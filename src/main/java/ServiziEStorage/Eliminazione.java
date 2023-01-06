@@ -1,4 +1,4 @@
-package ServiziStorage;
+package ServiziEStorage;
 
 public class Eliminazione {
 

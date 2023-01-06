@@ -1,11 +1,11 @@
-package ServiziStorage;
+package ServiziEStorage;
 
-public class Moderare {
+public class Iscrizione {
 
     private int idUtente, sezione;
     private String discussione;
 
-    public Moderare(int idUtente, int sezione, String discussione) {
+    public Iscrizione(int idUtente, int sezione, String discussione) {
         this.idUtente = idUtente;
         this.sezione = sezione;
         this.discussione = discussione;
