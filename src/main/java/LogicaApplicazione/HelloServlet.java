@@ -1,4 +1,4 @@
-package com.example.netsection_classe3;
+package LogicaApplicazione;
 
 import java.io.*;
 
