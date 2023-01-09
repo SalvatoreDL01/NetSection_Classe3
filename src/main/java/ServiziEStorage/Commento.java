@@ -5,7 +5,7 @@ import java.util.Date;
 public class Commento {
 
     private Date dataScrittura;
-    private int creatore, sezione;
+    private int creatore, sezione, punteggio;
     private String discussione, contenuto;
 
     public Commento(Date dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
@@ -14,6 +14,17 @@ public class Commento {
         this.sezione = sezione;
         this.discussione = discussione;
         this.contenuto = contenuto;
+        punteggio=0;
+    }
+
+    public Commento(Date dataScrittura, int creatore, int sezione, String discussione, String contenuto, int punteggio)
+    {
+        this.dataScrittura = dataScrittura;
+        this.creatore = creatore;
+        this.sezione = sezione;
+        this.discussione = discussione;
+        this.contenuto = contenuto;
+        this.punteggio = punteggio;
     }
 
     public Date getDataScrittura() {
@@ -56,4 +67,11 @@ public class Commento {
         this.contenuto = contenuto;
     }
 
+    public int getPunteggio() {
+        return punteggio;
+    }
+
+    public void setPunteggio(int punteggio) {
+        this.punteggio = punteggio;
+    }
 }
