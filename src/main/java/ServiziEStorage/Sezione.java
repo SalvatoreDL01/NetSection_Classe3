@@ -1,14 +1,30 @@
 package ServiziEStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sezione {
     private int idSezione;
     private String immagine, titolo, descrizione;
+    private List<?> listaGeneri,listaDiscussioni;
 
-    public Sezione(int idSezione, String immagine, String titolo, String descrizione) {
+    public Sezione(String immagine, String titolo, String descrizione, List<?> listaGeneri) {
+        this.idSezione = -1;
+        this.immagine = immagine;
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.listaGeneri = listaGeneri;
+        listaDiscussioni = new ArrayList<Discussione>();
+    }
+
+    public Sezione(int idSezione, String immagine, String titolo, String descrizione, List<?> listaGeneri,
+                   List<?> listaDiscussioni) {
         this.idSezione = idSezione;
         this.immagine = immagine;
         this.titolo = titolo;
         this.descrizione = descrizione;
+        this.listaGeneri = listaGeneri;
+        this.listaDiscussioni = listaDiscussioni;
     }
 
     public int getIdSezione() {
@@ -41,5 +57,21 @@ public class Sezione {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public List<?> getListaGeneri() {
+        return listaGeneri;
+    }
+
+    public void setListaGeneri(List<?> listaGeneri) {
+        this.listaGeneri = listaGeneri;
+    }
+
+    public List<?> getListaDiscussioni() {
+        return listaDiscussioni;
+    }
+
+    public void setListaDiscussioni(List<?> listaDiscussioni) {
+        this.listaDiscussioni = listaDiscussioni;
     }
 }
