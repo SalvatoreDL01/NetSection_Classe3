@@ -1,5 +1,7 @@
 package ServiziEStorage;
 
+import java.util.List;
+
 public class UtenteNetflix extends UtenteRegistrato{
 
     private String emailNetflix, passwordNetflix;
@@ -11,11 +13,20 @@ public class UtenteNetflix extends UtenteRegistrato{
         this.passwordNetflix=passwordNetflix;
     }
 
-    public UtenteNetflix(int id, String username, String email, String pass, String immagine, int eta,
+    public UtenteNetflix(int eta, String username, String email, String pass, String immagine, List<?> listaIscizioni,
+                         List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti, String emailNetflix,
+                         String passwordNetflix) {
+        super(eta, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
+        this.emailNetflix = emailNetflix;
+        this.passwordNetflix = passwordNetflix;
+    }
+
+    public UtenteNetflix(int id, int eta, String username, String email, String pass, String immagine,
+                         List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix) {
-        super(id, username, email, pass, immagine, eta);
-        this.emailNetflix=emailNetflix;
-        this.passwordNetflix=passwordNetflix;
+        super(id, eta, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
+        this.emailNetflix = emailNetflix;
+        this.passwordNetflix = passwordNetflix;
     }
 
     public String getEmailNetflix() {
@@ -92,5 +103,45 @@ public class UtenteNetflix extends UtenteRegistrato{
     @Override
     public void setImmagine(String immagine) {
         super.setImmagine(immagine);
+    }
+
+    @Override
+    public List<?> getListaIscizioni() {
+        return super.getListaIscizioni();
+    }
+
+    @Override
+    public void setListaIscizioni(List<?> listaIscizioni) {
+        super.setListaIscizioni(listaIscizioni);
+    }
+
+    @Override
+    public List<?> getListaModerazioni() {
+        return super.getListaModerazioni();
+    }
+
+    @Override
+    public void setListaModerazioni(List<?> listaModerazioni) {
+        super.setListaModerazioni(listaModerazioni);
+    }
+
+    @Override
+    public List<?> getListaKickato() {
+        return super.getListaKickato();
+    }
+
+    @Override
+    public void setListaKickato(List<?> listaKickato) {
+        super.setListaKickato(listaKickato);
+    }
+
+    @Override
+    public List<?> getListaPreferiti() {
+        return super.getListaPreferiti();
+    }
+
+    @Override
+    public void setListaPreferiti(List<?> listaPreferiti) {
+        super.setListaPreferiti(listaPreferiti);
     }
 }
