@@ -4,54 +4,6 @@ body{
     font-family: "arial";
 }
 
-#navBar{
-    height: 100px;
-    width: 100%;
-    background-color: #000007;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-}
-
-.elementiNavBar{
-    float: left;
-    position: relative;
-}
-
-#imageLogo{
-    margin: 10px;
-}
-
-#ricerca{
-    width: 300px;
-    height: 40px;
-    border-radius: 6px;
-    margin-top: 30px;
-    border-style: none;
-}
-
-#bottoreRicerca{
-    background-color: darkgrey;
-    border-radius: 6px;
-    height: 40px;
-    width: 150px;
-    border-style: none;
-    color: whitesmoke;
-    font-size: 12px;
-    font-family: "arial";
-}
-
-#login{
-    float: right;
-    text-decoration: none;
-    font-size: 30px;
-    margin-top: 25px;
-    margin-right: 10px;
-    color: darkgrey;
-}
-
 #corpo{
     margin-top: 100px;
     width: 100%;

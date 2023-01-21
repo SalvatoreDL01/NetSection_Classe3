@@ -5,19 +5,26 @@
   Time: 11:46
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>HomePage|NetSection</title>
-    <link rel="stylesheet" type="text/css" href="css/HomePageStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/NavBarStyle1.css">
 </head>
 <body>
+<div id="navBar">
+    <a class="elementiNavBar" href="###"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
+    <form class="elementiNavBar">
+        <input type="text" id="ricerca" placeholder="cerca sezione...">
+        <button type="button" id="bottoreRicerca">RICERCA PER GENERE</button>
+    </form>
+    <a class="elementiNavBar" id="login" href="#">LOGIN</a>
+</div>
 
-<%@include file="NavBar.jsp" %>
 
 <div id="corpo">
 
-<!-- slider delle sezioni più popolari, ogni slider contiene tre div con degli elementi all'interni che vengono fatti scorrere da una funzione js-->
+
     <div class="slideShow">
         <h1>I PIÙ POPOLARI</h1>
         <div class="mySlidesPopolari">
@@ -78,7 +85,6 @@
         <button class="frecciaAvanti" onclick="plusDivsPopolari(1)">&#10095;</button>
     </div>
 
-    <!-- funzione js per la gestione dello scorrimento dello slider, sliderIndexPopolari tiene traccia del div visibile in quel momento mentre gli altri sono nascosti-->
     <script>
         var slideIndexPopolari = 1;
         showDivsPopolari(slideIndexPopolari);
@@ -100,7 +106,7 @@
     </script>
 
 
-<!-- slider delle sezioni più viste-->
+
     <div class="slideShow">
         <h1>I PIÙ VISTI</h1>
         <div class="mySlidesVisti">
@@ -161,7 +167,6 @@
         <button class="frecciaAvanti" onclick="plusDivsVisti(1)">&#10095;</button>
     </div>
 
-    <!--funzioni js per la gestione dello scorrimento dello slider-->
     <script>
         var slideIndexVisti = 1;
         showDivsVisti(slideIndexVisti);
