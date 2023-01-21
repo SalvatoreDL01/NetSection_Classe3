@@ -13,93 +13,21 @@
 </head>
 <body>
 <div id="navBar">
-    <img id="imageLogo" class="elementiNavBar" src="css/logo.png">
+    <a class="elementiNavBar" href="###"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
     <form class="elementiNavBar">
-        <input type="text" id="ricerca">
-        <button type="button" id="bottoreRicerca">Ricerca per genere</button>
+        <input type="text" id="ricerca" placeholder="cerca sezione...">
+        <button type="button" id="bottoreRicerca">RICERCA PER GENERE</button>
     </form>
     <a class="elementiNavBar" id="login" href="#">LOGIN</a>
 </div>
+
+
 <div id="corpo">
-    <div class="slideShow">
-        <h1>I più popolari</h1>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-        </div>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-        </div>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-        </div>
-        <button class="frecciaIndietro" onclick="plusDivs(-1)">&#10094;</button>
-        <button class="frecciaAvanti" onclick="plusDivs(1)">&#10095;</button>
-    </div>
+
 
     <div class="slideShow">
-        <h1>I più popolari</h1>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
+        <h1>I PIÙ POPOLARI</h1>
+        <div class="mySlidesPopolari">
             <div class="element">
                 <img src="css/witcher.jpeg">
                 <p>the witcher</p>
@@ -117,11 +45,7 @@
                 <p>the witcher</p>
             </div>
         </div>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
+        <div class="mySlidesPopolari">
             <div class="element">
                 <img src="css/peacky.jpeg">
                 <p>peacky blinders</p>
@@ -139,11 +63,7 @@
                 <p>peacky blinders</p>
             </div>
         </div>
-        <div class="mySlides">
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
+        <div class="mySlidesPopolari">
             <div class="element">
                 <img src="css/big.jpeg">
                 <p>the big bang teory</p>
@@ -161,29 +81,112 @@
                 <p>the big bang teory</p>
             </div>
         </div>
-        <button class="frecciaIndietro" onclick="plusDivs(-1)">&#10094;</button>
-        <button class="frecciaAvanti" onclick="plusDivs(1)">&#10095;</button>
+        <button class="frecciaIndietro" onclick="plusDivsPopolari(-1)">&#10094;</button>
+        <button class="frecciaAvanti" onclick="plusDivsPopolari(1)">&#10095;</button>
     </div>
 
     <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
+        var slideIndexPopolari = 1;
+        showDivsPopolari(slideIndexPopolari);
 
-        function plusDivs(n) {
-            showDivs(slideIndex += n);
+        function plusDivsPopolari(n) {
+            showDivsPopolari(slideIndexPopolari += n);
         }
 
-        function showDivs(n) {
+        function showDivsPopolari(n) {
             var i;
-            var x = document.getElementsByClassName("mySlides");
-            if (n > x.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = x.length}
+            var x = document.getElementsByClassName("mySlidesPopolari");
+            if (n > x.length) {slideIndexPopolari = 1}
+            if (n < 1) {slideIndexPopolari = x.length}
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
             }
-            x[slideIndex-1].style.display = "block";
+            x[slideIndexPopolari-1].style.display = "block";
         }
     </script>
+
+
+
+    <div class="slideShow">
+        <h1>I PIÙ VISTI</h1>
+        <div class="mySlidesVisti">
+            <div class="element">
+                <img src="css/witcher.jpeg">
+                <p>the witcher</p>
+            </div>
+            <div class="element">
+                <img src="css/witcher.jpeg">
+                <p>the witcher</p>
+            </div>
+            <div class="element">
+                <img src="css/witcher.jpeg">
+                <p>the witcher</p>
+            </div>
+            <div class="element">
+                <img src="css/witcher.jpeg">
+                <p>the witcher</p>
+            </div>
+        </div>
+        <div class="mySlidesVisti">
+            <div class="element">
+                <img src="css/peacky.jpeg">
+                <p>peacky blinders</p>
+            </div>
+            <div class="element">
+                <img src="css/peacky.jpeg">
+                <p>peacky blinders</p>
+            </div>
+            <div class="element">
+                <img src="css/peacky.jpeg">
+                <p>peacky blinders</p>
+            </div>
+            <div class="element">
+                <img src="css/peacky.jpeg">
+                <p>peacky blinders</p>
+            </div>
+        </div>
+        <div class="mySlidesVisti">
+            <div class="element">
+                <img src="css/big.jpeg">
+                <p>the big bang teory</p>
+            </div>
+            <div class="element">
+                <img src="css/big.jpeg">
+                <p>the big bang teory</p>
+            </div>
+            <div class="element">
+                <img src="css/big.jpeg">
+                <p>the big bang teory</p>
+            </div>
+            <div class="element">
+                <img src="css/big.jpeg">
+                <p>the big bang teory</p>
+            </div>
+        </div>
+        <button class="frecciaIndietro" onclick="plusDivsVisti(-1)">&#10094;</button>
+        <button class="frecciaAvanti" onclick="plusDivsVisti(1)">&#10095;</button>
+    </div>
+
+    <script>
+        var slideIndexVisti = 1;
+        showDivsVisti(slideIndexVisti);
+
+        function plusDivsVisti(n) {
+            showDivsVisti(slideIndexVisti += n);
+        }
+
+        function showDivsVisti(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlidesVisti");
+            if (n > x.length) {slideIndexVisti = 1}
+            if (n < 1) {slideIndexVisti = x.length}
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndexVisti-1].style.display = "block";
+        }
+    </script>
+
 </div>
 </body>
 </html>
