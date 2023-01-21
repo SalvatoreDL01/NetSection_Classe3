@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Registrazione Netflix</title>
+    <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>
 <script>
@@ -51,7 +52,8 @@
 </script>
 <div class="reg">
     <div class="intro">
-        <p>Accedi con il tuo account Netflix</p>
+        <img src="css/logo.png"><br>
+        <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
         <form>

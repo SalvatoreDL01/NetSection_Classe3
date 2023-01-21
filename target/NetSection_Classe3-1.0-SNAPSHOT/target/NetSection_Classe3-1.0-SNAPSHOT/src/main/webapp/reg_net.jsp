@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Registrazione Netflix</title>
+    <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>
 <script>
@@ -38,12 +39,21 @@
             },3000)
         }
 
+        function validateFormTwo(){
+            let user=document.getElementById("username").value;
+            if(user.length<5){
+                alert("L'username scelto è troppo corto");
+                return false;
+            }
+            return true;
+        }
     }
 
 </script>
 <div class="reg">
     <div class="intro">
-        <p>Accedi con il tuo account Netflix</p>
+        <img src="css/logo.png">
+        <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
         <form>
@@ -58,7 +68,7 @@
     </div>
    <div class="re-user" >
        <p id="success"></p>
-       <form id="user" style="display: none; ">
+       <form id="user" style="display: none;" onsubmit="validateForm()">
            <label for="username">Inserisci il tuo username per proseguire:</label><br><br>
            <input type="text" id="username" name="username" value=""><br><br>
 
