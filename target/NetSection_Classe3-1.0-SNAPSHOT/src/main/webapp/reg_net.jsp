@@ -66,7 +66,7 @@
             <input type="button" onclick="showForm()" value="Verifica account Netflix">
         </form>
     </div>
-   <div class="re-user" >
+   <div class="reg-user" >
        <p id="success"></p>
        <form id="user" style="display: none;" onsubmit="validateForm()">
            <label for="username">Inserisci il tuo username per proseguire:</label><br><br>
