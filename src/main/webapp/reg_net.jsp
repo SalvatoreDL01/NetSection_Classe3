@@ -26,7 +26,7 @@
             <label for="username">Inserisci il tuo username:</label>
             <input type="text" id="username" name="username" value=""><br><br
 
-            <input type="button" value="Register">
+            <input type="button" value="Registrati con Netflix">
         </form>
     </div>
 </div>
