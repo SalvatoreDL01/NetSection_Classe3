@@ -48,3 +48,35 @@ body{
 a{
     text-decoration: none;
 }
+
+#visualizzazioneDiscussione{
+    position: relative;
+    float: left;
+    height: 1500px;
+    width: 900px;
+    border-radius: 10px;
+    background-color: #002431;
+    margin: 20px;
+    font-size: 20px;
+    font-family: arial;
+}
+
+#visualizzazioneDiscussione div{
+    position: relative;
+    float: left;
+    margin: 10px;
+}
+
+input{
+    border-radius: 6px;
+}
+
+.partecipante{
+    background-color: #0a1316;
+    border-radius: 6px;
+    width: 175px;
+}
+
+.partecipante button{
+    border-radius: 6px;
+}
