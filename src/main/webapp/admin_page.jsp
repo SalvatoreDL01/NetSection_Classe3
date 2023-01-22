@@ -9,6 +9,25 @@
   <link rel="stylesheet" href="css/AdmPageStyle.css">
 </head>
 <body>
+<script>
+  let id=document.getElementById("sid").value;
+  let nome=document.getElementById("nome").value;
+
+  function validateDelete(){
+    if(id== " "){
+      alert("Il campo non può essere vuoto");
+      return false;
+    }
+    return true;
+  }
+  function validateAdd(){
+    if(nome== " "){
+      alert("Il campo non può essere vuoto");
+      return false;
+    }
+    return true;
+  }
+</script>
 <div class="welcome">
   <img src="css/logo.png"><br>
   <h2>Benvenuto, *username*</h2>
@@ -24,22 +43,24 @@
     </ul>
   </div>
   <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>
-  <input type="button" value="Modifica">
+  <input type="button" id="edit" value="Modifica">
 </div>
 <div class="sections">
-  <div class="delete">
-    <p>Elimina una Sezione</p>
-    <form>
-      <input type="text" id="sid" name="sid" placeholder="ID Sezione..." value=""><br><br>
-      <input type="button" value="Elimina">
-    </form>
-  </div>
-  <div class="add">
-    <p>Aggiungi una Sezione</p>
-    <form>
-      <input type="text" id="nome" name="nome" placeholder="Nome Sezione..." value=""><br><br>
-      <input type="button" value="Aggiungi">
-    </form>
+  <div class="sections-values">
+    <div class="delete">
+      <p>Elimina una Sezione</p>
+      <form>
+        <input type="text" id="sid" name="sid" placeholder="ID Sezione..." value=""><br><br>
+        <input type="button" value="Elimina" onclick="validateDelete()">
+      </form>
+    </div>
+    <div class="add">
+      <p>Aggiungi una Sezione</p>
+      <form>
+        <input type="text" id="nome" name="nome" placeholder="Nome Sezione..." value=""><br><br>
+        <input type="button" id="aggiungi" value="Aggiungi">
+      </form>
+    </div>
   </div>
 </div>
 <div class="netflix-profile">
@@ -48,7 +69,7 @@
   <div class="create-disc">
     <p>Le tue discussioni</p>
     <input type="button" value="Crea una discussione"><br><br>
-    <input type="button" value="Le tue discussioni"><br>
+    <input type="button" id="ltd" value="Le tue discussioni"><br>
   </div>
 </div>
 <div class="discuss">
