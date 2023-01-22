@@ -5,18 +5,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>UserPage</title>
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="css/AdmPageStyle.css">
 </head>
 <body>
-
 <h1>Benvenuto, *username*</h1>
 <div class="info">
-  <p>Ecco alcune informazioni su di te: </p>
+  <p id="welcome">Ecco alcune informazioni su di te: </p><br>
   <ul>
-    <li>Nome: *nome*</li>
-    <li>Cognome: *cognome*</li>
-    <li>E-mail: *mail*</li>
-    <li>Età: *data*</li>
+    <li>Nome: *nome*</li><br>
+    <li>Cognome: *cognome*</li><br>
+    <li>E-mail: *mail*</li><br>
+    <li>Età: *data*</li><br>
   </ul>
   <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p>
   <button>Modifica</button>

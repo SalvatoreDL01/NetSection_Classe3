@@ -15,15 +15,15 @@ body{
     padding: 20px;
 }
 input[type=text]{
-    width: 50%;
+    width: 30%;
     padding: 8px 10px;
 }
 input[type=email]{
-    width: 50%;
+    width: 30%;
     padding: 8px 10px;
 }
 input[type=password]{
-    width: 50%;
+    width: 30%;
     padding: 8px 10px;
 }
 input[type=submit]{

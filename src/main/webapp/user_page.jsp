@@ -6,9 +6,9 @@
 <html>
 <head>
   <title>UserPage</title>
+  <link rel="stylesheet" href="css/AdmPageStyle.css">
 </head>
 <body>
-
 <h1>Benvenuto, *username*</h1>
 <div class="info">
   <p>Ecco alcune informazioni su di te: </p>

@@ -52,7 +52,7 @@
 </script>
 <div class="reg">
     <div class="intro">
-        <img src="css/logo.png">
+        <img src="css/logo.png"><br>
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
@@ -66,7 +66,7 @@
             <input type="button" onclick="showForm()" value="Verifica account Netflix">
         </form>
     </div>
-   <div class="re-user" >
+   <div class="reg-user" >
        <p id="success"></p>
        <form id="user" style="display: none;" onsubmit="validateForm()">
            <label for="username">Inserisci il tuo username per proseguire:</label><br><br>
