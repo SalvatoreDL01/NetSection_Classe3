@@ -13,35 +13,42 @@
 <body>
 <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
 <%@include file="NavBar.jsp" %>
-<%for(int i=0;i<4;i++){%>
-<div class="discussione">
-    <p class="titoloDiscussione">Titolo discussione</p>
-    <div class="immagine">
-        <img>
-    </div>
-    <div class="componentiDiscissione">
-        <div class="partecipanti">
-            <img>
-            <p class="componenteTestuale">1234</p>
+<div id="sfondo"></div>
+<div id="paginaSezione">
+    <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
+    <%for(int i=0;i<4;i++){%>
+    <div class="discussione">
+        <p class="titoloDiscussione">Titolo discussione</p>
+        <div class="immagine">
+            <img src="css/witcher.jpeg">
+        </div>
+        <br>
+        <div class="componenti">
+            <div class="componentiDiscissione">
+                <div class="partecipanti">
+                    <img src="css/witcher.jpeg">
+                    <p class="componenteTestuale", id="numeroPartecipanti">1234</p>
+                </div>
+            </div>
+            <div class="bottonePartecipazione">
+                <%if(true){%>
+                <form method="get" action="">
+                    <input type="hidden" value="sezione">
+                    <input type="hidden" value="titolo">
+                    <input type="button" value="Partecipa">
+                </form>
+                <%}else{%>
+                <p class="kickato">Non puoi più accedere</p>
+                <%}%>
+            </div>
+            <div class="testo">
+                <div class="tags"><%for(int j=0;j<4;j++){%>tag <%if(j<4){%>,<%}%><%}%></div>
+                <p class="creatore">Creato da: creatore</p>
+            </div>
         </div>
     </div>
-    <div class="bottonePartecipazione">
-        <%if(true){%>
-        <form method="get" action="">
-            <input type="hidden" value="sezione">
-            <input type="hidden" value="titolo">
-            <input type="button" value="visita">
-        </form>
-        <%}else{%>
-        <p class="kickato">Non puoi più accedere</p>
-        <%}%>
-    </div>
-    <div class="testo">
-        <div class="tags"><%for(int j=0;j<4;j++){%>tag <%if(j<4){%>,<%}%><%}%></div>
-        <p class="creatore">Creato da: creatore</p>
-    </div>
+    <br>
+    <%}%>
 </div>
-<br>
-<%}%>
 </body>
 </html>
