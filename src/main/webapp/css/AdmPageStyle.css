@@ -8,7 +8,7 @@ body{
     padding-bottom: 5%;
 }
 #info-list{
-    padding-right: 40%;
+    padding-right: 5%;
 }
 input[type=submit]{
     border-radius: 8px;
@@ -33,6 +33,18 @@ input[type=text]{
     padding: 8px 10px;
 }
 
+#aggiungi, #ltd{
+    background-color: darkgreen;
+}
+#aggiungi, #ltd:hover{
+    background-color: forestgreen;
+}
+#edit{
+    background-color: darkslateblue;
+}
+#edit:hover{
+    background-color: blueviolet;
+}
 .welcome{
     text-align: center;
     font-family: "arial";
