@@ -24,7 +24,7 @@
     </ul>
   </div>
   <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>
-  <input type="button" value="Modifica">
+  <input type="button" id="edit" value="Modifica">
 </div>
 <div class="netflix-profile">
   <p>Stato attuale profilo Netflix: </p><br>
@@ -32,7 +32,7 @@
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
     <input type="button" value="Crea una discussione"><br><br>
-    <input type="button" value="Le tue discussioni"><br>
+    <input type="button" id="ltd" value="Le tue discussioni"><br>
   </div>
 </div>
 <div class="discuss">
