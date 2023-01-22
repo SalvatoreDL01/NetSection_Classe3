@@ -14,6 +14,9 @@
 <body>
 <%@include file="NavBar.jsp"%>
 <div id="corpo">
+
+    <!--lista discussioni create dall'utente-->
+
     <div class="lista">
         <p>Lista discussioni create</p>
         <div class="discussione">
@@ -41,6 +44,9 @@
             <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
         </div>
     </div>
+
+    <!--listqa discussioni moderate dall'utente-->
+
     <div class="lista">
         <p>Lista discussioni moderate</p>
         <div class="discussione">
@@ -56,6 +62,9 @@
             <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
         </div>
     </div>
+
+    <!--div per la visualizzazione dei dati realtivi ad una discussione selezionata-->
+
     <div id="visualizzazioneDiscussione">
         <div>
             <p>Nome discussione</p>
