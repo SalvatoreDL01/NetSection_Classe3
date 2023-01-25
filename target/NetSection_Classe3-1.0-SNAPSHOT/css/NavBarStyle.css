@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .elementiNavBar{
@@ -35,7 +35,7 @@
     border-style: none;
     color: whitesmoke;
     font-size: 12px;
-    font-family: "arial";
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
 }
 
 #login{
