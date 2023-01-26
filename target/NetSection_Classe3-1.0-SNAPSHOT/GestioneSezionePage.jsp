@@ -9,7 +9,8 @@
 <html>
 <head>
     <title>Gestione Sezione|NetSection</title>
-  <link type="text/css" rel="stylesheet" href="css/GestioneSezioneStyle.css">
+    <link type="text/css" rel="stylesheet" href="css/GestioneSezioneStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/GestioneDiscussioniStyle.css">
 </head>
 <body>
 <%@ include file="NavBar.jsp"%>
@@ -28,7 +29,33 @@
         <textarea rows="10" cols="30"></textarea>
     </div>
     <div class="elemento">
-        Visualizza discussioni<br>
+        <div class="lista" style="overflow: scroll; height: 300px">
+            <p>Lista discussioni create</p>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+            <div class="discussione">
+                <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
+                <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            </div>
+        </div>
     </div>
     <div class="elemento">
         Modifica generi<br>
