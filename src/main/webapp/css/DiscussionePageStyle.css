@@ -1,0 +1,17 @@
+.immagineDiscussione{
+    margin-top: 125px;
+}
+
+.immagineDiscussione img{
+    width: 650px;
+    height: 450px;
+}
+
+p{
+    color: white;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+
+.title{
+    font-size: 25px;
+}

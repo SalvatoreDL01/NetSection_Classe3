@@ -6,25 +6,25 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     private String emailNetflix, passwordNetflix;
 
-    public UtenteNetflix(String username, String email, String pass, String immagine, int eta,String emailNetflix,
+    public UtenteNetflix(String username, String email, String pass, String immagine, String dataNascita,String emailNetflix,
                          String passwordNetflix) {
-        super(username, email, pass, immagine, eta);
+        super(username, email, pass, immagine, dataNascita);
         this.emailNetflix=emailNetflix;
         this.passwordNetflix=passwordNetflix;
     }
 
-    public UtenteNetflix(int eta, String username, String email, String pass, String immagine, List<?> listaIscizioni,
+    public UtenteNetflix(String dataNascita, String username, String email, String pass, String immagine, List<?> listaIscizioni,
                          List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti, String emailNetflix,
                          String passwordNetflix) {
-        super(eta, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
+        super(dataNascita, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
         this.emailNetflix = emailNetflix;
         this.passwordNetflix = passwordNetflix;
     }
 
-    public UtenteNetflix(int id, int eta, String username, String email, String pass, String immagine,
+    public UtenteNetflix(int id, String dataNascita, String username, String email, String pass, String immagine,
                          List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix) {
-        super(id, eta, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
+        super(id, dataNascita, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
         this.emailNetflix = emailNetflix;
         this.passwordNetflix = passwordNetflix;
     }
@@ -56,13 +56,13 @@ public class UtenteNetflix extends UtenteRegistrato{
     }
 
     @Override
-    public int getEta() {
-        return super.getEta();
+    public String getDataNascita() {
+        return super.getDataNascita();
     }
 
     @Override
-    public void setEta(int eta) {
-        super.setEta(eta);
+    public void setDataNascita(String dataNascita) {
+        super.setDataNascita(dataNascita);
     }
 
     @Override

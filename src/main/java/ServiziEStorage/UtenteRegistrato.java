@@ -5,13 +5,13 @@ import java.util.List;
 
 public class UtenteRegistrato {
 
-    private int id,eta;
-    private String username, email, pass, immagine;
+    private int id;
+    private String username, email, pass, immagine,dataNascita;
     private List<?> listaIscizioni,listaModerazioni,listaKickato,listaPreferiti;
 
-    public UtenteRegistrato(String username,String email,String pass,String immagine,int eta){
+    public UtenteRegistrato(String username,String email,String pass,String immagine,String dataNascita){
         this.email=email;
-        this.eta=eta;
+        this.dataNascita=dataNascita;
         this.username=username;
         this.immagine=immagine;
         this.pass=pass;
@@ -22,9 +22,9 @@ public class UtenteRegistrato {
         listaPreferiti  = new ArrayList<String>();
     }
 
-    public UtenteRegistrato(int eta, String username, String email, String pass, String immagine, List<?> listaIscizioni
+    public UtenteRegistrato(String dataNascita, String username, String email, String pass, String immagine, List<?> listaIscizioni
             , List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti) {
-        this.eta = eta;
+        this.dataNascita = dataNascita;
         this.username = username;
         this.email = email;
         this.pass = pass;
@@ -35,11 +35,11 @@ public class UtenteRegistrato {
         this.listaPreferiti = listaPreferiti;
     }
 
-    public UtenteRegistrato(int id, int eta, String username, String email, String pass, String immagine,
+    public UtenteRegistrato(int id, String dataNascita, String username, String email, String pass, String immagine,
                             List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato,
                             List<?> listaPreferiti) {
         this.id = id;
-        this.eta = eta;
+        this.dataNascita = dataNascita;
         this.username = username;
         this.email = email;
         this.pass = pass;
@@ -58,12 +58,12 @@ public class UtenteRegistrato {
         this.id = id;
     }
 
-    public int getEta() {
-        return eta;
+    public String getDataNascita() {
+        return dataNascita;
     }
 
-    public void setEta(int eta) {
-        this.eta = eta;
+    public void setDataNascita(String dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
     public String getUsername() {

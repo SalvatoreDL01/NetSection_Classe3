@@ -3,6 +3,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/NavBarStyle.css">
+    <script type="text/javascript" src="javaScript/NavBar.js"></script>
 </head>
 <body>
 <!--barra di navigazione fissa superiore-->
@@ -13,10 +14,85 @@
     <form class="elementiNavBar">
         <input type="text" id="ricerca" placeholder="cerca sezione...">
         <!--bottone per la ricerca dei generi-->
-        <button type="button" id="bottoreRicerca">RICERCA PER GENERE</button>
+        <button type="button" id="bottoreRicerca" onclick="mostraMenu()">RICERCA PER GENERE</button>
     </form>
     <!--link per accesso alla pagina di login-->
     <a class="elementiNavBar" id="login" href="#">LOGIN</a>
+</div>
+<div id="ricercaGeneri">
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <div class="genere">
+        genere
+    </div>
+    <button style="margin-left: 50px; margin-top: 10px">Cerca</button>
 </div>
 </body>
 </html>
