@@ -5,10 +5,11 @@ public class Amministratore {
     private int idAdmin;
     private String username, email, pass;
 
-    public Amministratore(int idAdmin, String username, String pass) {
+    public Amministratore(int idAdmin, String username, String pass, String email) {
         this.idAdmin = idAdmin;
         this.username = username;
         this.pass = pass;
+        this.email = email;
     }
 
     public int getIdAdmin() {
