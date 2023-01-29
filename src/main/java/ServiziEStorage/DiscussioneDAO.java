@@ -14,7 +14,7 @@ public class DiscussioneDAO {
             ps.setInt(3, d.getCreatore());
             ps.setString(4, d.getListaTag().toString());
             ps.setString(5, d.getImmagine());
-            ps.setDate(6, Date.valueOf(d.getDataCreazione()));
+            ps.setDate(6, d.getDataCreazione());
 
             ps.execute();
         }

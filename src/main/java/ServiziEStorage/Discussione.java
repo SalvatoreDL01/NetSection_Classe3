@@ -6,10 +6,12 @@ import java.util.List;
 
 public class Discussione {
     private int sezione,creatore;
-    private String titolo, immagine, dataCreazione;
+    private String titolo, immagine;
+
+    private Date dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
 
-    public Discussione(int sezione, String creatore, int titolo, String immagine, String dataCreazione, Date listaTag)
+    public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, Date dataCreazione)
     {
         this.sezione = sezione;
         this.creatore = creatore;
@@ -23,7 +25,7 @@ public class Discussione {
         listaCommenti = new ArrayList<Commento>();
     }
 
-    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,
+    public Discussione(int sezione, int creatore, String titolo, String immagine, Date dataCreazione,
                        List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
                        List<?> listaCommenti) {
         this.sezione = sezione;
@@ -70,11 +72,11 @@ public class Discussione {
         this.immagine = immagine;
     }
 
-    public String getDataCreazione() {
+    public Date getDataCreazione() {
         return dataCreazione;
     }
 
-    public void setDataCreazione(String dataCreazione) {
+    public void setDataCreazione(Date dataCreazione) {
         this.dataCreazione = dataCreazione;
     }
 
