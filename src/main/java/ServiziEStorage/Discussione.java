@@ -1,5 +1,6 @@
 package ServiziEStorage;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class Discussione {
     private String titolo, immagine, dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
 
-    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,List<?> listaTag)
+    public Discussione(int sezione, String creatore, int titolo, String immagine, String dataCreazione, Date listaTag)
     {
         this.sezione = sezione;
         this.creatore = creatore;
@@ -75,5 +76,45 @@ public class Discussione {
 
     public void setDataCreazione(String dataCreazione) {
         this.dataCreazione = dataCreazione;
+    }
+
+    public List<?> getListaTag() {
+        return listaTag;
+    }
+
+    public void setListaTag(List<?> listaTag) {
+        this.listaTag = listaTag;
+    }
+
+    public List<?> getListaIscritti() {
+        return listaIscritti;
+    }
+
+    public void setListaIscritti(List<?> listaIscritti) {
+        this.listaIscritti = listaIscritti;
+    }
+
+    public List<?> getListaModeratori() {
+        return listaModeratori;
+    }
+
+    public void setListaModeratori(List<?> listaModeratori) {
+        this.listaModeratori = listaModeratori;
+    }
+
+    public List<?> getListaKickati() {
+        return listaKickati;
+    }
+
+    public void setListaKickati(List<?> listaKickati) {
+        this.listaKickati = listaKickati;
+    }
+
+    public List<?> getListaCommenti() {
+        return listaCommenti;
+    }
+
+    public void setListaCommenti(List<?> listaCommenti) {
+        this.listaCommenti = listaCommenti;
     }
 }
