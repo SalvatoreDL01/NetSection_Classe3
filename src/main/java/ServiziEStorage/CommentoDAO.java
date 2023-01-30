@@ -9,21 +9,9 @@ import java.util.ArrayList;
 
 public class CommentoDAO {
 
-    /*create table Commento(
-dataScrittura datetime,
-creatore int,
-sezione int not null,
-discussione varchar(30) not null,
-contenuto varchar(300) not null,
-punteggio numeric(5) default 0,
-foreign key(creatore) references UtenteRegistrato(id) on delete cascade,
-foreign key(sezione,discussione) references Discussione(sezione,titolo) on delete cascade on update cascade,
-primary key(dataScrittura, creatore)
-);*/
-
     public static Commento doRetriveById(Date dataScrittura, int creatore){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ?, dataScrittura = ?");
+            PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ? and dataScrittura = ?");
             ps.setInt(1, creatore);
             ps.setDate(2, dataScrittura);
 
@@ -33,7 +21,7 @@ primary key(dataScrittura, creatore)
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                  c = new Commento(rs.getDate(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                PreparedStatement ps1 = con.prepareStatement("select c.dataScrittura, c.creatore, c.sezione, c.discussione, c.contenuto, c.punteggio from Commento c, Risposta r where c.creatore = ?, c.dataScrittura = ?, r.dataRisposta = ?, r.creatoreRisposta = ?");
+                PreparedStatement ps1 = con.prepareStatement("select c.dataScrittura, c.creatore, c.sezione, c.discussione, c.contenuto, c.punteggio from Commento c, Risposta r where c.creatore = ? and c.dataScrittura = ? and r.dataRisposta = ? and r.creatoreRisposta = ?");
                 ps.setInt(1, creatore);
                 ps.setDate(2, dataScrittura);
                 ps.setDate(3, dataScrittura);
