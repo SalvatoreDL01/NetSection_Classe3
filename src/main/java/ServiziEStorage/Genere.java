@@ -2,20 +2,19 @@ package ServiziEStorage;
 import java.util.ArrayList;
 import java.util.List;
 
+/* Classe che definisce oggetti generi che posseggono un nome, una lista di sezioni che fanno parte di questo genere*/
 public class Genere {
     private String nome;
-    private List<?> listaSezioni, listaUtenti;
-
+    private List<?> listaSezioni;
+/* costruttore che costruisce */
     public Genere(String nome) {
         this.nome = nome;
         listaSezioni = new ArrayList<Sezione>();
-        listaUtenti = new ArrayList<UtenteRegistrato>();
     }
 
-    public Genere(String nome, List<?> listaSezioni, List<?> listaUtenti) {
+    public Genere(String nome, List<?> listaSezioni) {
         this.nome = nome;
         this.listaSezioni = listaSezioni;
-        this.listaUtenti = listaUtenti;
     }
 
     public String getNome() {
@@ -34,11 +33,4 @@ public class Genere {
         this.listaSezioni = listaSezioni;
     }
 
-    public List<?> getListaUtenti() {
-        return listaUtenti;
-    }
-
-    public void setListaUtenti(List<?> listaUtenti) {
-        this.listaUtenti = listaUtenti;
-    }
 }

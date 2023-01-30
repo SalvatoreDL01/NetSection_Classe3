@@ -8,6 +8,13 @@ public class Sezione {
     private String immagine, titolo, descrizione;
     private List<?> listaGeneri,listaDiscussioni;
 
+    public Sezione(int idSezione, String immagine, String titolo, String descrizione) {
+        this.idSezione = idSezione;
+        this.immagine = immagine;
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+    }
+
     public Sezione(String immagine, String titolo, String descrizione, List<?> listaGeneri) {
         this.idSezione = -1;
         this.immagine = immagine;
