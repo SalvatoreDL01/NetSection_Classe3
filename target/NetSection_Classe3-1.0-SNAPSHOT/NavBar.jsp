@@ -17,7 +17,7 @@
         <button type="button" id="bottoreRicerca" onclick="mostraMenu()">RICERCA PER GENERE</button>
     </form>
     <!--link per accesso alla pagina di login-->
-    <a class="elementiNavBar" id="login" href="#">LOGIN</a>
+    <a class="elementiNavBar" id="login" href="LoginPage.jsp">LOGIN</a>
 </div>
 <div id="ricercaGeneri">
     <div class="genere">

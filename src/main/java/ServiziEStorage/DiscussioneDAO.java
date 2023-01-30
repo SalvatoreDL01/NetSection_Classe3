@@ -33,7 +33,7 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
-
+/*
     public static Discussione doRetriveById(int idDiscussione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
@@ -42,8 +42,7 @@ public class DiscussioneDAO {
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                Discussione discussione = new Discussione(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  rs.getString(5), rs.getDate(6));
+                Discussione discussione = new Discussione(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  rs.getString(5), rs.getDate(6));
                 return discussione;
             }
             return null;
@@ -68,5 +67,5 @@ public class DiscussioneDAO {
         catch (SQLException e){
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
