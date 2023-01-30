@@ -1,14 +1,17 @@
 package ServiziEStorage;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Discussione {
     private int sezione,creatore;
-    private String titolo, immagine, dataCreazione;
+    private String titolo, immagine;
+
+    private Date dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
 
-    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,List<?> listaTag)
+    public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, Date dataCreazione)
     {
         this.sezione = sezione;
         this.creatore = creatore;
@@ -22,7 +25,7 @@ public class Discussione {
         listaCommenti = new ArrayList<Commento>();
     }
 
-    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,
+    public Discussione(int sezione, int creatore, String titolo, String immagine, Date dataCreazione,
                        List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
                        List<?> listaCommenti) {
         this.sezione = sezione;
@@ -69,11 +72,51 @@ public class Discussione {
         this.immagine = immagine;
     }
 
-    public String getDataCreazione() {
+    public Date getDataCreazione() {
         return dataCreazione;
     }
 
-    public void setDataCreazione(String dataCreazione) {
+    public void setDataCreazione(Date dataCreazione) {
         this.dataCreazione = dataCreazione;
+    }
+
+    public List<?> getListaTag() {
+        return listaTag;
+    }
+
+    public void setListaTag(List<?> listaTag) {
+        this.listaTag = listaTag;
+    }
+
+    public List<?> getListaIscritti() {
+        return listaIscritti;
+    }
+
+    public void setListaIscritti(List<?> listaIscritti) {
+        this.listaIscritti = listaIscritti;
+    }
+
+    public List<?> getListaModeratori() {
+        return listaModeratori;
+    }
+
+    public void setListaModeratori(List<?> listaModeratori) {
+        this.listaModeratori = listaModeratori;
+    }
+
+    public List<?> getListaKickati() {
+        return listaKickati;
+    }
+
+    public void setListaKickati(List<?> listaKickati) {
+        this.listaKickati = listaKickati;
+    }
+
+    public List<?> getListaCommenti() {
+        return listaCommenti;
+    }
+
+    public void setListaCommenti(List<?> listaCommenti) {
+        this.listaCommenti = listaCommenti;
     }
 }
