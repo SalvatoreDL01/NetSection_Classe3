@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class GenereDAO {
 
@@ -15,6 +16,15 @@ public class GenereDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Genere g = new Genere(rs.getString(1));
+                //lista di tutte le sezioni
+                ArrayList<Sezione> lista = SezioneDAO.doRretriveAll();
+                //lista ddelle sezioni che contengono un determinato genere
+                ArrayList<Sezione> listaContenuti = new ArrayList<>();
+                for(Sezione s: lista){
+                    if(s.getListaGeneri().contains(g))
+                        listaContenuti.add(s);
+                }
+                g.setListaSezioni(listaContenuti);
                 return g;
             }
             return null;
@@ -24,29 +34,22 @@ public class GenereDAO {
         }
     }
 
-    public static Genere doRetriveGenereByNomeGenere(String nome){
+    static public ArrayList<Genere> retriveAll(){
+
         try(Connection con = ConPool.getConnection()){
-
-            //aggiungere sezioni
-
-            Genere g = GenereDAO.doRetriveByNomeGenere(nome);
-
-            //ResultSet rs = ps.executeQuery();
-           // while(rs.next()){
-                //Sezione s = new Sezione(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-            //}
-            //return g;
-            return null;
+            PreparedStatement ps = con.prepareStatement("select nome from Genere");
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Genere> lista = new ArrayList<>();
+            while (rs.next()){
+                Genere g = doRetriveByNomeGenere(rs.getString(1));
+                lista.add(g);
+            }
+            return lista;
         }
         catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
-    }
 
-    public static boolean contains(String nome){
-        if(GenereDAO.doRetriveByNomeGenere(nome)!=null)
-            return true;
-        return false;
     }
 
 }
