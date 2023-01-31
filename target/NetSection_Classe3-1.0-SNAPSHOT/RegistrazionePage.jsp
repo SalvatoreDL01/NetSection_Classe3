@@ -7,6 +7,7 @@
 <head>
     <title>Registrazione Netflix</title>
     <link rel="stylesheet" href="css/RegNetStyle.css">
+    <script type="text/javascript" src="javaScript/LoginPage.js"></script>
 </head>
 <body>
 <script>
@@ -15,28 +16,27 @@
         let password = document.getElementById("password").value;
 
         if(!email.includes("@")){
-            alert("L'email non è valida");
+            document.getElementById("success").innerHTML="L'email non è valida"
             return false;
         }
         if (!email || !password ) {
-            alert("Tutti i campi sono obbligatori");
+            document.getElementById("success").innerHTML="Tutti i campi sono obbligatori"
             return false;
         }
 
         if (password.length < 8) {
-            alert("La password deve essere lunga almeno 8 caratteri");
+            document.getElementById("success").innerHTML="La password deve essere lunga almeno 8 caratteri"
             return false;
         }
         return true;
     }
     function showForm(){
-        if(validateForm()==true){
+        if(validateForm()==1){
             setTimeout(function (){
                 document.getElementById("success").innerHTML="Account Verificato"
             },1500)
-            setTimeout(function (){
-                document.getElementById("user").style.display="block"
-            },3000)
+            document.getElementById("formLogin").action = "LoginController"
+            document.getElementById("formLogin").submit()
         }
 
         function validateFormTwo(){
@@ -56,7 +56,7 @@
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
-        <form>
+        <form id="formLogin">
             <label for="user">Username:</label><br><br>
             <input type="text" id="user" name="user" value="" placeholder="User name"><br><br>
 
