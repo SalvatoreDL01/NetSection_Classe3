@@ -16,15 +16,23 @@ public class LoginController extends HttpServlet {
 
         String user = request.getParameter("user");
         String password = request.getParameter("password");
+        String pagina = "";
+        String u = request.getParameter("email");
+        if(u == null)
+            System.out.println("chiamata da login");
+        else
+            System.out.println("chiamata da reg");
 
         UtenteRegistrato utente = LoginService.checkUtente(user, password);
-        if(utente != null);
+        if(utente != null)
             //è stato trovato un riscontro nel DB
+            pagina = "HomePage.jsp";
         else
             //non è stato trovato un riscontro
-        ;
+            pagina = "LoginPage.jsp";
 
-
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(pagina);
+        requestDispatcher.forward(request, response);
 
     }
 

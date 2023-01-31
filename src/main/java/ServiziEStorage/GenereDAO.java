@@ -36,6 +36,7 @@ public class GenereDAO {
                 //Sezione s = new Sezione(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
             //}
             //return g;
+            return null;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
