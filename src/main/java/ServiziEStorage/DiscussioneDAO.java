@@ -2,6 +2,7 @@ package ServiziEStorage;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiscussioneDAO {
 
@@ -34,16 +35,38 @@ public class DiscussioneDAO {
         }
     }
 
-    public static Discussione doRetriveById(int idDiscussione){
+    public static List<String> getTags(int idDiscussione, String titoloTag){
+        List<String> tags=new ArrayList<>();
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "select nome from Tag where sezione = ? and titolo=?");
+            ps.setInt(1, idDiscussione);
+            ps.setString(2, titoloTag);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String a=rs.getString(rs.getString(1));
+                tags.add(a);
+            }
+            return tags;
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Discussione doRetriveById(int idDiscussione,String titoloTag){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "select sezione, titolo, creatore, tags, immagine, dataCreazione from Discussione where sezione = ?");
             ps.setInt(1, idDiscussione);
 
+            List<String> tags=getTags(idDiscussione, titoloTag);
+
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Discussione discussione = new Discussione(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  rs.getString(5), rs.getDate(6));
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  tags, rs.getDate(6));
                 return discussione;
             }
             return null;
@@ -53,14 +76,17 @@ public class DiscussioneDAO {
         }
     }
 
-    public static ArrayList<Discussione> retriveAll(){
+    public static ArrayList<Discussione> retriveAll(int idDiscussione,String titoloTag){
         ArrayList<Discussione> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select sezione, titolo, creatore, tags, immagine, dataCreazione from Discussione");
+
+            List<String> tags=getTags(idDiscussione, titoloTag);
+
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Discussione discussione = new Discussione(
-                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  rs.getString(5), rs.getDate(6));
+                        rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4),  tags, rs.getDate(6));
                 l.add(discussione);
             }
             return l;
