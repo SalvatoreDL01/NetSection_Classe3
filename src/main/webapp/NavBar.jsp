@@ -9,7 +9,7 @@
 <!--barra di navigazione fissa superiore-->
 <div id="navBar">
     <!--logo nella barra di navigazione com un link alla homepage-->
-    <a class="elementiNavBar" href="/index.jsp"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
+    <a class="elementiNavBar" href="index.jsp"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
     <!--form per la ricerca delle sezioni-->
     <form class="elementiNavBar">
         <input type="text" id="ricerca" placeholder="cerca sezione...">

@@ -1,4 +1,7 @@
-<%@ page import="ServiziEStorage.UtenteRegistrato" %><%--
+<%@ page import="ServiziEStorage.UtenteRegistrato" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="ServiziEStorage.Genere" %>
+<%@ page import="ServiziEStorage.GenereDAO" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -39,6 +42,20 @@
     <input type="button" value="Crea una discussione"><br><br>
     <input type="button" id="ltd" value="Le tue discussioni"><br>
   </div>
+</div>
+<div class="discuss">
+  <p>Gestisci generi preferiti</p>
+  <form >
+    <%
+      ArrayList<Genere> list = GenereDAO.retriveAll();
+      for(Genere g: list){%>
+    <input type="checkbox" id="<%=g.getNome()%>" name="<%=g.getNome()%>" value="<%=g.getNome()%>">
+    <label for="<%=g.getNome()%>"> <%=g.getNome()%></label>
+    <%
+      }
+    %>
+    <input type="submit" value="Aggiorna">
+  </form>
 </div>
 <div class="discuss">
   <p>Accedi alle tue discussioni preferite</p><br>

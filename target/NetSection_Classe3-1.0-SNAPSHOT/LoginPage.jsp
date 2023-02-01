@@ -29,7 +29,13 @@
         </form>
     </div>
     <div class="reg-user" >
-        <p id="success"></p>
+        <%
+            String str;
+            if(request.getAttribute("errore") == null)
+                str = "";
+            else str = request.getAttribute("errore").toString();
+        %>
+        <p id="success"><%=str%></p>
     </div>
 </div>
 </body>

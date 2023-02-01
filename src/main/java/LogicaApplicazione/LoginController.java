@@ -30,9 +30,11 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", utente);
         }
-        else
+        else {
             //non è stato trovato un riscontro
             pagina = "LoginPage.jsp";
+            request.setAttribute("errore", "Username o password errata");
+        }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(pagina);
         requestDispatcher.forward(request, response);
