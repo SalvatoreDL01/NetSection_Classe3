@@ -24,9 +24,12 @@ public class LoginController extends HttpServlet {
             System.out.println("chiamata da reg");
 
         UtenteRegistrato utente = LoginService.checkUtente(user, password);
-        if(utente != null)
+        if(utente != null) {
             //è stato trovato un riscontro nel DB
-            pagina = "HomePage.jsp";
+            pagina = "/index.jsp";
+            HttpSession session = request.getSession();
+            session.setAttribute("user", utente);
+        }
         else
             //non è stato trovato un riscontro
             pagina = "LoginPage.jsp";

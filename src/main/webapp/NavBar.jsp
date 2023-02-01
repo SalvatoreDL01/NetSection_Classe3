@@ -9,7 +9,7 @@
 <!--barra di navigazione fissa superiore-->
 <div id="navBar">
     <!--logo nella barra di navigazione com un link alla homepage-->
-    <a class="elementiNavBar" href="###"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
+    <a class="elementiNavBar" href="/index.jsp"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
     <!--form per la ricerca delle sezioni-->
     <form class="elementiNavBar">
         <input type="text" id="ricerca" placeholder="cerca sezione...">
@@ -17,7 +17,14 @@
         <button type="button" id="bottoreRicerca" onclick="mostraMenu()">RICERCA PER GENERE</button>
     </form>
     <!--link per accesso alla pagina di login-->
-    <a class="elementiNavBar" id="login" href="LoginPage.jsp">LOGIN</a>
+    <%
+        String str;
+        if(session.getAttribute("user") != null)
+            str = "user_page.jsp";
+        else
+            str = "LoginPage.jsp";
+    %>
+    <a class="elementiNavBar" id="login" href="<%=str%>"><%=request.getAttribute("login")%></a>
 </div>
 <div id="ricercaGeneri">
     <div class="genere">

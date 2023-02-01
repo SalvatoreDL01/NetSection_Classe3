@@ -1,4 +1,4 @@
-<%--
+<%@ page import="ServiziEStorage.UtenteRegistrato" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -11,16 +11,21 @@
 <body>
 <div class="welcome">
   <img src="css/logo.png"><br>
-  <h2>Benvenuto, *username*</h2>
+  <%
+    UtenteRegistrato u = null;
+    if(session.getAttribute("user") != null){
+      u = (UtenteRegistrato) session.getAttribute("user");
+    }
+  %>
+  <h2>Benvenuto, <%=u.getUsername()%></h2>
 </div>
 <div class="info">
   <p>Ecco alcune informazioni su di te: </p>
   <div id="info-list">
     <ul>
-      <li>Nome: *nome*</li><br>
-      <li>Cognome: *cognome*</li><br>
-      <li>E-mail: *mail*</li><br>
-      <li>Età: *data*</li><br>
+      <li>Username: <%=u.getUsername()%></li><br>
+      <li>E-mail: <%=u.getEmail()%></li><br>
+      <li>Anno di nascita: <%=u.getDataNascita()%></li><br>
     </ul>
   </div>
   <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>

@@ -69,3 +69,15 @@
     float: left;
     text-align: center;
 }
+
+@media only screen and (max-width: 1200px){
+    #bottoreRicerca{
+        display: none;
+    }
+    #ricerca{
+        display: none;
+    }
+    #login{
+        display: none;
+    }
+}
