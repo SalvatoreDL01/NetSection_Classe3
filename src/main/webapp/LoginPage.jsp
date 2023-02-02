@@ -19,12 +19,13 @@
     <div class="reg-form">
         <form id="formLogin" action="">
             <label for="user">Username:</label><br><br>
-            <input type="text" id="user" name="user" value="" placeholder="User name o email"><br><br>
+            <input type="text" id="user" name="user" value="" placeholder="Email"><br><br>
 
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>
 
-            <input type="button" onclick="showForm()" value="Registrati">
+            <input type="button" onclick="showForm()" value="Accedi"><br>
+            <a href="RegistrazionePage.jsp" style="text-decoration: none; color: darkgrey; margin-top: 5px">Se non hai un account registrati</a>
         </form>
     </div>
     <div class="reg-user" >
