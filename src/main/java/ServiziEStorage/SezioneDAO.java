@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
+/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Sezione*/
 public class SezioneDAO {
-
+    /*Metodo che estrae tutti i dati di un oggetto Sezione dal DB tramite il suo id. Estrae anche la lista dei generi e delle discussioni
+    della sezione*/
     public static Sezione doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Sezione where idSezione = ?");
@@ -17,8 +19,8 @@ public class SezioneDAO {
             ps.setInt(1, id);
 
             ArrayList<String> generi = new ArrayList<String>();
-            ArrayList<Discussione> discussioni = new ArrayList<Discussione>();
-            //aggiungere metodi light per prendere discussioni
+            ArrayList<Discussione> discussioni;
+            discussioni = (ArrayList<Discussione>) DiscussioneDAO.doRetriveBySezione(id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
@@ -37,7 +39,8 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
+    /*Metodo che estrae i dati di un oggetto Sezione dal DB tramite il suo id. Non estrae dati riguardanti le
+    discussioni e i generi della sezione*/
     public static Sezione doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Sezione where idSezione = ?");
@@ -55,10 +58,10 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public static ArrayList<Sezione> doRretriveAll(){
+    /*Metodo che estrae tutte le sezioni dal DB. Estrae anche i dati relativi al loro genere e alle loro Discussioni*/
+    public static List<Sezione> doRretriveAll(){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione");
+            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione order by desc idSezione");
 
             ArrayList<Sezione> sezioni = new ArrayList<Sezione>();
 
@@ -72,8 +75,9 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public static ArrayList<Sezione> doRetriveByGenere(String genere){
+    /*Metodo che estrae tutte le sezioni dal DB che fanno parte di un genere comune fornito come input. Estrae anche i
+    dati relativi ai loro generi e alle loro discussioni*/
+    public static List<Sezione> doRetriveByGenere(String genere){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idSezione from Appartenere where genere=?");
             ps.setString(1, genere);
@@ -90,10 +94,29 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public static ArrayList<Sezione> doRetriveByName(String nome){
+    /*Metodo che estrae tutte le sezioni dal DB partendo dall'id di un utente fornito come input. Estrae anche i
+        dati relativi ai loro generi e alle loro discussioni*/
+    public static List<Sezione> doRetiveByUtente(int idUtente){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione where titolo=?");
+            PreparedStatement ps = con.prepareStatement("select distinct s.idSezione from (Sezione s join Discussione d on s.idSezione = d.sezione) join Iscrizione i on d.sezione = i.sezione and d.titolo = i.discussione where i.idUtente = ?");
+            ps.setInt(1, idUtente);
+
+            ArrayList<Sezione> sezioni = new ArrayList<Sezione>();
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                sezioni.add(SezioneDAO.doRetriveById(rs.getInt(1)));
+            }
+            return sezioni;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che estrae tutte le sesioni che hanno un nome simile all'oggetto String passato come input*/
+    public static List<Sezione> doRetriveByName(String nome){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione where titolo like ?");
             ps.setString(1, nome);
 
             ArrayList<Sezione> sezioni = new ArrayList<Sezione>();
@@ -108,15 +131,15 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public boolean save(Sezione s){
+    /*Metodo che salva tutti i dati relativi a un oggetto Sezione nel DB. Salva anche i dati relativi ai sui generi*/
+    public boolean doSave(Sezione s){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("insert into Sezione values (null,?,?,?)");
             ps.setString(1, s.getImmagine());
             ps.setString(2, s.getTitolo());
             ps.setString(3, s.getDescrizione());
-            ps.executeQuery();
+            ps.execute();
 
             PreparedStatement ps2 = con.prepareStatement("select idSezione from Sezione where titolo=?");
             ps2.setString(1, s.getTitolo());
@@ -138,6 +161,7 @@ public class SezioneDAO {
             queryGeneri += ";";
 
             PreparedStatement ps3 = con.prepareStatement(queryGeneri);
+            ps3.execute();
 
             return true;
         }
@@ -145,26 +169,17 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public static Sezione remove(int id){
+    /*Metodo che rimuove tutti i dati di una Sezione dal DB conoscendo il suo id*/
+    public static void remove(int id){
         try(Connection con = ConPool.getConnection()){
-
-            Sezione s = SezioneDAO.doRetriveLightById(id);
 
             PreparedStatement ps = con.prepareStatement("delete from Sezione where idSezione=?");
             ps.setInt(1, id);
 
-            return s;
+            ps.execute();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
-
-    public static boolean contains(int id){
-        if(SezioneDAO.doRetriveLightById(id)!=null)
-            return true;
-        return false;
-    }
-
 }
