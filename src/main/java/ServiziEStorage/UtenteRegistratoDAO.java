@@ -194,4 +194,137 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /*Metodo che svolge il kick di un utente da una discussione*/
+    public static void kickUtente(Discussione d,UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, d.getSezione());
+            ps.setString(3, d.getTitolo());
+
+            ps.execute();
+
+            PreparedStatement ps2 = con.prepareStatement("Insert into Kick values (?,?,?)");
+            ps2.setInt(1, d.getSezione());
+            ps2.setString(2, d.getTitolo());
+            ps2.setInt(3, u.getId());
+
+            ps2.execute();
+            d.getListaIscritti().remove(u);
+            ((ArrayList<UtenteRegistrato>)d.getListaKickati()).add(u);
+            u.getListaIscizioni().remove(d);
+            ((ArrayList<Discussione>)u.getListaKickato()).add(d);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che svolge ls rimozione di una Moderazione di un utente da una discussione*/
+    public static void removeModerazione(Discussione d,UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("delete from Moderare where idUtente=? and idSezione=? and discussione=?");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, d.getSezione());
+            ps.setString(3, d.getTitolo());
+
+            ps.execute();
+
+            d.getListaModeratori().remove(u);
+            u.getListaModerazioni().remove(d);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
+    public static void removeIscrizione(Discussione d,UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, d.getSezione());
+            ps.setString(3, d.getTitolo());
+
+            ps.execute();
+
+            d.getListaIscritti().remove(u);
+            u.getListaIscizioni().remove(d);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
+    public static void addModerazione(Discussione d,UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("Insert into Moderare values(?,?,?)");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, d.getSezione());
+            ps.setString(3, d.getTitolo());
+
+            ps.execute();
+
+            ((ArrayList<UtenteRegistrato>)d.getListaModeratori()).add(u);
+            ((ArrayList<Discussione>)u.getListaModerazioni()).add(d);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
+    public static void addIscrizione(Discussione d,UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("Insert into Iscrizione values(?,?,?)");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, d.getSezione());
+            ps.setString(3, d.getTitolo());
+
+            ps.execute();
+
+            ((ArrayList<UtenteRegistrato>)d.getListaIscritti()).add(u);
+            ((ArrayList<Discussione>)u.getListaIscizioni()).add(d);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*Metodo che svolge ls rimozione di una preferenza genere di un utente da una discussione*/
+    public static void removeGenere(UtenteRegistrato u,String genere){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("delete from Preferire where idUtente=? and genere=?");
+            ps.setInt(1, u.getId());
+            ps.setString(2, genere);
+
+            ps.execute();
+
+            u.getListaPreferiti().remove(genere);
+
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
+    public static void addGenere(UtenteRegistrato u,String genere){
+        try(Connection con = ConPool.getConnection()){
+
+            PreparedStatement ps = con.prepareStatement("Insert into Preferire values(?,?)");
+            ps.setInt(1, u.getId());
+            ps.setString(2, genere);
+
+            ps.execute();
+
+            ((ArrayList<String>)u.getListaPreferiti()).add(genere);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
