@@ -16,14 +16,9 @@ public class GenereDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Genere g = new Genere(rs.getString(1));
-                //lista di tutte le sezioni
-                ArrayList<Sezione> lista = SezioneDAO.doRretriveAll();
-                //lista ddelle sezioni che contengono un determinato genere
-                ArrayList<Sezione> listaContenuti = new ArrayList<>();
-                for(Sezione s: lista){
-                    if(s.getListaGeneri().contains(g))
-                        listaContenuti.add(s);
-                }
+                ArrayList<Sezione> listaContenuti;
+                listaContenuti = (ArrayList<Sezione>) SezioneDAO.doRetriveByGenere(nome);
+
                 g.setListaSezioni(listaContenuti);
                 return g;
             }
