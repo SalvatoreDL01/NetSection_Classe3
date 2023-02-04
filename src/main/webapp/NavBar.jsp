@@ -20,7 +20,7 @@
     <%
         String str;
         if(session.getAttribute("user") != null)
-            str = "user_page.jsp";
+            str = "UserPage.jsp";
         else
             str = "LoginPage.jsp";
     %>
