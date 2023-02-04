@@ -196,7 +196,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che svolge il kick di un utente da una discussione*/
-    public static void kickUtente(Discussione d,UtenteRegistrato u){
+    public static void removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");

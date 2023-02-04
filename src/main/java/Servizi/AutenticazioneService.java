@@ -1,9 +1,6 @@
 package Servizi;
 
-import ServiziEStorage.Eliminazione;
-import ServiziEStorage.EliminazioneDAO;
-import ServiziEStorage.UtenteRegistrato;
-import ServiziEStorage.UtenteRegistratoDAO;
+import ServiziEStorage.*;
 
 import java.util.ArrayList;
 
@@ -18,6 +15,17 @@ public class AutenticazioneService {
                 EliminazioneDAO.doSave(e);
                 UtenteRegistratoDAO.remove(idUserToBan);
                 System.out.println("L'utente è stato rimosso correttamente");
+            }
+        }
+    }
+
+    static public void kickUtente(int idUserToKick, Discussione discussione){
+        ArrayList<UtenteRegistrato> listU=UtenteRegistratoDAO.retriveAll();
+
+        for (UtenteRegistrato u: listU) {
+            if(u.getId()==idUserToKick){
+                UtenteRegistratoDAO.removeUtente(discussione, u);
+                System.out.println("L'utente è stato kickato dalla conversazione");
             }
         }
     }
