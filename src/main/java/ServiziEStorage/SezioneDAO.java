@@ -182,4 +182,49 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che permette di aggiornare i dati relativi ad una Sezione*/
+    public static void update(Sezione s){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Sezione set immagine=?,titolo=?,descrizione=? where idSezione=?");
+            ps.setString(1,s.getImmagine());
+            ps.setString(2,s.getTitolo());
+            ps.setString(3,s.getDescrizione());
+            ps.setInt(4,s.getIdSezione());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che permette di rimuovere un genere ad una Sezione*/
+    public static void removeGenere(Sezione s,String genere){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("delete from Appartenere where idSezione=? and genere=?");
+            ps.setInt(1,s.getIdSezione());
+            ps.setString(2,genere);
+
+            s.getListaGeneri().remove(genere);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che permette di aggiungere un genere ad una Sezione*/
+    public static void addGenere(Sezione s,String genere){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Insert into Appartenere values (?,?)");
+            ps.setInt(1,s.getIdSezione());
+            ps.setString(2,genere);
+
+            ((ArrayList<String>)s.getListaGeneri()).add(genere);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

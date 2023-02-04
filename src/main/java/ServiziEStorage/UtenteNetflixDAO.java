@@ -90,6 +90,20 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che permette di aggiornare i dati relativi ad un UtenteNetflix*/
+    public static void update(UtenteNetflix u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update UtenteNetflix set emailNetflix =?,passwordNetflix =? where idUtente=?");
+            ps.setString(1,u.getEmailNetflix());
+            ps.setString(2,u.getPasswordNetflix());
+            ps.setInt(3,u.getId());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

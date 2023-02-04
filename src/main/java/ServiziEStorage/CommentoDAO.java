@@ -150,4 +150,19 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /*Metodo che permette di aggiornare i dati relativi ad un Commento*/
+    public static void update(Commento c){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Commento set punteggio=0, contenuto=? where dataScrittura =? and creatore=?");
+            ps.setString(1,"<Modificato>"+c.getContenuto());
+            ps.setDate(2,c.getDataScrittura());
+            ps.setInt(3,c.getCreatore());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

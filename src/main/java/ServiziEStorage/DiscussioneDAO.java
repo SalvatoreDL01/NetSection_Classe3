@@ -217,4 +217,66 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che permette di aggiornare l'immagine relativi ad una Discussione*/
+    public static void updateImmagine(Discussione d){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Discussione set immagine=? where titolo=? and idSzione=?");
+            ps.setString(1,d.getImmagine());
+            ps.setString(2,d.getTitolo());
+            ps.setInt(3,d.getSezione());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che permette di aggiornare il titolo relativi ad una Discussione*/
+    public static void updateTitolo(Discussione d,String nuovoTitolo){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Discussione set titolo=? where titolo=? and idSzione=?");
+            ps.setString(1,nuovoTitolo);
+            ps.setString(2,d.getTitolo());
+            ps.setInt(3,d.getSezione());
+
+            d.setTitolo(nuovoTitolo);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che permette di rimuovere un tag associato ad una Discussione*/
+    public static void removeTag(Discussione d, String tag){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("delete from Tag where nome=? and titolo=? and sezione=?");
+            ps.setString(1,tag);
+            ps.setString(2,d.getTitolo());
+            ps.setInt(3,d.getSezione());
+
+            d.getListaTag().remove(tag);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che permette di aggiungere un tag ad una Discussione*/
+    public static void addTag(Discussione d, String tag){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Insert into Tag values(?,?,?)");
+            ps.setInt(1,d.getSezione());
+            ps.setString(2,d.getTitolo());
+            ps.setString(3,tag);
+
+            ((ArrayList<String>)d.getListaTag()).add(tag);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

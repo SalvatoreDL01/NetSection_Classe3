@@ -327,4 +327,22 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /*Metodo che permette di aggiornare i dati relativi ad un UtenteRegistrato*/
+    public static void update(UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update UtenteRegistrato set username=?,email=?,pass=?,dataNasita=?,immagine=? where id=?");
+            ps.setString(1, u.getUsername());
+            ps.setString(2,u.getEmail());
+            ps.setString(3,u.getPass());
+            ps.setDate(4,u.getDataNascita());
+            ps.setString(5,u.getImmagine());
+            ps.setInt(6,u.getId());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

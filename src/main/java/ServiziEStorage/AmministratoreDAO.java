@@ -50,7 +50,7 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-/*Metodo che estrae tutti i dati di un amministratore dal DB*/
+    /*Metodo che estrae tutti i dati di un amministratore dal DB*/
     public static ArrayList<Amministratore> retriveAll(){
         ArrayList<Amministratore> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
@@ -66,5 +66,19 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che permette di aggiornare i dati relativi ad un Amministratore*/
+    public static void update(Amministratore a){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Admin set username=?, email=?, pass=? where idAdmin=?");
+            ps.setString(1,a.getUsername());
+            ps.setString(2,a.getEmail());
+            ps.setString(3,a.getPass());
+            ps.setInt(4,a.getIdAdmin());
 
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
