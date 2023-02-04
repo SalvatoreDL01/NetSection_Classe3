@@ -1,20 +1,21 @@
 package Servizi;
 
-import ServiziEStorage.UtenteNetflix;
-import ServiziEStorage.UtenteNetflixDAO;
+import ServiziEStorage.Eliminazione;
+import ServiziEStorage.EliminazioneDAO;
 import ServiziEStorage.UtenteRegistrato;
 import ServiziEStorage.UtenteRegistratoDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class SegnalazioneService {
+public class AutenticazioneService {
 
     static public void banUtente(int idUserToBan){
-        ArrayList<UtenteRegistrato> listU=UtenteRegistratoDAO.retriveAll();
+        ArrayList<UtenteRegistrato> listU= UtenteRegistratoDAO.retriveAll();
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToBan){
+                Eliminazione e=new Eliminazione(u.getId(), u.getUsername(), u.getEmail());
+                EliminazioneDAO.doSave(e);
                 UtenteRegistratoDAO.remove(idUserToBan);
                 System.out.println("L'utente è stato rimosso correttamente");
             }

@@ -53,7 +53,7 @@ public class EliminazioneDAO {
         }
     }
     /*Metodo che salva i dati di un oggetto Eliminazione dal DB*/
-    static public void dosave(Eliminazione eliminazione){
+    static public void doSave(Eliminazione eliminazione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Eliminazione values (?,?,?)");
             ps.setInt(1, eliminazione.getId());
