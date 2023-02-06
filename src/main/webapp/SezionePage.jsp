@@ -16,6 +16,10 @@
 <div id="sfondo"></div>
 <div id="paginaSezione">
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
+    <form method="get" action="CreazioneDiscussioniServlet">
+        <input type="hidden" name="sezione" value="idsezione">
+        <input type="submit" value="Crea discussione">
+    </form>
     <%for(int i=0;i<4;i++){%>
     <div class="discussione">
         <p class="titoloDiscussione">Titolo discussione</p>
