@@ -2,26 +2,17 @@ package ServiziEStorage;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Problema*/
 public class ProblemaDAO {
-
-    /*create table Problema(
-idUtente int,
-dataSottomissione DATETIME,
-natura varchar(30) not null,
-contenuto varchar(250) not null,
-foreign key(idUtente) references UtenteRegistrato(id) on delete cascade,
-primary key(idUtente, dataSottomissione)
-);*/
-
-    static public Problema retriveById(int idUtente, String dataSottomissione){
+    /*Metodo che estrae i dati di una entry della tabella Problema partendo dal suoi identificatore*/
+    static public Problema retriveById(int idUtente, Date dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema where idUtente=? and dataSottomissione=?");
             ps.setInt(1, idUtente);
-            ps.setString(2, dataSottomissione);
+            ps.setDate(2, dataSottomissione);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                return new Problema(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                return new Problema(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4));
             }
             return null;
         }
@@ -29,14 +20,14 @@ primary key(idUtente, dataSottomissione)
             throw new RuntimeException();
         }
     }
-
+    /*Metodo che estrae tutti i dati dalla tabella Problema*/
     static public ArrayList<Problema> retriveAll(){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema");
+            PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema order by dataSottomissione");
             ResultSet rs = ps.executeQuery();
             ArrayList<Problema> list = new ArrayList<>();
             while(rs.next()){
-                list.add(new Problema(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                list.add(new Problema(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4)));
             }
             return list;
         }
@@ -44,12 +35,12 @@ primary key(idUtente, dataSottomissione)
             throw new RuntimeException();
         }
     }
-
+    /*Metodo che salva tutti i dati di un oggetto Problema sul DB*/
     static public void dosave(Problema p){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Problema values(?,?,?,?)");
             ps.setInt(1, p.getIdUtente());
-            ps.setString(2, p.getDataSottomissione());
+            ps.setDate(2, p.getDataSottomissione());
             ps.setString(3, p.getNatura());
             ps.setString(4, p.getContenuto());
             ps.execute();
@@ -58,12 +49,12 @@ primary key(idUtente, dataSottomissione)
             throw new RuntimeException();
         }
     }
-
-    static public void doRemoveById(int idUtente, String dataSottomissione){
+    /*Metodo che rimuove tutti i dati di una entry problema sul DB a partire dal suo identificatore*/
+    static public void doRemoveById(int idUtente, Date dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Problema where idUtente = ? and dataSottomissione = ?");
             ps.setInt(1, idUtente);
-            ps.setString(2, dataSottomissione);
+            ps.setDate(2, dataSottomissione);
             ps.execute();
         }
         catch (SQLException e){

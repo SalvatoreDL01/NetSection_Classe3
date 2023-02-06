@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Discussione*/
 public class AmministratoreDAO {
-
+/*Metodo che estrae i dati di un Amministratore dal DB tramite il suo id*/
     public static Amministratore doRetriveById(int idAdmin){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idAdmin, username, email, password from Admin where idAdmin = ?");
@@ -24,7 +24,7 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-
+/*Metodo che salva i dati di un amministratore sul DB tramite il suo id*/
     public static void doSave(Amministratore a){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Admin (idAdmin, username, email, password) values (?,?,?,?)");
@@ -39,7 +39,7 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-
+/*Metodo che rimuove i dati di un Amministratore dal DB tramite il suo id*/
     public static void doRemoveById(int idAdmin){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Admin where idAdmin=?");
@@ -50,7 +50,7 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-
+    /*Metodo che estrae tutti i dati di un amministratore dal DB*/
     public static ArrayList<Amministratore> retriveAll(){
         ArrayList<Amministratore> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
@@ -66,5 +66,19 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che permette di aggiornare i dati relativi ad un Amministratore*/
+    public static void update(Amministratore a){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Admin set username=?, email=?, pass=? where idAdmin=?");
+            ps.setString(1,a.getUsername());
+            ps.setString(2,a.getEmail());
+            ps.setString(3,a.getPass());
+            ps.setInt(4,a.getIdAdmin());
 
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
