@@ -132,7 +132,7 @@ public class SezioneDAO {
         }
     }
     /*Metodo che salva tutti i dati relativi a un oggetto Sezione nel DB. Salva anche i dati relativi ai sui generi*/
-    public boolean doSave(Sezione s){
+    static public boolean doSave(Sezione s){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("insert into Sezione values (null,?,?,?)");
