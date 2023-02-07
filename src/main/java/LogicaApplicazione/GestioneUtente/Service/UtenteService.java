@@ -1,15 +1,16 @@
 package LogicaApplicazione.GestioneUtente.Service;
 
 import ServiziEStorage.DAO.EliminazioneDAO;
+import ServiziEStorage.DAO.UtenteNetflixDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Eliminazione;
+import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.Entry.UtenteRegistrato;
 
 import java.util.ArrayList;
 
-public class AutenticazioneService {
-
+public class UtenteService {
     static public void banUtente(int idUserToBan){
         ArrayList<UtenteRegistrato> listU= UtenteRegistratoDAO.retriveAll();
 
@@ -32,5 +33,25 @@ public class AutenticazioneService {
                 System.out.println("L'utente è stato kickato dalla conversazione");
             }
         }
+    }
+
+    static public UtenteRegistrato checkUtente(String user, String password){
+
+        ArrayList<UtenteRegistrato> list = UtenteRegistratoDAO.retriveAll();
+        for(UtenteRegistrato u: list){
+            if(user.equals(u.getEmail()) && password.equals(u.getPass()))
+                return u;
+        }
+        return null;
+    }
+
+    static public UtenteNetflix checkUtenteNetflix(String user, String password){
+
+        ArrayList<UtenteNetflix> list = (ArrayList<UtenteNetflix>) UtenteNetflixDAO.retiveAll();
+        for(UtenteNetflix u: list){
+            if(user.equals(u.getEmail()) && password.equals(u.getPass()))
+                return u;
+        }
+        return null;
     }
 }
