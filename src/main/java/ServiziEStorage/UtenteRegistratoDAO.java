@@ -17,15 +17,17 @@ public class UtenteRegistratoDAO {
 
             List<Discussione> iscrizioni = DiscussioneDAO.doRetriveByIscritto(id);
             List<Discussione> moderazioni = DiscussioneDAO.doRetriveByModeratore(id);
-            List<Discussione> kicks = DiscussioneDAO.doRetriveByKickato(id);
-            List<String> generi = new ArrayList<String>();
-            PreparedStatement psGenere = con.prepareStatement("select p.genere from UtenteRegistrato u  join Preferire p on u.id=p.idUtente where u.id = ?");
+            //List<Discussione> kicks = DiscussioneDAO.doRetriveByKickato(id);
+            List<Genere> generi = new ArrayList<Genere>();
+            PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
             ps.setInt(1, id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
-                generi.add(rsGenere.getString(1));
+                generi.add(GenereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
             }
+
+
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -34,7 +36,8 @@ public class UtenteRegistratoDAO {
                         rs.getString(6));
                 u.setListaPreferiti(generi);
                 u.setListaIscizioni(iscrizioni);
-                u.setListaKickato(kicks);
+                //u.setListaKickato(kicks);
+                u.setListaKickato(null);
                 u.setListaModerazioni(moderazioni);
                 return u;
             }
@@ -44,6 +47,35 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static UtenteRegistrato doRetriveByIdForListaGeneri(int id){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select id, username, pass, email from UtenteRegistrato where id = ?");
+            ps.setInt(1, id);
+
+            UtenteRegistrato u = null;
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                u = new UtenteRegistrato(rs.getString(2), rs.getString(4), rs.getString(3), null, null);
+            }
+
+            List<Genere> generi = new ArrayList<Genere>();
+            PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
+            ps.setInt(1, id);
+
+            ResultSet rsGenere = psGenere.executeQuery();
+            while(rsGenere.next()){
+                generi.add(GenereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
+            }
+
+            u.setListaPreferiti(generi);
+            return u;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     /* Estrae i dati di una entry della tabella UtenteRegistrato*/
     public static UtenteRegistrato doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
@@ -139,7 +171,23 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Salva i dati di un oggetto UtenteRegistrato sul DB. Salva anche la tabella di generi preferiti se fornita*/
+
+    public static void doSaveRegistration(UtenteRegistrato u) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
+            ps.setString(1, u.getUsername());
+            ps.setString(2, u.getEmail());
+            ps.setString(3, u.getPass());
+            ps.setDate(4, u.getDataNascita());
+            ps.setString(5, u.getImmagine());
+
+            ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+
+            /*Salva i dati di un oggetto UtenteRegistrato sul DB. Salva anche la tabella di generi preferiti se fornita*/
     public static void doSave(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
@@ -151,7 +199,7 @@ public class UtenteRegistratoDAO {
 
             ps.execute();
 
-            PreparedStatement ps2 = con.prepareStatement("select idSezione from UtenteRegistrato where username=?");
+            PreparedStatement ps2 = con.prepareStatement("select idSezione from Appartenere where idSezione=?");
             ps2.setString(1, u.getUsername());
 
             int id = -1;
@@ -345,4 +393,5 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
+
 }

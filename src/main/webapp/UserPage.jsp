@@ -1,7 +1,8 @@
 <%@ page import="ServiziEStorage.UtenteRegistrato" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="ServiziEStorage.Genere" %>
-<%@ page import="ServiziEStorage.GenereDAO" %><%--
+<%@ page import="ServiziEStorage.GenereDAO" %>
+<%@ page import="ServiziEStorage.UtenteRegistratoDAO" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -45,17 +46,26 @@
 </div>
 <div class="discuss">
   <p>Gestisci generi preferiti</p>
-  <form >
     <%
-      ArrayList<Genere> list = GenereDAO.retriveAll();
+      u = UtenteRegistratoDAO.doRetriveByIdForListaGeneri(u.getId());
+      ArrayList<Genere> list = (ArrayList<Genere>) u.getListaPreferiti();
+      System.out.println(list.size());
       for(Genere g: list){%>
-    <input type="checkbox" id="<%=g.getNome()%>" name="<%=g.getNome()%>" value="<%=g.getNome()%>">
-    <label for="<%=g.getNome()%>"> <%=g.getNome()%></label>
+          <p><%=g.getNome()%></p>
+          <a href="GeneriPreferitiController?azione=rimuovi&genere=<%=g.getNome()%>">Rimuovi dai preferiti</a>
     <%
       }
     %>
-    <input type="submit" value="Aggiorna">
-  </form>
+  <%
+    ArrayList<Genere> listaGeneri = GenereDAO.retriveAll();
+    for(Genere g: list){
+      listaGeneri.remove(g);
+    }
+    for(Genere g1: listaGeneri){
+     %>
+  <p><%=g1.getNome()%></p>
+  <a href="GeneriPreferitiController?azione=aggiungi&genere=<%=g1.getNome()%>" style="color: aliceblue; text-decoration: none; height: 40px; width: 50px; background-color: #0a1316">Aggiungi ai preferiti</a>
+  <%}%>
 </div>
 <div class="discuss">
   <p>Accedi alle tue discussioni preferite</p><br>

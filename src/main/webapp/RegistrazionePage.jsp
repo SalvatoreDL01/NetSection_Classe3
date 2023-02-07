@@ -64,7 +64,7 @@
             <input type="email" id="email" name="email" value="" placeholder="Email"><br><br>
 
             <label for="eta">età:</label><br><br>
-            <input type="number" id="eta" name="eta" value="" placeholder="0"><br><br>
+            <input type="date" id="eta" name="eta" value="" placeholder="0"><br><br>
 
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>

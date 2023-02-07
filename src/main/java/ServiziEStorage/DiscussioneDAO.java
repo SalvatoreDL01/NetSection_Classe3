@@ -127,7 +127,7 @@ public class DiscussioneDAO {
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
             PreparedStatement ps = con.prepareStatement(
-                    "select d.idSezione,d.titolo from Discussione d join Moderare m on m.sezione=d.sezione and m.discussione =m.titolo where m.idUtente = ?");
+                    "select d.Sezione,d.titolo from Discussione d join Moderare m on m.sezione=d.sezione and m.discussione =d.titolo where m.idUtente = ?");
             ps.setInt(1, idUtente);
 
             ResultSet rs = ps.executeQuery();
@@ -145,7 +145,7 @@ public class DiscussioneDAO {
     public static List<Discussione> doRetriveByIscritto(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
-            PreparedStatement ps = con.prepareStatement("select d.idSezione,d.titolo from Discussione d join Iscrizione i on i.sezione=d.sezione and i.discussione =m.titolo where i.idUtente = ?");
+            PreparedStatement ps = con.prepareStatement("select d.sezione,d.titolo from Discussione d join Iscrizione i on i.sezione=d.sezione and i.discussione =d.titolo where i.idUtente = ?");
             ps.setInt(1, idUtente);
 
             ResultSet rs = ps.executeQuery();
@@ -164,7 +164,7 @@ public class DiscussioneDAO {
     public static List<Discussione> doRetriveByKickato(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
-            PreparedStatement ps = con.prepareStatement("select d.idSezione,d.titolo from Discussione d join Kick k on k.sezione=d.sezione and k.discussione =m.titolo where k.idUtente = ?");
+            PreparedStatement ps = con.prepareStatement("select d.Sezione,d.titolo from Discussione d join Kick k on k.sezione=d.sezione and k.discussione =m.titolo where k.idUtente = ?");
             ps.setInt(1, idUtente);
 
             ResultSet rs = ps.executeQuery();
