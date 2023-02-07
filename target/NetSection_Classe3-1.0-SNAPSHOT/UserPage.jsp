@@ -16,6 +16,8 @@
 <div class="welcome">
   <img src="css/logo.png"><br>
   <%
+    UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
+    GenereDAO genereDAO = new GenereDAO();
     UtenteRegistrato u = null;
     if(session.getAttribute("user") != null){
       u = (UtenteRegistrato) session.getAttribute("user");
@@ -47,7 +49,7 @@
 <div class="discuss">
   <p>Gestisci generi preferiti</p>
     <%
-      u = UtenteRegistratoDAO.doRetriveByIdForListaGeneri(u.getId());
+      u = utenteRegistratoDAO.doRetriveById(u.getId());
       ArrayList<Genere> list = (ArrayList<Genere>) u.getListaPreferiti();
       System.out.println(list.size());
       for(Genere g: list){%>
@@ -57,7 +59,7 @@
       }
     %>
   <%
-    ArrayList<Genere> listaGeneri = GenereDAO.retriveAll();
+    ArrayList<Genere> listaGeneri = genereDAO.retriveAll();
     for(Genere g: list){
       listaGeneri.remove(g);
     }

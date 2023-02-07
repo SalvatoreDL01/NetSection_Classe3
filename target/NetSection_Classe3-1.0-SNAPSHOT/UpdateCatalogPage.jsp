@@ -14,7 +14,7 @@
 <body>
 
 <%
-    List<Genere> generi= GenereDAO.retriveAll();
+    List<Genere> generi= new GenereDAO().retriveAll();
 %>
 
 <div class="aggiorna-catalogo">
