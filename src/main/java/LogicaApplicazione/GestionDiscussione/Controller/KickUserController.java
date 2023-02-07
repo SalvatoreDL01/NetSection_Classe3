@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestionDiscussione.Controller;
 
+import LogicaApplicazione.GestionDiscussione.Service.GestioneDiscussione;
 import LogicaApplicazione.GestionDiscussione.Service.GestioneDiscussioneImp;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.DAO.DiscussioneDAO;
@@ -17,7 +18,7 @@ public class KickUserController extends HttpServlet {
         int idDiscussione= Integer.parseInt(request.getParameter("idDiscussione"));
         String titolo= request.getParameter("titolo");
 
-        GestioneDiscussioneImp gd=new GestioneDiscussioneImp();
+        GestioneDiscussione gd=new GestioneDiscussioneImp();
         gd.checkKick(idUserToKick, idDiscussione, titolo);
 
         response.sendRedirect("/DiscussionePage");
