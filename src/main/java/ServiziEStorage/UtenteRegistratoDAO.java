@@ -9,7 +9,7 @@ import java.util.List;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe UtenteRegistrato*/
 public class UtenteRegistratoDAO {
     /*Metodo che estrae tutti i dati di un entry UtenteRegistrato dal DB partendo dal suo id. Estrae anche i dati
-    relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce */
+    relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce  l */
     public static UtenteRegistrato doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato where id = ?");
