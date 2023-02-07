@@ -23,15 +23,18 @@ public class UtenteRegistratoDAO {
             GenereDAO genereDAO= new GenereDAO();
             List<Discussione> iscrizioni = discussioneDAO.doRetriveByIscritto(id);
             List<Discussione> moderazioni = discussioneDAO.doRetriveByModeratore(id);
-            //List<Discussione> kicks = discussioneDAO.doRetriveByKickato(id);
+            List<Discussione> kicks = discussioneDAO.doRetriveByKickato(id);
             List<Genere> generi = new ArrayList<Genere>();
             PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
             psGenere.setInt(1, id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
+
                 generi.add(genereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
             }
+
+
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -40,8 +43,7 @@ public class UtenteRegistratoDAO {
                         rs.getString(6));
                 u.setListaPreferiti(generi);
                 u.setListaIscizioni(iscrizioni);
-                //u.setListaKickato(kicks);
-                //u.setListaKickato(null);
+                u.setListaKickato(kicks);
                 u.setListaModerazioni(moderazioni);
                 return u;
             }
