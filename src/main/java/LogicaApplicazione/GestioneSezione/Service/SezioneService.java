@@ -8,10 +8,12 @@ import java.util.List;
 
 public class SezioneService {
 
+    private static final SezioneDAO sezioneDAO = new SezioneDAO();
+
     static public void refresh(String titolo, String descrizione, String immagine, List<Genere> generi){
         if(titolo!=null && descrizione!=null && immagine!=null && !generi.isEmpty()){
             Sezione s=new Sezione(immagine, titolo, descrizione, generi);
-            if(SezioneDAO.doSave(s))
+            if(sezioneDAO.doSave(s))
                 System.out.println("Sezione salvata correttamente");
         }
     }
