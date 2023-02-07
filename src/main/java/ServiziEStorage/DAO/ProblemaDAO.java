@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Problema*/
 public class ProblemaDAO {
     /*Metodo che estrae i dati di una entry della tabella Problema partendo dal suoi identificatore*/
-    static public Problema retriveById(int idUtente, Date dataSottomissione){
+    public Problema retriveById(int idUtente, Date dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema where idUtente=? and dataSottomissione=?");
             ps.setInt(1, idUtente);
@@ -24,7 +24,7 @@ public class ProblemaDAO {
         }
     }
     /*Metodo che estrae tutti i dati dalla tabella Problema*/
-    static public ArrayList<Problema> retriveAll(){
+    public ArrayList<Problema> retriveAll(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema order by dataSottomissione");
             ResultSet rs = ps.executeQuery();
@@ -39,7 +39,7 @@ public class ProblemaDAO {
         }
     }
     /*Metodo che salva tutti i dati di un oggetto Problema sul DB*/
-    static public void dosave(Problema p){
+    public void dosave(Problema p){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Problema values(?,?,?,?)");
             ps.setInt(1, p.getIdUtente());
@@ -53,7 +53,7 @@ public class ProblemaDAO {
         }
     }
     /*Metodo che rimuove tutti i dati di una entry problema sul DB a partire dal suo identificatore*/
-    static public void doRemoveById(int idUtente, Date dataSottomissione){
+    public void doRemoveById(int idUtente, Date dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Problema where idUtente = ? and dataSottomissione = ?");
             ps.setInt(1, idUtente);

@@ -15,21 +15,23 @@ import java.util.List;
 public class UtenteRegistratoDAO {
     /*Metodo che estrae tutti i dati di un entry UtenteRegistrato dal DB partendo dal suo id. Estrae anche i dati
     relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce  l */
-    public static UtenteRegistrato doRetriveById(int id){
+    public UtenteRegistrato doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato where id = ?");
             ps.setInt(1, id);
-
-            List<Discussione> iscrizioni = DiscussioneDAO.doRetriveByIscritto(id);
-            List<Discussione> moderazioni = DiscussioneDAO.doRetriveByModeratore(id);
-            //List<Discussione> kicks = DiscussioneDAO.doRetriveByKickato(id);
+            DiscussioneDAO discussioneDAO= new DiscussioneDAO();
+            GenereDAO genereDAO= new GenereDAO();
+            List<Discussione> iscrizioni = discussioneDAO.doRetriveByIscritto(id);
+            List<Discussione> moderazioni = discussioneDAO.doRetriveByModeratore(id);
+            List<Discussione> kicks = discussioneDAO.doRetriveByKickato(id);
             List<Genere> generi = new ArrayList<Genere>();
             PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
             ps.setInt(1, id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
-                generi.add(GenereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
+
+                generi.add(genereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
             }
 
 
@@ -41,7 +43,7 @@ public class UtenteRegistratoDAO {
                         rs.getString(6));
                 u.setListaPreferiti(generi);
                 u.setListaIscizioni(iscrizioni);
-                //u.setListaKickato(kicks);
+                u.setListaKickato(kicks);
                 u.setListaKickato(null);
                 u.setListaModerazioni(moderazioni);
                 return u;
@@ -53,7 +55,7 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    public static UtenteRegistrato doRetriveByIdForListaGeneri(int id){
+    public UtenteRegistrato doRetriveByIdForListaGeneri(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select id, username, pass, email from UtenteRegistrato where id = ?");
             ps.setInt(1, id);
@@ -63,14 +65,14 @@ public class UtenteRegistratoDAO {
             if(rs.next()){
                 u = new UtenteRegistrato(rs.getString(2), rs.getString(4), rs.getString(3), null, null);
             }
-
+            GenereDAO genereDAO= new GenereDAO();
             List<Genere> generi = new ArrayList<Genere>();
             PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
             ps.setInt(1, id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
-                generi.add(GenereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
+                generi.add(genereDAO.doRetriveByNomeGenere(rsGenere.getString(1)));
             }
 
             u.setListaPreferiti(generi);
@@ -82,7 +84,7 @@ public class UtenteRegistratoDAO {
     }
 
     /* Estrae i dati di una entry della tabella UtenteRegistrato*/
-    public static UtenteRegistrato doRetriveLightById(int id){
+    public UtenteRegistrato doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato where id = ?");
             ps.setInt(1, id);
@@ -102,7 +104,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Il metodo permette di estrarre una lista di Moderatori della discussione dal DB fornendo come input l'identificatore della discussione*/
-    public static List<UtenteRegistrato> getModeratori(int idSezione,String titolo){
+    public List<UtenteRegistrato> getModeratori(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             List<UtenteRegistrato> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select idUtente from Moderare where sezione=? and discussione =?");
@@ -111,7 +113,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                UtenteRegistrato u = UtenteRegistratoDAO.doRetriveLightById(rs.getInt(1));
+                UtenteRegistrato u = doRetriveLightById(rs.getInt(1));
                 l.add(u);
             }
             return l;
@@ -121,7 +123,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Il metodo permette di estrarre una lista di Utenti iscritti alla discussione dal DB fornendo come input l'identificatore della discussione*/
-    public static List<UtenteRegistrato> getIscritti(int idSezione, String titolo) {
+    public List<UtenteRegistrato> getIscritti(int idSezione, String titolo) {
         try (Connection con = ConPool.getConnection()) {
             List<UtenteRegistrato> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select idUtente from Iscrizione where sezione=? and discussione =?");
@@ -130,7 +132,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                UtenteRegistrato u = UtenteRegistratoDAO.doRetriveLightById(rs.getInt(1));
+                UtenteRegistrato u = doRetriveLightById(rs.getInt(1));
                 l.add(u);
             }
             return l;
@@ -139,7 +141,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Il metodo permette di estrarre una lista di utenti kickati dalla discussione dal DB fornendo come input l'identificatore della discussione*/
-    public static List<UtenteRegistrato> getKickati(int idSezione,String titolo){
+    public List<UtenteRegistrato> getKickati(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             List<UtenteRegistrato> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select idUtente from Kick where sezione=? and discussione =?");
@@ -148,7 +150,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                UtenteRegistrato u = UtenteRegistratoDAO.doRetriveLightById(rs.getInt(1));
+                UtenteRegistrato u = doRetriveLightById(rs.getInt(1));
                 l.add(u);
             }
             return l;
@@ -158,7 +160,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Estrae tutti  i dati dalla tabella UtenteRegistrato*/
-    public static ArrayList<UtenteRegistrato> retriveAll(){
+    public ArrayList<UtenteRegistrato> retriveAll(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato");
             ArrayList<UtenteRegistrato> lista = new ArrayList<>();
@@ -177,7 +179,7 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    public static void doSaveRegistration(UtenteRegistrato u) {
+    public void doSaveRegistration(UtenteRegistrato u) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
             ps.setString(1, u.getUsername());
@@ -193,7 +195,7 @@ public class UtenteRegistratoDAO {
     }
 
             /*Salva i dati di un oggetto UtenteRegistrato sul DB. Salva anche la tabella di generi preferiti se fornita*/
-    public static void doSave(UtenteRegistrato u){
+    public void doSave(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
             ps.setString(1,u.getUsername());
@@ -235,7 +237,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che rimuove tutti i dati di un UtenteRegistrato dal DB conoscendo il suo id*/
-    public static void remove(int id){
+    public void remove(int id){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from UtenteRegistrato where id=?");
@@ -249,7 +251,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che svolge il kick di un utente da una discussione*/
-    public static void removeUtente(Discussione d,UtenteRegistrato u){
+    public void removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
@@ -275,7 +277,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Metodo che svolge ls rimozione di una Moderazione di un utente da una discussione*/
-    public static void removeModerazione(Discussione d,UtenteRegistrato u){
+    public void removeModerazione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Moderare where idUtente=? and idSezione=? and discussione=?");
@@ -293,7 +295,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
-    public static void removeIscrizione(Discussione d,UtenteRegistrato u){
+    public void removeIscrizione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
@@ -311,7 +313,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
-    public static void addModerazione(Discussione d,UtenteRegistrato u){
+    public void addModerazione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("Insert into Moderare values(?,?,?)");
@@ -329,7 +331,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
-    public static void addIscrizione(Discussione d,UtenteRegistrato u){
+    public void addIscrizione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("Insert into Iscrizione values(?,?,?)");
@@ -348,7 +350,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che svolge ls rimozione di una preferenza genere di un utente da una discussione*/
-    public static void removeGenere(UtenteRegistrato u,String genere){
+    public void removeGenere(UtenteRegistrato u,String genere){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Preferire where idUtente=? and genere=?");
@@ -365,7 +367,7 @@ public class UtenteRegistratoDAO {
         }
     }
     /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
-    public static void addGenere(UtenteRegistrato u,String genere){
+    public void addGenere(UtenteRegistrato u,String genere){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("Insert into Preferire values(?,?)");
@@ -382,7 +384,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che permette di aggiornare i dati relativi ad un UtenteRegistrato*/
-    public static void update(UtenteRegistrato u){
+    public void update(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update UtenteRegistrato set username=?,email=?,pass=?,dataNasita=?,immagine=? where id=?");
             ps.setString(1, u.getUsername());

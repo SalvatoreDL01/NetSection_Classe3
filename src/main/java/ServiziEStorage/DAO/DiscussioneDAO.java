@@ -11,7 +11,7 @@ import java.util.List;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Discussione*/
 public class DiscussioneDAO {
 /*Metodo che, preso un oggetto Discussione, permetti di salvarene i dati su DB.*/
-    public static void doSave(Discussione d){
+    public void doSave(Discussione d){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "insert into Discussione (sezione, titolo, creatore, tags, immagine, dataCreazione) values (?,?,?,?,?,?)");
@@ -44,7 +44,7 @@ public class DiscussioneDAO {
         }
     }
 /*Il metodo permette di rimuovere una entry relativa alla tabella Discussione dal DB. È necessario fornire id della sezione e titolo della discussione*/
-    public static void doRemoveById(int idSezione, String titolo){
+    public void doRemoveById(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Discussione where sezione=? and titolo=?");
             ps.setInt(1, idSezione);
@@ -77,15 +77,16 @@ public class DiscussioneDAO {
 
 
     /*Il metodo permette di estrarre un oggetto Discussione dal DB che è fornito di lista utenti kickati, iscritti e tag della discussione. Va fornito id della sezione e titolo della discussione*/
-    public static Discussione doRetriveLightById(int idSezione, String titolo){
+    public Discussione doRetriveLightById(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
             ps.setInt(1, idSezione);
+            UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
 
             List<String> tags=getTags(idSezione, titolo);
-            List<UtenteRegistrato> kickati = UtenteRegistratoDAO.getKickati(idSezione, titolo);
-            List<UtenteRegistrato> iscritti = UtenteRegistratoDAO.getIscritti(idSezione, titolo);
+            List<UtenteRegistrato> kickati = utenteRegistratoDAO.getKickati(idSezione, titolo);
+            List<UtenteRegistrato> iscritti = utenteRegistratoDAO.getIscritti(idSezione, titolo);
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -101,18 +102,20 @@ public class DiscussioneDAO {
         }
     }
     /*Il metodo permette di estrarre un oggetto Discussione dal DB che è fornito di lista utenti kickati, iscritti, tag, commenti e moderatori della discussione. Va fornito id della sezione e titolo della discussione*/
-    public static Discussione doRetriveById(int idSezione,String titolo){
+    public Discussione doRetriveById(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
             ps.setInt(1, idSezione);
 
+            UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
             List<String> tags=getTags(idSezione, titolo);
-            List<UtenteRegistrato> iscritti = UtenteRegistratoDAO.getIscritti(idSezione, titolo);
-            List<UtenteRegistrato> moderatori = UtenteRegistratoDAO.getModeratori(idSezione, titolo);
-            List<UtenteRegistrato> kickati = UtenteRegistratoDAO.getKickati(idSezione, titolo);
+            List<UtenteRegistrato> iscritti = utenteRegistratoDAO.getIscritti(idSezione, titolo);
+            List<UtenteRegistrato> moderatori = utenteRegistratoDAO.getModeratori(idSezione, titolo);
+            List<UtenteRegistrato> kickati = utenteRegistratoDAO.getKickati(idSezione, titolo);
             List<Commento> commenti;
-            commenti = CommentoDAO.doRetriveByDiscussione(idSezione,titolo);
+            CommentoDAO commentoDAO= new CommentoDAO();
+            commenti = commentoDAO.doRetriveByDiscussione(idSezione,titolo);
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -128,7 +131,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che estrae i dati delle Discussioni che un utente modera*/
-    public static List<Discussione> doRetriveByModeratore(int idUtente){
+    public List<Discussione> doRetriveByModeratore(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
             PreparedStatement ps = con.prepareStatement(
@@ -147,7 +150,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che estrae i dati delle Discussioni a cui un utente è iscritto*/
-    public static List<Discussione> doRetriveByIscritto(int idUtente){
+    public List<Discussione> doRetriveByIscritto(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
             PreparedStatement ps = con.prepareStatement("select d.sezione,d.titolo from Discussione d join Iscrizione i on i.sezione=d.sezione and i.discussione =d.titolo where i.idUtente = ?");
@@ -166,7 +169,7 @@ public class DiscussioneDAO {
     }
 
     /*Metodo che estrae i dati delle Discussioni a cui un utente è stato cacciato*/
-    public static List<Discussione> doRetriveByKickato(int idUtente){
+    public List<Discussione> doRetriveByKickato(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
             PreparedStatement ps = con.prepareStatement("select d.Sezione,d.titolo from Discussione d join Kick k on k.sezione=d.sezione and k.discussione =m.titolo where k.idUtente = ?");
@@ -185,7 +188,7 @@ public class DiscussioneDAO {
     }
 
     /*Questo metodo permette di estrarre una lista di discussioni provviste di lista utenti kickati, iscritti e tag. È necessario fornire l'id della sezione */
-    public static List<Discussione> doRetriveBySezione(int idSezione){
+    public List<Discussione> doRetriveBySezione(int idSezione){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
             PreparedStatement ps = con.prepareStatement(
@@ -204,7 +207,7 @@ public class DiscussioneDAO {
         }
     }
 /*Estrae tutti gli oggetti Discussione dal db, assieme alla loro lista tag*/
-    public static ArrayList<Discussione> retriveAll(){
+    public ArrayList<Discussione> retriveAll(){
         ArrayList<Discussione> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select sezione, titolo, creatore, immagine, dataCreazione from Discussione");
@@ -223,7 +226,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che permette di aggiornare l'immagine relativi ad una Discussione*/
-    public static void updateImmagine(Discussione d){
+    public void updateImmagine(Discussione d){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Discussione set immagine=? where titolo=? and idSzione=?");
             ps.setString(1,d.getImmagine());
@@ -237,7 +240,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che permette di aggiornare il titolo relativi ad una Discussione*/
-    public static void updateTitolo(Discussione d,String nuovoTitolo){
+    public void updateTitolo(Discussione d,String nuovoTitolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Discussione set titolo=? where titolo=? and idSzione=?");
             ps.setString(1,nuovoTitolo);
@@ -253,7 +256,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che permette di rimuovere un tag associato ad una Discussione*/
-    public static void removeTag(Discussione d, String tag){
+    public void removeTag(Discussione d, String tag){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Tag where nome=? and titolo=? and sezione=?");
             ps.setString(1,tag);
@@ -269,7 +272,7 @@ public class DiscussioneDAO {
         }
     }
     /*Metodo che permette di aggiungere un tag ad una Discussione*/
-    public static void addTag(Discussione d, String tag){
+    public void addTag(Discussione d, String tag){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Tag values(?,?,?)");
             ps.setInt(1,d.getSezione());

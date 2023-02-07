@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class GenereDAO {
 
-    public static Genere doRetriveByNomeGenere(String nome){
+    public Genere doRetriveByNomeGenere(String nome){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Genere where nome = ?");
             ps.setString(1, nome);
-
+            SezioneDAO sezioneDAO= new SezioneDAO();
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Genere g = new Genere(rs.getString(1));
                 ArrayList<Sezione> listaContenuti;
-                listaContenuti = (ArrayList<Sezione>) SezioneDAO.doRetriveByGenere(nome);
+                listaContenuti = (ArrayList<Sezione>) sezioneDAO.doRetriveByGenere(nome);
 
                 g.setListaSezioni(listaContenuti);
                 return g;
@@ -33,7 +33,7 @@ public class GenereDAO {
         }
     }
 
-    static public ArrayList<Genere> retriveAll(){
+    public ArrayList<Genere> retriveAll(){
 
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select nome from Genere");

@@ -13,7 +13,7 @@ import java.util.List;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Commento*/
 public class CommentoDAO {
 /*Estrae dal DB tutti i dati relativi a un commento tramite il suo identificatore e tutta la sua discendenza di commenti*/
-    public static Commento doRetriveById(Date dataScrittura, int creatore){
+    public Commento doRetriveById(Date dataScrittura, int creatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ? and dataScrittura = ?");
             ps.setInt(1, creatore);
@@ -30,7 +30,7 @@ public class CommentoDAO {
                 ps.setDate(2, dataScrittura);
                 ResultSet rs1 = ps1.executeQuery();
                 while (rs1.next()){
-                    Commento commento = CommentoDAO.doRetriveById(rs1.getDate(1),rs.getInt(2));
+                    Commento commento = doRetriveById(rs1.getDate(1),rs.getInt(2));
                     list.add(commento);
                 }
                 c.setListaRisposte(list);
@@ -43,7 +43,7 @@ public class CommentoDAO {
         }
     }
 /*estrae tutti i dati relativi ad un Commento tramite il suo identificatore. Non estrai la sua discendenza di commenti*/
-    public static Commento doRetriveLightById(Date dataScrittura, int creatore){
+    public Commento doRetriveLightById(Date dataScrittura, int creatore){
         try(Connection con = ConPool.getConnection()) {
             List<Commento> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ? and dataScrittura = ?");
@@ -62,7 +62,7 @@ public class CommentoDAO {
             }
     }
 /*Estrae tutti i commenti relativi ad una discussione e la loro discendenza*/
-    public static List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
+    public List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where" +
@@ -82,7 +82,7 @@ public class CommentoDAO {
         }
     }
 /*Estrae tutti i commenti di un utente*/
-    public static List<Commento> doRetriveByCreatore(int creatore) {
+    public List<Commento> doRetriveByCreatore(int creatore) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ?");
@@ -100,7 +100,7 @@ public class CommentoDAO {
         }
     }
 /*Estrae una Lista di commenti che sono stati segnalati*/
-    public static List<Commento> doRetriveSegnalati(){
+    public List<Commento> doRetriveSegnalati(){
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore, c.sezione, " +
@@ -118,7 +118,7 @@ public class CommentoDAO {
         }
     }
 /*salva un oggetto commento sul DB e specifica sul DB se è una risposta ad un altro commento*/
-    public static void doSave(Commento c){
+    public void doSave(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Commento values (?,?,?,?,?,null)");
             ps.setDate(1,c.getDataScrittura());
@@ -141,7 +141,7 @@ public class CommentoDAO {
         }
     }
 /*Rimuove un commento dal DB*/
-    public static void doRemove(Commento c){
+    public void doRemove(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Commento where dataScrittura=? and creatore=?");
             ps.setDate(1,c.getDataScrittura());
@@ -155,7 +155,7 @@ public class CommentoDAO {
     }
 
     /*Metodo che permette di aggiornare i dati relativi ad un Commento*/
-    public static void update(Commento c){
+    public void update(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Commento set punteggio=0, contenuto=? where dataScrittura =? and creatore=?");
             ps.setString(1,"<Modificato>"+c.getContenuto());

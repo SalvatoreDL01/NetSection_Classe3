@@ -9,7 +9,7 @@ import java.util.List;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Segnalazione*/
 public class SegnalazioneDAO {
     /*Metodo che salva i dati di un oggetto Segnalazione dal DB*/
-    public static void doSave(Segnalazione s){
+    public void doSave(Segnalazione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "insert into Segnalazione (dataSegnalazione, creatoreSegnalazione, dataCommento, " +
@@ -30,7 +30,7 @@ public class SegnalazioneDAO {
         }
     }
     /*Metodo che rimuove i dati di una entry Segnalazione dal DB tramite il suo id*/
-    public static void doRemoveById(Date data, int idCreatore){
+    public void doRemoveById(Date data, int idCreatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Segnalazione where dataSegnalazione=? and creatoreSegnalazione=? ");
             ps.setDate(1, data);
@@ -42,7 +42,7 @@ public class SegnalazioneDAO {
         }
     }
     /*Metodo che estrai i dati di una entry Segnalazione dal DB tramite il suo id*/
-    public static Segnalazione doRetriveById(Date data, int idCreatore){
+    public Segnalazione doRetriveById(Date data, int idCreatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
                     "select dataSegnalazione, dataCommento, creatoreSegnalazione, " +
@@ -64,7 +64,7 @@ public class SegnalazioneDAO {
         }
     }
     /*Metodo che estrai tutti i dati delle segnalazioni appartenenti a una discussine dal DB*/
-    public static List<Segnalazione> doRetriveByDiscussioni(int idSezione, String titolo){
+    public List<Segnalazione> doRetriveByDiscussioni(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             List l = new ArrayList<Segnalazione>();
             PreparedStatement ps = con.prepareStatement(
