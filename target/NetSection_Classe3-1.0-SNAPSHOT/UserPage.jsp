@@ -1,8 +1,8 @@
-<%@ page import="ServiziEStorage.UtenteRegistrato" %>
+<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ServiziEStorage.Genere" %>
-<%@ page import="ServiziEStorage.GenereDAO" %>
-<%@ page import="ServiziEStorage.UtenteRegistratoDAO" %><%--
+<%@ page import="ServiziEStorage.Entry.Genere" %>
+<%@ page import="ServiziEStorage.DAO.GenereDAO" %>
+<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>

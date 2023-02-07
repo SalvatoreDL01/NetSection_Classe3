@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestioneUtente.Controller;
 
+import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import jakarta.servlet.*;
@@ -19,7 +20,7 @@ public class LoginController extends HttpServlet {
         String pagina = "";
         String u = request.getParameter("email");
         if(u == null) {
-            UtenteRegistrato utente = LoginService.checkUtente(user, password);
+            UtenteRegistrato utente = new UtenteServiceImp().checkUtente(user, password);
             if(utente != null) {
                 //è stato trovato un riscontro nel DB
                 pagina = "/index.jsp";
@@ -35,7 +36,7 @@ public class LoginController extends HttpServlet {
         else {
             String email = request.getParameter("email");
             UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, new Date(2000, 6, 8));
-            UtenteRegistratoDAO.doSaveRegistration(utenteRegistrato);
+            new UtenteRegistratoDAO().doSaveRegistration(utenteRegistrato);
             pagina = "/index.jsp";
             HttpSession session = request.getSession();
             session.setAttribute("user", utenteRegistrato);

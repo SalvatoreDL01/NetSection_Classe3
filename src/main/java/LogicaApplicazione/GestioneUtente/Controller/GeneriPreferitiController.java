@@ -17,10 +17,10 @@ public class GeneriPreferitiController extends HttpServlet {
         String azione = request.getParameter("azione");
         HttpSession session = request.getSession();
         if(azione.equals("rimuovi")){
-            UtenteRegistratoDAO.removeGenere((UtenteRegistrato) session.getAttribute("user"), genere);
+            new UtenteRegistratoDAO().removeGenere((UtenteRegistrato) session.getAttribute("user"), genere);
         }
         else{
-            UtenteRegistratoDAO.addGenere((UtenteRegistrato) session.getAttribute("user"), genere);
+            new UtenteRegistratoDAO().addGenere((UtenteRegistrato) session.getAttribute("user"), genere);
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("UserPage.jsp");
