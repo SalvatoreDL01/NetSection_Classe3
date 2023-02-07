@@ -1,4 +1,4 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneUtente.Controller;
 
 import java.io.*;
 

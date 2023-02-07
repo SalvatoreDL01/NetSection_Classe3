@@ -1,4 +1,4 @@
-package LogicaApplicazione.GestioneUtente;
+package LogicaApplicazione.GestionDiscussione.Controller;
 
 import LogicaApplicazione.GestioneUtente.Service.AutenticazioneService;
 import ServiziEStorage.Entry.Discussione;

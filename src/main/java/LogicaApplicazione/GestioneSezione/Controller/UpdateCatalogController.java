@@ -1,4 +1,4 @@
-package LogicaApplicazione.GestioneSezione;
+package LogicaApplicazione.GestioneSezione.Controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
