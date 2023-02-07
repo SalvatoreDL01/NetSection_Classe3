@@ -1,4 +1,4 @@
-package Servizi;
+package LogicaApplicazione.GestioneUtente.Service;
 
 import ServiziEStorage.Entry.Genere;
 import ServiziEStorage.Entry.Sezione;

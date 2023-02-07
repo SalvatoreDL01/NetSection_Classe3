@@ -1,6 +1,5 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestionDiscussione;
 
-import Servizi.AutenticazioneService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

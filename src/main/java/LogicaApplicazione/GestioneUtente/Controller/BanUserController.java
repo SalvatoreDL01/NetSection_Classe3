@@ -1,6 +1,6 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneUtente.Controller;
 
-import Servizi.AutenticazioneService;
+import LogicaApplicazione.GestioneUtente.Service.AutenticazioneService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

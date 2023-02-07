@@ -1,6 +1,6 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneUtente.Controller;
 
-import Servizi.LoginService;
+import LogicaApplicazione.GestioneUtente.LoginService;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import jakarta.servlet.*;

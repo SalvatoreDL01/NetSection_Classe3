@@ -1,4 +1,4 @@
-package Servizi;
+package LogicaApplicazione.GestioneUtente;
 
 import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.DAO.UtenteNetflixDAO;
