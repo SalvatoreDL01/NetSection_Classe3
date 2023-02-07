@@ -57,4 +57,9 @@ public class UtenteServiceImp implements UtenteService {
         }
         return null;
     }
+
+    @Override
+    public void saveUtente(UtenteRegistrato u) {
+        utenteRegistratoDAO.doSaveRegistration(u);
+    }
 }

@@ -12,12 +12,12 @@ public class UtenteRegistrato {
 
     private int id;
     private String username, email, pass, immagine;
-    private Date dataNascita;
+    private String dataNascita;
     private List<?> listaIscizioni,listaModerazioni,listaKickato,listaPreferiti;
 
     /* costruttore per un nuovo utente registrato sono necessari oggetti String username, String email, String pass,
     String immagine, String dataNascita. Questo costruttore è usato per creare un nuovo untente e salvarlo nel DB */
-    public UtenteRegistrato(String username,String email,String pass,String immagine,Date dataNascita){
+    public UtenteRegistrato(String username,String email,String pass,String immagine,String dataNascita){
         this.email=email;
         this.dataNascita=dataNascita;
         this.username=username;
@@ -33,7 +33,7 @@ public class UtenteRegistrato {
     /* Costruttore utente per facilitare la registrazione con netflix. Ha bisogno di String dataNascita,
     String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
      List<?> listaKickato, List<?> listaPreferiti*/
-    public UtenteRegistrato(Date dataNascita, String username, String email, String pass, String immagine,
+    public UtenteRegistrato(String dataNascita, String username, String email, String pass, String immagine,
                             List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato,
                             List<?> listaPreferiti) {
         this.dataNascita = dataNascita;
@@ -51,7 +51,7 @@ public class UtenteRegistrato {
      Ha bisogno di int id, String dataNascita,
     String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
      List<?> listaKickato, List<?> listaPreferiti*/
-    public UtenteRegistrato(int id,Date dataNascita, String username, String email, String pass, String immagine,
+    public UtenteRegistrato(int id,String dataNascita, String username, String email, String pass, String immagine,
                             List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato,
                             List<?> listaPreferiti) {
         this.id = id;
@@ -69,7 +69,7 @@ public class UtenteRegistrato {
     /* Costruttore usato durante la retrive dei dati dal DB, ha bisogno di oggetti int id, String dataNascita,
      String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
       List<?> listaKickato, List<?> listaPreferiti */
-    public UtenteRegistrato(int id, Date dataNascita, String username, String email, String pass, String immagine) {
+    public UtenteRegistrato(int id, String dataNascita, String username, String email, String pass, String immagine) {
         this.id = id;
         this.dataNascita = dataNascita;
         this.username = username;
@@ -91,11 +91,11 @@ public class UtenteRegistrato {
         this.id = id;
     }
     /* permette di estrarre la data di nascita */
-    public Date getDataNascita() {
+    public String getDataNascita() {
         return dataNascita;
     }
     /* permette di settare la data di nascita */
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(String dataNascita) {
         this.dataNascita = dataNascita;
     }
     /* permette di estrarre l'username */

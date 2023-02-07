@@ -49,7 +49,7 @@
 <div class="discuss">
   <p>Gestisci generi preferiti</p>
     <%
-      u = utenteRegistratoDAO.doRetriveByIdForListaGeneri(u.getId());
+      u = utenteRegistratoDAO.doRetriveById(u.getId());
       ArrayList<Genere> list = (ArrayList<Genere>) u.getListaPreferiti();
       System.out.println(list.size());
       for(Genere g: list){%>
