@@ -26,7 +26,7 @@ public class UtenteRegistratoDAO {
             List<Discussione> kicks = discussioneDAO.doRetriveByKickato(id);
             List<Genere> generi = new ArrayList<Genere>();
             PreparedStatement psGenere = con.prepareStatement("select genere from Preferire where idUtente = ?");
-            ps.setInt(1, id);
+            psGenere.setInt(1, id);
 
             ResultSet rsGenere = psGenere.executeQuery();
             while(rsGenere.next()){
@@ -44,7 +44,6 @@ public class UtenteRegistratoDAO {
                 u.setListaPreferiti(generi);
                 u.setListaIscizioni(iscrizioni);
                 u.setListaKickato(kicks);
-                u.setListaKickato(null);
                 u.setListaModerazioni(moderazioni);
                 return u;
             }

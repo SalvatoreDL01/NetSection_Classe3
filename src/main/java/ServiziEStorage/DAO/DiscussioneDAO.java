@@ -172,7 +172,7 @@ public class DiscussioneDAO {
     public List<Discussione> doRetriveByKickato(int idUtente){
         try(Connection con = ConPool.getConnection()){
             List<Discussione> l = new ArrayList<Discussione>();
-            PreparedStatement ps = con.prepareStatement("select d.Sezione,d.titolo from Discussione d join Kick k on k.sezione=d.sezione and k.discussione =m.titolo where k.idUtente = ?");
+            PreparedStatement ps = con.prepareStatement("select d.Sezione,d.titolo from Discussione d join Kick k on k.sezione=d.sezione and k.titolo =d.titolo where k.idUtente = ?");
             ps.setInt(1, idUtente);
 
             ResultSet rs = ps.executeQuery();
