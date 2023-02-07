@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ServiziEStorage.Genere" %>
-<%@ page import="ServiziEStorage.GenereDAO" %>
+<%@ page import="ServiziEStorage.Entry.Genere" %>
+<%@ page import="ServiziEStorage.DAO.GenereDAO" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: chris

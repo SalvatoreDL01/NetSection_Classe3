@@ -1,4 +1,4 @@
-package ServiziEStorage;
+package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
 import java.sql.Date;

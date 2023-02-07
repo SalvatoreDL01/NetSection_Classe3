@@ -1,8 +1,8 @@
 package LogicaApplicazione.GestioneUtente.Service;
 
-import ServiziEStorage.Genere;
-import ServiziEStorage.Sezione;
-import ServiziEStorage.SezioneDAO;
+import ServiziEStorage.Entry.Genere;
+import ServiziEStorage.Entry.Sezione;
+import ServiziEStorage.DAO.SezioneDAO;
 
 import java.util.List;
 

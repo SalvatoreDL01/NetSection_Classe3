@@ -1,4 +1,8 @@
-package ServiziEStorage;
+package ServiziEStorage.DAO;
+
+import ServiziEStorage.Entry.ConPool;
+import ServiziEStorage.Entry.Genere;
+import ServiziEStorage.Entry.Sezione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

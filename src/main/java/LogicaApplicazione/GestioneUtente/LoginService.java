@@ -1,9 +1,9 @@
 package LogicaApplicazione.GestioneUtente;
 
-import ServiziEStorage.UtenteNetflix;
-import ServiziEStorage.UtenteNetflixDAO;
-import ServiziEStorage.UtenteRegistrato;
-import ServiziEStorage.UtenteRegistratoDAO;
+import ServiziEStorage.Entry.UtenteNetflix;
+import ServiziEStorage.DAO.UtenteNetflixDAO;
+import ServiziEStorage.Entry.UtenteRegistrato;
+import ServiziEStorage.DAO.UtenteRegistratoDAO;
 
 import java.util.ArrayList;
 

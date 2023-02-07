@@ -1,4 +1,9 @@
-package ServiziEStorage;
+package ServiziEStorage.DAO;
+
+import ServiziEStorage.Entry.Commento;
+import ServiziEStorage.Entry.ConPool;
+import ServiziEStorage.Entry.Discussione;
+import ServiziEStorage.Entry.UtenteRegistrato;
 
 import java.sql.*;
 import java.util.ArrayList;
