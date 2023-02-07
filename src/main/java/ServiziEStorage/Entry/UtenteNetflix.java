@@ -9,7 +9,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     private String emailNetflix, passwordNetflix;
     /*Costruttore leggero per UtenteNetflix. Necessita di String username, String email, String pass, String immagine,
      Date dataNascita,String emailNetflix,String passwordNetflix*/
-    public UtenteNetflix(String username, String email, String pass, String immagine, Date dataNascita,String emailNetflix,
+    public UtenteNetflix(String username, String email, String pass, String immagine, String dataNascita,String emailNetflix,
                          String passwordNetflix) {
         super(username, email, pass, immagine, dataNascita);
         this.emailNetflix=emailNetflix;
@@ -18,7 +18,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     /*Costruttore per un oggetto UtenteNetflix. Necessita di Date dataNascita, String username, String email, String pass,
     String immagine, List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
      String emailNetflix,String passwordNetflix*/
-    public UtenteNetflix(Date dataNascita, String username, String email, String pass, String immagine,
+    public UtenteNetflix(String dataNascita, String username, String email, String pass, String immagine,
                          List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix) {
         super(dataNascita, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
@@ -28,7 +28,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     /*Costruttore per un oggetto UtenteNetflix. Necessita di int id, Date dataNascita, String username, String email, String pass, String immagine,
                          List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix*/
-    public UtenteNetflix(int id, Date dataNascita, String username, String email, String pass, String immagine,
+    public UtenteNetflix(int id, String dataNascita, String username, String email, String pass, String immagine,
                          List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix) {
         super(id, dataNascita, username, email, pass, immagine, listaIscizioni, listaModerazioni, listaKickato, listaPreferiti);
@@ -63,12 +63,12 @@ public class UtenteNetflix extends UtenteRegistrato{
     }
     /*Metodo che ritorna un oggetto Date dataNascita della classe UntenteRegistrato*/
     @Override
-    public Date getDataNascita() {
+    public String getDataNascita() {
         return super.getDataNascita();
     }
     /*Metodo che setta un oggetto Date dataNascita della classe UntenteRegistrato*/
     @Override
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(String dataNascita) {
         super.setDataNascita(dataNascita);
     }
     /*Metodo che ritorna un oggetto String Username della classe UntenteRegistrato*/

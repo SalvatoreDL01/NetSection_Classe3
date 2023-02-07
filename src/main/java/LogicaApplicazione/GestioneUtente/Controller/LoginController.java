@@ -18,6 +18,7 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
         String pagina = "";
+        String data = request.getParameter("data").replace("/","-");
         String u = request.getParameter("email");
         if(u == null) {
             UtenteRegistrato utente = new UtenteServiceImp().checkUtente(user, password);
@@ -35,7 +36,7 @@ public class LoginController extends HttpServlet {
         }
         else {
             String email = request.getParameter("email");
-            UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, new Date(2000, 6, 8));
+            UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, data);
             new UtenteRegistratoDAO().doSaveRegistration(utenteRegistrato);
             pagina = "/index.jsp";
             HttpSession session = request.getSession();

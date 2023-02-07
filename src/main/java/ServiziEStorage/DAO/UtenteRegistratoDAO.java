@@ -38,7 +38,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getDate(5),
+                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getString(5),
                         rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(6));
                 u.setListaPreferiti(generi);
@@ -91,7 +91,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getDate(5),
+                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getString(5),
                         rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(6));
                 return u;
@@ -167,7 +167,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getDate(5),
+                UtenteRegistrato u = new UtenteRegistrato(rs.getInt(1), rs.getString(5),
                         rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(6));
                 lista.add(u);
@@ -181,12 +181,11 @@ public class UtenteRegistratoDAO {
 
     public void doSaveRegistration(UtenteRegistrato u) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,null)");
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getEmail());
             ps.setString(3, u.getPass());
-            ps.setDate(4, u.getDataNascita());
-            ps.setString(5, u.getImmagine());
+            ps.setString(4, u.getDataNascita());
 
             ps.execute();
         } catch (SQLException e) {
@@ -201,7 +200,7 @@ public class UtenteRegistratoDAO {
             ps.setString(1,u.getUsername());
             ps.setString(2,u.getEmail());
             ps.setString(3,u.getPass());
-            ps.setDate(4,u.getDataNascita());
+            ps.setString(4,u.getDataNascita());
             ps.setString(5,u.getImmagine());
 
             ps.execute();
@@ -390,7 +389,7 @@ public class UtenteRegistratoDAO {
             ps.setString(1, u.getUsername());
             ps.setString(2,u.getEmail());
             ps.setString(3,u.getPass());
-            ps.setDate(4,u.getDataNascita());
+            ps.setString(4,u.getDataNascita());
             ps.setString(5,u.getImmagine());
             ps.setInt(6,u.getId());
 
