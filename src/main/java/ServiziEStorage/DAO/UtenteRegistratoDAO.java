@@ -57,7 +57,7 @@ public class UtenteRegistratoDAO {
 
     public UtenteRegistrato doRetriveByIdForListaGeneri(int id){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select id, username, pass, email from UtenteRegistrato where id = ?");
+            PreparedStatement ps = con.prepareStatement("select id, username, pass, email,immagine from UtenteRegistrato where id = ?");
             ps.setInt(1, id);
 
             UtenteRegistrato u = null;

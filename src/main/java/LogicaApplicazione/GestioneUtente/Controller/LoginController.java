@@ -18,6 +18,7 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
         String pagina = "";
+        //String data = request.getParameter("data").replace("/","-");
         String u = request.getParameter("email");
         UtenteServiceImp service = new UtenteServiceImp();
         if(u == null) {
@@ -36,11 +37,11 @@ public class LoginController extends HttpServlet {
         }
         else {
             String email = request.getParameter("email");
-            UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, new Date(2000, 6, 8));
-            service.saveUtente(utenteRegistrato);
+           // UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, data);
+          //  service.saveUtente(utenteRegistrato);
             pagina = "/index.jsp";
             HttpSession session = request.getSession();
-            session.setAttribute("user", utenteRegistrato);
+           // session.setAttribute("user", utenteRegistrato);
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(pagina);
