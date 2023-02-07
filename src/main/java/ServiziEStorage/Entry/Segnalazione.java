@@ -1,4 +1,4 @@
-package ServiziEStorage;
+package ServiziEStorage.Entry;
 
 import java.util.Date;
 /*Oggetto che rappresenta un Segnalazione. Contiene i parametri int creatoreSegnalazione, creatoreCommento e sezione,

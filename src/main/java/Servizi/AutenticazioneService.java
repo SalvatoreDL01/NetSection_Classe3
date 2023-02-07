@@ -1,6 +1,10 @@
 package Servizi;
 
-import ServiziEStorage.*;
+import ServiziEStorage.DAO.EliminazioneDAO;
+import ServiziEStorage.DAO.UtenteRegistratoDAO;
+import ServiziEStorage.Entry.Discussione;
+import ServiziEStorage.Entry.Eliminazione;
+import ServiziEStorage.Entry.UtenteRegistrato;
 
 import java.util.ArrayList;
 

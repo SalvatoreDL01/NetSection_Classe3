@@ -1,8 +1,8 @@
 package LogicaApplicazione;
 
 import Servizi.AutenticazioneService;
-import ServiziEStorage.Discussione;
-import ServiziEStorage.DiscussioneDAO;
+import ServiziEStorage.Entry.Discussione;
+import ServiziEStorage.DAO.DiscussioneDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

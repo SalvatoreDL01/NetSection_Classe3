@@ -2,7 +2,7 @@ package LogicaApplicazione;
 
 import java.io.*;
 
-import ServiziEStorage.UtenteRegistrato;
+import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;

@@ -1,4 +1,7 @@
-package ServiziEStorage;
+package ServiziEStorage.DAO;
+
+import ServiziEStorage.Entry.ConPool;
+import ServiziEStorage.Entry.Segnalazione;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,13 +1,12 @@
 package LogicaApplicazione;
 
 import Servizi.LoginService;
-import ServiziEStorage.UtenteRegistrato;
-import ServiziEStorage.UtenteRegistratoDAO;
+import ServiziEStorage.Entry.UtenteRegistrato;
+import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.Date;
 

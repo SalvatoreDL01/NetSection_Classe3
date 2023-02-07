@@ -1,4 +1,4 @@
-package ServiziEStorage;
+package ServiziEStorage.Entry;
 /*Oggetto che rappresenta una eliminazione di un utente. Contiene il parametro int id, String username, email*/
 public class Eliminazione {
 

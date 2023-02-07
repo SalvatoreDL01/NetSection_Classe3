@@ -1,4 +1,4 @@
-package ServiziEStorage;
+package ServiziEStorage.Entry;
 /*Oggetto che rappresenta un Amministratore. Contiene il parametro int idAdmin, String username, email, e pass*/
 public class Amministratore {
 
