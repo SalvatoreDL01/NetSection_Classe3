@@ -1,4 +1,4 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestionDiscussione;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,12 +1,10 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneSezione;
 
-import Servizi.SezioneService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "UpdateCatalogController", value = "/UpdateCatalog")
 public class UpdateCatalogController extends HttpServlet {

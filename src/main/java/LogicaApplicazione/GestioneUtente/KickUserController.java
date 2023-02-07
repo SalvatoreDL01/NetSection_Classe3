@@ -1,6 +1,6 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneUtente;
 
-import Servizi.AutenticazioneService;
+import LogicaApplicazione.GestioneUtente.Service.AutenticazioneService;
 import ServiziEStorage.Discussione;
 import ServiziEStorage.DiscussioneDAO;
 import jakarta.servlet.*;

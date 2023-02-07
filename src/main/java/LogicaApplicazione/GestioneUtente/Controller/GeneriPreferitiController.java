@@ -1,4 +1,4 @@
-package LogicaApplicazione;
+package LogicaApplicazione.GestioneUtente.Controller;
 
 import ServiziEStorage.UtenteRegistrato;
 import ServiziEStorage.UtenteRegistratoDAO;
