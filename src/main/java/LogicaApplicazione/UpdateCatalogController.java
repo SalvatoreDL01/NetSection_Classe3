@@ -1,23 +1,23 @@
 package LogicaApplicazione;
 
-import Servizi.AutenticazioneService;
+import Servizi.SezioneService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "BanUserController", value = "/BanUser")
-public class BanUserController extends HttpServlet {
+@WebServlet(name = "UpdateCatalogController", value = "/UpdateCatalog")
+public class UpdateCatalogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idUserToBan= Integer.parseInt(request.getParameter("ban"));
+        String titolo=request.getParameter("titolo");
+        String descrizione=request.getParameter("descrizione");
+        String immagine=request.getParameter("immagine");
 
-        if(idUserToBan!=0){
-            AutenticazioneService.banUtente(idUserToBan);
-        }
 
-        response.sendRedirect("/AdminPage");
+
     }
 
     @Override

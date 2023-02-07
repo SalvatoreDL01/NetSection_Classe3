@@ -51,14 +51,13 @@
       <p>Elimina una Sezione</p>
       <form>
         <input type="text" id="sid" name="sid" placeholder="ID Sezione..." value=""><br><br>
-        <input type="button" value="Elimina" onclick="validateDelete()">
+        <input type="submit" value="Elimina" onclick="validateDelete()">
       </form>
     </div>
     <div class="add">
       <p>Aggiungi una Sezione</p>
-      <form>
-        <input type="text" id="nome" name="nome" placeholder="Nome Sezione..." value=""><br><br>
-        <input type="button" id="aggiungi" value="Aggiungi">
+      <form action="UpdateCatalogPage.jsp">
+        <input type="submit" id="aggiungi" value="Aggiungi">
       </form>
     </div>
   </div>
