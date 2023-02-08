@@ -8,14 +8,13 @@ punteggio, Data dataScrittura, Lista listaRisposte(rappresenta i commenti che ri
 e un oggetto commento che rappresenta il commento a cui questo commento risponde*/
 public class Commento {
 
-    private Date dataScrittura;
     private int creatore, sezione, punteggio;
-    private String discussione, contenuto;
+    private String discussione, contenuto, dataScrittura;
     private Commento commentoRisposto;
     private List<?> listaRisposte;
     /*Costruttore che crea un nuovo oggetto commento che è privo di punteggio e risposte. Necessità di Date dataScrittura,
     int creatore, int sezione, String discussione, String contenuto*/
-    public Commento(Date dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
+    public Commento(String dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
         this.sezione = sezione;
@@ -28,7 +27,7 @@ public class Commento {
 
     /*Costruttore che crea un oggetto commento che è la risposta di un altro commento. Necessita di Date dataScrittura,
      int creatore, int sezione, int punteggio, String discussione, String contenuto, Commento commentoRisposto */
-    public Commento(Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
+    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
                     Commento commentoRisposto) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
@@ -43,7 +42,7 @@ public class Commento {
     /*Costruttore che crea un oggetto commento completo ed è generalmente usato per il recupero dal DB. Necessità di
     Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
     Commento commentoRisposto, List<?> listaRisposte*/
-    public Commento(Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
+    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
                     Commento commentoRisposto, List<?> listaRisposte) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
@@ -55,11 +54,11 @@ public class Commento {
         this.listaRisposte = listaRisposte;
     }
     /*Metodo che ritorna un oggetto Date dataScrittura*/
-    public Date getDataScrittura() {
+    public String getDataScrittura() {
         return dataScrittura;
     }
     /*Metodo che setta un oggetto Date dataScrittura*/
-    public void setDataScrittura(Date dataScrittura) {
+    public void setDataScrittura(String dataScrittura) {
         this.dataScrittura = dataScrittura;
     }
     /*Metodo che ritorna un oggetto int creatore*/
