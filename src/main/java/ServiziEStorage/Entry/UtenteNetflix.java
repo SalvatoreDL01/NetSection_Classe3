@@ -1,6 +1,5 @@
 package ServiziEStorage.Entry;
 
-import java.sql.Date;
 import java.util.List;
 /*Classe che rappresenta gli UtentiNetflix. Estende la classe Utente registrato e sovrascrive
  tutti i sui metodi get e set. È provvista di oggetti String emailNetflix e passwordNetflix.*/
@@ -8,14 +7,14 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     private String emailNetflix, passwordNetflix;
     /*Costruttore leggero per UtenteNetflix. Necessita di String username, String email, String pass, String immagine,
-     Date dataNascita,String emailNetflix,String passwordNetflix*/
+     String dataNascita,String emailNetflix,String passwordNetflix*/
     public UtenteNetflix(String username, String email, String pass, String immagine, String dataNascita,String emailNetflix,
                          String passwordNetflix) {
         super(username, email, pass, immagine, dataNascita);
         this.emailNetflix=emailNetflix;
         this.passwordNetflix=passwordNetflix;
     }
-    /*Costruttore per un oggetto UtenteNetflix. Necessita di Date dataNascita, String username, String email, String pass,
+    /*Costruttore per un oggetto UtenteNetflix. Necessita di String dataNascita, String username, String email, String pass,
     String immagine, List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
      String emailNetflix,String passwordNetflix*/
     public UtenteNetflix(String dataNascita, String username, String email, String pass, String immagine,
@@ -25,7 +24,7 @@ public class UtenteNetflix extends UtenteRegistrato{
         this.emailNetflix = emailNetflix;
         this.passwordNetflix = passwordNetflix;
     }
-    /*Costruttore per un oggetto UtenteNetflix. Necessita di int id, Date dataNascita, String username, String email, String pass, String immagine,
+    /*Costruttore per un oggetto UtenteNetflix. Necessita di int id, String dataNascita, String username, String email, String pass, String immagine,
                          List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
                          String emailNetflix, String passwordNetflix*/
     public UtenteNetflix(int id, String dataNascita, String username, String email, String pass, String immagine,
@@ -61,12 +60,12 @@ public class UtenteNetflix extends UtenteRegistrato{
     public void setId(int id) {
         super.setId(id);
     }
-    /*Metodo che ritorna un oggetto Date dataNascita della classe UntenteRegistrato*/
+    /*Metodo che ritorna un oggetto String dataNascita della classe UntenteRegistrato*/
     @Override
     public String getDataNascita() {
         return super.getDataNascita();
     }
-    /*Metodo che setta un oggetto Date dataNascita della classe UntenteRegistrato*/
+    /*Metodo che setta un oggetto String dataNascita della classe UntenteRegistrato*/
     @Override
     public void setDataNascita(String dataNascita) {
         super.setDataNascita(dataNascita);

@@ -8,7 +8,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.sql.Date;
 
 @WebServlet(name = "LoginController", value = "/LoginController")
 public class LoginController extends HttpServlet {

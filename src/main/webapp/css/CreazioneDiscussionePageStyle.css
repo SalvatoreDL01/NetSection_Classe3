@@ -45,3 +45,16 @@ input[type=submit]:hover{
 #bottoneGioco{
     margin-top: 20px;
 }
+
+#generi{
+    width: 750px;
+    margin: 0 auto;
+}
+
+input[type=checkbox]{
+    display: inline-block;
+}
+
+#gioco{
+    text-align: center;
+}

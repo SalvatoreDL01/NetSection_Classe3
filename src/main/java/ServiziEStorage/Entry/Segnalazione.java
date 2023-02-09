@@ -1,16 +1,15 @@
 package ServiziEStorage.Entry;
 
-import java.util.Date;
 /*Oggetto che rappresenta un Segnalazione. Contiene i parametri int creatoreSegnalazione, creatoreCommento e sezione,
- String discussione, natura, e contenuto, Date dataSegnalazione e dataCommento*/
+ String discussione, natura, e contenuto, String dataSegnalazione e dataCommento*/
 public class Segnalazione {
 
-    private Date dataSegnalazione, dataCommento;
+    private String dataSegnalazione, dataCommento;
     private int creatoreSegnalazione, creatoreCommento, sezione;
     private String discussione, natura, contenuto;
-    /*Costruttore per un oggetto Segnalazione. Necessita di Date dataSegnalazione, Date dataCommento,
+    /*Costruttore per un oggetto Segnalazione. Necessita di String dataSegnalazione, String dataCommento,
     int creatoreSegnalazione, int creatoreCommento, int sezione, String discussione, String natura, String contenuto*/
-    public Segnalazione(Date dataSegnalazione, Date dataCommento, int creatoreSegnalazione, int creatoreCommento, int sezione, String discussione, String natura, String contenuto) {
+    public Segnalazione(String dataSegnalazione, String dataCommento, int creatoreSegnalazione, int creatoreCommento, int sezione, String discussione, String natura, String contenuto) {
         this.dataSegnalazione = dataSegnalazione;
         this.dataCommento = dataCommento;
         this.creatoreSegnalazione = creatoreSegnalazione;
@@ -20,20 +19,20 @@ public class Segnalazione {
         this.natura = natura;
         this.contenuto = contenuto;
     }
-    /*Metodo che ritorna un oggetto Date dataSegnalazione*/
-    public Date getDataSegnalazione() {
+    /*Metodo che ritorna un oggetto String dataSegnalazione*/
+    public String getDataSegnalazione() {
         return dataSegnalazione;
     }
     /*Metodo che setta un oggetto Date dataSegnalazione*/
-    public void setDataSegnalazione(Date dataSegnalazione) {
+    public void setDataSegnalazione(String dataSegnalazione) {
         this.dataSegnalazione = dataSegnalazione;
     }
     /*Metodo che ritorna un oggetto Date dataCommento*/
-    public Date getDataCommento() {
+    public String getDataCommento() {
         return dataCommento;
     }
     /*Metodo che setta un oggetto Date dataCommento*/
-    public void setDataCommento(Date dataCommento) {
+    public void setDataCommento(String dataCommento) {
         this.dataCommento = dataCommento;
     }
     /*Metodo che ritorna un oggetto int creatoreSegnalazione*/

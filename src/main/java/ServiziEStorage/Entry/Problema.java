@@ -1,14 +1,12 @@
 package ServiziEStorage.Entry;
 
-import java.sql.Date;
-
-/*Oggetto che rappresenta un Problema. Contiene il parametro int idUtente, String natura, e contenuto e un oggetto Date dataSottomissione*/
+/*Oggetto che rappresenta un Problema. Contiene il parametro int idUtente, String natura, e contenuto e un oggetto String dataSottomissione*/
 public class Problema {
     private int idUtente;
     private String  natura, contenuto;
-    private Date dataSottomissione;
-    /*Costruttore di un oggetto Problema che necessita di int idUtente, Date dataSottomissione, String natura, String contenuto*/
-    public Problema(int idUtente, Date dataSottomissione, String natura, String contenuto) {
+    private String dataSottomissione;
+    /*Costruttore di un oggetto Problema che necessita di int idUtente, String dataSottomissione, String natura, String contenuto*/
+    public Problema(int idUtente, String dataSottomissione, String natura, String contenuto) {
         this.idUtente = idUtente;
         this.dataSottomissione = dataSottomissione;
         this.natura = natura;
@@ -22,12 +20,12 @@ public class Problema {
     public void setIdUtente(int idUtente) {
         this.idUtente = idUtente;
     }
-    /*Metodo che ritorna un oggetto Date dataSottomissione*/
-    public Date getDataSottomissione() {
+    /*Metodo che ritorna un oggetto String dataSottomissione*/
+    public String getDataSottomissione() {
         return dataSottomissione;
     }
-    /*Metodo che setta un oggetto Date dataSottomissione*/
-    public void setDataSottomissione(Date dataSottomissione) {
+    /*Metodo che setta un oggetto String dataSottomissione*/
+    public void setDataSottomissione(String dataSottomissione) {
         this.dataSottomissione = dataSottomissione;
     }
     /*Metodo che ritorna un oggetto String natura*/

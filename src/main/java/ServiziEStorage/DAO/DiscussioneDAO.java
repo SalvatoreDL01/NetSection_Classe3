@@ -14,30 +14,14 @@ public class DiscussioneDAO {
     public void doSave(Discussione d){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "insert into Discussione (sezione, titolo, creatore, tags, immagine, dataCreazione) values (?,?,?,?,?,?)");
+                    "insert into Discussione (sezione, titolo, creatore, immagine, dataCreazione) values (?,?,?,?,?,?)");
             ps.setInt(1, d.getSezione());
             ps.setString(2, d.getTitolo());
             ps.setInt(3, d.getCreatore());
-            ps.setString(4, d.getListaTag().toString());
             ps.setString(5, d.getImmagine());
-            ps.setDate(6, d.getDataCreazione());
+            ps.setString(6, d.getDataCreazione());
 
             ps.execute();
-            //salva i tag della discussione
-            if(!d.getListaTag().isEmpty()){
-                String addTags = "insert into Tag values ";
-                ArrayList<String> tags = (ArrayList<String>) d.getListaTag();
-
-                for(int i=0; i<tags.size(); i++){
-                    addTags += "("+ d.getSezione() + "," + d.getTitolo() + "," + tags.get(i) + ")";
-                    if(i<tags.size()-1)
-                        addTags += ", ";
-                }
-                addTags += ";";
-
-                PreparedStatement ps2 = con.prepareStatement(addTags);
-                ps2.execute();
-            }
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -91,7 +75,7 @@ public class DiscussioneDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Discussione discussione = new Discussione(rs.getInt(1), rs.getInt(3),
-                        rs.getString(2), rs.getString(4),  rs.getDate(5),
+                        rs.getString(2), rs.getString(4),  rs.getString(5),
                         tags, iscritti, kickati);
                 return discussione;
             }
@@ -120,7 +104,7 @@ public class DiscussioneDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Discussione discussione = new Discussione(rs.getInt(1), rs.getInt(3),
-                        rs.getString(2), rs.getString(4),  rs.getDate(5), tags, iscritti,
+                        rs.getString(2), rs.getString(4),  rs.getString(5), tags, iscritti,
                         moderatori, kickati, commenti);
                 return discussione;
             }
@@ -216,7 +200,7 @@ public class DiscussioneDAO {
             while(rs.next()){
                 List<String> tags=getTags(rs.getInt(1), rs.getString(2));
                 Discussione discussione = new Discussione(rs.getInt(1), rs.getString(2),
-                        rs.getInt(3), rs.getString(4), tags, rs.getDate(5));
+                        rs.getInt(3), rs.getString(4), tags, rs.getString(5));
                 l.add(discussione);
             }
             return l;
@@ -228,7 +212,7 @@ public class DiscussioneDAO {
     /*Metodo che permette di aggiornare l'immagine relativi ad una Discussione*/
     public void updateImmagine(Discussione d){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("update Discussione set immagine=? where titolo=? and idSzione=?");
+            PreparedStatement ps = con.prepareStatement("upString Discussione set immagine=? where titolo=? and idSzione=?");
             ps.setString(1,d.getImmagine());
             ps.setString(2,d.getTitolo());
             ps.setInt(3,d.getSezione());
@@ -242,7 +226,7 @@ public class DiscussioneDAO {
     /*Metodo che permette di aggiornare il titolo relativi ad una Discussione*/
     public void updateTitolo(Discussione d,String nuovoTitolo){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("update Discussione set titolo=? where titolo=? and idSzione=?");
+            PreparedStatement ps = con.prepareStatement("upString Discussione set titolo=? where titolo=? and idSzione=?");
             ps.setString(1,nuovoTitolo);
             ps.setString(2,d.getTitolo());
             ps.setInt(3,d.getSezione());
