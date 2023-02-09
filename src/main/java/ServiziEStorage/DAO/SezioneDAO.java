@@ -148,24 +148,13 @@ public class SezioneDAO {
             PreparedStatement ps2 = con.prepareStatement("select idSezione from Sezione where titolo=?");
             ps2.setString(1, s.getTitolo());
 
-            int idSezione = -1;
-
             ResultSet rs = ps2.executeQuery();
             if(rs.next())
-                idSezione = rs.getInt(1);
+                s.setIdSezione(rs.getInt(1));
 
-            String queryGeneri = "insert into Appartenere values ";
-            ArrayList<String> generi = (ArrayList<String>) s.getListaGeneri();
-
-            for(int i=0; i<generi.size(); i++){
-                queryGeneri += "("+ idSezione + "," + generi.get(i) + ")";
-                if(i<generi.size()-1)
-                    queryGeneri += ", ";
-            }
-            queryGeneri += ";";
-
-            PreparedStatement ps3 = con.prepareStatement(queryGeneri);
-            ps3.execute();
+            List<String> l = (List<String>) s.getListaGeneri();
+            for(String genere: l)
+            addGenere(s,genere);
 
             return true;
         }
@@ -223,7 +212,9 @@ public class SezioneDAO {
             ps.setInt(1,s.getIdSezione());
             ps.setString(2,genere);
 
-            ((ArrayList<String>)s.getListaGeneri()).add(genere);
+            List<String> l =(ArrayList<String>)s.getListaGeneri();
+            if(!l.contains(genere))
+            l.add(genere);
 
             ps.execute();
         }

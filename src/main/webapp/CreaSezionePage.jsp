@@ -17,7 +17,7 @@
 <div id="dati">
 
     <!--form per l'aggiunta di una Sezione-->
-    <form id="formSezione" action="" method="POST" enctype="multipart/form-data" >
+    <form id="formSezione" action="UpdateCatalogController" method="POST">
 
         <div id="gioco" class="forms">
             <label for="titolo">Titolo Sezione</label><br>

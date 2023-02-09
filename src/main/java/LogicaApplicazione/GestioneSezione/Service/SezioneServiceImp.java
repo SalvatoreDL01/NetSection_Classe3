@@ -42,16 +42,15 @@ public class SezioneServiceImp implements SezioneService{
 
         List<String> generi = new ArrayList<String>();
 
-        for(int i=1;i<23;i++){
-            String genere = request.getParameter("c"+i);
-            if(genere!=null)
-            generi.add(genere);
+        for (int i=1;i<23;i++){
+            if(request.getParameter("c"+i)!=null)
+            generi.add(request.getParameter("c"+i));
         }
 
         Sezione s = new Sezione();
 
         s.setDescrizione(descrizione);
-        s.getTitolo();
+        s.setTitolo(titolo);
         s.setListaGeneri(generi);
 
         sezioneDAO.doSave(s);
@@ -65,11 +64,10 @@ public class SezioneServiceImp implements SezioneService{
 
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + s.getIdSezione() + "/" + titolo;
+            String path = "css/icone/Immagine/" + s.getIdSezione() + "/" + fileName;
             String pathCompleto = dirPath + "/" + fileName;
 
             s.setImmagine(path);
-
 
             InputStream is = part.getInputStream();
             if(uploadFile(is, pathCompleto))

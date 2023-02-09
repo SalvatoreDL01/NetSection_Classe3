@@ -14,15 +14,19 @@ import java.util.List;
 public class UpdateCatalogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String titolo=request.getParameter("titolo");
+        SezioneService s = new SezioneServiceImp();
+        String titolo = request.getParameter("titolo");
+        s.addSezioen(request);
+        /*String titolo=request.getParameter("titolo");
         String descrizione=request.getParameter("descrizione");
         String immagine=request.getParameter("immagine");
         String[] generi=request.getParameterValues("SceltaGeneri");
 
         SezioneService s=new SezioneServiceImp();
         s.refresh(titolo, descrizione, immagine, generi);
-
-        response.sendRedirect("AdminPage");
+    */
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage");
+        requestDispatcher.forward(request, response);
     }
 
     @Override
