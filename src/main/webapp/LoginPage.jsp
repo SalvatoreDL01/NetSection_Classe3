@@ -18,8 +18,8 @@
     </div>
     <div class="reg-form">
         <form id="formLogin" action="">
-            <label for="user">Username:</label><br><br>
-            <input type="text" id="user" name="user" value="" placeholder="Email"><br><br>
+            <label for="email">Username:</label><br><br>
+            <input type="text" id="email" name="email" value="" placeholder="Email"><br><br>
 
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>

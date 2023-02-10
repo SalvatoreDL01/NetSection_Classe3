@@ -1,6 +1,7 @@
 package ServiziEStorage.Entry;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /* Classe che definisce oggetti generi che posseggono un nome, una lista di sezioni che fanno parte di questo genere*/
 public class Genere {
@@ -33,4 +34,16 @@ public class Genere {
         this.listaSezioni = listaSezioni;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Genere genere = (Genere) o;
+        return Objects.equals(nome, genere.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, listaSezioni);
+    }
 }

@@ -46,28 +46,42 @@
     <input type="button" id="ltd" value="Le tue discussioni"><br>
   </div>
 </div>
-<div class="discuss">
-  <p>Gestisci generi preferiti</p>
-    <%
-      u = utenteRegistratoDAO.doRetriveById(u.getId());
-      ArrayList<Genere> list = (ArrayList<Genere>) u.getListaPreferiti();
-      System.out.println(list.size());
-      for(Genere g: list){%>
-          <p><%=g.getNome()%></p>
-          <a href="GeneriPreferitiController?azione=rimuovi&genere=<%=g.getNome()%>">Rimuovi dai preferiti</a>
-    <%
-      }
-    %>
-  <%
-    ArrayList<Genere> listaGeneri = genereDAO.retriveAll();
-    for(Genere g: list){
-      listaGeneri.remove(g);
-    }
-    for(Genere g1: listaGeneri){
-     %>
-  <p><%=g1.getNome()%></p>
-  <a href="GeneriPreferitiController?azione=aggiungi&genere=<%=g1.getNome()%>" style="color: aliceblue; text-decoration: none; height: 40px; width: 50px; background-color: #0a1316">Aggiungi ai preferiti</a>
-  <%}%>
+<div class="discuss" style="height: 1100px">
+  <div style="height: 500px">
+    <p>Generi preferiti</p>
+    <div>
+      <%
+        //correzione
+        u = utenteRegistratoDAO.doRetriveById(u.getId());
+        ArrayList<Genere> list = (ArrayList<Genere>) u.getListaPreferiti();
+        System.out.println(list.size());
+        for(Genere g: list){%>
+      <div style="float: left; border: solid 1px cadetblue; margin: 3px; border-radius: 6px">
+        <p><%=g.getNome()%></p>
+        <a href="GeneriPreferitiController?azione=rimuovi&genere=<%=g.getNome()%>" style="color: aliceblue; text-decoration: none; height: 40px; width: 50px; background-color: #0a1316">Rimuovi dai preferiti</a>
+      </div>
+      <%
+        }
+      %>
+    </div>
+  </div>
+  <div style="height: 500px">
+    <p>Generi da poter aggiungere</p>
+    <div>
+      <%
+        ArrayList<Genere> listaGeneri = genereDAO.retriveAll();
+        for(Genere g: list){
+          listaGeneri.remove(g);
+        }
+        for(Genere g1: listaGeneri){
+      %>
+      <div style="float: left; border: solid 1px cadetblue; margin: 3px; border-radius: 6px">
+        <p><%=g1.getNome()%></p>
+        <a href="GeneriPreferitiController?azione=aggiungi&genere=<%=g1.getNome()%>" style="color: aliceblue; text-decoration: none; height: 40px; width: 50px; background-color: #0a1316">Aggiungi ai preferiti</a>
+      </div>
+      <%}%>
+    </div>
+  </div>
 </div>
 <div class="discuss">
   <p>Accedi alle tue discussioni preferite</p><br>

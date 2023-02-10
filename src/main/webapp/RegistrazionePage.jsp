@@ -7,26 +7,25 @@
 <head>
     <title>Registrazione Netflix</title>
     <link rel="stylesheet" href="css/RegNetStyle.css">
-    <script type="text/javascript" src="javaScript/LoginPage.js"></script>
+
 </head>
 <body>
 <script>
     function validateForm() {
         let email = document.getElementById("email").value;
         let password = document.getElementById("password").value;
-
         if(!email.includes("@")){
             document.getElementById("success").innerHTML="L'email non è valida"
             return false;
         }
         if (!email || !password ) {
-            document.getElementById("success").innerHTML="Tutti i campi sono obbligatori"
+            document.getElementById("success").innerHTML="I campi email e password sono obbligatori"
             return false;
         }
 
         if (password.length < 8) {
             document.getElementById("success").innerHTML="La password deve essere lunga almeno 8 caratteri"
-            return false;
+            return  false;
         }
         return true;
     }
@@ -35,8 +34,11 @@
             setTimeout(function (){
                 document.getElementById("success").innerHTML="Account Verificato"
             },1500)
-            document.getElementById("formLogin").action = "LoginController"
+            document.getElementById("formLogin").action = "RegistrazioneController"
             document.getElementById("formLogin").submit()
+            //setTimeout(function (){
+            //document.getElementById("user").style.display="block"
+            //},3000)
         }
 
         function validateFormTwo(){

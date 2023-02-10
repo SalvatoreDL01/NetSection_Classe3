@@ -2,6 +2,8 @@ package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 /*Oggetto che rappresenta un Sezione. Contiene il parametro int idSezione, String immagine, titolo, e descrizione,
 List listaGeneri e listaDiscussioni */
 public class Sezione {
@@ -88,5 +90,18 @@ public class Sezione {
     /*Metodo che setta un oggetto List listaDiscussioni*/
     public void setListaDiscussioni(List<?> listaDiscussioni) {
         this.listaDiscussioni = listaDiscussioni;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sezione sezione = (Sezione) o;
+        return idSezione == sezione.idSezione && Objects.equals(immagine, sezione.immagine) && Objects.equals(titolo, sezione.titolo) && Objects.equals(descrizione, sezione.descrizione) && Objects.equals(listaGeneri, sezione.listaGeneri) && Objects.equals(listaDiscussioni, sezione.listaDiscussioni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idSezione, immagine, titolo, descrizione, listaGeneri, listaDiscussioni);
     }
 }
