@@ -1,5 +1,5 @@
 function validateForm() {
-    let email = document.getElementById("user").value;
+    let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     if(!email.includes("@")){
         document.getElementById("success").innerHTML="L'email non è valida"
