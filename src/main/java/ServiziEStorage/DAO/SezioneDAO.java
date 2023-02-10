@@ -140,33 +140,21 @@ public class SezioneDAO {
     public boolean doSave(Sezione s){
         try(Connection con = ConPool.getConnection()){
 
-            PreparedStatement ps = con.prepareStatement("insert into Sezione values (null,?,?,?)");
-            ps.setString(1, s.getImmagine());
-            ps.setString(2, s.getTitolo());
-            ps.setString(3, s.getDescrizione());
+            PreparedStatement ps = con.prepareStatement("insert into Sezione values (null,null,?,?)");
+            ps.setString(1, s.getTitolo());
+            ps.setString(2, s.getDescrizione());
             ps.execute();
 
             PreparedStatement ps2 = con.prepareStatement("select idSezione from Sezione where titolo=?");
             ps2.setString(1, s.getTitolo());
 
-            int idSezione = -1;
-
             ResultSet rs = ps2.executeQuery();
             if(rs.next())
-                idSezione = rs.getInt(1);
+                s.setIdSezione(rs.getInt(1));
 
-            String queryGeneri = "insert into Appartenere values ";
-            ArrayList<String> generi = (ArrayList<String>) s.getListaGeneri();
-
-            for(int i=0; i<generi.size(); i++){
-                queryGeneri += "("+ idSezione + "," + generi.get(i) + ")";
-                if(i<generi.size()-1)
-                    queryGeneri += ", ";
-            }
-            queryGeneri += ";";
-
-            PreparedStatement ps3 = con.prepareStatement(queryGeneri);
-            ps3.execute();
+            List<String> l = (List<String>) s.getListaGeneri();
+            for(String genere: l)
+            addGenere(s,genere);
 
             return true;
         }
@@ -224,8 +212,23 @@ public class SezioneDAO {
             ps.setInt(1,s.getIdSezione());
             ps.setString(2,genere);
 
-            ((ArrayList<String>)s.getListaGeneri()).add(genere);
+            List<String> l =(ArrayList<String>)s.getListaGeneri();
+            if(!l.contains(genere))
+            l.add(genere);
 
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*Metodo che permette di aggiungere un genere ad una Sezione*/
+    public void updateImmagine(Sezione s){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Sezione set immagine = ? where idSezione = ?");
+            ps.setInt(2,s.getIdSezione());
+            ps.setString(2,s.getImmagine());
             ps.execute();
         }
         catch (SQLException e){

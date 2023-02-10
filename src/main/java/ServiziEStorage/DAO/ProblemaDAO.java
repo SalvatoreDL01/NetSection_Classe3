@@ -8,14 +8,14 @@ import java.util.ArrayList;
 /* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Problema*/
 public class ProblemaDAO {
     /*Metodo che estrae i dati di una entry della tabella Problema partendo dal suoi identificatore*/
-    public Problema retriveById(int idUtente, Date dataSottomissione){
+    public Problema retriveById(int idUtente, String dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idUtente, dataSottomissione, natura, contenuto from Problema where idUtente=? and dataSottomissione=?");
             ps.setInt(1, idUtente);
-            ps.setDate(2, dataSottomissione);
+            ps.setString(2, dataSottomissione);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                return new Problema(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4));
+                return new Problema(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
             return null;
         }
@@ -30,7 +30,7 @@ public class ProblemaDAO {
             ResultSet rs = ps.executeQuery();
             ArrayList<Problema> list = new ArrayList<>();
             while(rs.next()){
-                list.add(new Problema(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4)));
+                list.add(new Problema(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
             return list;
         }
@@ -43,7 +43,7 @@ public class ProblemaDAO {
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Problema values(?,?,?,?)");
             ps.setInt(1, p.getIdUtente());
-            ps.setDate(2, p.getDataSottomissione());
+            ps.setString(2, p.getDataSottomissione());
             ps.setString(3, p.getNatura());
             ps.setString(4, p.getContenuto());
             ps.execute();
@@ -53,11 +53,11 @@ public class ProblemaDAO {
         }
     }
     /*Metodo che rimuove tutti i dati di una entry problema sul DB a partire dal suo identificatore*/
-    public void doRemoveById(int idUtente, Date dataSottomissione){
+    public void doRemoveById(int idUtente, String dataSottomissione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Problema where idUtente = ? and dataSottomissione = ?");
             ps.setInt(1, idUtente);
-            ps.setDate(2, dataSottomissione);
+            ps.setString(2, dataSottomissione);
             ps.execute();
         }
         catch (SQLException e){

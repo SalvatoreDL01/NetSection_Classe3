@@ -1,6 +1,5 @@
 package ServiziEStorage.Entry;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 /*Oggetto che rappresenta una Discussione. Contiene parametri int sezione e creatore, String titolo e immagine,
@@ -11,10 +10,10 @@ public class Discussione {
     private int sezione,creatore;
     private String titolo, immagine;
 
-    private Date dataCreazione;
+    private String dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
-/*Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, Date dataCreazione*/
-    public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, Date dataCreazione)
+/*Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione*/
+    public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione)
     {
         this.sezione = sezione;
         this.creatore = creatore;
@@ -27,9 +26,9 @@ public class Discussione {
         listaKickati = new ArrayList<UtenteRegistrato>();
         listaCommenti = new ArrayList<Commento>();
     }
-    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, Date dataCreazione, List<?> listaTag,
+    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione, List<?> listaTag,
                        List<?> listaIscritti, List<?> listaKickati*/
-    public Discussione(int sezione, int creatore, String titolo, String immagine, Date dataCreazione, List<?> listaTag,
+    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione, List<?> listaTag,
                        List<?> listaIscritti, List<?> listaKickati) {
         this.sezione = sezione;
         this.creatore = creatore;
@@ -42,10 +41,10 @@ public class Discussione {
         listaModeratori = new ArrayList<UtenteRegistrato>();
         listaCommenti = new ArrayList<Commento>();
     }
-    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, Date dataCreazione,
+    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
                        List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
                        List<?> listaCommenti*/
-    public Discussione(int sezione, int creatore, String titolo, String immagine, Date dataCreazione,
+    public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,
                        List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
                        List<?> listaCommenti) {
         this.sezione = sezione;
@@ -59,6 +58,11 @@ public class Discussione {
         this.listaKickati = listaKickati;
         this.listaCommenti = listaCommenti;
     }
+
+    public Discussione() {
+
+    }
+
     /*ritorna un numero intero sezione*/
     public int getSezione() {
         return sezione;
@@ -91,12 +95,12 @@ public class Discussione {
     public void setImmagine(String immagine) {
         this.immagine = immagine;
     }
-    /*ritorna un oggetto Date dataCreazione*/
-    public Date getDataCreazione() {
+    /*ritorna un oggetto String dataCreazione*/
+    public String getDataCreazione() {
         return dataCreazione;
     }
-    /*setta un oggetto Date dataCreazione*/
-    public void setDataCreazione(Date dataCreazione) {
+    /*setta un oggetto String dataCreazione*/
+    public void setDataCreazione(String dataCreazione) {
         this.dataCreazione = dataCreazione;
     }
     /*ritorna un oggetto List listaTag*/

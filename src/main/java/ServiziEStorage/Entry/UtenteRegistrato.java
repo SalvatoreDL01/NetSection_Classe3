@@ -1,6 +1,5 @@
 package ServiziEStorage.Entry;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 /* Questa classe rappresenta gli utenti registrati ad un sito e comprende un attributo int id, String username, email,

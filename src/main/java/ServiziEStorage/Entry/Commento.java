@@ -1,21 +1,20 @@
 package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 /*Oggetto che rappresenta un Commento. Contiene parametri int sezione, creatore e punteggio, String discussione e
-punteggio, Data dataScrittura, Lista listaRisposte(rappresenta i commenti che rispondono a questo commento),
+punteggio, String dataScrittura, Lista listaRisposte(rappresenta i commenti che rispondono a questo commento),
 e un oggetto commento che rappresenta il commento a cui questo commento risponde*/
 public class Commento {
 
-    private Date dataScrittura;
+    private String dataScrittura;
     private int creatore, sezione, punteggio;
     private String discussione, contenuto;
     private Commento commentoRisposto;
     private List<?> listaRisposte;
-    /*Costruttore che crea un nuovo oggetto commento che è privo di punteggio e risposte. Necessità di Date dataScrittura,
+    /*Costruttore che crea un nuovo oggetto commento che è privo di punteggio e risposte. Necessità di String dataScrittura,
     int creatore, int sezione, String discussione, String contenuto*/
-    public Commento(Date dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
+    public Commento(String dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
         this.sezione = sezione;
@@ -26,9 +25,9 @@ public class Commento {
         listaRisposte = new ArrayList<Commento>();
     }
 
-    /*Costruttore che crea un oggetto commento che è la risposta di un altro commento. Necessita di Date dataScrittura,
+    /*Costruttore che crea un oggetto commento che è la risposta di un altro commento. Necessita di String dataScrittura,
      int creatore, int sezione, int punteggio, String discussione, String contenuto, Commento commentoRisposto */
-    public Commento(Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
+    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
                     Commento commentoRisposto) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
@@ -41,9 +40,9 @@ public class Commento {
     }
 
     /*Costruttore che crea un oggetto commento completo ed è generalmente usato per il recupero dal DB. Necessità di
-    Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
+    String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
     Commento commentoRisposto, List<?> listaRisposte*/
-    public Commento(Date dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
+    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
                     Commento commentoRisposto, List<?> listaRisposte) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
@@ -54,12 +53,12 @@ public class Commento {
         this.commentoRisposto = commentoRisposto;
         this.listaRisposte = listaRisposte;
     }
-    /*Metodo che ritorna un oggetto Date dataScrittura*/
-    public Date getDataScrittura() {
+    /*Metodo che ritorna un oggetto String dataScrittura*/
+    public String getDataScrittura() {
         return dataScrittura;
     }
-    /*Metodo che setta un oggetto Date dataScrittura*/
-    public void setDataScrittura(Date dataScrittura) {
+    /*Metodo che setta un oggetto String dataScrittura*/
+    public void setDataScrittura(String dataScrittura) {
         this.dataScrittura = dataScrittura;
     }
     /*Metodo che ritorna un oggetto int creatore*/

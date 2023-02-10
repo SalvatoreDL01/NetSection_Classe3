@@ -36,6 +36,11 @@ public class Sezione {
         this.listaGeneri = listaGeneri;
         this.listaDiscussioni = listaDiscussioni;
     }
+
+    public Sezione() {
+
+    }
+
     /*Metodo che ritorna un oggetto int idSezione*/
     public int getIdSezione() {
         return idSezione;

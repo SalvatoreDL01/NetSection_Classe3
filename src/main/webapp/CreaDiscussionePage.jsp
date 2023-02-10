@@ -1,7 +1,7 @@
 <%--
   Created by IntelliJ IDEA.
   User: utente
-  Date: 05/02/2023
+  String: 05/02/2023
   Time: 20:28
   To change this template use File | Settings | File Templates.
 --%>
@@ -23,11 +23,9 @@
         <div id="gioco" class="forms">
             <label for="titolo">Titolo discussione</label><br>
             <input type="text" id="titolo" name="titolo" placeholder="Titolo discussione"><br>
-            <label for="descrizione">Descrizione</label><br>
-            <textarea id="descrizione" name="desc" placeholder="Inserisci una descrizione..."></textarea><br>
             <p>Carica immagine</p>
             <label id="labl1" class="custom-file-upload">
-                <input type="file" name="immagine1" multiple oninput="" >
+                <input type="file" name="immagine" multiple oninput="" >
                 Aggiungi
             </label>
             <br><br>
