@@ -17,6 +17,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
 
+
     public void checkKick(int idUserToKick, int idDiscussione, String titolo){
         if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
             DiscussioneDAO dao=new DiscussioneDAO();
