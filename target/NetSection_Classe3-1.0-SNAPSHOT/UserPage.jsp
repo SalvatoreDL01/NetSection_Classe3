@@ -87,5 +87,41 @@
   <p>Accedi alle tue discussioni preferite</p><br>
   <input type="button" value="Discussioni preferite">
 </div>
+<div class="discuss">
+  <input type="button" onclick="visualizzaForm()" value="Segnala un problema">
+</div>
+<div style="display: none" id="segnalazione" class="discuss">
+  <form action="SegnalazioneProblemaControl">
+    <label for="naturaProblema">Inserisci la natura del problema</label>
+    <input type="text" name="naturaProblema" id="naturaProblema"><br><br>
+    <label for="paginaProblema">Inserisci la pagina dove è stato riscontrato il problema</label>
+    <select name="paginaProblema" id="paginaProblema">
+      <option value="Pagina creazione sezione">Pagina creazione sezione</option>
+      <option value="Pagina creazione discussione">Pagina creazione discussione</option>
+      <option value="Pagina home">Pagina home</option>
+      <option value="Pagina login">Pagina login</option>
+      <option value="Pagina di registrazione">Pagina di registrazione</option>
+      <option value="Pagina visualizzazione sezione">Pagina visualizzazione sezione</option>
+      <option value="Pagina utente">Pagina utente</option>
+    </select><br><br>
+    <label for="descrizione">Inserisci la natura del problema</label><br>
+    <textarea name="descrizione" id="descrizione" rows="10" cols="40"></textarea><br>
+    <input type="submit" value="Invia">
+    <%
+      if(request.getParameter("errore") == null){
+    %>
+    <p>Esito: </p>
+    <%}
+      else{
+    %>
+    <p><%=request.getAttribute("errore")%></p>
+    <%}%>
+  </form>
+</div>
+<script>
+  function visualizzaForm(){
+    document.getElementById("segnalazione").style.display = "block";
+  }
+</script>
 </body>
 </html>
