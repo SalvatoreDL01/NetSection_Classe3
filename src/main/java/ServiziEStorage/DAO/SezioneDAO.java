@@ -227,8 +227,8 @@ public class SezioneDAO {
     public void updateImmagine(Sezione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Sezione set immagine = ? where idSezione = ?");
+            ps.setString(1,s.getImmagine());
             ps.setInt(2,s.getIdSezione());
-            ps.setString(2,s.getImmagine());
             ps.execute();
         }
         catch (SQLException e){

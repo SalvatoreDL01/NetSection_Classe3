@@ -17,7 +17,7 @@
 <div id="dati">
 
     <!--form per l'aggiunta di una Sezione-->
-    <form id="formSezione" action="UpdateCatalogController" method="POST">
+    <form id="formSezione" action="UpdateCatalogController" method="POST" enctype="multipart/form-data">
 
         <div id="gioco" class="forms">
             <label for="titolo">Titolo Sezione</label><br>
@@ -26,7 +26,7 @@
             <textarea id="descrizione" name="descrizione" placeholder="Descrizione..."></textarea><br>
             <p>Carica immagine</p>
             <label id="labl1" class="custom-file-upload">
-                <input type="file" name="immagine" multiple oninput="" >
+                <input type="file" name="immagine" accept=".jpg, .jpeg, .png" multiple >
                 Aggiungi
             </label>
             <p>Seleziona generi</p>

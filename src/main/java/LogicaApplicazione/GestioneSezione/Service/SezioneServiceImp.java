@@ -4,8 +4,8 @@ import ServiziEStorage.DAO.GenereDAO;
 import ServiziEStorage.Entry.Genere;
 import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.DAO.SezioneDAO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
-
+@MultipartConfig
 public class SezioneServiceImp implements SezioneService{
 
     private static final SezioneDAO sezioneDAO = new SezioneDAO();
@@ -62,15 +62,18 @@ public class SezioneServiceImp implements SezioneService{
             System.out.println(f.canWrite());
             f.mkdir();
 
+
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + s.getIdSezione() + "/" + fileName;
-            String pathCompleto = dirPath + "/" + fileName;
+            if(fileName.equals(""))
+                return false;
+            String immagine = "css/icone/Immagini/" + fileName;
+            String path = dirPath + "/" + fileName;
 
-            s.setImmagine(path);
+            s.setImmagine(immagine);
 
             InputStream is = part.getInputStream();
-            if(uploadFile(is, pathCompleto))
+            if(uploadFile(is, path))
                 sezioneDAO.updateImmagine(s);
             else{
                 request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
@@ -85,7 +88,7 @@ public class SezioneServiceImp implements SezioneService{
         }
 
 
-        return false;
+        return true;
     }
 
     private boolean uploadFile(InputStream is, String path){
