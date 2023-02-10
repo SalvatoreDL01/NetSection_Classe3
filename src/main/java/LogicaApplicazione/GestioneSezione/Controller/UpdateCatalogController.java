@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+@MultipartConfig
 @WebServlet(name = "UpdateCatalogController", value = "/UpdateCatalogController")
 public class UpdateCatalogController extends HttpServlet {
     @Override
@@ -17,14 +17,6 @@ public class UpdateCatalogController extends HttpServlet {
         SezioneService s = new SezioneServiceImp();
         String titolo = request.getParameter("titolo");
         s.addSezioen(request);
-        /*String titolo=request.getParameter("titolo");
-        String descrizione=request.getParameter("descrizione");
-        String immagine=request.getParameter("immagine");
-        String[] generi=request.getParameterValues("SceltaGeneri");
-
-        SezioneService s=new SezioneServiceImp();
-        s.refresh(titolo, descrizione, immagine, generi);
-    */
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage");
         requestDispatcher.forward(request, response);
     }

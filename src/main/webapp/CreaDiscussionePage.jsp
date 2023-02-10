@@ -25,7 +25,7 @@
             <input type="text" id="titolo" name="titolo" placeholder="Titolo discussione"><br>
             <p>Carica immagine</p>
             <label id="labl1" class="custom-file-upload">
-                <input type="file" name="immagine" multiple oninput="" >
+                <input type="file" name="immagine" accept=".jpg, .jpeg, .png" multiple>
                 Aggiungi
             </label>
             <br><br>
