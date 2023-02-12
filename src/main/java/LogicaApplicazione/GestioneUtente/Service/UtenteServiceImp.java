@@ -62,4 +62,9 @@ public class UtenteServiceImp implements UtenteService {
     public void saveUtente(UtenteRegistrato u) {
         utenteRegistratoDAO.doSaveRegistration(u);
     }
+
+    public void salvaUtenteNetflix(UtenteNetflix u){
+        utenteNetflixDAO.doSaveUtente(u);
+    }
+
 }
