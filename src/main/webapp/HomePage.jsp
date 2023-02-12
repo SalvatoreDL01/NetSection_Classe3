@@ -57,7 +57,7 @@
         <button class="frecciaIndietro" onclick="plusDivsPopolari(-1)">&#10094;</button>
         <button class="frecciaAvanti" onclick="plusDivsPopolari(1)">&#10095;</button>
     </div>
-
+<!---->
     <!-- funzione js per la gestione dello scorrimento dello slider, sliderIndexPopolari tiene traccia del div visibile in quel momento mentre gli altri sono nascosti-->
     <script>
         var slideIndexPopolari = 1;
