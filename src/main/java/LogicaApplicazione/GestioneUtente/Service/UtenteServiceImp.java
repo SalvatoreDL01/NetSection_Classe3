@@ -7,9 +7,17 @@ import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Eliminazione;
 import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.Entry.UtenteRegistrato;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-
+@MultipartConfig
 public class UtenteServiceImp implements UtenteService {
     public static final UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
     public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
@@ -68,4 +76,43 @@ public class UtenteServiceImp implements UtenteService {
         utenteNetflixDAO.doSaveUtente(u);
     }
 
+    public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException {
+        UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        HttpSession session = request.getSession();
+        Part part = request.getPart("immagine");
+        String fileName = part.getSubmittedFileName();
+        //controllo se non è stato inserito nessun file
+        if(fileName.equals("")){
+            request.setAttribute("errore","File non esistente");
+            return false;
+        }
+        //creazione path di salvataggio dell'immagine e salvataggio del path nel db
+        String path = "css/pictures/" + utente.getUsername()+ fileName;
+        utente.setImmagine(path);
+        utenteRegistratoDAO.updateImmagine(utente);
+
+        InputStream is = part.getInputStream();
+        return uploadFile(is, ""+fileName);
+    }
+
+    private boolean uploadFile(InputStream is, String path){
+        //funzione per la scrittura del file is nella posizione path
+        boolean test = false;
+        try{
+            byte[] byt = new byte[is.available()];
+            is.read(byt);
+
+            FileOutputStream fops = new FileOutputStream(path);
+            fops.write(byt);
+            fops.flush();
+            fops.close();
+
+            test = true;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return test;
+    }
 }
