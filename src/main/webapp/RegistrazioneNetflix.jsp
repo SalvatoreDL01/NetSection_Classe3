@@ -18,7 +18,7 @@
       alert("L'email non è valida");
       return false;
     }
-    if (!email || !password ) {
+    if (email==null || password==null ) {
       alert("Tutti i campi sono obbligatori");
       return false;
     }
