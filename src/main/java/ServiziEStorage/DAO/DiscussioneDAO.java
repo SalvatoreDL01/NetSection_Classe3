@@ -276,6 +276,69 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che rende un utente moderatore della discussione*/
+    public void addModeratore(Discussione d, UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Insert into Moderare values(?,?,?)");
+            ps.setInt(1,u.getId());
+            ps.setInt(1,d.getSezione());
+            ps.setString(3,d.getTitolo());
+
+            ((ArrayList<UtenteRegistrato>)d.getListaModeratori()).add(u);
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che rimuove un utente moderatore della discussione*/
+    public void deleteModeratore(Discussione d, UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Delete from Moderare where sezione=? and  discussione=? and idUtente=?");
+            ps.setInt(1,u.getId());
+            ps.setInt(1,d.getSezione());
+            ps.setString(3,d.getTitolo());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che rimuove un utente dalla discussione e lo aggiunge in kick*/
+    public void addKick(Discussione d, UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Insert into Kick values(?,?,?)");
+            ps.setInt(3,u.getId());
+            ps.setInt(1,d.getSezione());
+            ps.setString(2,d.getTitolo());
+            PreparedStatement ps2 = con.prepareStatement("Delete from Iscrizione where sezione=? and  discussione=? and idUtente=?");
+            ps2.setInt(3,u.getId());
+            ps2.setInt(1,d.getSezione());
+            ps2.setString(2,d.getTitolo());
+
+            ps.execute();
+            ps2.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che rimuove una iscrizione dalla discussione*/
+    public void removeIscrizione(Discussione d, UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Delete from Iscrizione where sezione=? and  discussione=? and idUtente=?");
+            ps.setInt(3,u.getId());
+            ps.setInt(1,d.getSezione());
+            ps.setString(2,d.getTitolo());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     /*Metodo che permette di aggiungere un tag ad una Discussione*/
     public void addTag(Discussione d, String tag){
         try(Connection con = ConPool.getConnection()){

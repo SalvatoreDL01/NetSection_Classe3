@@ -53,6 +53,11 @@ public class Commento {
         this.commentoRisposto = commentoRisposto;
         this.listaRisposte = listaRisposte;
     }
+
+    public Commento() {
+
+    }
+
     /*Metodo che ritorna un oggetto String dataScrittura*/
     public String getDataScrittura() {
         return dataScrittura;

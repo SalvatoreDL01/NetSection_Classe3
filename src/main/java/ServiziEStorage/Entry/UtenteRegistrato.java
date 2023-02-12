@@ -161,4 +161,11 @@ public class UtenteRegistrato {
     public void setListaPreferiti(List<?> listaPreferiti) {
         this.listaPreferiti = listaPreferiti;
     }
+    /* Metodo che ritorna vero se l'utente è un moderatore, falso altrimenti*/
+
+    public boolean isModeratore(){
+        if(listaModerazioni.size()==0)
+            return false;
+        return true;
+    }
 }
