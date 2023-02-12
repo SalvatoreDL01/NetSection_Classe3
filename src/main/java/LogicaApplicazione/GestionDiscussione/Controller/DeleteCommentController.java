@@ -1,7 +1,7 @@
 package LogicaApplicazione.GestionDiscussione.Controller;
 
-import LogicaApplicazione.GestionDiscussione.Service.GestioneDiscussione;
-import LogicaApplicazione.GestionDiscussione.Service.GestioneDiscussioneImp;
+import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
+import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -15,7 +15,7 @@ public class DeleteCommentController extends HttpServlet {
         int id= Integer.parseInt(request.getParameter("idCreatore"));
         String date=request.getParameter("dataCommento");
 
-        GestioneDiscussione gestioneDiscussione=new GestioneDiscussioneImp();
+        DiscussioneService gestioneDiscussione=new DiscussioneServiceImp();
         gestioneDiscussione.deleteComment(id, date);
 
         response.sendRedirect("DiscussionePage.jsp");

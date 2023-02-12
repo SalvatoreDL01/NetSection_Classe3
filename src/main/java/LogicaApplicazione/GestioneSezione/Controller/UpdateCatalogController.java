@@ -15,7 +15,8 @@ public class UpdateCatalogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
-        s.addSezioen(request);
+        String titolo = request.getParameter("titolo");
+        s.addSezione(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage");
         requestDispatcher.forward(request, response);
     }

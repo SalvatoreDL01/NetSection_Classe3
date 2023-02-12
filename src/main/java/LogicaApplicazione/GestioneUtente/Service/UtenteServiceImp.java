@@ -14,6 +14,7 @@ public class UtenteServiceImp implements UtenteService {
     public static final UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
     public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
     public static final EliminazioneDAO eliminazioneDAO = new EliminazioneDAO();
+
     public void banUtente(int idUserToBan){
         ArrayList<UtenteRegistrato> listU= utenteRegistratoDAO.retriveAll();
 
