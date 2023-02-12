@@ -1,4 +1,7 @@
-<%--
+<%@ page import="ServiziEStorage.Entry.Sezione" %>
+<%@ page import="ServiziEStorage.Entry.Discussione" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %><%--
   Created by IntelliJ IDEA.
   User: utente
   Date: 20/01/2023
@@ -13,42 +16,45 @@
 <body>
 <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
 <%@include file="NavBar.jsp" %>
-
-<div id="sfondo"></div>
-<div id="paginaSezione">
+<%
+    Sezione s = (Sezione) request.getAttribute("sezione");
+    List<Discussione> lDiscussione = (List<Discussione>) s.getListaDiscussioni();
+    UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
+%>
+<div id="sfondo" tyle="background-image: url(<%=s.getImmagine()%>)"></div>
+<div id="paginaSezione" s>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
     <form method="get" action="CreazioneDiscussioniServlet">
         <input type="hidden" name="sezione" value="idsezione">
         <input type="submit" value="Crea discussione">
     </form>
-    <%for(int i=0;i<4;i++){%>
+    <%for(Discussione d: lDiscussione){%>
     <div class="discussione">
-        <p class="titoloDiscussione">Titolo discussione</p>
+        <p class="titoloDiscussione"><%=d.getTitolo()%></p>
         <div class="immagine">
-            <img src="css/witcher.jpeg">
+            <img src="<%=d.getImmagine()%>">
         </div>
         <br>
         <div class="componenti">
             <div class="componentiDiscissione">
                 <div class="partecipanti">
-                    <img src="css/witcher.jpeg">
-                    <p class="componenteTestuale", id="numeroPartecipanti">1234</p>
+                    <img src="css/icone/gruppo.png">
+                    <p class="componenteTestuale", id="numeroPartecipanti"><%=d.getListaIscritti().size()%></p>
                 </div>
             </div>
             <div class="bottonePartecipazione">
-                <%if(true){%>
-                <form method="get" action="">
+                <%if(utente!=null && !d.getListaIscritti().contains(utente) && !d.getListaKickati().contains(utente)){%>
+                <form method="get" action="/SubscribeController">
                     <input type="hidden" value="sezione">
                     <input type="hidden" value="titolo">
                     <input type="button" value="Partecipa">
                 </form>
-                <%}else{%>
+                <%}else{ if(d.getListaKickati().contains(utente))%>
                 <p class="kickato">Non puoi più accedere</p>
                 <%}%>
             </div>
             <div class="testo">
-                <div class="tags"><%for(int j=0;j<4;j++){%>tag <%if(j<4){%>,<%}%><%}%></div>
-                <p class="creatore">Creato da: creatore</p>
+                <div class="tags"><%for(int j=0;j<4;j++){%><%=d.getListaTag().get(j)%>,<%}%>...</div>
             </div>
         </div>
     </div>
