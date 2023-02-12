@@ -2,21 +2,22 @@ package LogicaApplicazione.GestioneSezione.Controller;
 
 import LogicaApplicazione.GestioneSezione.Service.SezioneService;
 import LogicaApplicazione.GestioneSezione.Service.SezioneServiceImp;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-@MultipartConfig
-@WebServlet(name = "UpdateCatalogController", value = "/UpdateCatalogController")
-public class UpdateCatalogController extends HttpServlet {
+
+public class SezioneControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
-        s.addSezioen(request);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage");
+        String path = "SezionePage.jsp";
+        if(!s.loadSezione(request));
+        path = "HomePage.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
 

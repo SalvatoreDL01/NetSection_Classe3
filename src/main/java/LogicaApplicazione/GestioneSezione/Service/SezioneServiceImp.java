@@ -110,4 +110,15 @@ public class SezioneServiceImp implements SezioneService{
 
         return test;
     }
+
+    public boolean loadSezione(HttpServletRequest request){
+        int i = Integer.parseInt(request.getParameter("idSezione"));
+        Sezione s = sezioneDAO.doRetriveById(i);
+        if(s == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        request.setAttribute("sezione", s);
+        return true;
+    }
 }
