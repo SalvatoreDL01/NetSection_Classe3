@@ -1,5 +1,6 @@
 package ServiziEStorage.DAO;
 
+
 import ServiziEStorage.Entry.ConPool;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Sezione;
