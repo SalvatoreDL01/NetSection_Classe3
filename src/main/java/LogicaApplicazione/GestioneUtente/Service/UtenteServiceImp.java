@@ -1,12 +1,10 @@
 package LogicaApplicazione.GestioneUtente.Service;
 
+import ServiziEStorage.DAO.AmministratoreDAO;
 import ServiziEStorage.DAO.EliminazioneDAO;
 import ServiziEStorage.DAO.UtenteNetflixDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
-import ServiziEStorage.Entry.Discussione;
-import ServiziEStorage.Entry.Eliminazione;
-import ServiziEStorage.Entry.UtenteNetflix;
-import ServiziEStorage.Entry.UtenteRegistrato;
+import ServiziEStorage.Entry.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
@@ -114,5 +112,20 @@ public class UtenteServiceImp implements UtenteService {
         }
 
         return test;
+    }
+
+    public Amministratore checkAdmin(String email, String password){
+
+        ArrayList<Amministratore> list = new AmministratoreDAO().retriveAll();
+        for(Amministratore a: list){
+            if(email.equals(a.getEmail()) && password.equals(a.getPass()))
+                return a;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean checkNetflix(UtenteRegistrato u) {
+        return utenteRegistratoDAO.isUtenteNetflix(u);
     }
 }
