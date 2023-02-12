@@ -2,7 +2,9 @@ package LogicaApplicazione.GestionDiscussione.Service;
 
 import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
+import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -105,4 +107,13 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return test;
     }
 
+
+    public void deleteComment(int idCreatore, String dataCreazioneCommento){
+        if(idCreatore!=0 && dataCreazioneCommento!=null){
+            CommentoDAO c=new CommentoDAO();
+            Commento commento= c.doRetriveById(dataCreazioneCommento, idCreatore);
+            c.doRemove(commento);
+            System.out.println("Commento eliminato con successo!");
+        }
+    }
 }
