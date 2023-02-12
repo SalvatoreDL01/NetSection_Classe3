@@ -209,6 +209,27 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Estrae tutti gli oggetti Discussione create da un utente*/
+    public ArrayList<Discussione> retriveAllCreate(int idUtente){
+        ArrayList<Discussione> l = new ArrayList<>();
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select sezione, titolo, creatore, immagine, dataCreazione from Discussione where creatore = ?");
+            ps.setInt(1,idUtente);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                List<String> tags=getTags(rs.getInt(1), rs.getString(2));
+                Discussione discussione = new Discussione(rs.getInt(1), rs.getString(2),
+                        rs.getInt(3), rs.getString(4), tags, rs.getString(5));
+                l.add(discussione);
+            }
+            return l;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     /*Metodo che permette di aggiornare l'immagine relativi ad una Discussione*/
     public void updateImmagine(Discussione d){
         try(Connection con = ConPool.getConnection()){
