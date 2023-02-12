@@ -9,5 +9,5 @@ import java.util.List;
 @MultipartConfig
 public interface SezioneService {
     public void refresh(String titolo, String descrizione, String immagine, String[] arrayGeneri);
-    public boolean addSezioen(HttpServletRequest request);
+    public boolean addSezione(HttpServletRequest request);
 }

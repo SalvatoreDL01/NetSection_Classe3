@@ -35,8 +35,15 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
-       // int idSezione = Integer.parseInt(request.getParameter("sezione"));
+
         String[] tags = request.getParameter("tags").split(",");
+
+        for (String s : tags) {
+            if (s.contains(" ") || !s.startsWith("@")) {
+                break;
+            }
+        }
+
         String titolo = request.getParameter("titolo");
         int idSezione=1;
 
@@ -45,17 +52,20 @@ public class DiscussioneServiceImp implements DiscussioneService {
             request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
             return false;
         }
-        //formattazione della data di pubblicazione della recensione per salvataggio nel db
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         String dataCreazione = dtf.format(LocalDateTime.now());
 
         Discussione d = new Discussione();
 
-        d.setCreatore(utente.getId());
-        d.setTitolo(titolo);
-        d.setSezione(idSezione);
-        d.setDataCreazione(dataCreazione);
+        if(titolo!=null && dataCreazione!=null && idSezione!=0){
+            d.setCreatore(utente.getId());
+            d.setTitolo(titolo);
+            d.setSezione(idSezione);
+            d.setDataCreazione(dataCreazione);
+        }
+
         try {
             String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+idSezione;
             File f = new File(dirPath);
