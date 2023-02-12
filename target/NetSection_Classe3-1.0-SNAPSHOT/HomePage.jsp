@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ServiziEStorage.Entry.Sezione" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: giuseppe
   Date: 21/01/23
