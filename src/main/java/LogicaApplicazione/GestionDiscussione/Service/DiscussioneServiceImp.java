@@ -4,6 +4,7 @@ import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Sezione;
@@ -22,6 +23,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
     public final static CommentoDAO commentoDAO = new CommentoDAO();
+    public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
 
     public void checkKick(int idUserToKick, int idDiscussione, String titolo){
         if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
@@ -145,6 +147,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         request.setAttribute("discussione", s);
         return true;
+    }
+
+    public boolean electMod(int idUserToElect, Discussione discussione){
+
+        UtenteRegistrato utente= utenteRegistratoDAO.doRetriveById(idUserToElect);
+
+        if(utente!=null && discussione!=null){
+            utenteRegistratoDAO.addModerazione(discussione, utente);
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean addCommento(HttpServletRequest request){

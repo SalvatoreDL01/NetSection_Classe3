@@ -10,4 +10,5 @@ public interface DiscussioneService {
     public boolean loadDiscussione(HttpServletRequest request);
     public boolean addCommento(HttpServletRequest request);
     public boolean modificaCommento(HttpServletRequest request);
+    public boolean electMod(int idUserToElect, Discussione discussione);
 }
