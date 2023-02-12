@@ -1,9 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
   User: utente
-  Date: 23/01/2023
-  Time: 15:42
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
@@ -13,6 +10,13 @@
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
 </head>
 <body>
+<div class="elect-mod-button">
+    <form>
+        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
+        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br><br>
+        <input type="submit" id="Eleggi" name="electButton"><br>
+    </form>
+</div>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">

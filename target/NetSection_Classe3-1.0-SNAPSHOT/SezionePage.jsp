@@ -13,6 +13,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
 <%@include file="NavBar.jsp" %>
+
 <div id="sfondo"></div>
 <div id="paginaSezione">
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->

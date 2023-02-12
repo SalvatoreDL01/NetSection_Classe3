@@ -339,6 +339,19 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void addIscrizione(Discussione discussione, UtenteRegistrato utente){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("Insert into Iscrizione values (?,?,?)");
+            ps.setInt(1, utente.getId());
+            ps.setInt(2, discussione.getSezione());
+            ps.setString(3, discussione.getTitolo());
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     /*Metodo che permette di aggiungere un tag ad una Discussione*/
     public void addTag(Discussione d, String tag){
         try(Connection con = ConPool.getConnection()){

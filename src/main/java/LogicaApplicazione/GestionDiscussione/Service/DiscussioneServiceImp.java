@@ -161,6 +161,21 @@ public class DiscussioneServiceImp implements DiscussioneService {
             return false;
     }
 
+    public void iscrivi(int idSezione, String titolo, UtenteRegistrato utente){
+        Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
+
+        if(d!=null && utente!=null){
+            discussioneDAO.addIscrizione(d, utente);
+        }
+    }
+    public void disiscrivi(int idSezione, String titolo, UtenteRegistrato utente){
+        Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
+
+        if(d!=null && utente!=null){
+            discussioneDAO.removeIscrizione(d, utente);
+        }
+    }
+
     public boolean addCommento(HttpServletRequest request){
         Commento c = new Commento();
         Commento cRisposto = new Commento();

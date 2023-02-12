@@ -37,7 +37,7 @@
             </div>
             <div class="bottonePartecipazione">
                 <%if(true){%>
-                <form method="get" action="">
+                <form method="get" action="/Subscribe">
                     <input type="hidden" value="sezione">
                     <input type="hidden" value="titolo">
                     <input type="button" value="Partecipa">
