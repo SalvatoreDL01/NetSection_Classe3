@@ -18,7 +18,10 @@ public class AddDiscussioneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
+        String path = "SezionePage.jsp";
+        request.setAttribute("idSezione",request.getParameter("idSezione"));
         ds.addDiscussione(request);
+
     }
 
     @Override

@@ -29,6 +29,7 @@
 
         <div id="gioco" class="forms">
             <label for="titolo">Titolo discussione</label><br>
+            <input type="hidden" name="idSezione" value="<%=request.getAttribute("idSezione")%>">
             <input type="text" id="titolo" name="titolo" placeholder="Titolo discussione"><br>
             <p>Carica immagine</p>
             <label id="labl1" class="custom-file-upload">

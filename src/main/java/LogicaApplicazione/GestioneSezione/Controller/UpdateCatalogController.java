@@ -17,7 +17,7 @@ public class UpdateCatalogController extends HttpServlet {
         SezioneService s = new SezioneServiceImp();
         String titolo = request.getParameter("titolo");
         s.addSezione(request);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage.jsp");
         requestDispatcher.forward(request, response);
     }
 

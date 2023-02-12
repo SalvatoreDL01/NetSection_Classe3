@@ -36,7 +36,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
-
+        int idSezione= Integer.parseInt(request.getParameter("idSezione"));
         String[] tags = request.getParameter("tags").split(",");
 
         for (String s : tags) {
@@ -46,7 +46,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         String titolo = request.getParameter("titolo");
-        int idSezione=1;
+
 
         UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         if(utente==null){
@@ -65,6 +65,9 @@ public class DiscussioneServiceImp implements DiscussioneService {
             d.setTitolo(titolo);
             d.setSezione(idSezione);
             d.setDataCreazione(dataCreazione);
+        }else{
+            request.setAttribute("errore", "parametri errati");
+            return false;
         }
 
         try {
