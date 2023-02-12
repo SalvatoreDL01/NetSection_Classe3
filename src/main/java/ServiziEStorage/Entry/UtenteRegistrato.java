@@ -2,6 +2,8 @@ package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 /* Questa classe rappresenta gli utenti registrati ad un sito e comprende un attributo int id, String username, email,
  pass, immagine, dataNascita. Inolte mantiene dei riferimenti ad oggetti della classe discussione sotto forma di
   listaIscrizione che rappresenta le discussioni alle quali l'utente partecipa, listaModerazione che rappresenta le
@@ -167,5 +169,18 @@ public class UtenteRegistrato {
         if(listaModerazioni.size()==0)
             return false;
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UtenteRegistrato)) return false;
+        UtenteRegistrato that = (UtenteRegistrato) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

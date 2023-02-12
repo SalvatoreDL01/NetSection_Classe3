@@ -2,6 +2,8 @@ package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 /*Oggetto che rappresenta un Commento. Contiene parametri int sezione, creatore e punteggio, String discussione e
 punteggio, String dataScrittura, Lista listaRisposte(rappresenta i commenti che rispondono a questo commento),
 e un oggetto commento che rappresenta il commento a cui questo commento risponde*/
@@ -121,5 +123,18 @@ public class Commento {
     /*Metodo che setta un oggetto List listaRisposte*/
     public void setListaRisposte(List<?> listaRisposte) {
         this.listaRisposte = listaRisposte;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Commento)) return false;
+        Commento commento = (Commento) o;
+        return getCreatore() == commento.getCreatore() && getDataScrittura().equals(commento.getDataScrittura());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDataScrittura(), getCreatore());
     }
 }

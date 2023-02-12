@@ -2,27 +2,24 @@ package LogicaApplicazione.GestionDiscussione.Controller;
 
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
-import ServiziEStorage.Entry.Discussione;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-@MultipartConfig
-@WebServlet(name = "AddDiscussioneController", value = "/AddDiscussioneController")
-public class AddDiscussioneController extends HttpServlet {
+@WebServlet(name = "AggiungiCommento", value = "/AggiungiCommento")
+public class AggiungiCommento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
-        String path = "SezionePage.jsp";
-        request.setAttribute("idSezione",request.getParameter("idSezione"));
-        ds.addDiscussione(request);
 
+        String path = "DiscussionePage.jsp";
+        request.setAttribute("idSezione", request.getParameter("idSezione"));
+        request.setAttribute("discussione", request.getParameter("discussione"));
+        ds.addCommento(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }

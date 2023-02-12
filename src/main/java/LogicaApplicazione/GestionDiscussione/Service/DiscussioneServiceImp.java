@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
-
+    public final static CommentoDAO commentoDAO = new CommentoDAO();
 
     public void checkKick(int idUserToKick, int idDiscussione, String titolo){
         if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
@@ -144,6 +144,76 @@ public class DiscussioneServiceImp implements DiscussioneService {
             return false;
         }
         request.setAttribute("discussione", s);
+        return true;
+    }
+
+    public boolean addCommento(HttpServletRequest request){
+        Commento c = new Commento();
+        Commento cRisposto = new Commento();
+        String contenuto = request.getParameter("contenuto");
+        String discussione = request.getParameter("discussione");
+        int sezione = Integer.parseInt(request.getParameter("sezione"));
+        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("utente");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String dataCreazione = dtf.format(LocalDateTime.now());
+
+        if(contenuto==null && contenuto.length()>300){
+            request.setAttribute("errore","contenutno non valido");
+            return false;
+        }
+
+        String commentoRispostoData = request.getParameter("dataRisposto");
+
+        int commentoRispostoCreatore = Integer.parseInt(request.getParameter("creatoreRisposto"));
+
+        if(commentoRispostoData!=null){
+            cRisposto.setCreatore(commentoRispostoCreatore);
+            cRisposto.setDataScrittura(commentoRispostoData);
+        }
+
+        c.setDiscussione(discussione);
+        c.setDataScrittura(dataCreazione);
+        c.setCreatore(creatore.getId());
+        c.setContenuto(contenuto);
+        c.setSezione(sezione);
+
+        c.setCommentoRisposto(cRisposto);
+
+        commentoDAO.doSave(c);
+        return true;
+    }
+
+    public boolean modificaCommento(HttpServletRequest request){
+        Commento c = new Commento();
+        String originale = request.getParameter("contenutoOriginale");
+        String contenuto;
+        if(originale.equals(request.getParameter("contenuto")))
+             contenuto = originale;
+        else
+             contenuto ="<modificato>" + request.getParameter("contenuto");
+        String discussione = request.getParameter("discussione");
+        int sezione = Integer.parseInt(request.getParameter("sezione"));
+        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        String dataCreazione = request.getParameter("dataCreazione");
+
+        if(contenuto==null && contenuto.length()>300){
+            request.setAttribute("errore","contenutno non valido");
+            return false;
+        }
+
+        if(dataCreazione==null){
+            request.setAttribute("errore","data non valido");
+            return false;
+        }
+
+        c.setDiscussione(discussione);
+        c.setDataScrittura(dataCreazione);
+        c.setCreatore(creatore.getId());
+        c.setContenuto(contenuto);
+        c.setSezione(sezione);
+
+        commentoDAO.update(c);
         return true;
     }
 }

@@ -1,5 +1,7 @@
 package ServiziEStorage.Entry;
 
+import java.util.Objects;
+
 /*Oggetto che rappresenta un Problema. Contiene il parametro int idUtente, String natura, e contenuto e un oggetto String dataSottomissione*/
 public class Problema {
     private int idUtente;
@@ -43,5 +45,18 @@ public class Problema {
     /*Metodo che setta un oggetto String contenuto*/
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Problema)) return false;
+        Problema problema = (Problema) o;
+        return getIdUtente() == problema.getIdUtente() && getDataSottomissione().equals(problema.getDataSottomissione());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdUtente(), getDataSottomissione());
     }
 }

@@ -1,4 +1,7 @@
 package ServiziEStorage.Entry;
+
+import java.util.Objects;
+
 /*Oggetto che rappresenta un Amministratore. Contiene il parametro int idAdmin, String username, email, e pass*/
 public class Amministratore {
 
@@ -44,4 +47,16 @@ public class Amministratore {
         this.pass = pass;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Amministratore)) return false;
+        Amministratore that = (Amministratore) o;
+        return getIdAdmin() == that.getIdAdmin();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdAdmin());
+    }
 }

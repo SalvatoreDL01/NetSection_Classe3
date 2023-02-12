@@ -1,5 +1,7 @@
 package ServiziEStorage.Entry;
 
+import java.util.Objects;
+
 /*Oggetto che rappresenta un Segnalazione. Contiene i parametri int creatoreSegnalazione, creatoreCommento e sezione,
  String discussione, natura, e contenuto, String dataSegnalazione e dataCommento*/
 public class Segnalazione {
@@ -82,5 +84,18 @@ public class Segnalazione {
     /*Metodo che setta un oggetto String contenuto*/
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Segnalazione)) return false;
+        Segnalazione that = (Segnalazione) o;
+        return getCreatoreSegnalazione() == that.getCreatoreSegnalazione() && getCreatoreCommento() == that.getCreatoreCommento() && getDataSegnalazione().equals(that.getDataSegnalazione()) && getDataCommento().equals(that.getDataCommento());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDataSegnalazione(), getDataCommento(), getCreatoreSegnalazione(), getCreatoreCommento());
     }
 }
