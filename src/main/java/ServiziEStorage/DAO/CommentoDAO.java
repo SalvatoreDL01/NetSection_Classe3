@@ -65,7 +65,7 @@ public class CommentoDAO {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where" +
-                    " c.sezione=? and c.discussione =? and notExists(Select * from Risposta r where r.dataRisposta = c.dataScrittura and r.creatoreRisposta = c.creatore) order by c.punteggio");
+                    " c.sezione=? and c.discussione =? and notExists(Select * from Risposta r where r.dataRisposta = c.dataScrittura and r.creatoreRisposta = c.creatore) order by c.punteggio desc");
             ps.setInt(1, idSezione);
             ps.setString(2, titolo);
 
@@ -119,7 +119,7 @@ public class CommentoDAO {
 /*salva un oggetto commento sul DB e specifica sul DB se è una risposta ad un altro commento*/
     public void doSave(Commento c){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("Insert into Commento values (?,?,?,?,?,null)");
+            PreparedStatement ps = con.prepareStatement("Insert into Commento values (?,?,?,?,?,0)");
             ps.setString(1,c.getDataScrittura());
             ps.setInt(2,c.getCreatore());
             ps.setInt(3,c.getSezione());

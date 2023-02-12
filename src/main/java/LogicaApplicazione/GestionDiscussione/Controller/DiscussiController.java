@@ -2,23 +2,26 @@ package LogicaApplicazione.GestionDiscussione.Controller;
 
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
-import ServiziEStorage.Entry.Discussione;
+import LogicaApplicazione.GestioneSezione.Service.SezioneService;
+import LogicaApplicazione.GestioneSezione.Service.SezioneServiceImp;
+import ServiziEStorage.DAO.DiscussioneDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-@MultipartConfig
-@WebServlet(name = "AddDiscussioneController", value = "/AddDiscussioneController")
-public class AddDiscussioneController extends HttpServlet {
+
+public class DiscussiController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DiscussioneService ds = new DiscussioneServiceImp();
-        ds.addDiscussione(request);
+        DiscussioneService s = new DiscussioneServiceImp();
+        String path = "DiscussionePage.jsp";
+        if(!s.loadDiscussione(request));
+        path = "SezionePage.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+        requestDispatcher.forward(request, response);
     }
 
     @Override

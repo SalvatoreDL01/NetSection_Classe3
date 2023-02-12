@@ -1,9 +1,14 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
+import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
+import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
+import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.Entry.UtenteRegistrato;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 
@@ -12,7 +17,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+@MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
@@ -21,7 +26,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public void checkKick(int idUserToKick, int idDiscussione, String titolo){
         if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
             DiscussioneDAO dao=new DiscussioneDAO();
-            UtenteServiceImp u=new UtenteServiceImp();
+            UtenteService u=new UtenteServiceImp();
 
             Discussione discussione= dao.doRetriveById(idDiscussione, titolo);
 
@@ -31,26 +36,37 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
-        int idSezione = Integer.parseInt(request.getParameter("sezione"));
+
         String[] tags = request.getParameter("tags").split(",");
+
+        for (String s : tags) {
+            if (s.contains(" ") || !s.startsWith("@")) {
+                break;
+            }
+        }
+
         String titolo = request.getParameter("titolo");
+        int idSezione=1;
 
         UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         if(utente==null){
             request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
             return false;
         }
-        //formattazione della data di pubblicazione della recensione per salvataggio nel db
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
         String dataCreazione = dtf.format(LocalDateTime.now());
 
         Discussione d = new Discussione();
 
-        d.setCreatore(utente.getId());
-        d.setTitolo(titolo);
-        d.setSezione(idSezione);
-        d.setDataCreazione(dataCreazione);
+        if(titolo!=null && dataCreazione!=null && idSezione!=0){
+            d.setCreatore(utente.getId());
+            d.setTitolo(titolo);
+            d.setSezione(idSezione);
+            d.setDataCreazione(dataCreazione);
+        }
+
         try {
             String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+idSezione;
             File f = new File(dirPath);
@@ -102,4 +118,29 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return test;
     }
 
+
+    public void deleteComment(int idCreatore, String dataCreazioneCommento){
+        if(idCreatore!=0 && dataCreazioneCommento!=null){
+            CommentoDAO c=new CommentoDAO();
+            Commento commento= c.doRetriveById(dataCreazioneCommento, idCreatore);
+            c.doRemove(commento);
+            System.out.println("Commento eliminato con successo!");
+        }
+    }
+
+    public boolean loadDiscussione(HttpServletRequest request){
+        int i = Integer.parseInt(request.getParameter("idSezione"));
+        String titolo = request.getParameter("titolo");
+        if(titolo == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        Discussione s = discussioneDAO.doRetriveById(i,titolo);
+        if(s == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        request.setAttribute("discussione", s);
+        return true;
+    }
 }

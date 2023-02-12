@@ -399,4 +399,17 @@ public class UtenteRegistratoDAO {
         }
     }
 
+    public boolean isUtenteNetflix(UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select * from UtenteNetflix where idUtente=?");
+            ps.setInt(1,u.getId());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                return true;
+            else return false;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

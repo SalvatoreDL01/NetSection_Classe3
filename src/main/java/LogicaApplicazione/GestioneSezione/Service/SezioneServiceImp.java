@@ -36,7 +36,7 @@ public class SezioneServiceImp implements SezioneService{
     }
 
     @Override
-    public boolean addSezioen(HttpServletRequest request) {
+    public boolean addSezione(HttpServletRequest request) {
         String titolo = request.getParameter("titolo");
         String descrizione = request.getParameter("descrizione");
 
@@ -49,11 +49,13 @@ public class SezioneServiceImp implements SezioneService{
 
         Sezione s = new Sezione();
 
-        s.setDescrizione(descrizione);
-        s.setTitolo(titolo);
-        s.setListaGeneri(generi);
+        if(titolo!=null && descrizione!=null && generi!=null){
+            s.setDescrizione(descrizione);
+            s.setTitolo(titolo);
+            s.setListaGeneri(generi);
 
-        sezioneDAO.doSave(s);
+            sezioneDAO.doSave(s);
+        }
 
         try {
             String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+s.getIdSezione();
@@ -87,7 +89,6 @@ public class SezioneServiceImp implements SezioneService{
             request.setAttribute("messaggio", "Aggiunta Sezione non effettuata!");
         }
 
-
         return true;
     }
 
@@ -109,5 +110,16 @@ public class SezioneServiceImp implements SezioneService{
         }
 
         return test;
+    }
+
+    public boolean loadSezione(HttpServletRequest request){
+        int i = Integer.parseInt(request.getParameter("idSezione"));
+        Sezione s = sezioneDAO.doRetriveById(i);
+        if(s == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        request.setAttribute("sezione", s);
+        return true;
     }
 }
