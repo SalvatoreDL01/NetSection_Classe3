@@ -1,9 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
   User: utente
-  String: 05/02/2023
-  Time: 20:28
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -12,12 +9,24 @@
     <link rel="stylesheet" href="css/CreazioneDiscussionePageStyle.css">
 </head>
 <body>
+<script>
+    function validate(){
+        let titolo=document.getElementById("titolo");
+        let descrizione=document.getElementById("descrizione");
+
+        if(titolo==null || descrizione==null){
+            alert("Tutti i campi sono obbligatori!");
+            return false;
+        }
+    }
+</script>
+
 <h1>AGGIUNGI SEZIONE</h1>
 <!--visualizzazione del messaggio per dare conferma dell'aggiunta-->
 <div id="dati">
 
     <!--form per l'aggiunta di una Sezione-->
-    <form id="formSezione" action="UpdateCatalogController" method="POST" enctype="multipart/form-data">
+    <form id="formSezione" action="UpdateCatalogController" method="POST" enctype="multipart/form-data" onsubmit="validate()">
 
         <div id="gioco" class="forms">
             <label for="titolo">Titolo Sezione</label><br>
