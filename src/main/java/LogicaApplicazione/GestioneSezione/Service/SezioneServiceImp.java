@@ -69,7 +69,7 @@ public class SezioneServiceImp implements SezioneService{
             String fileName = part.getSubmittedFileName();
             if(fileName.equals(""))
                 return false;
-            String immagine = "css/icone/Immagini/" + fileName;
+            String immagine = "css/icone/Immagini/" +s.getIdSezione()+"/"+ fileName;
             String path = dirPath + "/" + fileName;
 
             s.setImmagine(immagine);

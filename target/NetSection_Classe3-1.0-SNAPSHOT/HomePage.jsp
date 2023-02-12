@@ -30,7 +30,7 @@
                     if(listaSezioni.size()>i){
             %>
             <div class="element">
-                <img src="css/witcher.jpeg">
+                <img src="<%=listaSezioni.get(i).getImmagine()%>">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
             <%}}%>
