@@ -39,7 +39,9 @@
 </div>
 <div class="netflix-profile">
   <p>Stato attuale profilo Netflix: </p><br>
-  <input type="button" value="Collega profilo Netflix"><br>
+  <form action="RegistrazioneNetflix.jsp">
+    <input type="submit" value="Collega profilo Netflix"><br>
+  </form>
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
     <input type="button" value="Crea una discussione"><br><br>

@@ -75,8 +75,8 @@ public class UtenteNetflixDAO {
     /*Salva i dati di un oggetto UtenteNetflix sul DB. Salva anche la tabella di generi preferiti se fornita. Usata quando*/
     public void doSaveUtente(UtenteNetflix u){
         try(Connection con = ConPool.getConnection()){
-            UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
-            utenteRegistratoDAO.doSave(u);
+            //UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
+            //utenteRegistratoDAO.doSave(u);
 
             PreparedStatement ps = con.prepareStatement("insert into UtenteNetflix values (?,?,?)");
             ps.setInt(1,u.getId());

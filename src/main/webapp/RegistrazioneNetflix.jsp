@@ -56,19 +56,19 @@
     <h2>Accedi con il tuo account Netflix</h2><br><br>
   </div>
   <div class="reg-form">
-    <form>
+    <form action="RegistrazioneNetflixController">
       <label for="email">Email del tuo profilo Netflix:</label><br><br>
       <input type="email" id="email" name="email" value=""><br><br>
 
       <label for="password">Password del tuo profilo Netflix:</label><br><br>
       <input type="password" id="password" name="password" value=""><br><br>
 
-      <input type="button" onclick="showForm()" value="Verifica account Netflix">
+      <input type="submit" value="Verifica account Netflix">
     </form>
   </div>
   <div class="reg-user" >
     <p id="success"></p>
-    <form id="user" style="display: none;" onsubmit="validateForm()">
+    <form id="user" style="display: none;" onsubmit="validateForm()" action="RegistrazioneNetflixController">
       <label for="username">Inserisci il tuo username per proseguire:</label><br><br>
       <input type="text" id="username" name="username" value=""><br><br>
 
