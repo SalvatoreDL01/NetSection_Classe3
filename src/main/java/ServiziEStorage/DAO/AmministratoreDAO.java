@@ -57,7 +57,7 @@ public class AmministratoreDAO {
     public ArrayList<Amministratore> retriveAll(){
         ArrayList<Amministratore> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select idAdmin, username, email, password from Admin");
+            PreparedStatement ps = con.prepareStatement("select idAdmin, username, email, pass from Amministratore");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Amministratore a = new Amministratore(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(3));

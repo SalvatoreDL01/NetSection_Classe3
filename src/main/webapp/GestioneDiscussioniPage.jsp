@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <!--listqa discussioni moderate dall'utente-->
+    <!--lista discussioni moderate dall'utente-->
 
     <div class="lista">
         <p>Lista discussioni moderate</p>

@@ -20,7 +20,7 @@ public class SezioneDAO {
             ps.setInt(1, id);
 
             PreparedStatement psGenere = con.prepareStatement("select a.genere from Sezione s natural join Appartenere a where s.idSezione = ?");
-            ps.setInt(1, id);
+            psGenere.setInt(1, id);
 
             ArrayList<String> generi = new ArrayList<String>();
             ArrayList<Discussione> discussioni;

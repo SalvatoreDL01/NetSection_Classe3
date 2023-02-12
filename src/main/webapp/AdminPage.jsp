@@ -1,4 +1,4 @@
-<%--
+<%@ page import="ServiziEStorage.Entry.Amministratore" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -30,7 +30,10 @@
 </script>
 <div class="welcome">
   <img src="css/logo.png"><br>
-  <h2>Benvenuto, *username*</h2>
+  <%
+    String nome = ((Amministratore)session.getAttribute("user")).getUsername();
+  %>
+  <h2>Benvenuto, <%=nome%></h2>
 </div>
 <div class="info">
   <p>Ecco alcune informazioni su di te: </p><br>
@@ -56,7 +59,7 @@
     </div>
     <div class="add">
       <p>Aggiungi una Sezione</p>
-      <form action="UpdateCatalogPage.jsp">
+      <form action="CreaSezionePage.jsp">
         <input type="submit" id="aggiungi" value="Aggiungi">
       </form>
     </div>

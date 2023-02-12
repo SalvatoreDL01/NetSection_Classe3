@@ -1,6 +1,9 @@
 package LogicaApplicazione.GestioneUtente.Controller;
 
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
+import ServiziEStorage.DAO.UtenteNetflixDAO;
+import ServiziEStorage.Entry.Amministratore;
+import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import jakarta.servlet.*;
@@ -27,11 +30,23 @@ public class LoginController extends HttpServlet {
             pagina = "/index.jsp";
             HttpSession session = request.getSession();
             session.setAttribute("user", utente);
+            if(new UtenteServiceImp().checkNetflix(utente)) {
+                UtenteNetflix u = new UtenteNetflixDAO().doRetriveById(utente.getId());
+                session.setAttribute("user", (UtenteRegistrato) u);
+            }
         }
         else {
-            //non è stato trovato un riscontro
-            pagina = "LoginPage.jsp";
-            request.setAttribute("errore", "Username o password errata");
+            Amministratore admin = service.checkAdmin(email, password);
+            if(admin != null){
+                pagina = "AdminPage.jsp";
+                HttpSession session = request.getSession();
+                session.setAttribute("user", admin);
+            }
+            else {
+                //non è stato trovato un riscontro
+                pagina = "LoginPage.jsp";
+                request.setAttribute("errore", "Username o password errata");
+            }
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(pagina);
