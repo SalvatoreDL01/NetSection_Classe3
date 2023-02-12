@@ -6,6 +6,7 @@ import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
+import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
@@ -125,5 +126,21 @@ public class DiscussioneServiceImp implements DiscussioneService {
             c.doRemove(commento);
             System.out.println("Commento eliminato con successo!");
         }
+    }
+
+    public boolean loadDiscussione(HttpServletRequest request){
+        int i = Integer.parseInt(request.getParameter("idSezione"));
+        String titolo = request.getParameter("titolo");
+        if(titolo == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        Discussione s = discussioneDAO.doRetriveById(i,titolo);
+        if(s == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        request.setAttribute("discussione", s);
+        return true;
     }
 }
