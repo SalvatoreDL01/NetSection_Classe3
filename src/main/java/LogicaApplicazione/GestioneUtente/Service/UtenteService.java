@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestioneUtente.Service;
 
+import ServiziEStorage.Entry.Amministratore;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.Entry.UtenteRegistrato;
@@ -18,4 +19,6 @@ public interface UtenteService {
     public void saveUtente(UtenteRegistrato u);
     public void salvaUtenteNetflix(UtenteNetflix u);
     public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException;
+   public Amministratore checkAdmin(String email, String password);
+   public boolean checkNetflix(UtenteRegistrato u);
 }
