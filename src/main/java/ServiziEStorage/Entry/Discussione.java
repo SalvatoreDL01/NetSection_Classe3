@@ -2,6 +2,8 @@ package ServiziEStorage.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 /*Oggetto che rappresenta una Discussione. Contiene parametri int sezione e creatore, String titolo e immagine,
  Data dataCreazione e Liste listaTag(rappresenta i tag della discussione),
   listaIscritti(rappresenta gli iscritti alla discussione), listaModeratori(rappresenta i moderatori della discussione),
@@ -142,5 +144,18 @@ public class Discussione {
     /*setta un oggetto List listaCommenti*/
     public void setListaCommenti(List<?> listaCommenti) {
         this.listaCommenti = listaCommenti;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Discussione)) return false;
+        Discussione that = (Discussione) o;
+        return getSezione() == that.getSezione() && getTitolo().equals(that.getTitolo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSezione(), getTitolo());
     }
 }

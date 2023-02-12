@@ -3,6 +3,7 @@ package LogicaApplicazione.GestionDiscussione.Controller;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
 import ServiziEStorage.Entry.Discussione;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +19,12 @@ public class AddDiscussioneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
+        String path = "SezionePage.jsp";
+        request.setAttribute("idSezione",request.getParameter("idSezione"));
         ds.addDiscussione(request);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+        requestDispatcher.forward(request, response);
     }
 
     @Override

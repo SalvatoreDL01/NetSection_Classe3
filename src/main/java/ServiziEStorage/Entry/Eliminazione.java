@@ -1,4 +1,7 @@
 package ServiziEStorage.Entry;
+
+import java.util.Objects;
+
 /*Oggetto che rappresenta una eliminazione di un utente. Contiene il parametro int id, String username, email*/
 public class Eliminazione {
 
@@ -35,4 +38,16 @@ public class Eliminazione {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Eliminazione)) return false;
+        Eliminazione that = (Eliminazione) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

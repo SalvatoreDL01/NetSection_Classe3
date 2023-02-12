@@ -398,7 +398,7 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-
+    /*Metodo che controlla se per un utente è presente un untente netflix sul DB*/
     public boolean isUtenteNetflix(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteNetflix where idUtente=?");
@@ -407,6 +407,19 @@ public class UtenteRegistratoDAO {
             if(rs.next())
                 return true;
             else return false;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che aggiorna l'immagine di un Utente registrato*/
+    public void updateImmagine(UtenteRegistrato u){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update UtenteRegistrato set immagine=? where id=?");
+            ps.setString(1,u.getImmagine());
+            ps.setInt(2,u.getId());
+
+            ps.execute();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
