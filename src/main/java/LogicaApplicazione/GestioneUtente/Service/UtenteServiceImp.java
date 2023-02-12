@@ -77,7 +77,7 @@ public class UtenteServiceImp implements UtenteService {
     }
 
     public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException {
-        UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         HttpSession session = request.getSession();
         Part part = request.getPart("immagine");
         String fileName = part.getSubmittedFileName();

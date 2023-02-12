@@ -10,15 +10,15 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "SubscribeController", value = "/Subscribe")
+@WebServlet(name = "SubscribeController", value = "/SubscribeController")
 public class SubscribeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idUser= Integer.parseInt(request.getParameter("user"));
-        int idSezione= Integer.parseInt(request.getParameter("idSezione"));
+        UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("user");
+        int idUser= u.getId();
+        int idSezione= Integer.parseInt(request.getParameter("sezione"));
         String titolo= request.getParameter("titolo");
         UtenteRegistratoDAO ud= new UtenteRegistratoDAO();
-        UtenteRegistrato u= ud.doRetriveById(idUser);
 
         DiscussioneService service= new DiscussioneServiceImp();
         service.iscrivi(idSezione, titolo, u);

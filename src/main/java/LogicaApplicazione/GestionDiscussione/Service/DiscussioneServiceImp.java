@@ -182,7 +182,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         String contenuto = request.getParameter("contenuto");
         String discussione = request.getParameter("discussione");
         int sezione = Integer.parseInt(request.getParameter("sezione"));
-        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("user");
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String dataCreazione = dtf.format(LocalDateTime.now());
@@ -223,7 +223,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
              contenuto ="<modificato>" + request.getParameter("contenuto");
         String discussione = request.getParameter("discussione");
         int sezione = Integer.parseInt(request.getParameter("sezione"));
-        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("utente");
+        UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("user");
         String dataCreazione = request.getParameter("dataCreazione");
 
         if(contenuto==null && contenuto.length()>300){
