@@ -18,7 +18,7 @@
 <div id="dati">
 
     <!--form per l'aggiunta di una discussione-->
-    <form id="formDiscussione" action="" method="POST" enctype="multipart/form-data" >
+    <form id="formDiscussione" action="AddDiscussioneController" method="POST" enctype="multipart/form-data" >
 
         <div id="gioco" class="forms">
             <label for="titolo">Titolo discussione</label><br>

@@ -66,7 +66,24 @@ public class SezioneDAO {
     /*Metodo che estrae tutte le sezioni dal DB. Estrae anche i dati relativi al loro genere e alle loro Discussioni*/
     public List<Sezione> doRretriveAll(){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione order by desc idSezione");
+            PreparedStatement ps = con.prepareStatement("select idSezione from Sezione order by idSezione desc");
+
+            ArrayList<Sezione> sezioni = new ArrayList<Sezione>();
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                sezioni.add(doRetriveById(rs.getInt(1)));
+            }
+            return sezioni;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che estrae tutte le sezioni dal DB in ordine di numero di discussioni presenti. Estrae anche i dati relativi al loro genere e alle loro Discussioni*/
+    public List<Sezione> doRretriveAllByDescrizioneCounter(){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select s.idSezione, count(d.sezione) from Sezione s join Discussione d on s.idSezione = d.sezione group by s.idSezione order by  count(d.sezione) desc");
 
             ArrayList<Sezione> sezioni = new ArrayList<Sezione>();
 

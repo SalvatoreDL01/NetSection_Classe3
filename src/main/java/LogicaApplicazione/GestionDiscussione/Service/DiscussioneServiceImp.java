@@ -5,6 +5,7 @@ import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteRegistrato;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 
@@ -13,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+@MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
@@ -32,9 +33,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
-        int idSezione = Integer.parseInt(request.getParameter("sezione"));
+       // int idSezione = Integer.parseInt(request.getParameter("sezione"));
         String[] tags = request.getParameter("tags").split(",");
         String titolo = request.getParameter("titolo");
+        int idSezione=1;
 
         UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         if(utente==null){
