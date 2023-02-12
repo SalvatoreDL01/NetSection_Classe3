@@ -125,5 +125,10 @@
     document.getElementById("segnalazione").style.display = "block";
   }
 </script>
+<div class="discuss">
+  <form action="LogoutController">
+    <input type="submit" value="Logout">
+  </form>
+</div>
 </body>
 </html>

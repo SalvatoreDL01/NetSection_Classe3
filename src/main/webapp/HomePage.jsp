@@ -27,32 +27,35 @@
         <div class="mySlidesPopolari">
             <%
                 for(int i=0; i<4; i++){
+                    if(listaSezioni.size()>i){
             %>
             <div class="element">
                 <img src="css/witcher.jpeg">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <%}%>
+            <%}}%>
         </div>
         <div class="mySlidesPopolari">
             <%
                 for(int i=4; i<8; i++){
+                    if(listaSezioni.size()>i){
             %>
             <div class="element">
                 <img src="css/peacky.jpeg">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <%}%>
+            <%}}%>
         </div>
         <div class="mySlidesPopolari">
             <%
                 for(int i=8; i<12; i++){
+                    if(listaSezioni.size()>i){
             %>
             <div class="element">
                 <img src="css/big.jpeg">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <%}%>
+            <%}}%>
         </div>
         <button class="frecciaIndietro" onclick="plusDivsPopolari(-1)">&#10094;</button>
         <button class="frecciaAvanti" onclick="plusDivsPopolari(1)">&#10095;</button>

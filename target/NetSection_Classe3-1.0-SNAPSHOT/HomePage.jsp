@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ServiziEStorage.Entry.Sezione" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: giuseppe
   Date: 21/01/23
@@ -18,66 +19,48 @@
 <div id="corpo">
 
 <!-- slider delle sezioni più popolari, ogni slider contiene tre div con degli elementi all'interni che vengono fatti scorrere da una funzione js-->
+    <%
+        List<Sezione> listaSezioni = (List<Sezione>) request.getAttribute("sezioni");
+    %>
     <div class="slideShow">
         <h1>I PIÙ POPOLARI</h1>
         <div class="mySlidesPopolari">
+            <%
+                for(int i=0; i<4; i++){
+                    if(listaSezioni.size()>i){
+            %>
             <div class="element">
                 <img src="css/witcher.jpeg">
-                <p>the witcher</p>
+                <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
+            <%}}%>
         </div>
         <div class="mySlidesPopolari">
+            <%
+                for(int i=4; i<8; i++){
+                    if(listaSezioni.size()>i){
+            %>
             <div class="element">
                 <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
+                <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
+            <%}}%>
         </div>
         <div class="mySlidesPopolari">
+            <%
+                for(int i=8; i<12; i++){
+                    if(listaSezioni.size()>i){
+            %>
             <div class="element">
                 <img src="css/big.jpeg">
-                <p>the big bang teory</p>
+                <p><%=listaSezioni.get(i).getTitolo()%></p>
             </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
+            <%}}%>
         </div>
         <button class="frecciaIndietro" onclick="plusDivsPopolari(-1)">&#10094;</button>
         <button class="frecciaAvanti" onclick="plusDivsPopolari(1)">&#10095;</button>
     </div>
-
+<!---->
     <!-- funzione js per la gestione dello scorrimento dello slider, sliderIndexPopolari tiene traccia del div visibile in quel momento mentre gli altri sono nascosti-->
     <script>
         var slideIndexPopolari = 1;
