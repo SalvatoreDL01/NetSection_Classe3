@@ -4,6 +4,7 @@ import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Sezione;
@@ -145,5 +146,17 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         request.setAttribute("discussione", s);
         return true;
+    }
+
+    public boolean electMod(int idUserToElect, Discussione discussione){
+        UtenteRegistratoDAO u=new UtenteRegistratoDAO();
+        UtenteRegistrato utente= u.doRetriveById(idUserToElect);
+
+        if(utente!=null && discussione!=null){
+            u.addModerazione(discussione, utente);
+            return true;
+        }
+        else
+            return false;
     }
 }

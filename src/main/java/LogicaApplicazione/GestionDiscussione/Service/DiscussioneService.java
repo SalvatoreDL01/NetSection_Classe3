@@ -8,4 +8,5 @@ public interface DiscussioneService {
     public boolean addDiscussione(HttpServletRequest request);
     public void deleteComment(int idCreatore, String dataCreazioneCommento);
     public boolean loadDiscussione(HttpServletRequest request);
+    public boolean electMod(int idUserToElect, Discussione discussione);
 }
