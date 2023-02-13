@@ -14,10 +14,6 @@
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    if(!email.includes("@")){
-      alert("L'email non è valida");
-      return false;
-    }
     if (email==null || password==null ) {
       alert("Tutti i campi sono obbligatori");
       return false;
@@ -56,7 +52,7 @@
     <h2>Accedi con il tuo account Netflix</h2><br><br>
   </div>
   <div class="reg-form">
-    <form action="RegistrazioneNetflixController">
+    <form action="/RegistrazioneNetflixController">
       <label for="email">Email del tuo profilo Netflix:</label><br><br>
       <input type="email" id="email" name="email" value=""><br><br>
 
