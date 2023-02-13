@@ -64,7 +64,7 @@ public class CommentoDAO {
     public List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where c.sezione=? and c.discussione =? and notExists(Select * from Risposta r where r.dataRisposto = c.dataScrittura and r.creatoreRisposto = c.creatore) order by c.punteggio desc");
+            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where c.sezione=? and c.discussione =? and not Exists(Select * from Risposta r where r.dataRisposto = c.dataScrittura and r.creatoreRisposto = c.creatore) order by c.punteggio desc");
             ps.setInt(1, idSezione);
             ps.setString(2, titolo);
 
