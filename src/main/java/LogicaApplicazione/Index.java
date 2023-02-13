@@ -4,8 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
+import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Genere;
 import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.Entry.UtenteRegistrato;

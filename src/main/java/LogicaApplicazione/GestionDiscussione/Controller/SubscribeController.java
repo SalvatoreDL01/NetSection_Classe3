@@ -23,7 +23,11 @@ public class SubscribeController extends HttpServlet {
         DiscussioneService service= new DiscussioneServiceImp();
         service.iscrivi(idSezione, titolo, u);
 
-        response.sendRedirect("DiscussionePage");
+        request.setAttribute("sezione",idSezione);
+        request.setAttribute("titolo",titolo);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("DiscussiController");
+        requestDispatcher.forward(request, response);
 
     }
 

@@ -14,12 +14,12 @@ public class DiscussioneDAO {
     public void doSave(Discussione d){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "insert into Discussione (sezione, titolo, creatore, immagine, dataCreazione) values (?,?,?,?,?,?)");
+                    "insert into Discussione values (?,?,?,?,?)");
             ps.setInt(1, d.getSezione());
             ps.setString(2, d.getTitolo());
             ps.setInt(3, d.getCreatore());
-            ps.setString(5, d.getImmagine());
-            ps.setString(6, d.getDataCreazione());
+            ps.setString(4, d.getImmagine());
+            ps.setString(5, d.getDataCreazione());
 
             ps.execute();
         }
@@ -49,7 +49,7 @@ public class DiscussioneDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String s  = rs.getString(3);
+                String s  = rs.getString(1);
                 l.add(s);
             }
             return l;
@@ -360,6 +360,7 @@ public class DiscussioneDAO {
             ps.setString(2,d.getTitolo());
             ps.setString(3,tag);
 
+            d.setListaTag(new ArrayList<>());
             ((ArrayList<String>)d.getListaTag()).add(tag);
 
             ps.execute();

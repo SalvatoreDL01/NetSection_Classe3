@@ -39,7 +39,14 @@ public class DiscussioneServiceImp implements DiscussioneService {
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
         int idSezione= Integer.parseInt(request.getParameter("idSezione"));
-        String[] tags = request.getParameter("tags").split(",");
+        String tag = request.getParameter("tags");
+        String[] tags;
+        tag.replace(" ","");
+        if(tag.contains(","))
+         tags = tag.split(", ");
+        else
+            tags = new String[1];
+            tags[0] = tag;
 
         for (String s : tags) {
             if (s.contains(" ") || !s.startsWith("@")) {
@@ -134,8 +141,8 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public boolean loadDiscussione(HttpServletRequest request){
-        int i = Integer.parseInt(request.getParameter("idSezione"));
-        String titolo = request.getParameter("titolo");
+        int i = Integer.parseInt((String) request.getAttribute("sezione"));
+        String titolo = (String) request.getAttribute("titolo");
         if(titolo == null){
             request.setAttribute("errore","La sezione non è più presente");
             return false;

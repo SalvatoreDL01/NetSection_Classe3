@@ -38,7 +38,7 @@ public class UtenteServiceImp implements UtenteService {
         ArrayList<UtenteRegistrato> list = utenteRegistratoDAO.retriveAll();
         for(UtenteRegistrato u: list){
             if(user.equals(u.getEmail()) && password.equals(u.getPass()))
-                return u;
+                return u;//
         }
         return null;
     }
@@ -55,7 +55,7 @@ public class UtenteServiceImp implements UtenteService {
 
     @Override
     public void saveUtente(UtenteRegistrato u) {
-        utenteRegistratoDAO.doSaveRegistration(u);
+        utenteRegistratoDAO.doSave(u);
     }
 
     public void salvaUtenteNetflix(UtenteNetflix u){
