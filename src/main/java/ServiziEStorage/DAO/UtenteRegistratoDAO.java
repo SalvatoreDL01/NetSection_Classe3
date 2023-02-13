@@ -221,8 +221,7 @@ public class UtenteRegistratoDAO {
 
             ResultSet rs = ps2.executeQuery();
             if(rs.next()){
-                id= rs.getInt(1);
-                u.setId(id);
+                u.setId(rs.getInt(1));
             }
             if(!u.getListaPreferiti().isEmpty()){
                 String queryGeneri = "insert into Preferire values ";

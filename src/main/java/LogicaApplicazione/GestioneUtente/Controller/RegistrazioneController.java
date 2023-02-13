@@ -17,15 +17,18 @@ public class RegistrazioneController extends HttpServlet {
         String password = request.getParameter("password");
         String pagina = "";
         String data = request.getParameter("data").replace("/","-");
-        String u = request.getParameter("email");
         UtenteServiceImp service = new UtenteServiceImp();
 
         String email = request.getParameter("email");
-        UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, data);
-        service.saveUtente(utenteRegistrato);
-        utenteRegistrato = service.checkUtente(utenteRegistrato.getEmail(), utenteRegistrato.getPass());
-        pagina = "/index.jsp";
+        UtenteServiceImp utenteServiceImp = new UtenteServiceImp();
+        UtenteRegistrato utenteRegistrato = utenteServiceImp.checkUtente(user, email);
 
+        if(utenteRegistrato==null) {
+            utenteRegistrato = new UtenteRegistrato(user,email,password,null,data);
+
+            service.saveUtente(utenteRegistrato);
+            pagina = "/index.jsp";
+        }
         HttpSession session = request.getSession();
         session.setAttribute("user", utenteRegistrato);
 
