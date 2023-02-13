@@ -143,7 +143,7 @@ public class UtenteRegistratoDAO {
     public List<UtenteRegistrato> getKickati(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             List<UtenteRegistrato> l = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement("select idUtente from Kick where sezione=? and discussione =?");
+            PreparedStatement ps = con.prepareStatement("select idUtente from Kick where sezione=? and sezione =?");
             ps.setInt(1, idSezione);
             ps.setString(2, titolo);
 

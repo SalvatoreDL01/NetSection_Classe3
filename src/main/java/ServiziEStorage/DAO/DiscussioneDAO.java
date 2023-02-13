@@ -49,7 +49,7 @@ public class DiscussioneDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String s  = rs.getString(3);
+                String s  = rs.getString(1);
                 l.add(s);
             }
             return l;
@@ -360,6 +360,7 @@ public class DiscussioneDAO {
             ps.setString(2,d.getTitolo());
             ps.setString(3,tag);
 
+            d.setListaTag(new ArrayList<>());
             ((ArrayList<String>)d.getListaTag()).add(tag);
 
             ps.execute();
