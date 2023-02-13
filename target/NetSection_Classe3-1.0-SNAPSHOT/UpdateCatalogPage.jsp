@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Aggiorna Catalogo</title>
-    <link rel="stylesheet" href="css/AdmPageStyle.css">
+    <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>
 
