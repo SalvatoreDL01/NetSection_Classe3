@@ -58,7 +58,7 @@ public class SezioneServiceImp implements SezioneService{
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+s.getIdSezione();
+            String dirPath = "/home/giuseppe/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+s.getIdSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
@@ -136,5 +136,15 @@ public class SezioneServiceImp implements SezioneService{
         }
         request.setAttribute("sezioni",sezioniGenere);
         return true;
+    }
+
+    @Override
+    public int searchSezione(String nome) {
+        List<Sezione> lista = sezioneDAO.doRretriveAll();
+        for(Sezione s: lista){
+            if(s.getTitolo().equals(nome))
+                return s.getIdSezione();
+        }
+        return -1;
     }
 }

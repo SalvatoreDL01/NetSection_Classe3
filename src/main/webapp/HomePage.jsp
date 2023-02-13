@@ -45,7 +45,7 @@
                     if(listaSezioni.size()>i){
             %>
             <a class="element" href="SezioneControl?idSezione=<%=listaSezioni.get(i).getIdSezione()%>">
-                <img src="css/peacky.jpeg">
+                <img src="<%=listaSezioni.get(i).getImmagine()%>">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </a>
             <%}}%>
@@ -56,7 +56,7 @@
                     if(listaSezioni.size()>i){
             %>
             <a class="element" href="SezioneControl?idSezione=<%=listaSezioni.get(i).getIdSezione()%>">
-                <img src="css/big.jpeg">
+                <img src="<%=listaSezioni.get(i).getImmagine()%>">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
             </a>
             <%}}%>
