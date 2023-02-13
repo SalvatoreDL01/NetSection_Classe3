@@ -1,7 +1,8 @@
 <%@ page import="ServiziEStorage.Entry.Sezione" %>
 <%@ page import="ServiziEStorage.Entry.Discussione" %>
 <%@ page import="java.util.List" %>
-<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %><%--
+<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
+<%@ page import="ServiziEStorage.Entry.UtenteNetflix" %><%--
   Created by IntelliJ IDEA.
   User: utente
   Date: 20/01/2023
@@ -21,7 +22,7 @@
     List<Discussione> lDiscussione = (List<Discussione>) s.getListaDiscussioni();
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
 %>
-<div id="sfondo" tyle="background-image: url(<%=s.getImmagine()%>)"></div>
+<div id="sfondo" tyle="background-image: url(/<%=s.getImmagine()%>);background-repeat: no-repeat;background-size: 100%; width: 100%;height: 650px;left:0px;top:0px;position:absolute;z-index: 3"></div>
 <div id="paginaSezione">
     <div id="ricercaFiltrata">
         <div id="bottoneRicerca">
@@ -32,10 +33,12 @@
         </form>
     </div>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
-    <form method="get" action="CreazioneDiscussioniServlet">
-        <input type="hidden" name="sezione" value="idsezione">
+
+    <form method="get" action="CreaDiscussioneController">
+        <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
         <input type="submit" value="Crea discussione">
     </form>
+
     <%for(Discussione d: lDiscussione){%>
     <div class="discussione">
         <p class="titoloDiscussione"><%=d.getTitolo()%></p>

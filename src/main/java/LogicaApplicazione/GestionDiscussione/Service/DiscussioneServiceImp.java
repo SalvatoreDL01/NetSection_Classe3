@@ -39,7 +39,14 @@ public class DiscussioneServiceImp implements DiscussioneService {
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
         int idSezione= Integer.parseInt(request.getParameter("idSezione"));
-        String[] tags = request.getParameter("tags").split(",");
+        String tag = request.getParameter("tags");
+        String[] tags;
+        tag.replace(" ","");
+        if(tag.contains(","))
+         tags = tag.split(", ");
+        else
+            tags = new String[1];
+            tags[0] = tag;
 
         for (String s : tags) {
             if (s.contains(" ") || !s.startsWith("@")) {

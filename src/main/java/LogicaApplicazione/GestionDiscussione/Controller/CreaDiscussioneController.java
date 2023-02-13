@@ -14,7 +14,7 @@ public class CreaDiscussioneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id=-1;
-        String ritorno="";
+        String ritorno="CreaDiscussionePage.jsp";
         id = Integer.parseInt(request.getParameter("sezione"));
         if(id==-1){
             //ritorna a sezione page
