@@ -1,3 +1,4 @@
+<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +24,12 @@
             str = "UserPage.jsp";
         else
             str = "LoginPage.jsp";
+        String nome = "";
+        if(session.getAttribute("user") != null)
+            nome = ((UtenteRegistrato) session.getAttribute("user")).getUsername();
+        else nome = "LOGIN";
     %>
-    <a class="elementiNavBar" id="login" href="<%=str%>"><%=request.getAttribute("login")%></a>
+    <a class="elementiNavBar" id="login" href="<%=str%>"><%=nome%></a>
 </div>
 <div id="ricercaGeneri">
     <div class="genere">

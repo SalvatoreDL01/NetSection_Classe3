@@ -23,9 +23,11 @@
     <%
         List<Sezione> listaSezioni = new ArrayList<>();
         listaSezioni = (List<Sezione>) request.getAttribute("sezioni");
+        List<Sezione> mostDiscusse = new ArrayList<>();
+        mostDiscusse = (List<Sezione>) request.getAttribute("sezioneDiscusse");
     %>
     <div class="slideShow">
-        <h1>I PIÙ POPOLARI</h1>
+        <h1>SEZIONI PRINCIPALI</h1>
         <div class="mySlidesPopolari">
             <%
                 for(int i=0; i<4; i++){
@@ -83,6 +85,67 @@
             x[slideIndexPopolari-1].style.display = "block";
         }
     </script>
+
+
+    <!-- slider delle sezioni più viste-->
+    <div class="slideShow">
+        <h1>SEZIONI PIÙ DISCUSSE</h1>
+        <div class="mySlidesVisti">
+            <%
+                for(int i=0; i<4; i++){
+                    if(mostDiscusse.size()>i){
+            %>
+            <a class="element" href="SezioneControl?idSezione=<%=mostDiscusse.get(i).getIdSezione()%>">
+                <img src="<%=mostDiscusse.get(i).getImmagine()%>">
+                <p><%=mostDiscusse.get(i).getTitolo()%></p>
+            </a>
+            <%}}%>
+        </div>
+        <div class="mySlidesVisti">
+            <%
+                for(int i=4; i<8; i++){
+                    if(mostDiscusse.size()>i){
+            %>
+            <a class="element" href="SezioneControl?idSezione=<%=mostDiscusse.get(i).getIdSezione()%>">
+                <img src="<%=mostDiscusse.get(i).getImmagine()%>">
+                <p><%=mostDiscusse.get(i).getTitolo()%></p>
+            </a>
+            <%}}%>
+        </div>
+        <div class="mySlidesVisti">
+            <%
+                for(int i=8; i<12; i++){
+                    if(mostDiscusse.size()>i){
+            %>
+            <a class="element" href="SezioneControl?idSezione=<%=mostDiscusse.get(i).getIdSezione()%>">
+                <img src="<%=mostDiscusse.get(i).getImmagine()%>">
+                <p><%=mostDiscusse.get(i).getTitolo()%></p>
+            </a>
+            <%}}%>
+        </div>
+        <button class="frecciaIndietro" onclick="plusDivsVisti(-1)">&#10094;</button>
+        <button class="frecciaAvanti" onclick="plusDivsVisti(1)">&#10095;</button>
+    </div>
+    <!--funzioni js per la gestione dello scorrimento dello slider-->
+    <script>
+        var slideIndexVisti = 1;
+        showDivsVisti(slideIndexVisti);
+        function plusDivsVisti(n) {
+            showDivsVisti(slideIndexVisti += n);
+        }
+        function showDivsVisti(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlidesVisti");
+            if (n > x.length) {slideIndexVisti = 1}
+            if (n < 1) {slideIndexVisti = x.length}
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndexVisti-1].style.display = "block";
+        }
+    </script>
+
+
 
 
 <!-- slider delle sezioni più viste-->
