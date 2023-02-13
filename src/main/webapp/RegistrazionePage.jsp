@@ -17,20 +17,20 @@
         let data= document.getElementById("data").value;
         let user=document.getElementById("username").value;
 
-        if (!user || !email || !password || !data) {
-            document.getElementById("success").innerHTML="Tutti i campi  sono obbligatori"
+        if (username==" " || email == " " || password == " ") {
+            alternative("I campi sono tutti obbligatori");
             return false;
         }
 
         if (password.length < 8) {
-            document.getElementById("success").innerHTML="La password deve essere lunga almeno 8 caratteri"
+            alert("La password deve essere lunga almeno 8 caratteri");
             return  false;
         }
-        if(user.length<5){
-            document.getElementById("success").innerHTML="L'username deve contenere almeno 5 caratteri"
-            return false;
+        if (user.length < 5) {
+            alert("L'username deve essere lungo almeno 5 caratteri");
+            return  false;
         }
-        return true;
+        return (true);
     }
 
 </script>
@@ -40,7 +40,7 @@
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
-        <form id="formLogin" onsubmit="return validate()" action="/RegistrazioneController">
+        <form id="formLogin" action="/RegistrazioneController" method="post" onsubmit="return(validate());">
             <label for="user">Username:</label><br><br>
             <input type="text" id="user" name="user" value="" placeholder="User name..."><br><br>
 
@@ -55,9 +55,6 @@
 
             <input type="submit" value="Registrati"><br>
         </form>
-    </div>
-    <div class="reg-user" >
-        <p id="success"></p>
     </div>
 </div>
 </body>
