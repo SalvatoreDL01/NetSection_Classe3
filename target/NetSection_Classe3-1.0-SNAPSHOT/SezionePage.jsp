@@ -22,7 +22,15 @@
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
 %>
 <div id="sfondo" tyle="background-image: url(<%=s.getImmagine()%>)"></div>
-<div id="paginaSezione" s>
+<div id="paginaSezione">
+    <div id="ricercaFiltrata">
+        <div id="bottoneRicerca">
+            RicercaFiltrata
+        </div>
+        <form action="" method="POST">
+            <input type="hidden" name="idSezione" value="<%=s.getIdSezione()%>">
+        </form>
+    </div>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
     <form method="get" action="CreazioneDiscussioniServlet">
         <input type="hidden" name="sezione" value="idsezione">

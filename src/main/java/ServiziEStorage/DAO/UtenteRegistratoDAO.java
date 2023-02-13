@@ -186,7 +186,17 @@ public class UtenteRegistratoDAO {
             ps.setString(3, u.getPass());
             ps.setString(4, u.getDataNascita());
 
-            ps.execute();
+            PreparedStatement ps2 = con.prepareStatement("select id from UtenteRegistrato where username=?");
+            ps2.setString(1, u.getUsername());
+
+            int id = -1;
+
+            ResultSet rs = ps2.executeQuery();
+            if(rs.next()) {
+                id = rs.getInt(1);
+                u.setId(id);
+
+            }
         } catch (SQLException e) {
             throw new RuntimeException();
         }
@@ -204,7 +214,7 @@ public class UtenteRegistratoDAO {
 
             ps.execute();
 
-            PreparedStatement ps2 = con.prepareStatement("select idSezione from Appartenere where idSezione=?");
+            PreparedStatement ps2 = con.prepareStatement("select id from UtenteRegistrato where username=?");
             ps2.setString(1, u.getUsername());
 
             int id = -1;

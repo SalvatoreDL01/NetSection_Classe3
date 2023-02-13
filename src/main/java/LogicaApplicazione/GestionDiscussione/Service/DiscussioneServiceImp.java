@@ -245,4 +245,8 @@ public class DiscussioneServiceImp implements DiscussioneService {
         commentoDAO.update(c);
         return true;
     }
+
+    public boolean serchByTag(HttpServletRequest request){
+return true;
+    }
 }
