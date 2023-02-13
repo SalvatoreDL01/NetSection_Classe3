@@ -18,7 +18,7 @@
         let user=document.getElementById("username").value;
 
         if (!user || !email || !password || !data) {
-            document.getElementById("success").innerHTML="I campi email e password sono obbligatori"
+            document.getElementById("success").innerHTML="Tutti i campi  sono obbligatori"
             return false;
         }
 
@@ -53,7 +53,7 @@
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password..."><br><br>
 
-            <input type="submit" value="Registrati">
+            <input type="submit" value="Registrati"><br>
         </form>
     </div>
     <div class="reg-user" >
