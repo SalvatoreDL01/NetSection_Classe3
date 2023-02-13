@@ -65,7 +65,7 @@
                 <%}%>
             </div>
             <div class="testo">
-                <div class="tags"><%for(int j=0;j<4;j++){%><%=d.getListaTag().get(j)%>,<%}%>...</div>
+                <div class="tags"><%for(int j=0;j<d.getListaTag().size();j++){%><%=d.getListaTag().get(j)%><%if(j<4){%>,<%}else{%>...<%break;}}%></div>
             </div>
         </div>
     </div>
