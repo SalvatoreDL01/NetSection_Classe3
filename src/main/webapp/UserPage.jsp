@@ -34,8 +34,8 @@
       <li>Anno di nascita: <%=u.getDataNascita()%></li><br>
     </ul>
   </div>
-  <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>
-  <input type="button" id="edit" value="Modifica">
+  <!--<p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>
+  <input type="button" id="edit" value="Modifica">-->
 </div>
 <div class="netflix-profile">
   <p>Stato attuale profilo Netflix: </p><br>
@@ -58,7 +58,7 @@
     <input type="button" value="Crea una discussione"><br><br>
     <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
   </div>
-  <div class="tue-discussioni">
+  <div id="tue-discussioni">
     <div class="discussione">
       Discussione
     </div>
@@ -107,10 +107,11 @@
     </div>
   </div>
 </div>
+<!--
 <div class="discuss">
   <p>Accedi alle tue discussioni preferite</p><br>
   <input type="button" value="Discussioni preferite">
-</div>
+</div>-->
 <div class="discuss">
   <input type="button" onclick="visualizzaForm()" value="Segnala un problema">
 </div>

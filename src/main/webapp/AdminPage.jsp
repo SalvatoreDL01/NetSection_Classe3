@@ -69,7 +69,7 @@
 </div>
 <div class="ban-user-by-id">
   <p>Banna un Utente. Attenzione: il Ban è un'azione irreversibile!</p><br>
-  <form name="ban-user" action="/BanUser">
+  <form name="ban-user" action="BanUser">
     <input type="text" id="ban" name="ban" value=""><br><br>
     <input type="submit" value="Banna Utente">
   </form>
