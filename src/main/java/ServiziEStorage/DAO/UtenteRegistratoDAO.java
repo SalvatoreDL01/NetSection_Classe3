@@ -204,7 +204,7 @@ public class UtenteRegistratoDAO {
 
             ps.execute();
 
-            PreparedStatement ps2 = con.prepareStatement("select idSezione from Appartenere where idSezione=?");
+            PreparedStatement ps2 = con.prepareStatement("select id from UtenteRegistrato where username=?");
             ps2.setString(1, u.getUsername());
 
             int id = -1;
