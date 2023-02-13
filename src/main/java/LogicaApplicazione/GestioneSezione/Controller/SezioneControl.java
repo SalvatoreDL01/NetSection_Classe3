@@ -17,8 +17,8 @@ public class SezioneControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
         String path = "SezionePage.jsp";
-        if(!s.loadSezione(request));
-        path = "HomePage.jsp";
+        if(!s.loadSezione(request))
+            path = "HomePage.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }//

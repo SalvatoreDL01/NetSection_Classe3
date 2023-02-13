@@ -14,4 +14,5 @@ public interface DiscussioneService {
     public boolean electMod(int idUserToElect, Discussione discussione);
     public void iscrivi(int idSezione, String titolo, UtenteRegistrato utente);
     public void disiscrivi(int idSezione, String titolo, UtenteRegistrato utente);
+    public boolean serchByTag(HttpServletRequest request);
 }

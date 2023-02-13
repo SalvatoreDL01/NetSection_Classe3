@@ -21,7 +21,8 @@
 
 <!-- slider delle sezioni più popolari, ogni slider contiene tre div con degli elementi all'interni che vengono fatti scorrere da una funzione js-->
     <%
-        List<Sezione> listaSezioni = (List<Sezione>) request.getAttribute("sezioni");
+        List<Sezione> listaSezioni = new ArrayList<>();
+        listaSezioni = (List<Sezione>) request.getAttribute("sezioni");
     %>
     <div class="slideShow">
         <h1>I PIÙ POPOLARI</h1>
