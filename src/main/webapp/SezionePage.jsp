@@ -24,7 +24,7 @@
 <div id="sfondo" tyle="background-image: url(<%=s.getImmagine()%>)"></div>
 <div id="paginaSezione" s>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
-    <form method="get" action="CreazioneDiscussioniServlet">
+    <form method="get" action="CreazioneDiscussioniControl">
         <input type="hidden" name="sezione" value="idsezione">
         <input type="submit" value="Crea discussione">
     </form>
