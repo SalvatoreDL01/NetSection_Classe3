@@ -44,19 +44,19 @@
   </form>
   <script>
     function mostraMenu(){
-      var display = document.getElementById("ricercaGeneri").style.display;
+      var display = document.getElementById("tue-discussioni").style.display;
       if(display == "block"){
-        document.getElementById("ricercaGeneri").style.display = "none";
+        document.getElementById("tue-discussioni").style.display = "none";
       }
       else{
-        document.getElementById("ricercaGeneri").style.display = "block";
+        document.getElementById("tue-discussioni").style.display = "block";
       }
     }
   </script>
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
     <input type="button" value="Crea una discussione"><br><br>
-    <input type="button" id="ltd" value="Le tue discussioni"><br>
+    <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
   </div>
   <div class="tue-discussioni">
     <div class="discussione">
