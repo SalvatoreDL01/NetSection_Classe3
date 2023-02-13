@@ -21,9 +21,9 @@ public class RegistrazioneController extends HttpServlet {
         UtenteServiceImp service = new UtenteServiceImp();
 
         String email = request.getParameter("email");
-        UtenteServiceImp utenteServiceImp = new UtenteServiceImp();
-        UtenteRegistrato utenteRegistrato = utenteServiceImp.checkUtente(user, email);
+        UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, data);
         service.saveUtente(utenteRegistrato);
+        utenteRegistrato = service.checkUtente(utenteRegistrato.getEmail(), utenteRegistrato.getPass());
         pagina = "/index.jsp";
 
         HttpSession session = request.getSession();

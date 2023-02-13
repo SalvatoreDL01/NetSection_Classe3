@@ -1,7 +1,8 @@
 <%@ page import="ServiziEStorage.Entry.Sezione" %>
 <%@ page import="ServiziEStorage.Entry.Discussione" %>
 <%@ page import="java.util.List" %>
-<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %><%--
+<%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
+<%@ page import="ServiziEStorage.Entry.UtenteNetflix" %><%--
   Created by IntelliJ IDEA.
   User: utente
   Date: 20/01/2023
