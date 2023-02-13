@@ -21,7 +21,8 @@ public class BanUserController extends HttpServlet {
             ad.banUtente(idUserToBan);
         }
 
-        response.sendRedirect("/AdminPage");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     @Override
