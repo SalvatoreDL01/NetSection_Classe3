@@ -13,12 +13,31 @@
     function validate(){
         let titolo=document.getElementById("titolo");
         let descrizione=document.getElementById("descrizione");
+        let checkbox= document.querySelectorAll('input[type="checkbox"]');
 
         if(titolo==null || descrizione==null){
             alert("Tutti i campi sono obbligatori!");
             return false;
         }
+        if(titolo.lenght()<5){
+            alert("Il titolo deve contenere almeno 5 caratteri!");
+        }
+        if(descrizione.lenght()<10){
+            alert("Il titolo deve contenere almeno 10 caratteri!");
+        }
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', (event) => {
+                // Verifica se almeno un checkbox è selezionato
+                const atLeastOneChecked = Array.from(checkboxes).some((cb) => cb.checked);
+                if (atLeastOneChecked) {
+                    console.log('Almeno un checkbox selezionato');
+                } else {
+                    alert("Nessun checkbox selezionato!");
+                }
+            });
+        });
     }
+
 </script>
 
 <h1>AGGIUNGI SEZIONE</h1>
@@ -87,7 +106,7 @@
             </div>
             <br><br>
             <div id="bottoneGioco">
-                <input type="submit" value="Aggiungi gioco">
+                <input type="submit" value="Aggiungi Sezione" onclick="validate()">
             </div>
 
         </div>
