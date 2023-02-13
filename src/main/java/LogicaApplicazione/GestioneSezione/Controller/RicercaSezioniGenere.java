@@ -10,15 +10,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
-@WebServlet(name = "SezioneControl", value = "/SezioneControl")
-public class SezioneControl extends HttpServlet {
+@WebServlet(name = "RicercaSezioniGenere", value = "/RicercaSezioniGenere")
+public class RicercaSezioniGenere extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
-        String path = "SezionePage.jsp";
-        if(!s.loadSezione(request));
-        path = "HomePage.jsp";
+        String path = "RicercaPage.jsp";
+        s.serchByGenere(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
