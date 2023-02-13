@@ -141,8 +141,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public boolean loadDiscussione(HttpServletRequest request){
-        int i = Integer.parseInt((String) request.getAttribute("sezione"));
-        String titolo = (String) request.getAttribute("titolo");
+        int i;
+        String titolo;
+        if(request.getParameter("tipo")!=null){
+            titolo=request.getParameter("titolo");
+            i= Integer.parseInt(request.getParameter("sezione"));
+        }
+        else
+        {
+            titolo= (String) request.getAttribute("titolo");
+            i= (Integer) request.getAttribute("sezione");
+        }
+        request.setAttribute("sezione",i);
         if(titolo == null){
             request.setAttribute("errore","La sezione non è più presente");
             return false;

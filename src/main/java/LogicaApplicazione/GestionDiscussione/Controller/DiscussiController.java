@@ -19,8 +19,8 @@ public class DiscussiController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService s = new DiscussioneServiceImp();
         String path = "DiscussionePage.jsp";
-        if(!s.loadDiscussione(request));
-        path = "SezionePage.jsp";
+        if(!s.loadDiscussione(request))
+        path = "SezioneController";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
