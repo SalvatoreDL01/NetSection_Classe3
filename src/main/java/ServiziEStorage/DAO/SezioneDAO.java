@@ -136,7 +136,7 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutte le sesioni che hanno un nome simile all'oggetto String passato come input*/
+    /*Metodo che estrae tutte le sezioni che hanno un nome simile all'oggetto String passato come input*/
     public List<Sezione> doRetriveByName(String nome){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idSezione from Sezione where titolo like ?");
