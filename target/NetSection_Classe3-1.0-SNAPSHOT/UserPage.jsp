@@ -44,12 +44,12 @@
   </form>
   <script>
     function mostraMenu(){
-      var display = document.getElementById("ricercaGeneri").style.display;
+      var display = document.getElementById("tue-discussioni").style.display;
       if(display == "block"){
-        document.getElementById("ricercaGeneri").style.display = "none";
+        document.getElementById("tue-discussioni").style.display = "none";
       }
       else{
-        document.getElementById("ricercaGeneri").style.display = "block";
+        document.getElementById("tue-discussioni").style.display = "block";
       }
     }
   </script>
