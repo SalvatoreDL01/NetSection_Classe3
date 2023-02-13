@@ -19,7 +19,7 @@ public class BanUserController extends HttpServlet {
         if(idUserToBan!=0){
             AdminService ad = new AdminServiceImp();
             ad.banUtente(idUserToBan);
-        }
+        }//
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("AdminPage.jsp");
         requestDispatcher.forward(request, response);
