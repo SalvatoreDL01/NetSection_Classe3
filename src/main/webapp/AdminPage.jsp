@@ -31,22 +31,25 @@
 <div class="welcome">
   <img src="css/logo.png"><br>
   <%
-    String nome = ((Amministratore)session.getAttribute("user")).getUsername();
+    String username = ((Amministratore)session.getAttribute("user")).getUsername();
+    String mail = ((Amministratore)session.getAttribute("user")).getEmail();
+    int id= ((Amministratore)session.getAttribute("user")).getIdAdmin();
   %>
-  <h2>Benvenuto, <%=nome%></h2>
+  <h2>Benvenuto, <%=username%></h2>
 </div>
 <div class="info">
   <p>Ecco alcune informazioni su di te: </p><br>
   <div id="info-list">
     <ul>
-      <li>Nome: *nome*</li><br>
-      <li>Cognome: *cognome*</li><br>
-      <li>E-mail: *mail*</li><br>
-      <li>Età: *data*</li><br>
+      <li>E-mail: <%=mail%></li><br>
+      <li>ID: <%=id%></li>
     </ul>
   </div>
-  <p>Puoi modificare queste informazioni cliccando sul pulsante "Modifica"</p><br>
-  <input type="button" id="edit" value="Modifica">
+  <p>Puoi modificare la mail cliccando sul pulsante "Modifica"</p><br>
+  <form>
+    <input type="text" name="mail" id="mail" placeholder="Modifica la mail..."><br>
+    <input type="button" id="edit" value="Modifica">
+  </form>
 </div>
 <div class="sections">
   <div class="sections-values">

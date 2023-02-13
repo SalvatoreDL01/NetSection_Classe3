@@ -10,7 +10,7 @@
 <html>
 <head>
   <title>UserPage</title>
-  <link rel="stylesheet" href="css/AdmPageStyle.css">
+  <link rel="stylesheet" href="css/UserPageStyle.css">
 </head>
 <body>
 <div class="welcome">
@@ -42,10 +42,32 @@
   <form action="RegistrazioneNetflix.jsp">
     <input type="submit" value="Collega profilo Netflix"><br>
   </form>
+  <script>
+    function mostraMenu(){
+      var display = document.getElementById("ricercaGeneri").style.display;
+      if(display == "block"){
+        document.getElementById("ricercaGeneri").style.display = "none";
+      }
+      else{
+        document.getElementById("ricercaGeneri").style.display = "block";
+      }
+    }
+  </script>
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
     <input type="button" value="Crea una discussione"><br><br>
     <input type="button" id="ltd" value="Le tue discussioni"><br>
+  </div>
+  <div class="tue-discussioni">
+    <div class="discussione">
+      Discussione
+    </div>
+    <div class="discussione">
+      Discussione
+    </div>
+    <div class="discussione">
+      Discussione
+    </div>
   </div>
 </div>
 <div class="discuss" style="height: 1100px">

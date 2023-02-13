@@ -21,7 +21,7 @@ public class SezioneControl extends HttpServlet {
         path = "HomePage.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
-    }
+    }//
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -21,18 +21,6 @@ public class UtenteServiceImp implements UtenteService {
     public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
     public static final EliminazioneDAO eliminazioneDAO = new EliminazioneDAO();
 
-    public void banUtente(int idUserToBan){
-        ArrayList<UtenteRegistrato> listU= utenteRegistratoDAO.retriveAll();
-
-        for (UtenteRegistrato u: listU) {
-            if(u.getId()==idUserToBan){
-                Eliminazione e=new Eliminazione(u.getId(), u.getUsername(), u.getEmail());
-                eliminazioneDAO.doSave(e);
-                utenteRegistratoDAO.remove(idUserToBan);
-                System.out.println("L'utente è stato rimosso correttamente");
-            }
-        }
-    }
 
     public void kickUtente(int idUserToKick, Discussione discussione){
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();

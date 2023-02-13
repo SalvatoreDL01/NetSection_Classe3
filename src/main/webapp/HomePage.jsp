@@ -1,5 +1,6 @@
 <%@ page import="ServiziEStorage.Entry.Sezione" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: giuseppe
   Date: 21/01/23
@@ -29,10 +30,10 @@
                 for(int i=0; i<4; i++){
                     if(listaSezioni.size()>i){
             %>
-            <div class="element">
+            <a class="element" href="SezioneControl?idSezione=<%=listaSezioni.get(i).getIdSezione()%>">
                 <img src="<%=listaSezioni.get(i).getImmagine()%>">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
-            </div>
+            </a>
             <%}}%>
         </div>
         <div class="mySlidesPopolari">
@@ -40,10 +41,10 @@
                 for(int i=4; i<8; i++){
                     if(listaSezioni.size()>i){
             %>
-            <div class="element">
+            <a class="element" href="SezioneControl?idSezione=<%=listaSezioni.get(i).getIdSezione()%>">
                 <img src="css/peacky.jpeg">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
-            </div>
+            </a>
             <%}}%>
         </div>
         <div class="mySlidesPopolari">
@@ -51,10 +52,10 @@
                 for(int i=8; i<12; i++){
                     if(listaSezioni.size()>i){
             %>
-            <div class="element">
+            <a class="element" href="SezioneControl?idSezione=<%=listaSezioni.get(i).getIdSezione()%>">
                 <img src="css/big.jpeg">
                 <p><%=listaSezioni.get(i).getTitolo()%></p>
-            </div>
+            </a>
             <%}}%>
         </div>
         <button class="frecciaIndietro" onclick="plusDivsPopolari(-1)">&#10094;</button>
@@ -87,83 +88,20 @@
     <div class="slideShow">
         <h1>I PIÙ VISTI</h1>
         <div class="mySlidesVisti">
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
-            <div class="element">
-                <img src="css/witcher.jpeg">
-                <p>the witcher</p>
-            </div>
+        <%
+            List<Sezione> lista = new ArrayList<>();
+            if(request.getAttribute("listaGeneriPreferiti") != null) {
+                lista = (List<Sezione>) request.getAttribute("listaGeneriPreferiti");
+                for (Sezione s : lista) {
+                    %>
+        <a class="element" href="SezioneControl?idSezione=<%=s.getIdSezione()%>">
+            <img src="css/witcher.jpeg">
+            <p>the witcher</p>
+        </a>
+        <%}}%>
         </div>
-        <div class="mySlidesVisti">
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-            <div class="element">
-                <img src="css/peacky.jpeg">
-                <p>peacky blinders</p>
-            </div>
-        </div>
-        <div class="mySlidesVisti">
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-            <div class="element">
-                <img src="css/big.jpeg">
-                <p>the big bang teory</p>
-            </div>
-        </div>
-        <button class="frecciaIndietro" onclick="plusDivsVisti(-1)">&#10094;</button>
-        <button class="frecciaAvanti" onclick="plusDivsVisti(1)">&#10095;</button>
+
     </div>
-
-    <!--funzioni js per la gestione dello scorrimento dello slider-->
-    <script>
-        var slideIndexVisti = 1;
-        showDivsVisti(slideIndexVisti);
-
-        function plusDivsVisti(n) {
-            showDivsVisti(slideIndexVisti += n);
-        }
-
-        function showDivsVisti(n) {
-            var i;
-            var x = document.getElementsByClassName("mySlidesVisti");
-            if (n > x.length) {slideIndexVisti = 1}
-            if (n < 1) {slideIndexVisti = x.length}
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            x[slideIndexVisti-1].style.display = "block";
-        }
-    </script>
 
 </div>
 </body>
