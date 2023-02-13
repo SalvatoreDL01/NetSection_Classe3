@@ -1,5 +1,7 @@
-package LogicaApplicazione.GestioneUtente.Controller;
+package LogicaApplicazione.Admin.Controller;
 
+import LogicaApplicazione.Admin.Service.AdminService;
+import LogicaApplicazione.Admin.Service.AdminServiceImp;
 import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import jakarta.servlet.*;
@@ -15,8 +17,8 @@ public class BanUserController extends HttpServlet {
         int idUserToBan= Integer.parseInt(request.getParameter("ban"));
 
         if(idUserToBan!=0){
-            UtenteService us = new UtenteServiceImp();
-            us.banUtente(idUserToBan);
+            AdminService ad = new AdminServiceImp();
+            ad.banUtente(idUserToBan);
         }
 
         response.sendRedirect("/AdminPage");

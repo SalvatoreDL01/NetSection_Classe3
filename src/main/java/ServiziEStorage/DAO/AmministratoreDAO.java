@@ -84,4 +84,19 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateMail(Amministratore a, String mail){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("update Admin set username=?, email=?, pass=? where idAdmin=?");
+            ps.setString(1,a.getUsername());
+            ps.setString(2,mail);
+            ps.setString(3,a.getPass());
+            ps.setInt(4,a.getIdAdmin());
+
+            ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
