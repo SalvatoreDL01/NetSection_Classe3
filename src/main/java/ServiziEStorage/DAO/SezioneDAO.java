@@ -136,6 +136,25 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /*Metodo che estrae tutti i tag in una sezione*/
+    public List<String> getListaTag(int idSezione){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select distinct t.nome from Tag t where t.sezione = ?");
+            ps.setInt(1, idSezione);
+
+            List<String> tag = new ArrayList<>();
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+                tag.add(rs.getString(1));
+            return tag;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     /*Metodo che estrae tutte le sezioni che hanno un nome simile all'oggetto String passato come input*/
     public List<Sezione> doRetriveByName(String nome){
         try(Connection con = ConPool.getConnection()){
