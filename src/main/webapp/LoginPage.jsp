@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registrazione Netflix</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/RegNetStyle.css">
     <script type="text/javascript" src="javaScript/LoginPage.js"></script>
 </head>
