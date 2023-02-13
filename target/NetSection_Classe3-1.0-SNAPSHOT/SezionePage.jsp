@@ -55,10 +55,10 @@
             </div>
             <div class="bottonePartecipazione">
                 <%if(utente!=null && !d.getListaIscritti().contains(utente) && !d.getListaKickati().contains(utente)){%>
-                <form method="get" action="/SubscribeController">
-                    <input type="hidden" value="sezione">
-                    <input type="hidden" value="titolo">
-                    <input type="button" value="Partecipa">
+                <form method="get" action="SubscribeController">
+                    <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
+                    <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+                    <input type="submit" value="Partecipa">
                 </form>
                 <%}else{ if(d.getListaKickati().contains(utente))%>
                 <p class="kickato">Non puoi più accedere</p>

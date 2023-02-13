@@ -24,9 +24,9 @@ public class CommentoDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                  c = new Commento(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                PreparedStatement ps1 = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c, Risposta r where r.dataRisposta = ? and r.creatoreRisposta = ?");
-                ps.setInt(1, creatore);
-                ps.setString(2, dataScrittura);
+                PreparedStatement ps1 = con.prepareStatement("select r.dataRisposta, r.creatoreRisposta from  Risposta r where r.dataRisposto = ? and r.creatoreRisposto = ?");
+                ps.setInt(2, creatore);
+                ps.setString(1, dataScrittura);
                 ResultSet rs1 = ps1.executeQuery();
                 while (rs1.next()){
                     Commento commento = doRetriveById(rs1.getString(1),rs.getInt(2));
@@ -64,8 +64,7 @@ public class CommentoDAO {
     public List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where" +
-                    " c.sezione=? and c.discussione =? and notExists(Select * from Risposta r where r.dataRisposta = c.dataScrittura and r.creatoreRisposta = c.creatore) order by c.punteggio desc");
+            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where c.sezione=? and c.discussione =? and notExists(Select * from Risposta r where r.dataRisposto = c.dataScrittura and r.creatoreRisposto = c.creatore) order by c.punteggio desc");
             ps.setInt(1, idSezione);
             ps.setString(2, titolo);
 
