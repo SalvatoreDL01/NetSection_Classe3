@@ -398,12 +398,12 @@ public class DiscussioneDAO {
     public List<Discussione> ricercaTagConEsclusione(List<String> nonDesiderati,int idSezione){
         try(Connection con = ConPool.getConnection()){
             String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and d.titolo<> all(" +
-                    "select t2.titolo form Tag t2 where ";;
+                    "select t2.titolo form Tag t2 where ";
             for(int i=0; i<nonDesiderati.size(); i++)
                 if(i==nonDesiderati.size())
                     query += "t.nome = "+nonDesiderati.get(i)+")";
                 else
-                    query += "t.nome = "+nonDesiderati.get(i)+" and ";
+                    query += "t.nome = "+nonDesiderati.get(i)+" or ";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
@@ -430,12 +430,12 @@ public class DiscussioneDAO {
                     "select t2.titolo form Tag t2 where ";
             for(i=0; i<nonDesiderati.size(); i++)
                 if(i==nonDesiderati.size())
-                    query += "t2.nome = "+nonDesiderati.get(i)+") or (";
+                    query += "t2.nome = "+nonDesiderati.get(i)+") and ";
                 else
                     query += "t2.nome = "+nonDesiderati.get(i)+" or ";
             for(i=0; i<nonDesiderati.size(); i++)
                 if(i==nonDesiderati.size())
-                    query += "t.nome = "+nonDesiderati.get(i)+")";
+                    query += "t.nome = "+nonDesiderati.get(i);
                 else
                     query += "t.nome = "+nonDesiderati.get(i)+" or ";
 
