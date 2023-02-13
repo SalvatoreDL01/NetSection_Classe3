@@ -1,4 +1,7 @@
 <%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
+<%@ page import="ServiziEStorage.DAO.GenereDAO" %>
+<%@ page import="ServiziEStorage.Entry.Genere" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -32,79 +35,30 @@
     <a class="elementiNavBar" id="login" href="<%=str%>"><%=nome%></a>
 </div>
 <div id="ricercaGeneri">
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <div class="genere">
-        genere
-    </div>
-    <button style="margin-left: 50px; margin-top: 10px">Cerca</button>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="animazione" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="avventura" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="biografico" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="comico" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="commedia" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="drammatico" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="fantascienza" style="background-color: #0a1316; color: aliceblue">
+    </form>
+    <form action="RicercaGenere">
+        <input type="submit" name="nome" class="genere" value="animazione" style="background-color: #0a1316; color: aliceblue">
+    </form>
 </div>
 </body>
 </html>
