@@ -55,7 +55,7 @@
   </script>
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
-    <input type="button" value="Crea una discussione"><br><br>
+    <input type="button" value="Crea una discussione" ><br><br>
     <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
   </div>
   <div id="tue-discussioni">

@@ -12,4 +12,5 @@ public interface SezioneService {
     public boolean addSezione(HttpServletRequest request);
     public boolean loadSezione(HttpServletRequest request);
     public boolean serchByGenere(HttpServletRequest request);
+    public int searchSezione(String nome);
 }

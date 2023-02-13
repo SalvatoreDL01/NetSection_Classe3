@@ -12,8 +12,8 @@
     <!--logo nella barra di navigazione com un link alla homepage-->
     <a class="elementiNavBar" href="index.jsp"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
     <!--form per la ricerca delle sezioni-->
-    <form class="elementiNavBar">
-        <input type="text" id="ricerca" placeholder="cerca sezione...">
+    <form class="elementiNavBar" action="RicercaSezioneControl">
+        <input type="text" id="ricerca" name="nomeSezione" placeholder="cerca sezione...">
         <!--bottone per la ricerca dei generi-->
         <button type="button" id="bottoreRicerca" onclick="mostraMenu()">RICERCA PER GENERE</button>
     </form>
