@@ -55,7 +55,7 @@ public class UtenteServiceImp implements UtenteService {
 
     @Override
     public void saveUtente(UtenteRegistrato u) {
-        utenteRegistratoDAO.doSaveRegistration(u);
+        utenteRegistratoDAO.doSave(u);
     }
 
     public void salvaUtenteNetflix(UtenteNetflix u){
