@@ -13,13 +13,6 @@
   let id=document.getElementById("sid").value;
   let nome=document.getElementById("nome").value;
 
-  function validateDelete(){
-    if(id== " "){
-      alert("Il campo non può essere vuoto");
-      return false;
-    }
-    return true;
-  }
   function validateAdd(){
     if(nome== " "){
       alert("Il campo non può essere vuoto");
@@ -53,13 +46,6 @@
 </div>
 <div class="sections">
   <div class="sections-values">
-    <div class="delete">
-      <p>Elimina una Sezione</p>
-      <form>
-        <input type="text" id="sid" name="sid" placeholder="ID Sezione..." value=""><br><br>
-        <input type="submit" value="Elimina" onclick="validateDelete()">
-      </form>
-    </div>
     <div class="add">
       <p>Aggiungi una Sezione</p>
       <form action="CreaSezionePage.jsp">
