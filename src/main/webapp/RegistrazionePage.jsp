@@ -18,16 +18,16 @@
         let user=document.getElementById("username").value;
 
         if (!user || !email || !password || !data) {
-            alert("I campi email e password sono obbligatori");
+            document.getElementById("success").innerHTML="Tutti i campi  sono obbligatori"
             return false;
         }
 
         if (password.length < 8) {
-            alert("La password deve essere lunga almeno 8 caratteri");
+            document.getElementById("success").innerHTML="La password deve essere lunga almeno 8 caratteri"
             return  false;
         }
         if(user.length<5){
-            alert("L'username scelto è troppo corto");
+            document.getElementById("success").innerHTML="L'username deve contenere almeno 5 caratteri"
             return false;
         }
         return true;
@@ -53,7 +53,7 @@
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password..."><br><br>
 
-            <input type="submit" value="Registrati">
+            <input type="submit" value="Registrati"><br>
         </form>
     </div>
     <div class="reg-user" >
