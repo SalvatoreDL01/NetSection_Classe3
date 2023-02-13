@@ -17,10 +17,10 @@ public class RegistrazioneController extends HttpServlet {
         String password = request.getParameter("password");
         String pagina = "";
         String data = request.getParameter("data").replace("/","-");
-        String u = request.getParameter("email");
+        String email = request.getParameter("email");
         UtenteServiceImp service = new UtenteServiceImp();
 
-        String email = request.getParameter("email");
+
         UtenteRegistrato utenteRegistrato = new UtenteRegistrato(user, email, password, null, data);
         service.saveUtente(utenteRegistrato);
         pagina = "/index.jsp";
