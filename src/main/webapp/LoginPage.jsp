@@ -32,7 +32,7 @@
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
-        <form id="formLogin" onsubmit="return validate()" action="/LoginController">
+        <form id="formLogin" onsubmit="return validate()" action="LoginController">
             <label for="email">Username:</label><br><br>
             <input type="text" id="email" name="email" value="" placeholder="Email"><br><br>
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.DAO.GenereDAO;
 import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Discussione;
@@ -48,6 +49,9 @@ public class Index extends HttpServlet {
 
         request.setAttribute("sezioni",sezioni);
         request.setAttribute("sezioneDiscusse",sezioneDiscusse);
+        GenereDAO g = new GenereDAO();
+        List<Genere> li = g.retriveAll();
+        session.setAttribute("listaGeneri", li);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("HomePage.jsp");
         requestDispatcher.forward(request, response);

@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registrazione Netflix</title>
+    <title>Registrati</title>
     <link rel="stylesheet" href="css/RegNetStyle.css">
 
 </head>
@@ -40,7 +40,7 @@
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
-        <form id="formLogin" onsubmit="return validate()" action="/RegistrazioneController">
+        <form id="formLogin" onsubmit="return validate()" action="RegistrazioneController">
             <label for="user">Username:</label><br><br>
             <input type="text" id="user" name="user" value="" placeholder="User name..."><br><br>
 

@@ -147,4 +147,9 @@ public class SezioneServiceImp implements SezioneService{
         }
         return -1;
     }
+
+    @Override
+    public List<Sezione> ricercaGeneri(String g) {
+        return sezioneDAO.doRetriveByGenere(g);
+    }
 }

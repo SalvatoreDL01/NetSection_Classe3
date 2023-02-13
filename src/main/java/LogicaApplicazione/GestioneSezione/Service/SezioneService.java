@@ -1,6 +1,7 @@
 package LogicaApplicazione.GestioneSezione.Service;
 
 import ServiziEStorage.Entry.Genere;
+import ServiziEStorage.Entry.Sezione;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,4 +14,5 @@ public interface SezioneService {
     public boolean loadSezione(HttpServletRequest request);
     public boolean serchByGenere(HttpServletRequest request);
     public int searchSezione(String nome);
+    public List<Sezione> ricercaGeneri(String g);
 }
