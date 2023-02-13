@@ -88,7 +88,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + idSezione + "/" + titolo;
+            String path = "css/icone/Immagine/" + idSezione + "/" + fileName;
             String pathCompleto = dirPath + "/" + fileName;
 
             d.setImmagine(path);

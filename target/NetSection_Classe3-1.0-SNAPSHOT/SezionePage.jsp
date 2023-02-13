@@ -58,11 +58,18 @@
                 <form method="get" action="SubscribeController">
                     <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
                     <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+                    <input type="submit" value="Iscriviti">
+                </form>
+                <%}else{ if(d.getListaKickati().contains(utente)){%>
+                <p class="kickato">Non puoi più accedere</p>
+                <%}else{if(d.getListaIscritti().contains(utente)){%>
+                <form method="get" action="DiscussiController">
+                    <input type="hidden" name="tipo" value="iscritto">
+                    <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
+                    <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
                     <input type="submit" value="Partecipa">
                 </form>
-                <%}else{ if(d.getListaKickati().contains(utente))%>
-                <p class="kickato">Non puoi più accedere</p>
-                <%}%>
+                <%}}}%>
             </div>
             <div class="testo">
                 <div class="tags"><%for(int j=0;j<d.getListaTag().size();j++){%><%=d.getListaTag().get(j)%><%if(j<4){%>,<%}else{%>...<%break;}}%></div>
