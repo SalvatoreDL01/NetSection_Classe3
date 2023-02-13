@@ -22,7 +22,7 @@
     List<Discussione> lDiscussione = (List<Discussione>) s.getListaDiscussioni();
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
 %>
-<div id="sfondo" tyle="background-image: url(/<%=s.getImmagine()%>);background-repeat: no-repeat;background-size: 100%; width: 100%;height: 650px;left:0px;top:0px;position:absolute;z-index: 3"></div>
+<div id="sfondo" tyle="background-image: url(<%=s.getImmagine()%>),background-repeat: no-repeat,background-size: 100%, width: 100%,height: 650px,left:0px,top:0px,position:absolute,z-index: 3"></div>
 <div id="paginaSezione">
     <div id="ricercaFiltrata">
         <div id="bottoneRicerca">
