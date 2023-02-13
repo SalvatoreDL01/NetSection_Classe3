@@ -122,4 +122,19 @@ public class SezioneServiceImp implements SezioneService{
         request.setAttribute("sezione", s);
         return true;
     }
+
+    public boolean serchByGenere(HttpServletRequest request){
+        String genere = request.getParameter("genere");
+        if(genere==null){
+            request.setAttribute("errore","genere non valido");
+            return false;
+        }
+        List<Sezione> sezioniGenere = sezioneDAO.doRetriveByGenere(genere);
+        if(sezioniGenere==null){
+            request.setAttribute("errore","non ci sono sezioni di questo genere");
+            return false;
+        }
+        request.setAttribute("sezioni",sezioniGenere);
+        return true;
+    }
 }

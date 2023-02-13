@@ -368,4 +368,91 @@ public class DiscussioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Discussione> ricercaTagDesiderati(List<String> desiderati,int idSezione){
+        try(Connection con = ConPool.getConnection()){
+            String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and (";
+            for(int i=0; i<desiderati.size(); i++)
+            if(i==desiderati.size())
+                query += "t.nome = "+desiderati.get(i)+")";
+            else
+                query += "t.nome = "+desiderati.get(i)+" or ";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,idSezione);
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Discussione> d = new ArrayList<>();
+            while(rs.next()){
+                d.add(this.doRetriveById(idSezione,rs.getString(1)));
+            }
+            return d;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<Discussione> ricercaTagConEsclusione(List<String> nonDesiderati,int idSezione){
+        try(Connection con = ConPool.getConnection()){
+            String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and d.titolo<> all(" +
+                    "select t2.titolo form Tag t2 where ";;
+            for(int i=0; i<nonDesiderati.size(); i++)
+                if(i==nonDesiderati.size())
+                    query += "t.nome = "+nonDesiderati.get(i)+")";
+                else
+                    query += "t.nome = "+nonDesiderati.get(i)+" and ";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,idSezione);
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Discussione> d = new ArrayList<>();
+            while(rs.next()){
+                d.add(this.doRetriveById(idSezione,rs.getString(1)));
+            }
+            return d;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<Discussione> ricercaTag(List<String> desiderati,List<String> nonDesiderati,int idSezione){
+        try(Connection con = ConPool.getConnection()){
+            int i;
+            String query =
+                    "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and d.titolo<> all(" +
+                    "select t2.titolo form Tag t2 where ";
+            for(i=0; i<nonDesiderati.size(); i++)
+                if(i==nonDesiderati.size())
+                    query += "t2.nome = "+nonDesiderati.get(i)+") or (";
+                else
+                    query += "t2.nome = "+nonDesiderati.get(i)+" or ";
+            for(i=0; i<nonDesiderati.size(); i++)
+                if(i==nonDesiderati.size())
+                    query += "t.nome = "+nonDesiderati.get(i)+")";
+                else
+                    query += "t.nome = "+nonDesiderati.get(i)+" or ";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,idSezione);
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Discussione> d = new ArrayList<>();
+            while(rs.next()){
+                d.add(this.doRetriveById(idSezione,rs.getString(1)));
+            }
+            return d;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
 }
