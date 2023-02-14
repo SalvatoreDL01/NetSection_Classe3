@@ -1,0 +1,38 @@
+body{
+    background-color: #0a1316;
+    color: darkgrey;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+.reg{
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 20px;
+}
+.reg-form{
+    padding: 20px;
+}
+.reg-user{
+    padding: 20px;
+}
+input[type=text],input[type=date],input[type=email],input[type=password]{
+    width: 30%;
+    padding: 8px 10px;
+}
+input[type=submit]{
+    border-radius: 8px;
+    background-color: darkred;
+    color: white;
+    padding: 12px 26px;
+}
+input[type=submit]:hover {
+    background-color: red;
+}
+input[type=button]{
+    border-radius: 8px;
+    background-color: darkred;
+    color: white;
+    padding: 12px 26px;
+}
+input[type=button]:hover {
+    background-color: red;
+}
