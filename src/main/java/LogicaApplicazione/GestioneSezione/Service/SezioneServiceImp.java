@@ -58,7 +58,7 @@ public class SezioneServiceImp implements SezioneService{
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini"+s.getIdSezione();
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+s.getIdSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
