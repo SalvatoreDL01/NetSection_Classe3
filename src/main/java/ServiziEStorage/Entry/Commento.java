@@ -12,8 +12,6 @@ public class Commento {
     private String dataScrittura;
     private int creatore, sezione, punteggio;
     private String discussione, contenuto;
-    private Commento commentoRisposto;
-    private List<?> listaRisposte;
     /*Costruttore che crea un nuovo oggetto commento che è privo di punteggio e risposte. Necessità di String dataScrittura,
     int creatore, int sezione, String discussione, String contenuto*/
     public Commento(String dataScrittura, int creatore, int sezione, String discussione, String contenuto) {
@@ -23,37 +21,17 @@ public class Commento {
         this.discussione = discussione;
         this.contenuto = contenuto;
         punteggio = 0;
-        commentoRisposto =null;
-        listaRisposte = new ArrayList<Commento>();
     }
 
     /*Costruttore che crea un oggetto commento che è la risposta di un altro commento. Necessita di String dataScrittura,
-     int creatore, int sezione, int punteggio, String discussione, String contenuto, Commento commentoRisposto */
-    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
-                    Commento commentoRisposto) {
+     int creatore, int sezione, int punteggio, String discussione, String contenuto */
+    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto) {
         this.dataScrittura = dataScrittura;
         this.creatore = creatore;
         this.sezione = sezione;
         this.punteggio = punteggio;
         this.discussione = discussione;
         this.contenuto = contenuto;
-        this.commentoRisposto = commentoRisposto;
-        listaRisposte = new ArrayList<Commento>();
-    }
-
-    /*Costruttore che crea un oggetto commento completo ed è generalmente usato per il recupero dal DB. Necessità di
-    String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
-    Commento commentoRisposto, List<?> listaRisposte*/
-    public Commento(String dataScrittura, int creatore, int sezione, int punteggio, String discussione, String contenuto,
-                    Commento commentoRisposto, List<?> listaRisposte) {
-        this.dataScrittura = dataScrittura;
-        this.creatore = creatore;
-        this.sezione = sezione;
-        this.punteggio = punteggio;
-        this.discussione = discussione;
-        this.contenuto = contenuto;
-        this.commentoRisposto = commentoRisposto;
-        this.listaRisposte = listaRisposte;
     }
 
     public Commento() {
@@ -107,22 +85,6 @@ public class Commento {
     /*Metodo che setta un oggetto int punteggio*/
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
-    }
-    /*Metodo che ritorna un oggetto Commento commentoRisposto*/
-    public Commento getCommentoRisposto() {
-        return commentoRisposto;
-    }
-    /*Metodo che setta un oggetto Commento commentoRisposto*/
-    public void setCommentoRisposto(Commento commentoRisposto) {
-        this.commentoRisposto = commentoRisposto;
-    }
-    /*Metodo che ritorna un oggetto List listaRisposte*/
-    public List<?> getListaRisposte() {
-        return listaRisposte;
-    }
-    /*Metodo che setta un oggetto List listaRisposte*/
-    public void setListaRisposte(List<?> listaRisposte) {
-        this.listaRisposte = listaRisposte;
     }
 
     @Override
