@@ -2,7 +2,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="ServiziEStorage.Entry.Genere" %>
 <%@ page import="ServiziEStorage.DAO.GenereDAO" %>
-<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %><%--
+<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %>
+<%@ page import="ServiziEStorage.Entry.Discussione" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ServiziEStorage.DAO.DiscussioneDAO" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -59,15 +62,14 @@
     <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
   </div>
   <div id="tue-discussioni">
-    <div class="discussione">
-      Discussione
-    </div>
-    <div class="discussione">
-      Discussione
-    </div>
-    <div class="discussione">
-      Discussione
-    </div>
+    <%
+      UtenteRegistrato us = (UtenteRegistrato) session.getAttribute("user");
+      us = new UtenteRegistratoDAO().doRetriveById(us.getId());
+      if(us.getListaIscizioni() != null){
+        List<Discussione> l = (List<Discussione>) us.getListaIscizioni();
+        for(Discussione d: l){%>
+    <a href="DiscussiController?tipo=iscritto&sezione=<%=d.getSezione()%>&titolo=<%=d.getTitolo()%>" style="color: aliceblue; text-decoration: none"><%=d.getTitolo()%></a><br>
+    <%}}%>
   </div>
 </div>
 <div class="discuss" style="height: 1100px">
