@@ -10,41 +10,20 @@
 </head>
 <body>
 <script>
-  function validateForm() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-
-    if (email==null || password==null ) {
-      alert("Tutti i campi sono obbligatori");
-      return false;
-    }
-
-    if (password.length < 8) {
-      alert("La password deve essere lunga almeno 8 caratteri");
-      return false;
-    }
-    return true;
-  }
-  function showForm(){
-    if(validateForm()==true){
-      setTimeout(function (){
-        document.getElementById("success").innerHTML="Account Verificato"
-      },1500)
-      setTimeout(function (){
-        document.getElementById("user").style.display="block"
-      },3000)
-    }
-
-    function validateFormTwo(){
-      let user=document.getElementById("username").value;
-      if(user.length<5){
-        alert("L'username scelto è troppo corto");
+    function validate() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      if (email == " " || password == " ") {
+        alternative("I campi email e password sono obbligatori");
         return false;
       }
-      return true;
-    }
-  }
 
+      if (password.length < 8) {
+        alert("La password deve essere lunga almeno 8 caratteri");
+        return false;
+      }
+      return (true);
+  }
 </script>
 <div class="reg">
   <div class="intro">
@@ -52,7 +31,7 @@
     <h2>Accedi con il tuo account Netflix</h2><br><br>
   </div>
   <div class="reg-form">
-    <form action="/RegistrazioneNetflixController">
+    <form action="RegistrazioneNetflixController" method="get" onsubmit="return(validate());">
       <label for="email">Email del tuo profilo Netflix:</label><br><br>
       <input type="email" id="email" name="email" value=""><br><br>
 
@@ -60,15 +39,6 @@
       <input type="password" id="password" name="password" value=""><br><br>
 
       <input type="submit" value="Verifica account Netflix">
-    </form>
-  </div>
-  <div class="reg-user" >
-    <p id="success"></p>
-    <form id="user" style="display: none;" onsubmit="validateForm()" action="RegistrazioneNetflixController">
-      <label for="username">Inserisci il tuo username per proseguire:</label><br><br>
-      <input type="text" id="username" name="username" value=""><br><br>
-
-      <input type="submit" value="Registrati con Netflix">
     </form>
   </div>
 </div>

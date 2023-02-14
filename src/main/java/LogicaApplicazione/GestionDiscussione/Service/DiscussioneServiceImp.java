@@ -224,7 +224,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         c.setContenuto(contenuto);
         c.setSezione(sezione);
 
-        c.setCommentoRisposto(cRisposto);
+        //c.setCommentoRisposto(cRisposto);
 
         commentoDAO.doSave(c);
         return true;
@@ -265,5 +265,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     public boolean serchByTag(HttpServletRequest request){
 return true;
+    }
+
+    @Override
+    public Commento ottieniCommento(String data, int creatore) {
+        return commentoDAO.doRetriveById(data, creatore);
     }
 }

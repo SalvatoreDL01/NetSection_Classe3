@@ -16,9 +16,9 @@ public class AggiungiCommento extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
 
-        String path = "DiscussionePage.jsp";
         request.setAttribute("idSezione", request.getParameter("idSezione"));
         request.setAttribute("discussione", request.getParameter("discussione"));
+        String path = "DiscussiController?tipo=iscritto&sezione=" + request.getParameter("idSezione") + "&titolo=" + request.getParameter("discussione");
         ds.addCommento(request);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
