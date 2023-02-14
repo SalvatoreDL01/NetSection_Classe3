@@ -58,7 +58,7 @@ public class SezioneServiceImp implements SezioneService{
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+s.getIdSezione();
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/";
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
@@ -69,8 +69,8 @@ public class SezioneServiceImp implements SezioneService{
             String fileName = part.getSubmittedFileName();
             if(fileName.equals(""))
                 return false;
-            String immagine = "css/icone/Immagini/" +s.getIdSezione()+"/"+ fileName;
-            String path = dirPath + "/" + fileName;
+            String immagine = "css/icone/Immagini/"+ fileName;
+            String path = dirPath + fileName;
 
             s.setImmagine(immagine);
 
