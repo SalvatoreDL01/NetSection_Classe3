@@ -1,14 +1,19 @@
 package LogicaApplicazione.GestioneUtente.Controller;
 
+
+
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.UtenteNetflixDAO;
 import ServiziEStorage.Entry.Amministratore;
 import ServiziEStorage.Entry.UtenteNetflix;
 import ServiziEStorage.Entry.UtenteRegistrato;
-import ServiziEStorage.DAO.UtenteRegistratoDAO;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
