@@ -80,7 +80,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+idSezione;
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini";
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
@@ -88,7 +88,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + idSezione + "/" + fileName;
+            String path = "css/icone/Immagine/"+ fileName;
             String pathCompleto = dirPath + "/" + fileName;
 
             d.setImmagine(path);
