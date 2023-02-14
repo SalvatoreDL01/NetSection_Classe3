@@ -2,7 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="ServiziEStorage.Entry.Genere" %>
 <%@ page import="ServiziEStorage.DAO.GenereDAO" %>
-<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %><%--
+<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %>
+<%@ page import="ServiziEStorage.Entry.UtenteNetflix" %>
+<%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -39,9 +41,20 @@
 </div>
 <div class="netflix-profile">
   <p>Stato attuale profilo Netflix: </p><br>
+  <%
+    if(!(u instanceof UtenteNetflix)){
+  %>
   <form action="RegistrazioneNetflix.jsp">
     <input type="submit" value="Collega profilo Netflix"><br>
   </form>
+  <%
+    }
+    else{
+  %>
+  <p style="color: lawngreen">Il tuo account è già collegato a Netflix! Grazie per il supporto.</p>
+  <%
+    }
+  %>
   <script>
     function mostraMenu(){
       var display = document.getElementById("tue-discussioni").style.display;
@@ -53,11 +66,17 @@
       }
     }
   </script>
+  <%
+    if(u instanceof UtenteNetflix){
+  %>
   <div class="create-disc">
     <p>Le tue discussioni</p><br>
     <input type="button" value="Crea una discussione" ><br><br>
     <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
   </div>
+  <%
+    }
+  %>
   <div id="tue-discussioni">
     <div class="discussione">
       Discussione
