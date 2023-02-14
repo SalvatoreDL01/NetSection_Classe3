@@ -4,9 +4,15 @@ body{
 }
 
 #paginaSezione{
+    text-align: center;
     margin-top: 125px;
     z-index: 2;
     width: 100%;
+}
+
+
+input[type=checkbox]{
+    display: inline-block;
 }
 
 .discussione{
@@ -46,11 +52,11 @@ body{
     left:10px;
 }
 
-.componenti,#numeroPartecipanti, .componentiDiscissione, .bottonePartecipazione, .kickato, .testo{
+.componenti,#numeroPartecipanti,#numeroPartecipanti2, .componentiDiscissione, .bottonePartecipazione, .kickato, .testo{
     display: inline-block;
 }
 
-#numeroPartecipanti{
+#numeroPartecipanti,#numeroPartecipanti2{
     margin-top: 25px;
 }
 
@@ -58,7 +64,7 @@ body{
     margin-left:25%;
 }
 
-.bottonePartecipazione input[type=submit]{
+input[type=submit]{
     font-size:25px;
     color:white;
     background-color: grey;
@@ -77,4 +83,27 @@ body{
 
 .testo{
     float:right;
+}
+
+.tags{
+    color : white;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+
+#ricercaFiltrata{
+    width: 350px;
+    background-color: dimgray;
+    margin: 0px;
+
+}
+
+#sfondo{
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 650px;
+    left:0px;
+    top:0px;
+    position:absolute;
+    z-index: -1;
 }

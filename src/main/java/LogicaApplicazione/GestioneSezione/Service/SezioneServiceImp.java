@@ -115,10 +115,14 @@ public class SezioneServiceImp implements SezioneService{
     public boolean loadSezione(HttpServletRequest request){
         int i = Integer.parseInt(request.getParameter("idSezione"));
         Sezione s = sezioneDAO.doRetriveById(i);
+        List<String> tags = sezioneDAO.getListaTag(i);
         if(s == null){
             request.setAttribute("errore","La sezione non è più presente");
             return false;
         }
+        if(tags == null)
+            tags = new ArrayList<>();
+        request.setAttribute("tags",tags);
         request.setAttribute("sezione", s);
         return true;
     }
