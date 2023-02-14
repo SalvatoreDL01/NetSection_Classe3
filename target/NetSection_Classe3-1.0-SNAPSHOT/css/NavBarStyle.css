@@ -1,0 +1,84 @@
+
+#navBar{
+    height: 100px;
+    width: 100%;
+    background-color: #000007;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.elementiNavBar{
+    float: left;
+    position: relative;
+}
+
+#imageLogo{
+    margin: 10px;
+}
+
+#ricerca{
+    width: 300px;
+    height: 40px;
+    border-radius: 6px;
+    margin-top: 30px;
+    border-style: none;
+}
+
+#bottoreRicerca{
+    background-color: darkgrey;
+    border-radius: 6px;
+    height: 40px;
+    width: 150px;
+    border-style: none;
+    color: whitesmoke;
+    font-size: 12px;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+
+#login{
+    float: right;
+    text-decoration: none;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-right: 10px;
+    color: darkgrey;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+}
+
+#ricercaGeneri{
+    margin-top: 10px;
+    width: 500px;
+    height: 300px;
+    margin-left: 30%;
+    border-radius: 10px;
+    background-color: #002431;
+    z-index: 3;
+    position: fixed;
+    display: none;
+}
+
+.genere{
+    background-color: #0a1316;
+    border-radius: 6px;
+    height: 30px;
+    width: 110px;
+    margin: 5px;
+    position: relative;
+    float: left;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1200px){
+    #bottoreRicerca{
+        display: none;
+    }
+    #ricerca{
+        display: none;
+    }
+    #login{
+        display: none;
+    }
+}

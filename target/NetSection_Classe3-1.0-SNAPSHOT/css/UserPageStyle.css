@@ -1,0 +1,116 @@
+body{
+    background-color: whitesmoke;
+    color: black;
+    font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    padding-left: 25%;
+    padding-right: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+#info-list{
+    padding-right: 5%;
+}
+input[type=submit]{
+    border-radius: 8px;
+    background-color: darkred;
+    color: white;
+    padding: 12px 26px;
+}
+input[type=submit]:hover {
+    background-color: red;
+}
+input[type=button]{
+    border-radius: 8px;
+    background-color: darkred;
+    color: white;
+    padding: 12px 26px;
+}
+input[type=button]:hover {
+    background-color: red;
+}
+input[type=text]{
+    width: 30%;
+    padding: 8px 10px;
+}
+
+#aggiungi, #ltd{
+    background-color: darkgreen;
+}
+#aggiungi, #ltd:hover{
+    background-color: forestgreen;
+}
+#edit{
+    background-color: darkslateblue;
+}
+#edit:hover{
+    background-color: blueviolet;
+}
+.welcome{
+    text-align: center;
+    font-family: "arial";
+    padding: 20px;
+}
+
+.info{
+    text-align: center;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-width: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.sections{
+    text-align: center;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    border-width: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.netflix-profile{
+    text-align: center;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    border-width: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.discuss{
+    text-align: center;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+    border-width: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+ul{
+    list-style: none;
+}
+
+#tue-discussioni{
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 22%;
+    background-color: #002431;
+    display: none;
+}
