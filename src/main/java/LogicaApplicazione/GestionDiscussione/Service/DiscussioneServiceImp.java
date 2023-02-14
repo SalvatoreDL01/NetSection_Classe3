@@ -4,7 +4,6 @@ import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
-import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
@@ -19,16 +18,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
     public final static CommentoDAO commentoDAO = new CommentoDAO();
     public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
-    public final static SezioneDAO sezioneDAO = new SezioneDAO();
 
     public void checkKick(int idUserToKick, int idDiscussione, String titolo){
         if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
@@ -201,33 +196,35 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public boolean addCommento(HttpServletRequest request){
         Commento c = new Commento();
         Commento cRisposto = new Commento();
-        String contenuto = request.getParameter("contenuto");
+        String contenuto = request.getParameter("commento");
         String discussione = request.getParameter("discussione");
-        int sezione = Integer.parseInt(request.getParameter("sezione"));
+        int sezione = Integer.parseInt(request.getParameter("idSezione"));
         UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("user");
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String dataCreazione = dtf.format(LocalDateTime.now());
 
-        if(contenuto==null && contenuto.length()>300){
+        if(contenuto==null || contenuto.length()>300){
             request.setAttribute("errore","contenutno non valido");
             return false;
         }
 
-        String commentoRispostoData = request.getParameter("dataRisposto");
+        //String commentoRispostoData = request.getParameter("dataRisposto");
 
-        int commentoRispostoCreatore = Integer.parseInt(request.getParameter("creatoreRisposto"));
+        //int commentoRispostoCreatore = Integer.parseInt(request.getParameter("creatoreRisposto"));
 
-        if(commentoRispostoData!=null){
-            cRisposto.setCreatore(commentoRispostoCreatore);
-            cRisposto.setDataScrittura(commentoRispostoData);
-        }
+        //if(commentoRispostoData!=null){
+          //  cRisposto.setCreatore(commentoRispostoCreatore);
+            //cRisposto.setDataScrittura(commentoRispostoData);
+        //}
 
         c.setDiscussione(discussione);
         c.setDataScrittura(dataCreazione);
         c.setCreatore(creatore.getId());
         c.setContenuto(contenuto);
         c.setSezione(sezione);
+
+        //c.setCommentoRisposto(cRisposto);
 
         commentoDAO.doSave(c);
         return true;
@@ -267,34 +264,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public boolean serchByTag(HttpServletRequest request){
-        List<String> tagSelezionati = new ArrayList<>();
-        int idSezione = Integer.parseInt(request.getParameter("idSezione"));
-        Sezione s = sezioneDAO.doRetriveById(idSezione);
-        List<String> tags = sezioneDAO.getListaTag(idSezione);
+return true;
+    }
 
-        if(s == null){
-            request.setAttribute("errore","La sezione non è più presente");
-            return false;
-        }
-        if(tags == null)
-            tags = new ArrayList<>();
-        request.setAttribute("tags",tags);
-        request.setAttribute("sezione", s);
-
-
-        for(int i=0;i<tags.size();i++)
-            if(request.getParameter("c"+i)!=null)
-                tagSelezionati.add(request.getParameter("c"+i));
-
-        List<Discussione> d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
-
-        if(d==null){
-            request.setAttribute("errore","Ricerca filtrata fallita");
-            return false;
-        }
-
-        request.setAttribute("discussioniTag",d);
-
-        return true;
+    @Override
+    public Commento ottieniCommento(String data, int creatore) {
+        return commentoDAO.doRetriveById(data, creatore);
     }
 }

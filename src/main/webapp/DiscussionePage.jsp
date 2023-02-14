@@ -36,7 +36,21 @@
     <p class="title"><%=d.getTitolo()%></p>
 
     <hr>
-    <form id="formCommento" method="POST" class="commento" action="">
+    <%for(Commento c: commenti){
+        UtenteRegistrato u = utenteRegistratoDAO.doRetriveById(c.getCreatore());
+    %>
+    <hr>
+
+    <div class="immagineUtente" style="color: aliceblue">
+        <img style="float:left;" src="<%if(u.getImmagine()!=null){%>
+                                <%=u.getImmagine()%>
+                                    <%}else{%>css/icone/user.png<%}%>">
+        <p style="float:left;" class="nomeUtente"><%=u.getUsername()%></p>
+        <p style="float:left;width: 80%" class="commento"><%=c.getContenuto()%></p> <!-- aggiungere immagini punteggio -->
+           <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%><a><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
+    </div>
+<%}%>
+    <form id="formCommento" class="commento" action="AggiungiCommento">
 
         <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
         <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
@@ -44,41 +58,18 @@
 
         <input id="submitCommento" type="submit" value="Pubblica">
     </form>
-    <%for(Commento c: commenti){
-        UtenteRegistrato u = utenteRegistratoDAO.doRetriveById(c.getCreatore());
-    %>
-    <hr>
-
-    <div class="immagineUtente">
-        <img src="<%if(u.getImmagine()!=null){%>
-                                <%=u.getImmagine()%>
-                                    <%}else{%>css/icone/user.png<%}%>">
-        <p class="nomeUtente"><%=u.getUsername()%></p
-            <img src="css/icone/icons8-su-50.png"><%=c.getPunteggio()%><img src="css/icone/icons8-su-50.png" style="rotate: 180deg">
-    </div>
-    <p class="commento"><%=c.getContenuto()%></p> <!-- aggiungere immagini punteggio -->
-    <div ></div>
+    <!--
     <h6>rispondi</h6>
     <form class="formRisposta" method="POST" class="commento" action="">
-        <input type="hidden" name="idSezione" value="<%=c.getDataScrittura()%>">
-        <input type="hidden" name="idSezione" value="<%=c.getCreatore()%>">
+        <input type="hidden" name="idSezione" value=">
+        <input type="hidden" name="idSezione" value="">
         <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
         <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
         <textarea class="testoRisposta" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
 
-        <input class="submitRisposta" type="submit" value="Pubblica">
-    </form>
-    <%if(c.getCreatore()==utente.getId())%>
-    <h6>modifica</h6>
-    <form class="formModifica" method="POST" class="commento" action="">
-        <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
-        <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
-        <textarea class="testoModifica" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
 
-        <input class="submitModifica" type="submit" value="Modifica">
-    </form>
-
-    <%}%>
+       <input class="submitRisposta" type="submit" value="Pubblica">-->
+    <p></p>
 </div>
 </body>
 </html>

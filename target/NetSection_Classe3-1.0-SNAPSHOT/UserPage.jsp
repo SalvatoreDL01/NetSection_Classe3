@@ -4,6 +4,9 @@
 <%@ page import="ServiziEStorage.DAO.GenereDAO" %>
 <%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %>
 <%@ page import="ServiziEStorage.Entry.UtenteNetflix" %>
+<%@ page import="ServiziEStorage.Entry.Discussione" %>
+<%@ page import="ServiziEStorage.DAO.DiscussioneDAO" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: chris
@@ -77,17 +80,18 @@
   <%
     }
   %>
+  <%
+    DiscussioneDAO dao = new DiscussioneDAO();
+    List<Discussione> lista= (List<Discussione>) u.getListaIscizioni();
+
+  for(Discussione d : lista){
+  %>
   <div id="tue-discussioni">
     <div class="discussione">
-      Discussione
-    </div>
-    <div class="discussione">
-      Discussione
-    </div>
-    <div class="discussione">
-      Discussione
+      <% d.getTitolo(); %>
     </div>
   </div>
+  <% } %>
 </div>
 <div class="discuss" style="height: 1100px">
   <div style="height: 500px">

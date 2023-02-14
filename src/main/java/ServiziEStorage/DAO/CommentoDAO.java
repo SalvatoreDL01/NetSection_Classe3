@@ -24,6 +24,16 @@ public class CommentoDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                  c = new Commento(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+                 c.setPunteggio(rs.getInt(6));
+                PreparedStatement ps1 = con.prepareStatement("select r.dataRisposta, r.creatoreRisposta from  Risposta r where r.dataRisposto = ? and r.creatoreRisposto = ?");
+                ps1.setInt(2, creatore);
+                ps1.setString(1, dataScrittura);
+                ResultSet rs1 = ps1.executeQuery();
+                while (rs1.next()){
+                    Commento commento = doRetriveById(rs1.getString(1),rs1.getInt(2));
+                    list.add(commento);
+                }
+                //c.setListaRisposte(list);
                 return c;
             }
             return null;
@@ -117,7 +127,16 @@ public class CommentoDAO {
             ps.setString(5,c.getContenuto());
 
             ps.execute();
+            /*
+            if(c.getCommentoRisposto()!=null){
+                PreparedStatement ps2 = con.prepareStatement("Insert into Risposta values (?,?,?,?)");
+                ps.setString(1,c.getCommentoRisposto().getDataScrittura());
+                ps.setInt(2,c.getCommentoRisposto().getCreatore());
+                ps.setString(1,c.getDataScrittura());
+                ps.setInt(2,c.getCreatore());
             }
+             */
+        }
         catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -139,9 +158,9 @@ public class CommentoDAO {
     /*Metodo che permette di aggiornare i dati relativi ad un Commento*/
     public void update(Commento c){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement("update Commento set punteggio=0, contenuto=? where dataScrittura =? and creatore=?");
-            ps.setString(1,"<Modificato>"+c.getContenuto());
+            PreparedStatement ps = con.prepareStatement("update Commento set punteggio=? where dataScrittura =? and creatore=?");
             ps.setString(2,c.getDataScrittura());
+            ps.setInt(1, c.getPunteggio());
             ps.setInt(3,c.getCreatore());
 
             ps.execute();
