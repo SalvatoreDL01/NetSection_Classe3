@@ -25,11 +25,11 @@ public class CommentoDAO {
             if(rs.next()){
                  c = new Commento(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
                 PreparedStatement ps1 = con.prepareStatement("select r.dataRisposta, r.creatoreRisposta from  Risposta r where r.dataRisposto = ? and r.creatoreRisposto = ?");
-                ps.setInt(2, creatore);
-                ps.setString(1, dataScrittura);
+                ps1.setInt(2, creatore);
+                ps1.setString(1, dataScrittura);
                 ResultSet rs1 = ps1.executeQuery();
                 while (rs1.next()){
-                    Commento commento = doRetriveById(rs1.getString(1),rs.getInt(2));
+                    Commento commento = doRetriveById(rs1.getString(1),rs1.getInt(2));
                     list.add(commento);
                 }
                 c.setListaRisposte(list);

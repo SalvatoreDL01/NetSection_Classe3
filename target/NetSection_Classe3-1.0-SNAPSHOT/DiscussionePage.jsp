@@ -36,7 +36,7 @@
     <p class="title"><%=d.getTitolo()%></p>
 
     <hr>
-    <form id="formCommento" method="POST" class="commento" action="">
+    <form id="formCommento" class="commento" action="AggiungiCommento">
 
         <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
         <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
@@ -49,15 +49,16 @@
     %>
     <hr>
 
-    <div class="immagineUtente">
-        <img src="<%if(u.getImmagine()!=null){%>
+    <div class="immagineUtente" style="color: aliceblue">
+        <img style="float:left;" src="<%if(u.getImmagine()!=null){%>
                                 <%=u.getImmagine()%>
                                     <%}else{%>css/icone/user.png<%}%>">
-        <p class="nomeUtente"><%=u.getUsername()%></p
-            <img src="css/icone/icons8-su-50.png"><%=c.getPunteggio()%><img src="css/icone/icons8-su-50.png" style="rotate: 180deg">
+        <p style="float:left;" class="nomeUtente"><%=u.getUsername()%></p>
+        <p style="float:left;width: 80%" class="commento">-Commento:<%=c.getContenuto()%></p> <!-- aggiungere immagini punteggio -->
+           <img src="css/icone/mipiace.png"><%=c.getPunteggio()%><img src="css/icone/mipiace.png" style="rotate: 180deg">
     </div>
-    <p class="commento"><%=c.getContenuto()%></p> <!-- aggiungere immagini punteggio -->
-    <div ></div>
+
+    <!--
     <h6>rispondi</h6>
     <form class="formRisposta" method="POST" class="commento" action="">
         <input type="hidden" name="idSezione" value="<%=c.getDataScrittura()%>">
@@ -68,6 +69,7 @@
 
         <input class="submitRisposta" type="submit" value="Pubblica">
     </form>
+
     <%if(c.getCreatore()==utente.getId())%>
     <h6>modifica</h6>
     <form class="formModifica" method="POST" class="commento" action="">
@@ -77,6 +79,7 @@
 
         <input class="submitModifica" type="submit" value="Modifica">
     </form>
+    -->
         <%
             List<Commento> risposte = (List<Commento>) c.getListaRisposte();
             for(Commento c2: risposte){%>

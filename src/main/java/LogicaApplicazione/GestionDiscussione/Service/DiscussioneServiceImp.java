@@ -196,27 +196,27 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public boolean addCommento(HttpServletRequest request){
         Commento c = new Commento();
         Commento cRisposto = new Commento();
-        String contenuto = request.getParameter("contenuto");
+        String contenuto = request.getParameter("commento");
         String discussione = request.getParameter("discussione");
-        int sezione = Integer.parseInt(request.getParameter("sezione"));
+        int sezione = Integer.parseInt(request.getParameter("idSezione"));
         UtenteRegistrato creatore = (UtenteRegistrato) request.getSession().getAttribute("user");
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String dataCreazione = dtf.format(LocalDateTime.now());
 
-        if(contenuto==null && contenuto.length()>300){
+        if(contenuto==null || contenuto.length()>300){
             request.setAttribute("errore","contenutno non valido");
             return false;
         }
 
-        String commentoRispostoData = request.getParameter("dataRisposto");
+        //String commentoRispostoData = request.getParameter("dataRisposto");
 
-        int commentoRispostoCreatore = Integer.parseInt(request.getParameter("creatoreRisposto"));
+        //int commentoRispostoCreatore = Integer.parseInt(request.getParameter("creatoreRisposto"));
 
-        if(commentoRispostoData!=null){
-            cRisposto.setCreatore(commentoRispostoCreatore);
-            cRisposto.setDataScrittura(commentoRispostoData);
-        }
+        //if(commentoRispostoData!=null){
+          //  cRisposto.setCreatore(commentoRispostoCreatore);
+            //cRisposto.setDataScrittura(commentoRispostoData);
+        //}
 
         c.setDiscussione(discussione);
         c.setDataScrittura(dataCreazione);
