@@ -150,7 +150,7 @@
 
 <!-- slider delle sezioni più viste-->
     <div class="slideShow">
-        <h1>I PIÙ VISTI</h1>
+        <h1>I TUOI GENERI PREFERITI</h1>
         <div class="mySlidesVisti">
         <%
             List<Sezione> lista = new ArrayList<>();
