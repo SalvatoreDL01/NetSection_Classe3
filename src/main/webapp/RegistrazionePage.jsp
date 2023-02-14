@@ -40,7 +40,7 @@
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
     <div class="reg-form">
-        <form id="formLogin" action="/RegistrazioneController" method="post" onsubmit="return(validate());">
+        <form id="formLogin" action="RegistrazioneController" method="get" onsubmit="return(validate());">
             <label for="user">Username:</label><br><br>
             <input type="text" id="user" name="user" value="" placeholder="User name..."><br><br>
 
