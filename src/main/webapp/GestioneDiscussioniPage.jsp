@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %>
+<%@ page import="ServiziEStorage.Entry.Discussione" %><%--
   Created by IntelliJ IDEA.
   User: giuseppe
 --%>
@@ -10,72 +11,42 @@
 </head>
 <body>
 <%@include file="NavBar.jsp"%>
+
+<%
+    UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
+    UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
+    Discussione discussione = (Discussione) request.getAttribute("discussione");
+%>
 <div id="corpo">
 
+    <div class="mod">
+        <p>Lista discussioni moderate:</p>
     <!--lista discussioni create dall'utente-->
-
-    <div class="lista">
-        <p>Lista discussioni create</p>
-        <div class="discussione">
+    <%
+        List<Discussione> lista= (List<Discussione>) utente.getListaModerazioni();
+        for (Discussione d: lista) {
+    %>
+        <div class="discussione-moderata">
             <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
+            <div><p><% d.getTitolo(); %></p><p>creata da:</p><p><% d.getCreatore(); %></p></div>
         </div>
     </div>
-
-    <!--lista discussioni moderate dall'utente-->
-
-    <div class="lista">
-        <p>Lista discussioni moderate</p>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-        <div class="discussione">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p>Cosa è successo a Ranucolo?</p><p>data creazione:</p><p> xx/xx/xxxx</p></div>
-        </div>
-    </div>
+    <% } %>
 
     <!--div per la visualizzazione dei dati realtivi ad una discussione selezionata-->
 
     <div id="visualizzazioneDiscussione">
         <div>
-            <p>Nome discussione</p>
-            <input type="text" value="" style="width: 350px">
+            <p><% discussione.getTitolo(); %></p>
         </div>
         <div>
             <p>Immagine</p>
-            <img src="css/witcher.jpeg">
-            <input type="file" value="scegli file">
+            <img src='<% discussione.getImmagine(); %>'>
         </div>
         <hr style="width: 800px">
         <div>
             <p>Elenco tag</p>
-            <textarea cols="50" rows="15">tags</textarea>
+            <textarea cols="50" rows="15"><% discussione.getListaTag(); %></textarea>
         </div>
         <div>
             <div>
@@ -90,54 +61,18 @@
         <hr style="width: 800px">
         <div>
             <p>Elenco partecipanti</p>
+            <%
+            List<UtenteRegistrato> listu= (List<UtenteRegistrato>) discussione.getListaIscritti();
+                for (UtenteRegistrato u: listu) {
+            %>
             <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
+                <form action="KickUser" method="get">
+                    <p>ID: <% u.getId(); %></p>
+                    <p>Nome: <% u.getUsername(); %></p
+                    <input type="submit" id="kick-button" value="KICK">
+                </form>
             </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
-            <div class="partecipante">
-                <p>nome</p>
-                <button>kick</button>
-            </div>
+            <% } %>
         </div>
         <hr style="width: 800px">
         <div>
