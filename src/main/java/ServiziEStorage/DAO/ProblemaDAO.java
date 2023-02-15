@@ -50,8 +50,8 @@ public class ProblemaDAO {
             return true;
         }
         catch (SQLException e){
-            return false;
-            //throw new RuntimeException();
+            //return false;
+            throw new RuntimeException();
         }
     }
     /*Metodo che rimuove tutti i dati di una entry problema sul DB a partire dal suo identificatore*/
