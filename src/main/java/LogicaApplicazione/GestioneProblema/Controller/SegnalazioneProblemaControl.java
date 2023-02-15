@@ -33,14 +33,16 @@ public class SegnalazioneProblemaControl extends HttpServlet {
         listaPagineSito.add("Pagina utente");
         HttpSession session = request.getSession();
 
-        if(naturaProblema.equals("") || !listaPagineSito.contains(paginaProblema) || descrizione.equals("")){
-            request.setAttribute("errore", "Esito: Alcuni dati inseriti sono incorretti");
-        }
-        else{
+        ProblemaServiceImp service = new ProblemaServiceImp();
+        boolean control = service.controllaProblem(naturaProblema, paginaProblema, descrizione, listaPagineSito);
+        if(control){
             Problema problema = new Problema(((UtenteRegistrato)session.getAttribute("user")).getId(), new Date().toString(), naturaProblema, "Pagina " + paginaProblema + " Contenuto: " + descrizione);
             ProblemaServiceImp problemaServiceImp = new ProblemaServiceImp();
             problemaServiceImp.salvaProblema(problema);
             request.setAttribute("errore", "Esito: Segnalazione inviata");
+        }
+        else{
+            request.setAttribute("errore", "Esito: Alcuni dati inseriti sono incorretti");
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("UserPage.jsp");
