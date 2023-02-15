@@ -21,18 +21,6 @@ public class UtenteServiceImp implements UtenteService {
     public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
     public static final EliminazioneDAO eliminazioneDAO = new EliminazioneDAO();
 
-
-    public void kickUtente(int idUserToKick, Discussione discussione){
-        ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
-
-        for (UtenteRegistrato u: listU) {
-            if(u.getId()==idUserToKick){
-                utenteRegistratoDAO.removeUtente(discussione, u);
-                System.out.println("L'utente è stato kickato dalla conversazione");
-            }
-        }
-    }
-
     public UtenteRegistrato checkUtente(String user, String password){
 
         ArrayList<UtenteRegistrato> list = utenteRegistratoDAO.retriveAll();

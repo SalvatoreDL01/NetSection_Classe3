@@ -18,6 +18,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
@@ -25,17 +27,16 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public final static CommentoDAO commentoDAO = new CommentoDAO();
     public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
 
-    public void checkKick(int idUserToKick, int idDiscussione, String titolo){
-        if(idUserToKick!=0 && idDiscussione!=0 && titolo!=null){
-            DiscussioneDAO dao=new DiscussioneDAO();
-            UtenteService u=new UtenteServiceImp();
+    public void kickUtente(int idUserToKick, Discussione discussione){
+        ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 
-            Discussione discussione= dao.doRetriveById(idDiscussione, titolo);
-
-            u.kickUtente(idUserToKick, discussione);
+        for (UtenteRegistrato u: listU) {
+            if(u.getId()==idUserToKick){
+                utenteRegistratoDAO.removeUtente(discussione, u);
+                System.out.println("L'utente è stato kickato dalla conversazione");
+            }
         }
     }
-
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
         int idSezione= Integer.parseInt(request.getParameter("idSezione"));

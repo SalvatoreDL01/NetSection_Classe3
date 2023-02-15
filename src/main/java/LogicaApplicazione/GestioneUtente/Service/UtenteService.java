@@ -12,7 +12,6 @@ import java.io.IOException;
 @MultipartConfig
 public interface UtenteService {
 
-    public void kickUtente(int idUserToKick, Discussione discussione);
     public UtenteRegistrato checkUtente(String user, String password);
     public UtenteNetflix checkUtenteNetflix(String user, String password);
     public void saveUtente(UtenteRegistrato u);

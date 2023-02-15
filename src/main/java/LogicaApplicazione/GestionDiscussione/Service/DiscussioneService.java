@@ -6,7 +6,7 @@ import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface DiscussioneService {
-    public void checkKick(int idUserToKick, int idDiscussione, String titolo);
+    public void kickUtente(int idUserToKick, Discussione discussione);
     public boolean addDiscussione(HttpServletRequest request);
     public void deleteComment(int idCreatore, String dataCreazioneCommento);
     public boolean loadDiscussione(HttpServletRequest request);

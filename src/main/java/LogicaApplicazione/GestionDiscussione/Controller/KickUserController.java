@@ -2,6 +2,7 @@ package LogicaApplicazione.GestionDiscussione.Controller;
 
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
+import ServiziEStorage.Entry.Discussione;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,13 +14,15 @@ public class KickUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idUserToKick= Integer.parseInt(request.getParameter("kick"));
-        int idDiscussione= Integer.parseInt(request.getParameter("idDiscussione"));
-        String titolo= request.getParameter("titolo");
+        Discussione discussione = (Discussione) request.getAttribute("discussione");
+        DiscussioneService service= new DiscussioneServiceImp();
 
-        DiscussioneService gd=new DiscussioneServiceImp();
-        gd.checkKick(idUserToKick, idDiscussione, titolo);
+        if(idUserToKick!=0 && discussione!=null){
+            service.kickUtente(idUserToKick, discussione);
+        }
 
-        response.sendRedirect("/DiscussionePage");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("GestioneDiscussioniPage.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     @Override
