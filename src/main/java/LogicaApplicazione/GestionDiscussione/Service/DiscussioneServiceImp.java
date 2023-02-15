@@ -4,6 +4,7 @@ import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
@@ -19,6 +20,7 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
@@ -26,6 +28,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
     public final static CommentoDAO commentoDAO = new CommentoDAO();
     public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
+    public final static SezioneDAO sezioneDAO = new SezioneDAO();
 
     public void kickUtente(int idUserToKick, Discussione discussione){
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
@@ -265,7 +268,35 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public boolean serchByTag(HttpServletRequest request){
-return true;
+        List<String> tagSelezionati = new ArrayList<>();
+        int idSezione = Integer.parseInt(request.getParameter("idSezione"));
+        Sezione s = sezioneDAO.doRetriveById(idSezione);
+        List<String> tags = sezioneDAO.getListaTag(idSezione);
+
+        if(s == null){
+            request.setAttribute("errore","La sezione non è più presente");
+            return false;
+        }
+        if(tags == null)
+            tags = new ArrayList<>();
+        request.setAttribute("tags",tags);
+        request.setAttribute("sezione", s);
+
+
+        for(int i=0;i<tags.size();i++)
+            if(request.getParameter("c"+i)!=null)
+                tagSelezionati.add(request.getParameter("c"+i));
+
+        List<Discussione> d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
+
+        if(d==null){
+            request.setAttribute("errore","Ricerca filtrata fallita");
+            return false;
+        }
+
+        request.setAttribute("discussioniTag",d);
+
+        return true;
     }
 
     @Override
