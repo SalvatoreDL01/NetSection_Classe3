@@ -40,7 +40,7 @@
   </div>
   <p>Puoi modificare la mail cliccando sul pulsante "Modifica"</p><br>
   <form>
-    <input type="text" name="mail" id="mail" placeholder="Modifica la mail..."><br>
+    <input type="text" name="mail" id="mail" placeholder="Modifica la mail..."><br><br>
     <input type="button" id="edit" value="Modifica">
   </form>
 </div>
