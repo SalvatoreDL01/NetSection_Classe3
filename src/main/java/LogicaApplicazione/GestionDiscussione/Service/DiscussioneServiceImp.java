@@ -49,10 +49,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         String[] tags;
         tag.replace(" ","");
         if(tag.contains(","))
-         tags = tag.split(", ");
-        else
+         tags = tag.split(",");
+        else{
             tags = new String[1];
             tags[0] = tag;
+        }
 
         for (String s : tags) {
             if (s.contains(" ") || !s.startsWith("@")) {
