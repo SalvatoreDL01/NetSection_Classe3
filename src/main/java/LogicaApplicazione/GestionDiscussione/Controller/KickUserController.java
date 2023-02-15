@@ -18,7 +18,8 @@ public class KickUserController extends HttpServlet {
         DiscussioneService service= new DiscussioneServiceImp();
 
         if(idUserToKick!=0 && discussione!=null){
-            service.kickUtente(idUserToKick, discussione);
+            if(!service.kickUtente(idUserToKick, discussione))
+                request.setAttribute("errore","l'utente non è stato kickato");
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("GestioneDiscussioniPage.jsp");
