@@ -33,7 +33,7 @@
     </div>
     <div class="reg-form">
         <form id="formLogin" action="LoginController" onsubmit="return(validate());" >
-            <label for="email">Username:</label><br><br>
+            <label for="email">E-mail:</label><br><br>
             <input type="text" id="email" name="email" value="" placeholder="Email"><br><br>
 
             <label for="password">Password:</label><br><br>
