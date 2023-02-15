@@ -14,11 +14,12 @@ import java.io.IOException;
 public class ElectModController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idUserToElect= Integer.parseInt(request.getParameter("userToElect"));
-        int idSezione= Integer.parseInt(request.getParameter("idSezione"));
-        String titolo= request.getParameter("titolo");
         DiscussioneDAO d=new DiscussioneDAO();
-        Discussione discussione= d.doRetriveById(idSezione, titolo);
+        int idUserToElect= Integer.parseInt(request.getParameter("userToElect"));
+        HttpSession session = request.getSession();
+        Discussione discussione= (Discussione) session.getAttribute("discussione");
+
+        //eseguire un check per verificare che non sia già moderatore di questa sezione
 
         DiscussioneService ds=new DiscussioneServiceImp();
         if(ds.electMod(idUserToElect, discussione)){

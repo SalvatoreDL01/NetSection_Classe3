@@ -20,14 +20,26 @@
     Discussione d = (Discussione) request.getAttribute("discussione");
     List<Commento> commenti = (List<Commento>) d.getListaCommenti();
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
-%><!--
+%>
+<script>
+    function validateElect(){
+        let id= document.getElementById("userToElect").value;
+
+        if(id==" "){
+            let hid= document.getElementById("hidden").innerHTML= "utente non valido!";
+            return false;
+        }
+        return true;
+    }
+</script>
 <div class="elect-mod-button">
-    <form>
+    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
         <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
-        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br><br>
+        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
+        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
         <input type="submit" id="Eleggi" name="electButton"><br>
     </form>
-</div> -->
+</div>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">
