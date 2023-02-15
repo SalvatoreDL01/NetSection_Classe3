@@ -4,6 +4,7 @@ import LogicaApplicazione.Admin.Service.AdminService;
 import LogicaApplicazione.Admin.Service.AdminServiceImp;
 import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
+import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

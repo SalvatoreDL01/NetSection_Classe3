@@ -25,6 +25,9 @@ public class AdminServiceImp implements AdminService{
                 utenteRegistratoDAO.remove(idUserToBan);
                 System.out.println("L'utente è stato rimosso correttamente");
             }
+            else{
+                System.out.println("L'utente non è presente in lista");
+            }
         }
     }
     public void editMail(String nuovaMail, int idAdmin){

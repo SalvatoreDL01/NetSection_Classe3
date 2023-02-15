@@ -4,7 +4,6 @@ body{
 }
 
 #paginaSezione{
-    text-align: center;
     margin-top: 125px;
     z-index: 2;
     width: 100%;
@@ -88,13 +87,6 @@ input[type=submit]{
 .tags{
     color : white;
     font-family: Netflix Sans,Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
-}
-
-#ricercaFiltrata{
-    width: 350px;
-    background-color: dimgray;
-    margin: 0px;
-
 }
 
 #sfondo{

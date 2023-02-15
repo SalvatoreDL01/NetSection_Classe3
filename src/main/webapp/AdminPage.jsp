@@ -67,10 +67,22 @@
   <p>Accedi alle tue discussioni preferite</p><br>
   <input type="button" value="Discussioni preferite">
 </div>
+<script>
+  function validateBan(){
+    let id= document.getElementById("ban").value;
+
+    if(id==" "){
+      document.getElementById("hidden").innerHTML= "id non valido";
+      return false;
+    }
+    return (true);
+  }
+</script>
 <div class="ban-user-by-id">
   <p>Banna un Utente. Attenzione: il Ban è un'azione irreversibile!</p><br>
-  <form name="ban-user" action="BanUser">
-    <input type="text" id="ban" name="ban" value=""><br><br>
+  <form action="BanUser" method="get" onsubmit="return (validateBan());">
+    <input type="text" id="ban" name="ban" value=""><br>
+    <input type="hidden" id="hidden" style="color: red" value=""><br><br>
     <input type="submit" value="Banna Utente">
   </form>
 </div>
