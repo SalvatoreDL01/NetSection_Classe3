@@ -30,7 +30,7 @@
         <p class="tags" id="bottoneRicerca">
             RicercaFiltrata
         </p>
-        <form class="tags" action="" method="POST">
+        <form class="tags" action="RicercaByTag" method="POST">
             <input type="hidden" name="idSezione" value="<%=s.getIdSezione()%>">
             <%for(int i=0;i<tagSezione.size();i++){%>
             <input type="checkbox" value="<%=tagSezione.get(i)%>" id="tag<%=i%>" name="c<%=i%>">

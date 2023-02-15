@@ -377,13 +377,15 @@ public class DiscussioneDAO {
         try(Connection con = ConPool.getConnection()){
             String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and (";
             for(int i=0; i<desiderati.size(); i++)
-            if(i==desiderati.size())
-                query += "t.nome = "+desiderati.get(i)+")";
+            if(i==desiderati.size()-1)
+                query += "t.nome = ?)";
             else
-                query += "t.nome = "+desiderati.get(i)+" or ";
+                query += "t.nome = ? or ";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
+            for(int i=1;i<=desiderati.size();i++)
+                ps.setString(i+1,desiderati.get(i-1));
 
             ResultSet rs = ps.executeQuery();
 

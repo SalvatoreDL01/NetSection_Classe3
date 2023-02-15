@@ -25,15 +25,6 @@ public class CommentoDAO {
             if(rs.next()){
                  c = new Commento(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
                  c.setPunteggio(rs.getInt(6));
-                PreparedStatement ps1 = con.prepareStatement("select r.dataRisposta, r.creatoreRisposta from  Risposta r where r.dataRisposto = ? and r.creatoreRisposto = ?");
-                ps1.setInt(2, creatore);
-                ps1.setString(1, dataScrittura);
-                ResultSet rs1 = ps1.executeQuery();
-                while (rs1.next()){
-                    Commento commento = doRetriveById(rs1.getString(1),rs1.getInt(2));
-                    list.add(commento);
-                }
-                //c.setListaRisposte(list);
                 return c;
             }
             return null;
@@ -65,7 +56,7 @@ public class CommentoDAO {
     public List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where c.sezione=? and c.discussione =? and not Exists(Select * from Risposta r where r.dataRisposto = c.dataScrittura and r.creatoreRisposto = c.creatore) order by c.punteggio desc");
+            PreparedStatement ps = con.prepareStatement("select c.dataScrittura, c.creatore from Commento c where c.sezione=? and c.discussione =? ");
             ps.setInt(1, idSezione);
             ps.setString(2, titolo);
 
@@ -116,7 +107,7 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*salva un oggetto commento sul DB e specifica sul DB se è una risposta ad un altro commento*/
+/*salva un oggetto commento sul DB e specifica sul DB */
     public void doSave(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Commento values (?,?,?,?,?,0)");
@@ -127,15 +118,6 @@ public class CommentoDAO {
             ps.setString(5,c.getContenuto());
 
             ps.execute();
-            /*
-            if(c.getCommentoRisposto()!=null){
-                PreparedStatement ps2 = con.prepareStatement("Insert into Risposta values (?,?,?,?)");
-                ps.setString(1,c.getCommentoRisposto().getDataScrittura());
-                ps.setInt(2,c.getCommentoRisposto().getCreatore());
-                ps.setString(1,c.getDataScrittura());
-                ps.setInt(2,c.getCreatore());
-            }
-             */
         }
         catch (SQLException e){
             throw new RuntimeException(e);
