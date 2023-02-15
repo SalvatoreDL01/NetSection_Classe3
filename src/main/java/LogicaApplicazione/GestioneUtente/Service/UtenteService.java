@@ -14,8 +14,8 @@ public interface UtenteService {
 
     public UtenteRegistrato checkUtente(String user, String password);
     public UtenteNetflix checkUtenteNetflix(String user, String password);
-    public void saveUtente(UtenteRegistrato u);
-    public void salvaUtenteNetflix(UtenteNetflix u);
+    public boolean saveUtente(UtenteRegistrato u);
+    public boolean salvaUtenteNetflix(UtenteNetflix u);
     public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException;
    public Amministratore checkAdmin(String email, String password);
    public boolean checkNetflix(UtenteRegistrato u);

@@ -42,12 +42,24 @@ public class UtenteServiceImp implements UtenteService {
     }
 
     @Override
-    public void saveUtente(UtenteRegistrato u) {
-        utenteRegistratoDAO.doSave(u);
+    public boolean saveUtente(UtenteRegistrato u) {
+        try{
+            utenteRegistratoDAO.doSave(u);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
-    public void salvaUtenteNetflix(UtenteNetflix u){
-        utenteNetflixDAO.doSaveUtente(u);
+    public boolean salvaUtenteNetflix(UtenteNetflix u){
+        try {
+            utenteNetflixDAO.doSaveUtente(u);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException {

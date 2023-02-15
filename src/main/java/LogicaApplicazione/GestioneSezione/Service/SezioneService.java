@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 @MultipartConfig
 public interface SezioneService {
+    public boolean refresh(String titolo, String descrizione, String immagine, String[] arrayGeneri);
     public boolean addSezione(HttpServletRequest request);
     public boolean loadSezione(HttpServletRequest request);
     public boolean serchByGenere(HttpServletRequest request);
