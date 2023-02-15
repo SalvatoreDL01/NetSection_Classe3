@@ -16,7 +16,8 @@ public class EditMailController extends HttpServlet {
         int id= Integer.parseInt(request.getParameter("id"));
 
         AdminService service= new AdminServiceImp();
-        service.editMail(mail, id);
+        if(!service.editMail(mail, id))
+            request.setAttribute("errore","errore");
 
         response.sendRedirect("AdminPage");
     }

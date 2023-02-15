@@ -64,8 +64,10 @@ public class DiscussioneDAO {
     public Discussione doRetriveLightById(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
+                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?" +
+                            " and titolo = ?");
             ps.setInt(1, idSezione);
+            ps.setString(2,titolo);
             UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
 
             List<String> tags=getTags(idSezione, titolo);
@@ -181,7 +183,8 @@ public class DiscussioneDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-               Discussione d = doRetriveLightById(idSezione, rs.getString(1));
+                String nome = rs.getString(1);
+               Discussione d = doRetriveLightById(idSezione,nome);
                l.add(d);
             }
             return l;

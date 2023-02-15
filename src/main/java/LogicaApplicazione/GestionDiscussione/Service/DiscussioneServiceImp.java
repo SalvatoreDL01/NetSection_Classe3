@@ -30,15 +30,17 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
     public final static SezioneDAO sezioneDAO = new SezioneDAO();
 
-    public void kickUtente(int idUserToKick, Discussione discussione){
+    public boolean kickUtente(int idUserToKick, Discussione discussione){
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){
                 utenteRegistratoDAO.removeUtente(discussione, u);
                 System.out.println("L'utente è stato kickato dalla conversazione");
+                return true;
             }
         }
+        return false;
     }
     @Override
     public boolean addDiscussione(HttpServletRequest request) {
@@ -47,10 +49,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         String[] tags;
         tag.replace(" ","");
         if(tag.contains(","))
-         tags = tag.split(", ");
-        else
+         tags = tag.split(",");
+        else{
             tags = new String[1];
             tags[0] = tag;
+        }
 
         for (String s : tags) {
             if (s.contains(" ") || !s.startsWith("@")) {
@@ -135,13 +138,15 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
 
-    public void deleteComment(int idCreatore, String dataCreazioneCommento){
+    public boolean deleteComment(int idCreatore, String dataCreazioneCommento){
         if(idCreatore!=0 && dataCreazioneCommento!=null){
             CommentoDAO c=new CommentoDAO();
             Commento commento= c.doRetriveById(dataCreazioneCommento, idCreatore);
             c.doRemove(commento);
             System.out.println("Commento eliminato con successo!");
+            return true;
         }
+        return false;
     }
 
     public boolean loadDiscussione(HttpServletRequest request){
@@ -182,19 +187,23 @@ public class DiscussioneServiceImp implements DiscussioneService {
             return false;
     }
 
-    public void iscrivi(int idSezione, String titolo, UtenteRegistrato utente){
+    public boolean iscrivi(int idSezione, String titolo, UtenteRegistrato utente){
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
         if(d!=null && utente!=null){
             discussioneDAO.addIscrizione(d, utente);
+            return true;
         }
+        return false;
     }
-    public void disiscrivi(int idSezione, String titolo, UtenteRegistrato utente){
+    public boolean disiscrivi(int idSezione, String titolo, UtenteRegistrato utente){
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
         if(d!=null && utente!=null){
             discussioneDAO.removeIscrizione(d, utente);
+            return true;
         }
+        return false;
     }
 
     public boolean addCommento(HttpServletRequest request){
