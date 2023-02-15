@@ -20,7 +20,7 @@ public class SezioneServiceImp implements SezioneService{
 
     private static final SezioneDAO sezioneDAO = new SezioneDAO();
 
-    public void refresh(String titolo, String descrizione, String immagine, String[] arrayGeneri){
+    public boolean refresh(String titolo, String descrizione, String immagine, String[] arrayGeneri){
         GenereDAO gd=new GenereDAO();
         ArrayList<Genere> generi=new ArrayList<>();
 
@@ -31,8 +31,10 @@ public class SezioneServiceImp implements SezioneService{
             }
             Sezione s=new Sezione(immagine, titolo, descrizione, generi);
             if(sezioneDAO.doSave(s))
-                System.out.println("Sezione salvata correttamente");
+                return true;
+            else return false;
         }
+        else return false;
     }
 
     @Override

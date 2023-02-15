@@ -4,6 +4,6 @@ import ServiziEStorage.Entry.Problema;
 
 public interface ProblemaService {
 
-    public void salvaProblema(Problema problema);
+    public boolean salvaProblema(Problema problema);
 
 }
