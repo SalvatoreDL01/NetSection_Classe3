@@ -193,6 +193,11 @@ public class UtenteRegistrato {
         return true;
     }
 
+    public boolean isModeratoreOf(Discussione discussione){
+
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
