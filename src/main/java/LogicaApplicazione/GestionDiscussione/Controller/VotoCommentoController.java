@@ -14,12 +14,27 @@ public class VotoCommentoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String data = request.getParameter("data");
-        int creatore = Integer.parseInt(request.getParameter("creatore"));
-        DiscussioneServiceImp discussioneServiceImp = new DiscussioneServiceImp();
-        Commento c = discussioneServiceImp.ottieniCommento(data, creatore);
-        c.setPunteggio(c.getPunteggio()+1);
-        new CommentoDAO().update(c);
+        if(request.getParameter("dec") != null){
+            String data = request.getParameter("data");
+            int creatore = Integer.parseInt(request.getParameter("creatore"));
+            DiscussioneServiceImp discussioneServiceImp = new DiscussioneServiceImp();
+            Commento c = discussioneServiceImp.ottieniCommento(data, creatore);
+            if(c.getPunteggio() == 0){
+
+            }
+            else{
+                c.setPunteggio(c.getPunteggio()-1);
+                new CommentoDAO().update(c);
+            }
+        }
+        else{
+            String data = request.getParameter("data");
+            int creatore = Integer.parseInt(request.getParameter("creatore"));
+            DiscussioneServiceImp discussioneServiceImp = new DiscussioneServiceImp();
+            Commento c = discussioneServiceImp.ottieniCommento(data, creatore);
+            c.setPunteggio(c.getPunteggio()+1);
+            new CommentoDAO().update(c);
+        }
         String path = "DiscussiController?tipo=iscritto&sezione=" + request.getParameter("idSezione") + "&titolo=" + request.getParameter("discussione");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
