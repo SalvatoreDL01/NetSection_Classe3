@@ -15,7 +15,7 @@ public class AdminServiceImp implements AdminService{
     UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
     EliminazioneDAO eliminazioneDAO= new EliminazioneDAO();
 
-    public void banUtente(int idUserToBan){
+    public boolean banUtente(int idUserToBan){
         ArrayList<UtenteRegistrato> listU= utenteRegistratoDAO.retriveAll();
 
         for (UtenteRegistrato u: listU) {
@@ -24,11 +24,14 @@ public class AdminServiceImp implements AdminService{
                 eliminazioneDAO.doSave(e);
                 utenteRegistratoDAO.remove(idUserToBan);
                 System.out.println("L'utente è stato rimosso correttamente");
+                return true;
             }
             else{
                 System.out.println("L'utente non è presente in lista");
+                return false;
             }
         }
+        return false;
     }
     public boolean editMail(String nuovaMail, int idAdmin){
         Amministratore a= ammDao.doRetriveById(idAdmin);
@@ -41,3 +44,4 @@ public class AdminServiceImp implements AdminService{
         return false;
     }
 }
+
