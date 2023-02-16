@@ -287,40 +287,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
-    public boolean serchByTag(HttpServletRequest request){
-        List<String> tagSelezionati = new ArrayList<>();
-        int idSezione = Integer.parseInt(request.getParameter("idSezione"));
-        Sezione s = sezioneDAO.doRetriveById(idSezione);
-        List<String> tags = sezioneDAO.getListaTag(idSezione);
+    public List<Discussione> serchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
+    List<Discussione> d = new ArrayList<>();
+        if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
+        d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
+        else
+            if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
+                d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+            else
+                if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
+                    d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
 
-        if(s == null){
-            request.setAttribute("errore","La sezione non è più presente");
-            return false;
-        }
-        if(tags == null)
-            tags = new ArrayList<>();
-        request.setAttribute("tags",tags);
-        request.setAttribute("sezione", s);
-
-
-        for(int i=0;i<tags.size();i++)
-            if(request.getParameter("c"+i)!=null)
-                tagSelezionati.add(request.getParameter("c"+i));
-
-        if(tagSelezionati.size()==0){
-            request.setAttribute("errore","Non hai selezionato tag");
-            return false;
-        }
-        List<Discussione> d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
-
-        if(d==null){
-            request.setAttribute("errore","Ricerca filtrata fallita");
-            return false;
-        }
-
-        request.setAttribute("discussioniTag",d);
-
-        return true;
+        return d;
     }
 
     @Override

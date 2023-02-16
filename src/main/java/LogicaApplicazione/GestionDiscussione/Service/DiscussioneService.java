@@ -5,6 +5,8 @@ import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 public interface DiscussioneService {
     public boolean kickUtente(int idUserToKick, Discussione discussione);
     public boolean addDiscussione(HttpServletRequest request);
@@ -15,6 +17,6 @@ public interface DiscussioneService {
     public boolean electMod(int idUserToElect, Discussione discussione);
     public boolean iscrivi(int idSezione, String titolo, UtenteRegistrato utente);
     public boolean disiscrivi(int idSezione, String titolo, UtenteRegistrato utente);
-    public boolean serchByTag(HttpServletRequest request);
+    public List<Discussione> serchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione);
     public Commento ottieniCommento(String data, int creatore);
 }

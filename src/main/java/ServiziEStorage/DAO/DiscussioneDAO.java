@@ -404,17 +404,19 @@ public class DiscussioneDAO {
 
     public List<Discussione> ricercaTagConEsclusione(List<String> nonDesiderati,int idSezione){
         try(Connection con = ConPool.getConnection()){
-            String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and d.titolo<> all(" +
-                    "select t2.titolo form Tag t2 where ";
+            String query = "select distinct t.titolo from Tag t where t.sezione = ? and t.titolo<> all(" +
+                    "select distinct t2.titolo from Tag t2 where t2.sezione = ? and( ";
             for(int i=0; i<nonDesiderati.size(); i++)
-                if(i==nonDesiderati.size())
-                    query += "t.nome = "+nonDesiderati.get(i)+")";
+                if(i==nonDesiderati.size()-1)
+                    query += "t2.nome = ?))";
                 else
-                    query += "t.nome = "+nonDesiderati.get(i)+" or ";
+                    query += "t2.nome = ? or ";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
-
+            ps.setInt(2,idSezione);
+            for(int i=1;i<=nonDesiderati.size();i++)
+                ps.setString(i+2,nonDesiderati.get(i-1));
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Discussione> d = new ArrayList<>();
@@ -433,24 +435,25 @@ public class DiscussioneDAO {
         try(Connection con = ConPool.getConnection()){
             int i;
             String query =
-                    "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and d.titolo<> all(" +
-                    "select t2.titolo form Tag t2 where ";
+                    "select distinct t.titolo from Tag t where t.sezione = ? and t.titolo<> all(" +
+                    "select t2.titolo from Tag t2 where t2.sezione = ? and (";
             for(i=0; i<nonDesiderati.size(); i++)
-                if(i==nonDesiderati.size())
-                    query += "t2.nome = "+nonDesiderati.get(i)+") and ";
+                if(i==nonDesiderati.size()-1)
+                    query += "t2.nome = \""+nonDesiderati.get(i)+"\")) and (";
                 else
-                    query += "t2.nome = "+nonDesiderati.get(i)+" or ";
+                    query += "t2.nome = \""+nonDesiderati.get(i)+"\" or ";
             for(i=0; i<nonDesiderati.size(); i++)
-                if(i==nonDesiderati.size())
-                    query += "t.nome = "+nonDesiderati.get(i);
+                if(i==nonDesiderati.size()-1)
+                    query += "t.nome =\""+desiderati.get(i)+"\")";
                 else
-                    query += "t.nome = "+nonDesiderati.get(i)+" or ";
+                    query += "t.nome = \""+desiderati.get(i)+"\" or ";
+
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
+            ps.setInt(2,idSezione);
 
             ResultSet rs = ps.executeQuery();
-
             ArrayList<Discussione> d = new ArrayList<>();
             while(rs.next()){
                 d.add(this.doRetriveById(idSezione,rs.getString(1)));
