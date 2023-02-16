@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>HomePage|NetSection</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/HomePageStyle.css">
 </head>
 <body>

@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Discussione</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/DiscussionePageStyle.css">
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
 </head>

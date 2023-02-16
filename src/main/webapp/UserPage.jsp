@@ -15,6 +15,7 @@
 <html>
 <head>
   <title>UserPage</title>
+  <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
   <link rel="stylesheet" href="css/UserPageStyle.css">
 </head>
 <body>
