@@ -1,4 +1,7 @@
-<%@ page import="ServiziEStorage.Entry.Amministratore" %><%--
+<%@ page import="ServiziEStorage.Entry.Amministratore" %>
+<%@ page import="ServiziEStorage.Entry.Problema" %>
+<%@ page import="ServiziEStorage.DAO.ProblemaDAO" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: chris
 --%>
@@ -55,8 +58,21 @@
   </div>
 </div>
 <div class="netflix-profile">
-  <p>Stato attuale profilo Netflix: </p><br>
-  <input type="button" value="Collega profilo Netflix"><br>
+  <p>Visualizza le segnalazioni degli utenti: </p><br>
+
+  <%
+    ProblemaDAO dao = new ProblemaDAO();
+    List<Problema> lista= (List<Problema>) dao.retriveAll();
+
+    for(Problema p : lista){
+  %>
+  <div id="tue-discussioni">
+    <div class="discussione">
+      <%=p.getDataSottomissione()%>, <%=p.getNatura()%>, <%=p.getContenuto()%>
+    </div>
+  </div>
+  <% } %>
+</div>
   <div class="create-disc">
     <p>Le tue discussioni</p>
     <input type="button" value="Crea una discussione"><br><br>
