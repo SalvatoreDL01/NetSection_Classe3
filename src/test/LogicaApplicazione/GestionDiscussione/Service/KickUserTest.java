@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
+import LogicaApplicazione.GestionDiscussione.Exception.IdNotFoundException;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteRegistrato;
@@ -15,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class KickUserTest {
 
     @Test
-    void KickUserTest(){
+    void KickUserTest() throws IdNotFoundException {
         DiscussioneService service= new DiscussioneServiceImp();
-        int idUser=5, sezione=365289, creatore=673532;
+        int idUser=1, sezione=365289, creatore=673532;
         String titolo = "che fai?", immagine="img.png", dataCreazione="2023-01-01", tag1="@tag1", tag2="@tag2";
         List<String> tags=new ArrayList<>();
         tags.add(tag1);
@@ -25,14 +26,14 @@ public class KickUserTest {
         Discussione discussione=new Discussione(sezione, titolo, creatore, immagine, tags, dataCreazione);
 
         List<UtenteRegistrato> utenti= new ArrayList<>();
-        UtenteRegistrato u1= new UtenteRegistrato("u1", "m1", "p1", "i1", "d1");
-        UtenteRegistrato u2= new UtenteRegistrato("u2", "m2", "p2", "i2", "d2");
-        UtenteRegistrato u3= new UtenteRegistrato("u3", "m3", "p3", "i3", "d3");
+        UtenteRegistrato u1= new UtenteRegistrato( 1,"u1", "m1", "p1", "i1", "d1");
+        UtenteRegistrato u2= new UtenteRegistrato(2,"u2", "m2", "p2", "i2", "d2");
+        UtenteRegistrato u3= new UtenteRegistrato(3,"u3", "m3", "p3", "i3", "d3");
         utenti.add(u1);
         utenti.add(u2);
         utenti.add(u3);
 
-        UtenteRegistrato utenteSample= new UtenteRegistrato("u1", "m1", "p1", "i1", "d1");
+        UtenteRegistrato utenteSample= new UtenteRegistrato( 1,"u1", "m1", "p1", "i1", "d1");
         UtenteRegistratoDAO dao= Mockito.mock(UtenteRegistratoDAO.class);
         Mockito.when(dao.retriveAll()).thenReturn((ArrayList<UtenteRegistrato>) utenti);
         Mockito.when(dao.removeUtente(discussione, utenteSample)).thenReturn(true);

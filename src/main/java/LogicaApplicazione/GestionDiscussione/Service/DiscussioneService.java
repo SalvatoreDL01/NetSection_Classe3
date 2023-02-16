@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
+import LogicaApplicazione.GestionDiscussione.Exception.IdNotFoundException;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.UtenteRegistrato;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface DiscussioneService {
     public  boolean checkUtenteToKick(int idUserToKick);
-    public boolean kickUtente(int idUserToKick, Discussione discussione);
+    public boolean kickUtente(int idUserToKick, Discussione discussione) throws IdNotFoundException;
     public boolean addDiscussione(HttpServletRequest request);
     public boolean deleteComment(int idCreatore, String dataCreazioneCommento);
     public boolean loadDiscussione(HttpServletRequest request);

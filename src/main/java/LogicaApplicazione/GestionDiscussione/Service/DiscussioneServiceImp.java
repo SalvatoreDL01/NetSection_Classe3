@@ -1,5 +1,6 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
+import LogicaApplicazione.GestionDiscussione.Exception.IdNotFoundException;
 import LogicaApplicazione.GestioneUtente.Service.UtenteService;
 import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
@@ -42,7 +43,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return true;
     }
-    public boolean kickUtente(int idUserToKick, Discussione discussione){
+    public boolean kickUtente(int idUserToKick, Discussione discussione) throws IdNotFoundException {
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 
         for (UtenteRegistrato u: listU) {
@@ -51,6 +52,9 @@ public class DiscussioneServiceImp implements DiscussioneService {
                     System.out.println("L'utente è stato kickato dalla conversazione");
                     return true;
                 }
+            }
+            else{
+                throw new IdNotFoundException();
             }
         }
         return false;
