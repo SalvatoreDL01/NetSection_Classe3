@@ -67,15 +67,18 @@
 <%}%>
     <br>
     <br>
-    <form id="formCommento" class="commento" action="AggiungiCommento">
+    <div class="commento">
+        <form id="formCommento" class="commento" action="AggiungiCommento">
 
-        <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
-        <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
-        <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
-        <br><br>
-        <input id="submitCommento" type="submit" value="Pubblica"><br>
-    </form>
-    <p></p>
+            <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
+            <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
+            <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
+            <br><br>
+            <input id="submitCommento" type="submit" value="Pubblica"><br><br>
+        </form>
+        <p></p>
+    </div>
+
 </div>
 <script>
     function validateKickForm(){
@@ -89,13 +92,15 @@
 </script>
 <div>
 </div>
-<div class="elect-mod-button">
-    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
-        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
-        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
-        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
-        <input type="submit" id="Eleggi" name="electButton"><br>
-    </form>
-</div>
+<footer>
+    <div class="elect-mod-button">
+        <form action="ElectModController" method="get" onsubmit="return (validateElect());">
+            <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label>
+            <input type="number" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
+            <input type="hidden" id="hidden" style="color: red" value=""><br><br>
+            <input type="submit" id="Eleggi" name="electButton"><br>
+        </form>
+    </div>
+</footer>
 </body>
 </html>
