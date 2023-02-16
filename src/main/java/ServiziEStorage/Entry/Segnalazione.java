@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Segnalazione {
 
     private String dataSegnalazione, dataCommento;
-    private int creatoreSegnalazione, creatoreCommento, sezione;
+    private int creatoreSegnalazione, creatoreCommento, sezione, idUtenteKick;
     private String discussione, natura, contenuto;
     /*Costruttore per un oggetto Segnalazione. Necessita di String dataSegnalazione, String dataCommento,
     int creatoreSegnalazione, int creatoreCommento, int sezione, String discussione, String natura, String contenuto*/
@@ -21,6 +21,7 @@ public class Segnalazione {
         this.natura = natura;
         this.contenuto = contenuto;
     }
+
     /*Metodo che ritorna un oggetto String dataSegnalazione*/
     public String getDataSegnalazione() {
         return dataSegnalazione;
@@ -84,6 +85,14 @@ public class Segnalazione {
     /*Metodo che setta un oggetto String contenuto*/
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
+    }
+
+    public int getIdUtenteKick() {
+        return idUtenteKick;
+    }
+
+    public void setIdUtenteKick(int idUtenteKick) {
+        this.idUtenteKick = idUtenteKick;
     }
 
     @Override
