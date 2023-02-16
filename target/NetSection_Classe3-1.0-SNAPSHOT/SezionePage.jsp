@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Sezione Page</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function(){

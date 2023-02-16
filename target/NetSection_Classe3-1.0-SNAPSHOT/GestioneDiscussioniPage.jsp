@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>Gestione Discussioni|NetSection</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/GestioneDiscussioniStyle.css">
 </head>
 <body>
@@ -47,16 +48,6 @@
         <div>
             <p>Elenco tag</p>
             <textarea cols="50" rows="15"><% discussione.getListaTag(); %></textarea>
-        </div>
-        <div>
-            <div>
-                <p>Tag da aggiungere</p>
-                <input type="text">
-            </div>
-            <div>
-                <p>Tag da togliere</p>
-                <input type="text">
-            </div>
         </div>
         <hr style="width: 800px">
         <div>

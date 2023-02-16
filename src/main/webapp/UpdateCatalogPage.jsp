@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Aggiorna Catalogo</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>

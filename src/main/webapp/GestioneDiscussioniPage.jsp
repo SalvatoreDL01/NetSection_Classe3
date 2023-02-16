@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>Gestione Discussioni|NetSection</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/GestioneDiscussioniStyle.css">
 </head>
 <body>
