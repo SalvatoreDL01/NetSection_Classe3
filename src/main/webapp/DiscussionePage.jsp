@@ -46,10 +46,7 @@
         <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
     <br>
-    <p class="segnalazione" id="bottoneRicerca">
-        segnala
-    </p>
-    <form id="segnala">
+    <form id="segnala" method="post" action="SegnalazioneCommentoController">
         <br>
         <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
         <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
@@ -88,14 +85,24 @@
 <div>
 </div>
 <footer>
+    <%if(d.getListaModeratori().contains(utente)){%>
     <div class="elect-mod-button">
         <form action="ElectModController" method="get" onsubmit="return (validateElect());">
-            <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label>
+            <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label><br>
             <input type="number" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
             <input type="hidden" id="hidden" style="color: red" value=""><br><br>
             <input type="submit" id="Eleggi" name="electButton"><br>
         </form>
     </div>
+
+    <div class="elect-mod-button">
+        <form action="GestioneDiscussioneController" method="post" onsubmit="return (validateElect());">
+            <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
+            <input type="hidden" name="sezione" value="<%=d.getTitolo()%>">
+            <input type="submit" id="Visualizza segnalazioni" name="electButton"><br>
+        </form>
+    </div>
+    <%}%>
 </footer>
 </body>
 </html>
