@@ -30,6 +30,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
     public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
     public final static SezioneDAO sezioneDAO = new SezioneDAO();
 
+    public  boolean checkUtenteToKick(int idUserToKick){
+        String idString= Integer.toString(idUserToKick);
+        if(idString.length()<5){
+            System.out.println("La lunghezza deve essere superiore a 4.");
+            return false;
+        }
+        else if(!(idString.matches("[0-9]+"))){
+            System.out.println("L'ID può contenere solo numeri.");
+            return false;
+        }
+        return true;
+    }
     public boolean kickUtente(int idUserToKick, Discussione discussione){
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 

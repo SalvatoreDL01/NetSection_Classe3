@@ -26,8 +26,11 @@ public class AdminServiceImp implements AdminService{
                 System.out.println("L'utente è stato rimosso correttamente");
                 return true;
             }
+            else{
+                System.out.println("L'utente non è presente in lista");
+                return false;
+            }
         }
-        System.out.println("L'utente non è presente in lista");
         return false;
     }
     public boolean editMail(String nuovaMail, int idAdmin){
@@ -38,7 +41,7 @@ public class AdminServiceImp implements AdminService{
             System.out.println("Mail aggiornata correttamente.");
             return true;
         }
-        System.out.println("Mail aggiornata correttamente.");
         return false;
     }
 }
+
