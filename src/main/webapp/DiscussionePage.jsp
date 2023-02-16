@@ -15,13 +15,6 @@
     <link rel="stylesheet" type="text/css" href="css/DiscussionePageStyle.css">
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#bottoneRicerca").click(function(){
-                $("#segnala").slideToggle('fast');
-            });
-        });
-    </script>
 </head>
 <body>
 <%
@@ -30,17 +23,6 @@
     List<Commento> commenti = (List<Commento>) d.getListaCommenti();
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
 %>
-<script>
-    function validateElect(){
-        let id= document.getElementById("userToElect").value;
-
-        if(id==" "){
-            let hid= document.getElementById("hidden").innerHTML= "utente non valido!";
-            return false;
-        }
-        return true;
-    }
-</script>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">
@@ -68,12 +50,13 @@
         segnala
     </p>
     <form id="segnala">
+        <br>
         <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
         <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
         <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
         <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
-        <input type="text" name="natura" placeholder="natura segnalazione">
-        <textarea id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea>
+        <input class="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>
+        <textarea class=segnalaText id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea><br><br>
         <input type="submit" value="Segnala Utente">
     </form>
 <%}%>

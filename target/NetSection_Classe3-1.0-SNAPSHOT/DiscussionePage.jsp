@@ -68,12 +68,13 @@
         segnala
     </p>
     <form id="segnala">
+        <br>
         <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
         <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
         <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
         <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
-        <input type="text" name="natura" placeholder="natura segnalazione">
-        <textarea id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea>
+        <input id="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>
+        <textarea id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea><br><br>
         <input type="submit" value="Segnala Utente">
     </form>
 <%}%>

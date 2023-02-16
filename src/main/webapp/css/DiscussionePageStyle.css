@@ -22,3 +22,14 @@ p{
     height: 100px;
     resize: none;
 }
+
+.natura{
+    font-size: 20px;
+    width: 250px;
+}
+
+.segnalaText{
+    font-size: 20px;
+    width: 450px;
+    resize: none;
+}
