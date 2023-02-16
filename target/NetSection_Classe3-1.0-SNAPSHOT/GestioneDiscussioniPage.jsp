@@ -69,6 +69,7 @@
             <% } %>
         </div>
         <h2>Segnalazioni</h2>
+        <%if(!listaSegnalazione.isEmpty())%>
         <%for(int i=0; i<listaSegnalazione.size();i++){%>
         <p><%=utenti.get(i).getUsername()%></p>
         <p><%=commenti.get(i).getContenuto()%></p>
