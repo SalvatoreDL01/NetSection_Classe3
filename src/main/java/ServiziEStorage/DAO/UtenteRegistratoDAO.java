@@ -258,7 +258,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che svolge il kick di un utente da una discussione*/
-    public void removeUtente(Discussione d,UtenteRegistrato u){
+    public boolean removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
@@ -278,6 +278,7 @@ public class UtenteRegistratoDAO {
             ((ArrayList<UtenteRegistrato>)d.getListaKickati()).add(u);
             u.getListaIscizioni().remove(d);
             ((ArrayList<Discussione>)u.getListaKickato()).add(d);
+            return true;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
