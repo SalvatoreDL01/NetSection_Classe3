@@ -22,7 +22,7 @@ public class RegistrazioneNetflixController extends HttpServlet {
 
         u = new UtenteRegistratoDAO().doRetriveById(u.getId());
 
-        UtenteNetflix utenteNetflix = new UtenteNetflix(u.getId(), u.getDataNascita(), u.getUsername(), u.getEmail(), u.getPass(), null, u.getListaIscizioni(), u.getListaModerazioni(), u.getListaKickato(), u.getListaPreferiti(), email, password);
+        UtenteNetflix utenteNetflix = new UtenteNetflix(u.getId(), u.getDataNascita(), u.getUsername(), u.getEmail(), u.getPass(), null, u.getListaIscizioni(), null, u.getListaKickato(), u.getListaPreferiti(), email, password);
 
         UtenteServiceImp utenteServiceImp = new UtenteServiceImp();
         utenteServiceImp.salvaUtenteNetflix(utenteNetflix);

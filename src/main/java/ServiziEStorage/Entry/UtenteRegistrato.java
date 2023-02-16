@@ -16,6 +16,28 @@ public class UtenteRegistrato {
     private String dataNascita;
     private List<?> listaIscizioni,listaModerazioni,listaKickato,listaPreferiti;
 
+    public class GestioneListaModerazioni{
+
+        private ArrayList<Discussione> l = new ArrayList<>();
+
+        public GestioneListaModerazioni(ArrayList<Discussione> list){
+            l = list;
+        }
+
+        public void addToList(Discussione d){
+            l.add(d);
+        }
+
+        public boolean removeFromList(Discussione d){
+            return l.remove(d);
+        }
+
+        public boolean contains(Discussione d){
+            return l.contains(d);
+        }
+
+    }
+
     /* costruttore per un nuovo utente registrato sono necessari oggetti String username, String email, String pass,
     String immagine, String dataNascita. Questo costruttore è usato per creare un nuovo untente e salvarlo nel DB */
     public UtenteRegistrato(String username,String email,String pass,String immagine,String dataNascita){
@@ -140,8 +162,8 @@ public class UtenteRegistrato {
         this.listaIscizioni = listaIscizioni;
     }
     /* permette di estrarre la lista moderazioni */
-    public List<?> getListaModerazioni() {
-        return listaModerazioni;
+    public GestioneListaModerazioni getListaModerazioni() {
+        return new GestioneListaModerazioni((ArrayList<Discussione>) listaModerazioni);
     }
     /* permette di settare la lista moderazioni */
     public void setListaModerazioni(List<?> listaModerazioni) {
