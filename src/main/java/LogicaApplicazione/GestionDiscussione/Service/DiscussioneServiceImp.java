@@ -22,10 +22,24 @@ import java.util.List;
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
-    public DiscussioneDAO discussioneDAO;
-    public CommentoDAO commentoDAO;
-    public UtenteRegistratoDAO utenteRegistratoDAO;
-    public SezioneDAO sezioneDAO;
+    private DiscussioneDAO discussioneDAO;
+    private CommentoDAO commentoDAO;
+    private UtenteRegistratoDAO utenteRegistratoDAO;
+    private SezioneDAO sezioneDAO;
+
+    public DiscussioneServiceImp(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+    }
 
     public DiscussioneServiceImp() {
         discussioneDAO = new DiscussioneDAO();
@@ -39,6 +53,14 @@ public class DiscussioneServiceImp implements DiscussioneService {
         commentoDAO = new CommentoDAO();
         utenteRegistratoDAO = new UtenteRegistratoDAO();
         sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO, CommentoDAO commentoDAO,
+                                 UtenteRegistratoDAO utenteRegistratoDAO, SezioneDAO sezioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+        this.commentoDAO = commentoDAO;
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        this.sezioneDAO = sezioneDAO;
     }
 
     public void setDiscussioneDAO(DiscussioneDAO discussioneDAO) {

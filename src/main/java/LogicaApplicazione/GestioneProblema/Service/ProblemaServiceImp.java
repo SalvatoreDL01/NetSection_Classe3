@@ -12,7 +12,23 @@ import java.util.List;
 
 public class ProblemaServiceImp implements ProblemaService{
 
-    public static final SegnalazioneDAO segnalazioneDAO = new SegnalazioneDAO();
+    private SegnalazioneDAO segnalazioneDAO;
+
+    public ProblemaServiceImp() {
+        segnalazioneDAO = new SegnalazioneDAO();
+    }
+
+    public ProblemaServiceImp(SegnalazioneDAO segnalazioneDAO) {
+        this.segnalazioneDAO = segnalazioneDAO;
+    }
+
+    public SegnalazioneDAO getSegnalazioneDAO() {
+        return segnalazioneDAO;
+    }
+
+    public void setSegnalazioneDAO(SegnalazioneDAO segnalazioneDAO) {
+        this.segnalazioneDAO = segnalazioneDAO;
+    }
 
     @Override
     public boolean salvaProblema(Problema problema) {
