@@ -87,26 +87,35 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+idSezione;
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
             f.mkdir();
 
+
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + idSezione + "/" + fileName;
-            String pathCompleto = dirPath + "/" + fileName;
+            if(fileName.equals(""))
+                return false;
+            String immagine = "css/icone/Immagini/" +d.getSezione()+"/"+ fileName;
+            String path = dirPath + "/" + fileName;
 
-            d.setImmagine(path);
+            d.setImmagine(immagine);
 
             InputStream is = part.getInputStream();
-            uploadFile(is, pathCompleto);
+            if(uploadFile(is, path))
+                discussioneDAO.updateImmagine(d);
+            else{
+                request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
+                return false;
+            }
+
 
         }
         catch (Exception e){
             System.out.println(e);
-            request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
+            request.setAttribute("messaggio", "Aggiunta Discussione non effettuata!");
         }
 
         discussioneDAO.doSave(d);
@@ -149,9 +158,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return false;
     }
 
+    @Override
     public boolean loadDiscussione(HttpServletRequest request){
-        int i;
+
         String titolo;
+        int i;
         if(request.getParameter("tipo")!=null){
             titolo=request.getParameter("titolo");
             i= Integer.parseInt(request.getParameter("sezione"));
@@ -163,12 +174,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         request.setAttribute("sezione",i);
         if(titolo == null){
-            request.setAttribute("errore","La sezione non è più presente");
+            request.setAttribute("errore","La discussione non è più presente");
             return false;
         }
         Discussione s = discussioneDAO.doRetriveById(i,titolo);
         if(s == null){
-            request.setAttribute("errore","La sezione non è più presente");
+            request.setAttribute("errore","La discussione non è più presente");
             return false;
         }
         request.setAttribute("discussione", s);
@@ -191,7 +202,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
         if(d!=null && utente!=null){
-            discussioneDAO.addIscrizione(d, utente);
+            discussioneDAO.addIscrizione( idSezione,  titolo, utente);
             return true;
         }
         return false;
@@ -296,6 +307,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
             if(request.getParameter("c"+i)!=null)
                 tagSelezionati.add(request.getParameter("c"+i));
 
+        if(tagSelezionati.size()==0){
+            request.setAttribute("errore","Non hai selezionato tag");
+            return false;
+        }
         List<Discussione> d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
 
         if(d==null){

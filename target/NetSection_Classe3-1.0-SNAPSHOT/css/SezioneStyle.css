@@ -99,3 +99,21 @@ input[type=submit]{
     position:absolute;
     z-index: -1;
 }
+
+#bottoneRicerca{
+    font-size:25px;
+    width: 160px;
+    background-color: grey;
+    margin: 0 auto;
+    border-radius: 6px;
+    border: 2px solid white;
+}
+
+#formTag{
+    background-color: dimgray;
+    padding-bottom: 10px;
+    width: 600px;
+    border-radius: 5px;
+    display: none;
+    margin: 0 auto;
+}

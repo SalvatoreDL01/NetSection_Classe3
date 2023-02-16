@@ -91,8 +91,9 @@ public class DiscussioneDAO {
     public Discussione doRetriveById(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
+                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ? and titolo=?");
             ps.setInt(1, idSezione);
+            ps.setString(2,titolo);
 
             UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
             List<String> tags=getTags(idSezione, titolo);
@@ -343,12 +344,12 @@ public class DiscussioneDAO {
         }
     }
 
-    public void addIscrizione(Discussione discussione, UtenteRegistrato utente){
+    public void addIscrizione(int idSezione, String titolo, UtenteRegistrato utente){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Iscrizione values (?,?,?)");
             ps.setInt(1, utente.getId());
-            ps.setInt(2, discussione.getSezione());
-            ps.setString(3, discussione.getTitolo());
+            ps.setInt(2, idSezione);
+            ps.setString(3, titolo);
             ps.execute();
         }
         catch (SQLException e){
@@ -377,13 +378,15 @@ public class DiscussioneDAO {
         try(Connection con = ConPool.getConnection()){
             String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and (";
             for(int i=0; i<desiderati.size(); i++)
-            if(i==desiderati.size())
-                query += "t.nome = "+desiderati.get(i)+")";
+            if(i==desiderati.size()-1)
+                query += "t.nome = ?)";
             else
-                query += "t.nome = "+desiderati.get(i)+" or ";
+                query += "t.nome = ? or ";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
+            for(int i=1;i<=desiderati.size();i++)
+                ps.setString(i+1,desiderati.get(i-1));
 
             ResultSet rs = ps.executeQuery();
 
