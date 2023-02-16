@@ -323,6 +323,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
+
+        //controlliamo che ogni tag desiderato non faccia parte di quelli non desiderati
+        for(String tag:tagSelezionati)
+            if(nonDesiderati.contains(tag))
+                return null;
+
         if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
             return discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
         else
