@@ -41,6 +41,22 @@ public class DiscussioneServiceImp implements DiscussioneService {
         sezioneDAO = new SezioneDAO();
     }
 
+    public void setDiscussioneDAO(DiscussioneDAO discussioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+    }
+
+    public void setCommentoDAO(CommentoDAO commentoDAO) {
+        this.commentoDAO = commentoDAO;
+    }
+
+    public void setUtenteRegistratoDAO(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+    }
+
+    public void setSezioneDAO(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
+
     public  boolean checkUtenteToKick(int idUserToKick){
         String idString= Integer.toString(idUserToKick);
         if(idString.length()<5){
