@@ -54,6 +54,16 @@
            <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%>
         <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
+    <br>
+    <form id="segnala">
+        <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
+        <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
+        <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
+        <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
+        <input type="text" name="natura" placeholder="natura segnalazione">
+        <textarea id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea>
+        <input type="submit" value="Segnala Utente">
+    </form>
 <%}%>
     <br>
     <br>
@@ -78,19 +88,6 @@
     }
 </script>
 <div>
-    <form>
-        <select type="hidden" class="form-select" id = "formKick">
-            <option selected value = "0">Seleziona l'utente</option>
-            <%
-                List<UtenteRegistrato> list= (List<UtenteRegistrato>) d.getListaIscritti();
-                for (UtenteRegistrato u: list) {
-            %>
-            <option value="1"><% u.getUsername(); %></option>
-            <% } %>
-        </select>
-        <input type="hidden" type="text" id="mot" placeholder="Descrivi la motivazione della segnalazione...">
-        <input type="submit" value="Segnala Utente" onsubmit="return (validateKickForm());"><br><br>
-    </form>
 </div>
 <div class="elect-mod-button">
     <form action="ElectModController" method="get" onsubmit="return (validateElect());">
