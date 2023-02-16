@@ -30,12 +30,14 @@ public class AdminServiceImp implements AdminService{
             }
         }
     }
-    public void editMail(String nuovaMail, int idAdmin){
+    public boolean editMail(String nuovaMail, int idAdmin){
         Amministratore a= ammDao.doRetriveById(idAdmin);
 
         if(a!=null){
             ammDao.updateMail(a, nuovaMail);
             System.out.println("Mail aggiornata correttamente.");
+            return true;
         }
+        return false;
     }
 }
