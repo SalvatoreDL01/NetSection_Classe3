@@ -63,7 +63,7 @@ public class SezioneServiceImp implements SezioneService{
             if(uploadFile(is, path))
                 sezioneDAO.updateImmagine(s);
             else{
-                request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
+                request.setAttribute("messaggio", "Aggiunta sezione non effettuata!");
                 return false;
             }
 

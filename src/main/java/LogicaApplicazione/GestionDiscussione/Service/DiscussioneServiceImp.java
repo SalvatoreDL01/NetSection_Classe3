@@ -87,26 +87,35 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         try {
-            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+idSezione;
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
             f.mkdir();
 
+
             Part part = request.getPart("immagine");
             String fileName = part.getSubmittedFileName();
-            String path = "css/icone/Immagine/" + idSezione + "/" + fileName;
-            String pathCompleto = dirPath + "/" + fileName;
+            if(fileName.equals(""))
+                return false;
+            String immagine = "css/icone/Immagini/" +d.getSezione()+"/"+ fileName;
+            String path = dirPath + "/" + fileName;
 
-            d.setImmagine(path);
+            d.setImmagine(immagine);
 
             InputStream is = part.getInputStream();
-            uploadFile(is, pathCompleto);
+            if(uploadFile(is, path))
+                discussioneDAO.updateImmagine(d);
+            else{
+                request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
+                return false;
+            }
+
 
         }
         catch (Exception e){
             System.out.println(e);
-            request.setAttribute("messaggio", "Aggiunta discussione non effettuata!");
+            request.setAttribute("messaggio", "Aggiunta Discussione non effettuata!");
         }
 
         discussioneDAO.doSave(d);
