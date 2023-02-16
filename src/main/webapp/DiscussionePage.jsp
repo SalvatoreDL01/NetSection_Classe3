@@ -14,6 +14,14 @@
     <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/DiscussionePageStyle.css">
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#bottoneRicerca").click(function(){
+                $("#segnala").slideToggle('fast');
+            });
+        });
+    </script>
 </head>
 <body>
 <%
@@ -56,6 +64,9 @@
         <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
     <br>
+    <p class="segnalazione" id="bottoneRicerca">
+        segnala
+    </p>
     <form id="segnala">
         <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
         <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
