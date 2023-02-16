@@ -26,10 +26,24 @@ import java.util.List;
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
-    public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
-    public final static CommentoDAO commentoDAO = new CommentoDAO();
-    public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
-    public final static SezioneDAO sezioneDAO = new SezioneDAO();
+    public DiscussioneDAO discussioneDAO;
+    public CommentoDAO commentoDAO;
+    public UtenteRegistratoDAO utenteRegistratoDAO;
+    public SezioneDAO sezioneDAO;
+
+    public DiscussioneServiceImp() {
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO){
+        this.discussioneDAO = discussioneDAO;
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
 
     public  boolean checkUtenteToKick(int idUserToKick){
         String idString= Integer.toString(idUserToKick);
@@ -307,17 +321,16 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
-    List<Discussione> d = new ArrayList<>();
         if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
-            d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
+            return discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
         else
             if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
-            d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+                return discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
         else
             if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
-                d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
+                return discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
 
-        return d;
+        return null;
     }
 
     @Override
