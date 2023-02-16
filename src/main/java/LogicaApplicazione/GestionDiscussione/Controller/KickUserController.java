@@ -14,12 +14,15 @@ public class KickUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idUserToKick= Integer.parseInt(request.getParameter("kick"));
+
         Discussione discussione = (Discussione) request.getAttribute("discussione");
         DiscussioneService service= new DiscussioneServiceImp();
 
         if(idUserToKick!=0 && discussione!=null){
-            if(!service.kickUtente(idUserToKick, discussione))
-                request.setAttribute("errore","l'utente non è stato kickato");
+            if(service.checkUtenteToKick(idUserToKick)){
+                if(!service.kickUtente(idUserToKick, discussione))
+                    request.setAttribute("errore","l'utente non è stato kickato");
+            }
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("GestioneDiscussioniPage.jsp");
