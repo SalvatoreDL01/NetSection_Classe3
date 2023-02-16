@@ -39,7 +39,7 @@ public class ProblemaDAO {
         }
     }
     /*Metodo che salva tutti i dati di un oggetto Problema sul DB*/
-    public void dosave(Problema p){
+    public boolean dosave(Problema p){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Problema values(?,?,?,?)");
             ps.setInt(1, p.getIdUtente());
@@ -47,8 +47,10 @@ public class ProblemaDAO {
             ps.setString(3, p.getNatura());
             ps.setString(4, p.getContenuto());
             ps.execute();
+            return true;
         }
         catch (SQLException e){
+            //return false;
             throw new RuntimeException();
         }
     }

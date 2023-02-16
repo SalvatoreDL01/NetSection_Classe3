@@ -16,7 +16,8 @@ public class DeleteCommentController extends HttpServlet {
         String date=request.getParameter("dataCommento");
 
         DiscussioneService gestioneDiscussione=new DiscussioneServiceImp();
-        gestioneDiscussione.deleteComment(id, date);
+        if(!gestioneDiscussione.deleteComment(id, date))
+            request.setAttribute("errore","il commento non è stato eliminato");
 
         response.sendRedirect("DiscussionePage.jsp");
     }

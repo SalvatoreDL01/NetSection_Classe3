@@ -62,25 +62,16 @@
            <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%><a><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
 <%}%>
+    <br>
+    <br>
     <form id="formCommento" class="commento" action="AggiungiCommento">
 
         <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
         <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
         <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
-
+        <br><br>
         <input id="submitCommento" type="submit" value="Pubblica">
     </form>
-    <!--
-    <h6>rispondi</h6>
-    <form class="formRisposta" method="POST" class="commento" action="">
-        <input type="hidden" name="idSezione" value=">
-        <input type="hidden" name="idSezione" value="">
-        <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
-        <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
-        <textarea class="testoRisposta" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
-
-
-       <input class="submitRisposta" type="submit" value="Pubblica">-->
     <p></p>
 </div>
 </body>

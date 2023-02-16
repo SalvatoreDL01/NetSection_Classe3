@@ -13,6 +13,14 @@
 <html>
 <head>
     <title>Sezione Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#bottoneRicerca").click(function(){
+                $("#formTag").slideToggle('slow');
+            });
+        });
+    </script>
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
@@ -23,14 +31,19 @@
     List<Discussione> lDiscussione = (List<Discussione>) s.getListaDiscussioni();
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
     List<Discussione> discussioniTag = (List<Discussione>) request.getAttribute("discussioniTag");
+    String errore = (String) request.getAttribute("errore");
 %>
 <div id="sfondo" style="background-image: url(<%=s.getImmagine()%>);"></div>
 <div id="paginaSezione">
+    <%if(errore != null){%>
+    <h2><%=errore%></h2>
+    <%}%>
     <div id="ricercaFiltrata">
         <p class="tags" id="bottoneRicerca">
             RicercaFiltrata
         </p>
-        <form class="tags" action="" method="POST">
+        <br>
+        <form id="formTag" class="tags" action="RicercaByTag" method="POST">
             <input type="hidden" name="idSezione" value="<%=s.getIdSezione()%>">
             <%for(int i=0;i<tagSezione.size();i++){%>
             <input type="checkbox" value="<%=tagSezione.get(i)%>" id="tag<%=i%>" name="c<%=i%>">
@@ -40,6 +53,8 @@
             <input type="submit" value="Filtra">
         </form>
     </div>
+    <br>
+    <br>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
 
     <form method="get" action="CreaDiscussioneController">
@@ -48,34 +63,34 @@
     </form>
 
     <%  if(discussioniTag==null){
-        for(Discussione d: lDiscussione){%>
+        for(int i=0; i<lDiscussione.size();i++){%>
     <div class="discussione">
-        <p class="titoloDiscussione"><%=d.getTitolo()%></p>
+        <p class="titoloDiscussione"><%=lDiscussione.get(i).getTitolo()%></p>
         <div class="immagine">
-            <img src="<%=d.getImmagine()%>">
+            <img src="<%=lDiscussione.get(i).getImmagine()%>">
         </div>
         <br>
         <div class="componenti">
             <div class="componentiDiscissione">
                 <div class="partecipanti">
                     <img src="css/icone/gruppo.png">
-                    <p class="componenteTestuale", id="numeroPartecipanti"><%=d.getListaIscritti().size()%></p>
+                    <p class="componenteTestuale", id="numeroPartecipanti"><%=lDiscussione.get(i).getListaIscritti().size()%></p>
                 </div>
             </div>
             <div class="bottonePartecipazione">
-                <%if(utente!=null && !d.getListaIscritti().contains(utente) && !d.getListaKickati().contains(utente)){%>
+                <%if(utente!=null && !lDiscussione.get(i).getListaIscritti().contains(utente) && !lDiscussione.get(i).getListaKickati().contains(utente)){%>
                 <form method="get" action="SubscribeController">
                     <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
-                    <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+                    <input type="hidden" name="titolo" value="<%=lDiscussione.get(i).getTitolo()%>">
                     <input type="submit" value="Iscriviti">
                 </form>
-                <%}else{ if(d.getListaKickati().contains(utente)){%>
+                <%}else{ if(lDiscussione.get(i).getListaKickati().contains(utente)){%>
                 <p class="kickato">Non puoi più accedere</p>
-                <%}else{if(d.getListaIscritti().contains(utente)){%>
+                <%}else{if(lDiscussione.get(i).getListaIscritti().contains(utente)){%>
                 <form method="get" action="DiscussiController">
                     <input type="hidden" name="tipo" value="iscritto">
                     <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
-                    <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+                    <input type="hidden" name="titolo" value="<%=lDiscussione.get(i).getTitolo()%>">
                     <input type="submit" value="Partecipa">
                 </form>
                 <%}}}%>

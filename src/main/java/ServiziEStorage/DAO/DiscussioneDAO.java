@@ -64,8 +64,10 @@ public class DiscussioneDAO {
     public Discussione doRetriveLightById(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
+                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?" +
+                            " and titolo = ?");
             ps.setInt(1, idSezione);
+            ps.setString(2,titolo);
             UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
 
             List<String> tags=getTags(idSezione, titolo);
@@ -181,7 +183,8 @@ public class DiscussioneDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-               Discussione d = doRetriveLightById(idSezione, rs.getString(1));
+                String nome = rs.getString(1);
+               Discussione d = doRetriveLightById(idSezione,nome);
                l.add(d);
             }
             return l;
@@ -374,13 +377,15 @@ public class DiscussioneDAO {
         try(Connection con = ConPool.getConnection()){
             String query = "select distinct d.titolo from Discussione d natural join Tag t where d.sezione = ? and (";
             for(int i=0; i<desiderati.size(); i++)
-            if(i==desiderati.size())
-                query += "t.nome = "+desiderati.get(i)+")";
+            if(i==desiderati.size()-1)
+                query += "t.nome = ?)";
             else
-                query += "t.nome = "+desiderati.get(i)+" or ";
+                query += "t.nome = ? or ";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,idSezione);
+            for(int i=1;i<=desiderati.size();i++)
+                ps.setString(i+1,desiderati.get(i-1));
 
             ResultSet rs = ps.executeQuery();
 

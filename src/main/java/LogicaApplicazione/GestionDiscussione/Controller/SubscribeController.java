@@ -21,8 +21,8 @@ public class SubscribeController extends HttpServlet {
         UtenteRegistratoDAO ud= new UtenteRegistratoDAO();
 
         DiscussioneService service= new DiscussioneServiceImp();
-        service.iscrivi(idSezione, titolo, u);
-
+        if(!service.iscrivi(idSezione, titolo, u))
+            request.setAttribute("errore","iscrizione fallita");
         request.setAttribute("sezione",idSezione);
         request.setAttribute("titolo",titolo);
 

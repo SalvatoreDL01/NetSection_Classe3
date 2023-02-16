@@ -21,7 +21,8 @@ public class UnsubscribeController extends HttpServlet {
         UtenteRegistrato u= ud.doRetriveById(idUser);
 
         DiscussioneService service= new DiscussioneServiceImp();
-        service.disiscrivi(idSezione, titolo, u);
+        if(!service.disiscrivi(idSezione, titolo, u))
+            request.setAttribute("errore","disiscrizione fallita");
 
         response.sendRedirect("DiscussionePage");
     }
