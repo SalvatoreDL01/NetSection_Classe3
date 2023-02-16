@@ -81,3 +81,13 @@ input{
 .partecipante button{
     border-radius: 6px;
 }
+footer{
+    padding-top: 20%;
+    padding-right: 40%;
+    padding-left: 40%;
+}
+.elect-mod-button{
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-bottom: 20%;
+}

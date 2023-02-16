@@ -100,7 +100,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         try {
-            String dirPath = "/home/giuseppe/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
@@ -132,6 +132,8 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         discussioneDAO.doSave(d);
+        utenteRegistratoDAO.addModerazione(d,utente);
+        utenteRegistratoDAO.addIscrizione(d,utente);
         
         for(String s : tags)
             discussioneDAO.addTag(d,s);

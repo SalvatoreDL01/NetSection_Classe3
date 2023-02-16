@@ -1,5 +1,5 @@
 <%@ page import="ServiziEStorage.DAO.UtenteRegistratoDAO" %>
-<%@ page import="ServiziEStorage.Entry.Discussione" %><%--
+<%@ page import="ServiziEStorage.Entry.*" %><%--
   Created by IntelliJ IDEA.
   User: giuseppe
 --%>
@@ -17,6 +17,9 @@
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
     Discussione discussione = (Discussione) request.getAttribute("discussione");
+    List<Segnalazione> listaSegnalazione = (List<Segnalazione>) request.getAttribute("segnalazioni");
+    List<Commento> commenti = (List<Commento>) request.getAttribute("commenti");
+    List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) request.getAttribute("utenti");
 %>
 <div id="corpo">
 
@@ -65,11 +68,19 @@
             </div>
             <% } %>
         </div>
+        <h2>Segnalazioni</h2>
+        <%for(int i=0; i<listaSegnalazione.size();i++){%>
+        <p><%=utenti.get(i).getUsername()%></p>
+        <p><%=commenti.get(i).getContenuto()%></p>
+        <p><%=listaSegnalazione.get(i).getNatura()%></p>
+        <p><%=listaSegnalazione.get(i).getContenuto()%></p>
+        <form action="DeleteCommentController" method="post">
+            <input type="hidden" name="idCreatore" value="<%=commenti.get(i).getCreatore()%>">
+            <input type="hidden" name="dataCommento" value="<%=commenti.get(i).getDataScrittura()%>">
+            <input type="submit" value="Cancella commento">
+        </form>
+        <%}%>
         <hr style="width: 800px">
-        <div>
-            <button>Aggiorna dati</button>
-            <button>Elimina discussione</button>
-        </div>
     </div>
 </div>
 </body>

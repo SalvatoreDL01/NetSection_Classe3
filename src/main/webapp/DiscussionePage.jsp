@@ -96,10 +96,10 @@
     </div>
 
     <div class="elect-mod-button">
-        <form action="GestioneDiscussioneController" method="post" onsubmit="return (validateElect());">
+        <form action="GestioneDiscussioneController" method="post">
             <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
             <input type="hidden" name="sezione" value="<%=d.getTitolo()%>">
-            <input type="submit" id="Visualizza segnalazioni" name="electButton"><br>
+            <input type="submit" name="Visualizza segnalazioni" name="electButton"><br>
         </form>
     </div>
     <%}%>

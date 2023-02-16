@@ -330,9 +330,6 @@ public class UtenteRegistratoDAO {
             ps.setString(3, d.getTitolo());
 
             ps.execute();
-
-            ((ArrayList<UtenteRegistrato>)d.getListaModeratori()).add(u);
-            u.getListaModerazioni().addToList(d);
         }
         catch (SQLException e){
             throw new RuntimeException(e);
