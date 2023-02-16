@@ -1,15 +1,11 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
-import LogicaApplicazione.GestionDiscussione.Exception.IdNotFoundException;
-import LogicaApplicazione.GestioneUtente.Service.UtenteService;
-import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
-import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,18 +39,24 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return true;
     }
-    public boolean kickUtente(int idUserToKick, Discussione discussione) throws IdNotFoundException {
+    public boolean kickUtente(int idUserToKick, Discussione discussione) {
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){
+                System.out.println("ID trovato.");
                 if(utenteRegistratoDAO.removeUtente(discussione, u)){
                     System.out.println("L'utente è stato kickato dalla conversazione.");
                     return true;
                 }
+                else{
+                    System.out.println("L'utente non è stato kickato dalla conversazione.");
+                    return false;
+                }
             }
             else{
-                throw new IdNotFoundException();
+                System.out.println("ID non trovato.");
+                return false;
             }
         }
         return false;

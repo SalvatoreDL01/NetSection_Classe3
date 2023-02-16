@@ -16,17 +16,17 @@ public class ElectModController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneDAO d=new DiscussioneDAO();
         int idUserToElect= Integer.parseInt(request.getParameter("userToElect"));
-        HttpSession session = request.getSession();
-        Discussione discussione= (Discussione) session.getAttribute("discussione");
+        String titolo= request.getParameter("title");
+        int sezione= Integer.parseInt(request.getParameter("sezione"));
 
-        //eseguire un check per verificare che non sia già moderatore di questa sezione
-
-        DiscussioneService ds=new DiscussioneServiceImp();
-        if(ds.electMod(idUserToElect, discussione)){
-            System.out.println("Moderatore eletto correttamente.");
-            response.sendRedirect("DiscussionePage");
+        if(((titolo != null) && (sezione != 0))){
+            Discussione discussione= d.doRetriveById(sezione, titolo);
+            DiscussioneService ds=new DiscussioneServiceImp();
+            if(ds.electMod(idUserToElect, discussione)){
+                System.out.println("Moderatore eletto correttamente.");
+                response.sendRedirect("DiscussionePage");
+            }
         }
-
     }
 
     @Override

@@ -1,6 +1,5 @@
 package LogicaApplicazione.GestionDiscussione.Controller;
 
-import LogicaApplicazione.GestionDiscussione.Exception.IdNotFoundException;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
 import ServiziEStorage.Entry.Discussione;
@@ -21,12 +20,8 @@ public class KickUserController extends HttpServlet {
 
         if(idUserToKick!=0 && discussione!=null){
             if(service.checkUtenteToKick(idUserToKick)){
-                try {
-                    if(!service.kickUtente(idUserToKick, discussione))
-                        request.setAttribute("errore","l'utente non è stato kickato");
-                } catch (IdNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
+                if(!service.kickUtente(idUserToKick, discussione))
+                    request.setAttribute("errore","l'utente non è stato kickato");
             }
         }
 

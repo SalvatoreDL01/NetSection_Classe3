@@ -95,7 +95,7 @@
         </form>
     </div>
 
-    <div class="elect-mod-button">
+    <div class="ges-disc-button">
         <form action="GestioneDiscussioneController" method="post">
             <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
             <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
