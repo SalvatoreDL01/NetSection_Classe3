@@ -53,7 +53,6 @@ LogicaApplicazione/GestionDiscussione/Service/DiscussioneServiceImp$1.class
 LogicaApplicazione/GestioneUtente/Service/UtenteServiceImp.class
 LogicaApplicazione/Admin/Service/AdminService.class
 LogicaApplicazione/GestioneSezione/Controller/RicercaSezioniGenere.class
-LogicaApplicazione/GestioneProblema/Controller/ProblemControl.class
 LogicaApplicazione/GestionDiscussione/Controller/CreaDiscussioneController.class
 LogicaApplicazione/GestioneUtente/Controller/LogoutController.class
 LogicaApplicazione/Index.class

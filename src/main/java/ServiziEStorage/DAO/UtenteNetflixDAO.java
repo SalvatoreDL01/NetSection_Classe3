@@ -20,7 +20,7 @@ public class UtenteNetflixDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 UtenteNetflix un = new UtenteNetflix(id,u.getDataNascita(),u.getUsername(),u.getEmail(),u.getPass(),
-                        u.getImmagine(),u.getListaIscizioni(),u.getListaModerazioni(),u.getListaKickato(),
+                        u.getImmagine(),u.getListaIscizioni(), null,u.getListaKickato(),
                         u.getListaPreferiti(),rs.getString(1),rs.getString(2));
                 return un;
             }

@@ -122,7 +122,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     }
     /*Metodo che ritorna un oggetto List listaModerazioni della classe UntenteRegistrato*/
     @Override
-    public List<?> getListaModerazioni() {
+    public GestioneListaModerazioni getListaModerazioni() {
         return super.getListaModerazioni();
     }
     /*Metodo che setta un oggetto List listaModerazioni della classe UntenteRegistrato*/

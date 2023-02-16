@@ -19,7 +19,8 @@
 </head>
 <body>
 <div class="welcome">
-  <img src="css/logo.png"><br>
+  <a href="index.jsp"><img id="imageLogo" class="elementiNavBar" src="css/logo.png"></a>
+
   <%
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
     GenereDAO genereDAO = new GenereDAO();
@@ -74,9 +75,10 @@
     <%
       if(u instanceof UtenteNetflix){
     %>
+    <!--
     <p>Crea la tua discussioni</p><br>
     <input type="button" value="Crea una discussione" ><br><br>
-
+-->
   </div>
   <%
     }

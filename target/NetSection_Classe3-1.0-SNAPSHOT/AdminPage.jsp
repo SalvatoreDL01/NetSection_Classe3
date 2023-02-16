@@ -41,12 +41,13 @@
       <li>ID: <%=id%></li>
     </ul>
   </div>
-  <p>Puoi modificare la mail cliccando sul pulsante "Modifica"</p><br>
+  <!--<p>Puoi modificare la mail cliccando sul pulsante "Modifica"</p><br>
   <form>
     <input type="text" name="mail" id="mail" placeholder="Modifica la mail..."><br><br>
     <input type="button" id="edit" value="Modifica">
   </form>
 </div>
+-->
 <div class="sections">
   <div class="sections-values">
     <div class="add">
@@ -72,6 +73,7 @@
     </div>
   </div>
   <% } %>
+  <!--
 </div>
   <div class="create-disc">
     <p>Le tue discussioni</p>
@@ -83,6 +85,7 @@
   <p>Accedi alle tue discussioni preferite</p><br>
   <input type="button" value="Discussioni preferite">
 </div>
+-->
 <script>
   function validateBan(){
     let id= document.getElementById("ban").value;
@@ -100,6 +103,11 @@
     <input type="text" id="ban" name="ban" value=""><br>
     <input type="hidden" id="hidden" style="color: red" value=""><br><br>
     <input type="submit" value="Banna Utente">
+  </form>
+</div>
+<div class="discuss">
+  <form action="LogoutController">
+    <input type="submit" value="Logout">
   </form>
 </div>
 </body>

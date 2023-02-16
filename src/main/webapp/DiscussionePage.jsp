@@ -32,14 +32,6 @@
         return true;
     }
 </script>
-<div class="elect-mod-button">
-    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
-        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
-        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
-        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
-        <input type="submit" id="Eleggi" name="electButton"><br>
-    </form>
-</div>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">
@@ -59,7 +51,8 @@
                                     <%}else{%>css/icone/user.png<%}%>">
         <p style="float:left;" class="nomeUtente"><%=u.getUsername()%></p>
         <p style="float:left;width: 80%" class="commento"><%=c.getContenuto()%></p> <!-- aggiungere immagini punteggio -->
-           <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%><a><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
+           <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%>
+        <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
 <%}%>
     <br>
@@ -70,9 +63,42 @@
         <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
         <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
         <br><br>
-        <input id="submitCommento" type="submit" value="Pubblica">
+        <input id="submitCommento" type="submit" value="Pubblica"><br>
     </form>
     <p></p>
+</div>
+<script>
+    function validateKickForm(){
+        let m= document.getElementById("mot").value;
+        if(m<10 || m>255){
+            alert("Dai una breve motivazione!");
+            return false;
+        }
+        return true;
+    }
+</script>
+<div>
+    <form>
+        <select type="hidden" class="form-select" id = "formKick">
+            <option selected value = "0">Seleziona l'utente</option>
+            <%
+                List<UtenteRegistrato> list= (List<UtenteRegistrato>) d.getListaIscritti();
+                for (UtenteRegistrato u: list) {
+            %>
+            <option value="1"><% u.getUsername(); %></option>
+            <% } %>
+        </select>
+        <input type="hidden" type="text" id="mot" placeholder="Descrivi la motivazione della segnalazione...">
+        <input type="submit" value="Segnala Utente" onsubmit="return (validateKickForm());"><br><br>
+    </form>
+</div>
+<div class="elect-mod-button">
+    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
+        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
+        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
+        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
+        <input type="submit" id="Eleggi" name="electButton"><br>
+    </form>
 </div>
 </body>
 </html>

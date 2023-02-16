@@ -295,7 +295,7 @@ public class UtenteRegistratoDAO {
             ps.execute();
 
             d.getListaModeratori().remove(u);
-            u.getListaModerazioni().remove(d);
+            u.getListaModerazioni().removeFromList(d);
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -331,7 +331,7 @@ public class UtenteRegistratoDAO {
             ps.execute();
 
             ((ArrayList<UtenteRegistrato>)d.getListaModeratori()).add(u);
-            ((ArrayList<Discussione>)u.getListaModerazioni()).add(d);
+            u.getListaModerazioni().addToList(d);
         }
         catch (SQLException e){
             throw new RuntimeException(e);
