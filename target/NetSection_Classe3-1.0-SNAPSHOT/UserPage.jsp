@@ -70,16 +70,21 @@
     }
   </script>
   <div class="create-disc">
-    <p>Le tue discussioni</p><br>
+
     <%
       if(u instanceof UtenteNetflix){
     %>
+    <p>Crea la tua discussioni</p><br>
     <input type="button" value="Crea una discussione" ><br><br>
-    <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
+
   </div>
   <%
     }
   %>
+  <div class="discuss">
+    <p>Le tue discussioni</p>
+    <input type="button" id="ltd" value="Le tue discussioni" onclick="mostraMenu()"><br>
+  </div>
   <%
     DiscussioneDAO dao = new DiscussioneDAO();
     List<Discussione> lista= (List<Discussione>) u.getListaIscizioni();
@@ -88,7 +93,7 @@
   %>
   <div id="tue-discussioni">
     <div class="discussione">
-      <% d.getTitolo(); %>
+      <p style="color: aliceblue; margin: 2px;"><%=d.getTitolo()%></p>
     </div>
   </div>
   <% } %>
@@ -155,16 +160,18 @@
     <label for="descrizione">Inserisci la natura del problema</label><br>
     <textarea name="descrizione" id="descrizione" rows="10" cols="40"></textarea><br>
     <input type="submit" value="Invia">
-    <%
-      if(request.getParameter("errore") == null){
-    %>
-    <p>Esito: </p>
-    <%}
-      else{
-    %>
-    <p><%=request.getAttribute("errore")%></p>
-    <%}%>
   </form>
+  <%
+
+    if(request.getAttribute("errore") == null){
+  %>
+
+  <%}
+  else{System.out.println(request.getAttribute("errore"));
+  %>
+
+  <%=request.getAttribute("errore")%>
+  <%}%>
 </div>
 <script>
   function visualizzaForm(){
