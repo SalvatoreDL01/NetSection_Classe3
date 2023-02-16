@@ -15,11 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class SearchByTagTest {
 
     @Test
-    void searchByTagX1Y0() {
+    void soloTagDesiderati() {
         //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
         int idSezione = 1;
         List<String> tagDesiderati = new ArrayList<>();
-        List<String> tagNonDesiderati = new ArrayList<>();
 
         tagDesiderati.add("@tag");
 
@@ -39,14 +38,13 @@ class SearchByTagTest {
 
         //Simuliamo il risultato
         List<Discussione> result = dao.ricercaTagDesiderati(tagDesiderati,idSezione);
-        assertTrue(result.equals(aspettato));
+        assertEquals(aspettato,result);
     }
 
     @Test
-    void searchByTagX0Y1() {
+    void soloTagNonDesiderati() {
         //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
         int idSezione = 1;
-        List<String> tagDesiderati = new ArrayList<>();
         List<String> tagNonDesiderati = new ArrayList<>();
 
         tagNonDesiderati.add("@tag");
@@ -70,6 +68,35 @@ class SearchByTagTest {
         assertEquals(aspettato,result);
     }
 
+    @Test
+    void siaTagDesideratiCheNon() {
+        //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
+        int idSezione = 1;
+        List<String> tagDesiderati = new ArrayList<>();
+        List<String> tagNonDesiderati = new ArrayList<>();
+
+        tagNonDesiderati.add("@tag");
+        tagDesiderati.add("@tag1");
+
+        List<Discussione> aspettato;
+        List<Discussione> list;
+        List<String> tags,tags2;
+
+        tags = Arrays.asList("@tag1","@tag");
+        tags2 = Arrays.asList("@tag1");
+        Discussione d1 = new Discussione(1,"titolo",1,"path",tags,"data");
+        Discussione d2 = new Discussione(1,"titolo2",1,"path2",tags2,"data2");
+        aspettato = Arrays.asList(d2);
+        list = Arrays.asList(d2);
+        //simuliamo la connessione al DB
+
+        DiscussioneDAO dao = Mockito.mock(DiscussioneDAO.class);
+        Mockito.when(dao.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione)).thenReturn(list);
+        //Simuliamo il risultato
+        List<Discussione> result = dao.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione);
+
+        assertEquals(aspettato,result);
+    }
     /*
     List<Discussione> d = new ArrayList<>(); --
         if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
