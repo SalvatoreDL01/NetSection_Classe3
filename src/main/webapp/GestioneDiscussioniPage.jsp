@@ -48,16 +48,6 @@
             <p>Elenco tag</p>
             <textarea cols="50" rows="15"><% discussione.getListaTag(); %></textarea>
         </div>
-        <div>
-            <div>
-                <p>Tag da aggiungere</p>
-                <input type="text">
-            </div>
-            <div>
-                <p>Tag da togliere</p>
-                <input type="text">
-            </div>
-        </div>
         <hr style="width: 800px">
         <div>
             <p>Elenco partecipanti</p>
