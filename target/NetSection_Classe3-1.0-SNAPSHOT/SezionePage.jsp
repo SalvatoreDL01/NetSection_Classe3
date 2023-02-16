@@ -13,6 +13,14 @@
 <html>
 <head>
     <title>Sezione Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#bottoneRicerca").click(function(){
+                $("#formTag").slideToggle('slow');
+            });
+        });
+    </script>
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
@@ -23,14 +31,19 @@
     List<Discussione> lDiscussione = (List<Discussione>) s.getListaDiscussioni();
     UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
     List<Discussione> discussioniTag = (List<Discussione>) request.getAttribute("discussioniTag");
+    String errore = (String) request.getAttribute("errore");
 %>
 <div id="sfondo" style="background-image: url(<%=s.getImmagine()%>);"></div>
 <div id="paginaSezione">
+    <%if(errore != null){%>
+    <h2><%=errore%></h2>
+    <%}%>
     <div id="ricercaFiltrata">
         <p class="tags" id="bottoneRicerca">
             RicercaFiltrata
         </p>
-        <form class="tags" action="RicercaByTag" method="POST">
+        <br>
+        <form id="formTag" class="tags" action="RicercaByTag" method="POST">
             <input type="hidden" name="idSezione" value="<%=s.getIdSezione()%>">
             <%for(int i=0;i<tagSezione.size();i++){%>
             <input type="checkbox" value="<%=tagSezione.get(i)%>" id="tag<%=i%>" name="c<%=i%>">
@@ -40,6 +53,8 @@
             <input type="submit" value="Filtra">
         </form>
     </div>
+    <br>
+    <br>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
 
     <form method="get" action="CreaDiscussioneController">

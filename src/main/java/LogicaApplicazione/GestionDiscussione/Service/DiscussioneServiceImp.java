@@ -296,6 +296,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
             if(request.getParameter("c"+i)!=null)
                 tagSelezionati.add(request.getParameter("c"+i));
 
+        if(tagSelezionati.size()==0){
+            request.setAttribute("errore","Non hai selezionato tag");
+            return false;
+        }
         List<Discussione> d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
 
         if(d==null){
