@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/NavBarStyle.css">
     <script type="text/javascript" src="javaScript/NavBar.js"></script>
 </head>
