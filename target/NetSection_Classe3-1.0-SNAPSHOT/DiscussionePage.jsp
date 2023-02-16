@@ -91,15 +91,15 @@
             <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label><br>
             <input type="number" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
             <input type="hidden" id="hidden" style="color: red" value=""><br><br>
-            <input type="submit" id="Eleggi" name="electButton"><br>
+            <input type="submit" id="Eleggi" value="electButton"><br>
         </form>
     </div>
 
     <div class="elect-mod-button">
         <form action="GestioneDiscussioneController" method="post">
             <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
-            <input type="hidden" name="sezione" value="<%=d.getTitolo()%>">
-            <input type="submit" name="Visualizza segnalazioni" name="electButton"><br>
+            <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+            <input type="submit" value="Visualizza segnalazioni"><br>
         </form>
     </div>
     <%}%>
