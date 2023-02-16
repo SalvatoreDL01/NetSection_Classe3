@@ -50,7 +50,7 @@ public class RicercaByTag extends HttpServlet {
             request.setAttribute("errore","Non hai selezionato tag");
         }
         else {
-            d = ds.serchByTag(tagSelezionati,tagNonSelezionati,idSezione);
+            d = ds.searchByTag(tagSelezionati,tagNonSelezionati,idSezione);
             if(d == null)
                 request.setAttribute("errore" ,"Discussone non trovata");
         }

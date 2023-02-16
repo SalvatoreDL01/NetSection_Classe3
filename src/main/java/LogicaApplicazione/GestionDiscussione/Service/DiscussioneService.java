@@ -18,6 +18,6 @@ public interface DiscussioneService {
     public boolean electMod(int idUserToElect, Discussione discussione);
     public boolean iscrivi(int idSezione, String titolo, UtenteRegistrato utente);
     public boolean disiscrivi(int idSezione, String titolo, UtenteRegistrato utente);
-    public List<Discussione> serchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione);
+    public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione);
     public Commento ottieniCommento(String data, int creatore);
 }

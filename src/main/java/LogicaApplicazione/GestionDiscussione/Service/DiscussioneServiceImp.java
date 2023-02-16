@@ -299,16 +299,17 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
-    public List<Discussione> serchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
+    public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
     List<Discussione> d = new ArrayList<>();
+
         if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
         d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
-        else
-            if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
-                d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
-            else
-                if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
-                    d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
+
+        if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
+            d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+
+        if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
+            d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
 
         return d;
     }
