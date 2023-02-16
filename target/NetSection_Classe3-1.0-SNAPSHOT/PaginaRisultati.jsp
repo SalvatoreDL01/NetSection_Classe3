@@ -25,7 +25,7 @@
         System.out.println(listaSezioni.size());
     %>
     <div class="slideShow">
-        <h1>SEZIONI PRINCIPALI</h1>
+        <h1>LISTA RUSULTATI</h1>
         <div class="mySlidesPopolari">
             <%
                 for(int i=0; i<4; i++){

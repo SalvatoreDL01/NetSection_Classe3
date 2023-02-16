@@ -23,12 +23,10 @@ public class AdminServiceImp implements AdminService{
                 Eliminazione e=new Eliminazione(u.getId(), u.getUsername(), u.getEmail());
                 eliminazioneDAO.doSave(e);
                 utenteRegistratoDAO.remove(idUserToBan);
-                System.out.println("L'utente è stato rimosso correttamente");
                 return true;
             }
             else{
                 System.out.println("L'utente non è presente in lista");
-                return false;
             }
         }
         return false;
@@ -44,4 +42,3 @@ public class AdminServiceImp implements AdminService{
         return false;
     }
 }
-
