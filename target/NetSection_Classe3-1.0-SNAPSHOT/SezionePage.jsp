@@ -49,7 +49,14 @@
             <input type="checkbox" value="<%=tagSezione.get(i)%>" id="tag<%=i%>" name="c<%=i%>">
             <label for="tag<%=i%>"><%=tagSezione.get(i)%></label>
             <%if(i==5){%><br><%}%>
-            <%}%><br><br>
+            <%}%><br>
+            <p class="tags">Tag NON desiderati</p>
+            <%for(int i=0;i<tagSezione.size();i++){%>
+            <input type="checkbox" value="<%=tagSezione.get(i)%>" id="Ntag<%=i%>" name="d<%=i%>">
+            <label for="Ntag<%=i%>"><%=tagSezione.get(i)%></label>
+            <%if(i==5){%><br><%}%>
+            <%}%>
+            <br><br>
             <input type="submit" value="Filtra">
         </form>
     </div>
