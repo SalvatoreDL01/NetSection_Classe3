@@ -15,13 +15,6 @@
     <link rel="stylesheet" type="text/css" href="css/DiscussionePageStyle.css">
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#bottoneRicerca").click(function(){
-                $("#segnala").slideToggle('fast');
-            });
-        });
-    </script>
 </head>
 <body>
 <%
@@ -30,17 +23,6 @@
     List<Commento> commenti = (List<Commento>) d.getListaCommenti();
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
 %>
-<script>
-    function validateElect(){
-        let id= document.getElementById("userToElect").value;
-
-        if(id==" "){
-            let hid= document.getElementById("hidden").innerHTML= "utente non valido!";
-            return false;
-        }
-        return true;
-    }
-</script>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">
@@ -73,22 +55,25 @@
         <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
         <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
         <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
-        <input id="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>
-        <textarea id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea><br><br>
+        <input class="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>
+        <textarea class=segnalaText id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea><br><br>
         <input type="submit" value="Segnala Utente">
     </form>
 <%}%>
     <br>
     <br>
-    <form id="formCommento" class="commento" action="AggiungiCommento">
+    <div class="commento">
+        <form id="formCommento" class="commento" action="AggiungiCommento">
 
-        <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
-        <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
-        <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
-        <br><br>
-        <input id="submitCommento" type="submit" value="Pubblica"><br>
-    </form>
-    <p></p>
+            <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
+            <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
+            <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
+            <br><br>
+            <input id="submitCommento" type="submit" value="Pubblica"><br><br>
+        </form>
+        <p></p>
+    </div>
+
 </div>
 <script>
     function validateKickForm(){
@@ -102,13 +87,15 @@
 </script>
 <div>
 </div>
-<div class="elect-mod-button">
-    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
-        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
-        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
-        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
-        <input type="submit" id="Eleggi" name="electButton"><br>
-    </form>
-</div>
+<footer>
+    <div class="elect-mod-button">
+        <form action="ElectModController" method="get" onsubmit="return (validateElect());">
+            <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label>
+            <input type="number" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
+            <input type="hidden" id="hidden" style="color: red" value=""><br><br>
+            <input type="submit" id="Eleggi" name="electButton"><br>
+        </form>
+    </div>
+</footer>
 </body>
 </html>

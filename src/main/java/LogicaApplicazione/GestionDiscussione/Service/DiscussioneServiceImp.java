@@ -47,9 +47,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){
-                utenteRegistratoDAO.removeUtente(discussione, u);
-                System.out.println("L'utente è stato kickato dalla conversazione");
-                return true;
+                if(utenteRegistratoDAO.removeUtente(discussione, u)){
+                    System.out.println("L'utente è stato kickato dalla conversazione");
+                    return true;
+                }
             }
         }
         return false;

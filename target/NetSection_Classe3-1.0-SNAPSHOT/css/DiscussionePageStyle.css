@@ -23,12 +23,12 @@ p{
     resize: none;
 }
 
-#natura{
+.natura{
     font-size: 20px;
     width: 250px;
 }
 
-#segnalaText{
+.segnalaText{
     font-size: 20px;
     width: 450px;
     resize: none;
