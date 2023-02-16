@@ -91,8 +91,9 @@ public class DiscussioneDAO {
     public Discussione doRetriveById(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ?");
+                    "select sezione, titolo, creatore, immagine, dataCreazione from Discussione where sezione = ? and titolo=?");
             ps.setInt(1, idSezione);
+            ps.setString(2,titolo);
 
             UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
             List<String> tags=getTags(idSezione, titolo);
@@ -343,12 +344,12 @@ public class DiscussioneDAO {
         }
     }
 
-    public void addIscrizione(Discussione discussione, UtenteRegistrato utente){
+    public void addIscrizione(int idSezione, String titolo, UtenteRegistrato utente){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Iscrizione values (?,?,?)");
             ps.setInt(1, utente.getId());
-            ps.setInt(2, discussione.getSezione());
-            ps.setString(3, discussione.getTitolo());
+            ps.setInt(2, idSezione);
+            ps.setString(3, titolo);
             ps.execute();
         }
         catch (SQLException e){

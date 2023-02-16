@@ -16,3 +16,9 @@ p{
 .title{
     font-size: 25px;
 }
+
+#testoCommetno{
+    width: 500px;
+    height: 100px;
+    resize: none;
+}

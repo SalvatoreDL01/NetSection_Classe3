@@ -158,9 +158,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return false;
     }
 
+    @Override
     public boolean loadDiscussione(HttpServletRequest request){
-        int i;
+
         String titolo;
+        int i;
         if(request.getParameter("tipo")!=null){
             titolo=request.getParameter("titolo");
             i= Integer.parseInt(request.getParameter("sezione"));
@@ -172,12 +174,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         request.setAttribute("sezione",i);
         if(titolo == null){
-            request.setAttribute("errore","La sezione non è più presente");
+            request.setAttribute("errore","La discussione non è più presente");
             return false;
         }
         Discussione s = discussioneDAO.doRetriveById(i,titolo);
         if(s == null){
-            request.setAttribute("errore","La sezione non è più presente");
+            request.setAttribute("errore","La discussione non è più presente");
             return false;
         }
         request.setAttribute("discussione", s);
@@ -200,7 +202,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
         if(d!=null && utente!=null){
-            discussioneDAO.addIscrizione(d, utente);
+            discussioneDAO.addIscrizione( idSezione,  titolo, utente);
             return true;
         }
         return false;
