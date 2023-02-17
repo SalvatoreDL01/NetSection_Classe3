@@ -173,12 +173,12 @@
 
     if(request.getAttribute("errore") == null){
   %>
-
+  <p id="esito"></p>
   <%}
   else{System.out.println(request.getAttribute("errore"));
   %>
 
-  <%=request.getAttribute("errore")%>
+  <p id="esito"><%=request.getAttribute("errore")%></p>
   <%}%>
 </div>
 <!-- funzione di visualizzazione per la segnalazione -->
