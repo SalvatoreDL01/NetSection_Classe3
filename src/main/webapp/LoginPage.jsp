@@ -41,7 +41,7 @@
             <label for="password">Password:</label><br><br>
             <input type="password" id="password" name="password" value="" placeholder="Password"><br><br>
 
-            <input type="submit" value="Accedi"><br>
+            <input type="submit" id="accedi" value="Accedi"><br>
             <a href="RegistrazionePage.jsp" style="text-decoration: none; color: darkgrey; margin-top: 5px">Se non hai un account registrati</a>
         </form>
     </div>
