@@ -53,7 +53,6 @@ a{
 #visualizzazioneDiscussione{
     position: relative;
     float: left;
-    height: 1500px;
     width: 900px;
     border-radius: 10px;
     background-color: #002431;
@@ -90,4 +89,18 @@ footer{
     padding-left: 40%;
     padding-right: 40%;
     padding-bottom: 20%;
+}
+
+#immagineDiscussione{
+    width: 500px;
+    height: 300px;
+}
+
+input[type=submit]{
+    margin-left: 10px;
+    font-size:18px;
+    color:white;
+    background-color: grey;
+    border-radius: 6px;
+    border-color: white;
 }
