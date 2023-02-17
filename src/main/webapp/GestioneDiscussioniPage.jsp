@@ -31,7 +31,7 @@
         <div>
             <p><%= discussione.getTitolo()%></p>
         </div>
-        <div>
+        <div id="divImmagine">
             <p>Immagine</p>
             <img id="immagineDiscussione" src='<%= discussione.getImmagine()%>'>
         </div>
@@ -46,16 +46,19 @@
                 <form action="KickUser" method="get">
                     <p>ID: <%= u.getId() %></p>
                     <p>Nome: <%= u.getUsername() %></p>
-                    <input type="hidden" name="kick" vale="<%=u.getId()%>">
+                    <input type="hidden" name="kick" value="<%=u.getId()%>">
                     <input type="submit" id="kick-button" value="KICK">
                 </form>
             </div>
             <% }} %>
         </div>
+        <div>
+            <hr>
         <!-- display per la visualizzazione delle segnalazioni -->
         <h2>Segnalazioni</h2>
         <%if(!listaSegnalazione.isEmpty())%>
         <%for(int i=0; i<listaSegnalazione.size();i++){%>
+            <hr>
         <p><%=utenti.get(i).getUsername()%></p>
         <p><%=commenti.get(i).getContenuto()%></p>
         <p><%=listaSegnalazione.get(i).getNatura()%></p>
@@ -67,6 +70,7 @@
         </form>
         <%}%>
         <hr style="width: 800px">
+            </div>
     </div>
 </div>
 </div>

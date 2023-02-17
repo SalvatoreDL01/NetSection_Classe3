@@ -39,7 +39,7 @@
 <div id="paginaSezione">
     <br>
     <%if(errore != null){%>
-    <h2 style="color:red"><%=errore%></h2>
+    <h2 id="errore"><%=errore%></h2>
     <%}%>
     <!-- ricerca filtrata per tags -->
     <div id="ricercaFiltrata">
