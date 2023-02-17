@@ -4,6 +4,8 @@ import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
 import LogicaApplicazione.GestioneProblema.Service.ProblemaService;
 import LogicaApplicazione.GestioneProblema.Service.ProblemaServiceImp;
+import ServiziEStorage.DAO.DiscussioneDAO;
+import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Segnalazione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.*;
@@ -12,6 +14,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -27,35 +30,41 @@ public class SegnalazioneCommentoController extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int sezione= Integer.parseInt(request.getParameter("sezione"));
-        String titolo= request.getParameter("discussione");
+        int sezione= Integer.parseInt(request.getParameter("idSezione"));
+        String titolo= request.getParameter("titolo");
         String data= request.getParameter("dataSegnalato");
-        int creatore= Integer.parseInt(request.getParameter("creatore"));
+        int creatore= Integer.parseInt(request.getParameter("creatoreSegnalato"));
         String natura= request.getParameter("natura");
         String contenuto= request.getParameter("contenuto");
         UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         LocalDate localDate= LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dataStringa = localDate.format(formatter);
 
-        Segnalazione segnalazione= new Segnalazione(dataStringa, data, creatore, utente.getId(), sezione, titolo, natura, contenuto);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
+        String dataCreazione = dtf.format(LocalDateTime.now());
+
+        Segnalazione segnalazione= new Segnalazione(dataCreazione, data, utente.getId(), creatore, sezione, titolo,
+                natura, contenuto);
 
         ProblemaService problemaService = new ProblemaServiceImp();
 
         if(problemaService.salvaSegnalazione(segnalazione))
             request.setAttribute("errore", "errore segnalazione");
 
-        DiscussioneService s = new DiscussioneServiceImp();
-        String path = "DiscussionePage.jsp";
-        if(!s.loadDiscussione(request))
-            path = "SezioneController";
+        DiscussioneDAO discussioneDAO = new DiscussioneDAO();
+        Discussione s = discussioneDAO.doRetriveById(sezione,titolo);
+        if(s == null){
+            request.setAttribute("errore","La discussione non è più presente");
+        }
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
+        request.setAttribute("discussione", s);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("DiscussionePage.jsp");
         requestDispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    this.doGet(request,response);
     }
 }

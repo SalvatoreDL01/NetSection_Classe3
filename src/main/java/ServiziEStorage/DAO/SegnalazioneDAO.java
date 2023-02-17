@@ -12,8 +12,7 @@ public class SegnalazioneDAO {
     public void doSave(Segnalazione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "insert into Segnalazione (dataSegnalazione, creatoreSegnalazione, dataCommento, " +
-                            "creatoreCommento, sezione, discussione, natura, contenuto) values (?,?,?,?,?,?,?,?)");
+                    "insert into Segnalazione values (?,?,?,?,?,?,?,?)");
             ps.setString(1, s.getDataSegnalazione());
             ps.setInt(2, s.getCreatoreSegnalazione());
             ps.setString(3, s.getDataCommento());
