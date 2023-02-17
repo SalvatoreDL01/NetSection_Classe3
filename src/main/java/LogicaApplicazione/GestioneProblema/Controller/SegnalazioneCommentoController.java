@@ -1,5 +1,9 @@
 package LogicaApplicazione.GestioneProblema.Controller;
 
+import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
+import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
+import LogicaApplicazione.GestioneProblema.Service.ProblemaService;
+import LogicaApplicazione.GestioneProblema.Service.ProblemaServiceImp;
 import ServiziEStorage.Entry.Segnalazione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.*;
@@ -27,7 +31,17 @@ public class SegnalazioneCommentoController extends HttpServlet {
 
         Segnalazione segnalazione= new Segnalazione(dataStringa, data, creatore, utente.getId(), sezione, titolo, natura, contenuto);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("DiscussionePage.jsp");
+        ProblemaService problemaService = new ProblemaServiceImp();
+
+        if(problemaService.salvaSegnalazione(segnalazione))
+            request.setAttribute("errore", "errore segnalazione");
+
+        DiscussioneService s = new DiscussioneServiceImp();
+        String path = "DiscussionePage.jsp";
+        if(!s.loadDiscussione(request))
+            path = "SezioneController";
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
         requestDispatcher.forward(request, response);
     }
 
