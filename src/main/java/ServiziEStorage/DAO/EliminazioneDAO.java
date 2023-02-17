@@ -8,9 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Eliminazione*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Eliminazione*/
 public class EliminazioneDAO {
-    /*Metodo che estrae i dati di una eliminazione dal DB tramite il suo Id*/
+    /**Metodo che estrae i dati di una eliminazione dal DB tramite il suo Id
+     *
+     * @param id
+     * @return Eliminazione
+     */
     public Eliminazione retriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select id, username, email from Eliminazione where id = ?");
@@ -25,7 +29,12 @@ public class EliminazioneDAO {
             throw new RuntimeException();
         }
     }
-    /*Metodo che estrae i dati di una eliminazione dal DB tramite il suo username*/
+
+    /**Metodo che estrae i dati di una eliminazione dal DB tramite il suo username
+     *
+     * @param username
+     * @return Eliminazione
+     */
     public Eliminazione retriveByUsername(String username){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select id, username, email from Eliminazione where username = ?");
@@ -40,7 +49,12 @@ public class EliminazioneDAO {
             throw new RuntimeException();
         }
     }
-    /*Metodo che estrae i dati di una eliminazione dal DB tramite il suo email*/
+
+    /**Metodo che estrae i dati di una eliminazione dal DB tramite il suo email
+     *
+     * @param email
+     * @return Eliminazione
+     */
     public Eliminazione retriveByEmail(String email){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select id, username, email from Eliminazione where email = ?");
@@ -55,7 +69,11 @@ public class EliminazioneDAO {
             throw new RuntimeException();
         }
     }
-    /*Metodo che salva i dati di un oggetto Eliminazione dal DB*/
+
+    /**Metodo che salva i dati di un oggetto Eliminazione dal DB
+     *
+     * @param eliminazione
+     */
     public void doSave(Eliminazione eliminazione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Eliminazione values (?,?,?)");
@@ -68,7 +86,11 @@ public class EliminazioneDAO {
             throw new RuntimeException();
         }
     }
-    /*Metodo che estrae i dati di tutte le eliminazioni dal DB*/
+
+    /**Metodo che estrae i dati di tutte le eliminazioni dal DB
+     *
+     * @return ArrayList<Eliminazione>
+     */
     public ArrayList<Eliminazione> retriveAll(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select id, username, email from Eliminazione");
@@ -83,7 +105,11 @@ public class EliminazioneDAO {
             throw new RuntimeException();
         }
     }
-    /*Metodo che rimuove i dati di una eliminazione dal DB tramite il suo id*/
+
+    /**Metodo che rimuove i dati di una eliminazione dal DB tramite il suo id
+     *
+     * @param id
+     */
     public void doRemoveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Eliminazione where id=?");
@@ -95,7 +121,10 @@ public class EliminazioneDAO {
         }
     }
 
-    /*Metodo che rimuove i dati di una eliminazione dal DB tramite il suo username*/
+    /**Metodo che rimuove i dati di una eliminazione dal DB tramite il suo username
+     *
+     * @param username
+     */
     public void doRemoveByUsername(String username){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Eliminazione where username=?");
@@ -107,7 +136,10 @@ public class EliminazioneDAO {
         }
     }
 
-    /*Metodo che rimuove i dati di una eliminazione dal DB tramite la sua email*/
+    /**Metodo che rimuove i dati di una eliminazione dal DB tramite la sua email
+     *
+     * @param email
+     */
     public void doRemoveByEmail(String email){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Eliminazione where email=?");

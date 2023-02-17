@@ -9,9 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Commento*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Commento*/
 public class CommentoDAO {
-/*Estrae dal DB tutti i dati relativi a un commento tramite il suo identificatore e tutta la sua discendenza di commenti*/
+    /**Estrae dal DB tutti i dati relativi a un commento tramite il suo identificatore e tutta la sua discendenza di commenti
+     *
+     * @param dataScrittura
+     * @param creatore
+     * @return Commento
+     */
     public Commento doRetriveById(String dataScrittura, int creatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select dataScrittura, creatore, sezione, discussione, contenuto, punteggio  from Commento where creatore = ? and dataScrittura = ?");
@@ -33,7 +38,13 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*estrae tutti i dati relativi ad un Commento tramite il suo identificatore. Non estrai la sua discendenza di commenti*/
+
+    /**estrae tutti i dati relativi ad un Commento tramite il suo identificatore. Non estrai la sua discendenza di commenti
+     *
+     * @param dataScrittura
+     * @param creatore
+     * @return Commento
+     */
     public Commento doRetriveLightById(String dataScrittura, int creatore){
         try(Connection con = ConPool.getConnection()) {
             List<Commento> l = new ArrayList<>();
@@ -52,7 +63,13 @@ public class CommentoDAO {
                 throw new RuntimeException(e);
             }
     }
-/*Estrae tutti i commenti relativi ad una discussione e la loro discendenza*/
+
+    /**Estrae tutti i commenti relativi ad una discussione e la loro discendenza
+     *
+     * @param idSezione
+     * @param titolo
+     * @return List<Commento>
+     */
     public List<Commento> doRetriveByDiscussione(int idSezione,String titolo) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
@@ -71,7 +88,12 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*Estrae tutti i commenti di un utente*/
+
+    /**Estrae tutti i commenti di un utente
+     *
+     * @param creatore
+     * @return  List<Commento>
+     */
     public List<Commento> doRetriveByCreatore(int creatore) {
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
@@ -89,7 +111,11 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*Estrae una Lista di commenti che sono stati segnalati*/
+
+    /**Estrae una Lista di commenti che sono stati segnalati
+     *
+     * @return  List<Commento>
+     */
     public List<Commento> doRetriveSegnalati(){
         try(Connection con = ConPool.getConnection()){
             List<Commento> l = new ArrayList<>();
@@ -107,7 +133,11 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*salva un oggetto commento sul DB e specifica sul DB */
+
+    /**salva un oggetto commento sul DB e specifica sul DB
+     *
+     * @param c
+     */
     public void doSave(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Commento values (?,?,?,?,?,0)");
@@ -123,7 +153,11 @@ public class CommentoDAO {
             throw new RuntimeException(e);
         }
     }
-/*Rimuove un commento dal DB*/
+
+    /**Rimuove un commento dal DB
+     *
+     * @param c
+     */
     public void doRemove(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Commento where dataScrittura=? and creatore=?");
@@ -137,7 +171,10 @@ public class CommentoDAO {
         }
     }
 
-    /*Metodo che permette di aggiornare i dati relativi ad un Commento*/
+    /**Metodo che permette di aggiornare i dati relativi ad un Commento
+     *
+     * @param c
+     */
     public void update(Commento c){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Commento set punteggio=? where dataScrittura =? and creatore=?");

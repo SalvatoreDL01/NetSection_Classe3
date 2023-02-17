@@ -11,10 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe UtenteRegistrato*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe UtenteRegistrato*/
 public class UtenteRegistratoDAO {
-    /*Metodo che estrae tutti i dati di un entry UtenteRegistrato dal DB partendo dal suo id. Estrae anche i dati
-    relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce  l */
+    /**Metodo che estrae tutti i dati di un entry UtenteRegistrato dal DB partendo dal suo id.
+     *  Estrae anche i dati relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatoree i generi che preferisce  l
+     *
+     * @param id
+     * @return UtenteRegistrato
+     */
     public UtenteRegistrato doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato where id = ?");
@@ -82,7 +86,11 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /* Estrae i dati di una entry della tabella UtenteRegistrato*/
+    /** Estrae i dati di una entry della tabella UtenteRegistrato
+     *
+     * @param id
+     * @return UtenteRegistrato
+     */
     public UtenteRegistrato doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato where id = ?");
@@ -102,7 +110,12 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /*Il metodo permette di estrarre una lista di Moderatori della discussione dal DB fornendo come input l'identificatore della discussione*/
+    /**Il metodo permette di estrarre una lista di Moderatori della discussione dal DB fornendo come input l'identificatore della discussione
+     *
+     * @param idSezione
+     * @param titolo
+     * @return List<UtenteRegistrato>
+     */
     public List<UtenteRegistrato> getModeratori(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             List<UtenteRegistrato> l = new ArrayList<>();
@@ -121,7 +134,13 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Il metodo permette di estrarre una lista di Utenti iscritti alla discussione dal DB fornendo come input l'identificatore della discussione*/
+
+    /**Il metodo permette di estrarre una lista di Utenti iscritti alla discussione dal DB fornendo come input l'identificatore della discussione
+     *
+     * @param idSezione
+     * @param titolo
+     * @return List<UtenteRegistrato>
+     */
     public List<UtenteRegistrato> getIscritti(int idSezione, String titolo) {
         try (Connection con = ConPool.getConnection()) {
             List<UtenteRegistrato> l = new ArrayList<>();
@@ -139,7 +158,13 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Il metodo permette di estrarre una lista di utenti kickati dalla discussione dal DB fornendo come input l'identificatore della discussione*/
+
+    /**Il metodo permette di estrarre una lista di utenti kickati dalla discussione dal DB fornendo come input l'identificatore della discussione
+     *
+     * @param idSezione
+     * @param titolo
+     * @return List<UtenteRegistrato>
+     */
     public List<UtenteRegistrato> getKickati(int idSezione,String titolo){
         try(Connection con = ConPool.getConnection()){
             List<UtenteRegistrato> l = new ArrayList<>();
@@ -158,7 +183,11 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Estrae tutti  i dati dalla tabella UtenteRegistrato*/
+
+    /** Estrae tutti  i dati dalla tabella UtenteRegistrato
+     *
+     * @return ArrayList<UtenteRegistrato>
+     */
     public ArrayList<UtenteRegistrato> retriveAll(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteRegistrato");
@@ -202,7 +231,10 @@ public class UtenteRegistratoDAO {
         }
     }
 
-            /*Salva i dati di un oggetto UtenteRegistrato sul DB. Salva anche la tabella di generi preferiti se fornita*/
+    /**Salva i dati di un oggetto UtenteRegistrato sul DB. Salva anche la tabella di generi preferiti se fornita
+     *
+     * @param u
+     */
     public void doSave(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into UtenteRegistrato values (null,?,?,?,?,?)");
@@ -243,7 +275,10 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /*Metodo che rimuove tutti i dati di un UtenteRegistrato dal DB conoscendo il suo id*/
+    /**Metodo che rimuove tutti i dati di un UtenteRegistrato dal DB conoscendo il suo id
+     *
+     * @param id
+     */
     public void remove(int id){
         try(Connection con = ConPool.getConnection()){
 
@@ -257,7 +292,12 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /*Metodo che svolge il kick di un utente da una discussione*/
+    /**Metodo che svolge il kick di un utente da una discussione
+     *
+     * @param d
+     * @param u
+     * @return boolean
+     */
     public boolean removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
@@ -284,7 +324,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che svolge ls rimozione di una Moderazione di un utente da una discussione*/
+
+    /**Metodo che svolge ls rimozione di una Moderazione di un utente da una discussione
+     *
+     * @param d
+     * @param u
+     */
     public void removeModerazione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
@@ -302,7 +347,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
+
+    /**Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione
+     *
+     * @param d
+     * @param u
+     */
     public void removeIscrizione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
@@ -320,7 +370,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
+
+    /**Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione
+     *
+     * @param d
+     * @param u
+     */
     public void addModerazione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
@@ -335,7 +390,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione*/
+
+    /**Metodo che svolge ls rimozione di una iscrizione di un utente da una discussione
+     *
+     * @param d
+     * @param u
+     */
     public void addIscrizione(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
@@ -351,7 +411,11 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /*Metodo che svolge ls rimozione di una preferenza genere di un utente da una discussione*/
+    /**Metodo che svolge ls rimozione di una preferenza genere di un utente da una discussione
+     *
+     * @param u
+     * @param genere
+     */
     public void removeGenere(UtenteRegistrato u,String genere){
         try(Connection con = ConPool.getConnection()){
 
@@ -368,7 +432,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione*/
+
+    /**Metodo che svolge ls aggiunta di una Moderazione di un utente da una discussione
+     *
+     * @param u
+     * @param genere
+     */
     public void addGenere(UtenteRegistrato u,String genere){
         try(Connection con = ConPool.getConnection()){
 
@@ -385,7 +454,10 @@ public class UtenteRegistratoDAO {
         }
     }
 
-    /*Metodo che permette di aggiornare i dati relativi ad un UtenteRegistrato*/
+    /**Metodo che permette di aggiornare i dati relativi ad un UtenteRegistrato
+     *
+     * @param u
+     */
     public void update(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update UtenteRegistrato set username=?,email=?,pass=?,dataNasita=?,immagine=? where id=?");
@@ -402,7 +474,12 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che controlla se per un utente è presente un untente netflix sul DB*/
+
+    /**Metodo che controlla se per un utente è presente un untente netflix sul DB
+     *
+     * @param u
+     * @return boolean
+     */
     public boolean isUtenteNetflix(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from UtenteNetflix where idUtente=?");
@@ -416,7 +493,11 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che aggiorna l'immagine di un Utente registrato*/
+
+    /**Metodo che aggiorna l'immagine di un Utente registrato
+     *
+     * @param u
+     */
     public void updateImmagine(UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update UtenteRegistrato set immagine=? where id=?");
@@ -429,7 +510,14 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che controlla se per un utente è iscritto ad una Iscrizione*/
+
+    /**Metodo che controlla se per un utente è iscritto ad una Iscrizione
+     *
+     * @param sezione
+     * @param titolo
+     * @param idUtene
+     * @return boolean
+     */
     public boolean isIscritto(int sezione, String titolo, int idUtene){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idUtente from Iscrizione where idUtente=? " +

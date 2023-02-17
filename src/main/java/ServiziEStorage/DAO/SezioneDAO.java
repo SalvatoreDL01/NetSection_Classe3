@@ -11,10 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Sezione*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Sezione*/
 public class SezioneDAO {
-    /*Metodo che estrae tutti i dati di un oggetto Sezione dal DB tramite il suo id. Estrae anche la lista dei generi e delle discussioni
-    della sezione*/
+    /**Metodo che estrae tutti i dati di un oggetto Sezione dal DB tramite il suo id. Estrae anche la lista dei generi e delle discussioni della sezione
+     *
+     * @param id
+     * @return Sezione
+     */
     public Sezione doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Sezione where idSezione = ?");
@@ -45,8 +48,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae i dati di un oggetto Sezione dal DB tramite il suo id. Non estrae dati riguardanti le
-    discussioni e i generi della sezione*/
+
+    /**Metodo che estrae i dati di un oggetto Sezione dal DB tramite il suo id. Non estrae dati riguardanti le discussioni e i generi della sezione
+     *
+     * @param id
+     * @return Sezione
+     */
     public Sezione doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Sezione where idSezione = ?");
@@ -64,7 +71,11 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutte le sezioni dal DB. Estrae anche i dati relativi al loro genere e alle loro Discussioni*/
+
+    /**Metodo che estrae tutte le sezioni dal DB. Estrae anche i dati relativi al loro genere e alle loro Discussioni
+     *
+     * @return List<Sezione>
+     */
     public List<Sezione> doRretriveAll(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idSezione from Sezione order by idSezione desc");
@@ -81,7 +92,11 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutte le sezioni dal DB in ordine di numero di discussioni presenti. Estrae anche i dati relativi al loro genere e alle loro Discussioni*/
+
+    /**Metodo che estrae tutte le sezioni dal DB in ordine di numero di discussioni presenti. Estrae anche i dati relativi al loro genere e alle loro Discussioni
+     *
+     * @return List<Sezione>
+     */
     public List<Sezione> doRretriveAllByDescrizioneCounter(){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select s.idSezione, count(d.sezione) from Sezione s join Discussione d on s.idSezione = d.sezione group by s.idSezione order by  count(d.sezione) desc");
@@ -98,8 +113,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutte le sezioni dal DB che fanno parte di un genere comune fornito come input. Estrae anche i
-    dati relativi ai loro generi e alle loro discussioni*/
+
+    /**Metodo che estrae tutte le sezioni dal DB che fanno parte di un genere comune fornito come input. Estrae anche i dati relativi ai loro generi e alle loro discussioni
+     *
+     * @param genere
+     * @return List<Sezione>
+     */
     public List<Sezione> doRetriveByGenere(String genere){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idSezione from Appartenere where genere=?");
@@ -117,8 +136,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutte le sezioni dal DB partendo dall'id di un utente fornito come input. Estrae anche i
-        dati relativi ai loro generi e alle loro discussioni*/
+
+    /**Metodo che estrae tutte le sezioni dal DB partendo dall'id di un utente fornito come input. Estrae anche i dati relativi ai loro generi e alle loro discussioni
+     *
+     * @param idUtente
+     * @return List<Sezione>
+     */
     public List<Sezione> doRetiveByUtente(int idUtente){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select distinct s.idSezione from (Sezione s join Discussione d on s.idSezione = d.sezione) join Iscrizione i on d.sezione = i.sezione and d.titolo = i.discussione where i.idUtente = ?");
@@ -137,7 +160,11 @@ public class SezioneDAO {
         }
     }
 
-    /*Metodo che estrae tutti i tag in una sezione*/
+    /**Metodo che estrae tutti i tag in una sezione
+     *
+     * @param idSezione
+     * @return List<Sezione>
+     */
     public List<String> getListaTag(int idSezione){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select distinct t.nome from Tag t where t.sezione = ?");
@@ -155,7 +182,11 @@ public class SezioneDAO {
         }
     }
 
-    /*Metodo che estrae tutte le sezioni che hanno un nome simile all'oggetto String passato come input*/
+    /**Metodo che estrae tutte le sezioni che hanno un nome simile all'oggetto String passato come input
+     *
+     * @param nome
+     * @return List<Sezione>
+     */
     public List<Sezione> doRetriveByName(String nome){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idSezione from Sezione where titolo like ?");
@@ -173,7 +204,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che salva tutti i dati relativi a un oggetto Sezione nel DB. Salva anche i dati relativi ai sui generi*/
+
+    /**Metodo che salva tutti i dati relativi a un oggetto Sezione nel DB. Salva anche i dati relativi ai sui generi
+     *
+     * @param s
+     * @return boolean
+     */
     public boolean doSave(Sezione s){
         try(Connection con = ConPool.getConnection()){
 
@@ -199,7 +235,11 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che rimuove tutti i dati di una Sezione dal DB conoscendo il suo id*/
+
+    /**Metodo che rimuove tutti i dati di una Sezione dal DB conoscendo il suo id
+     *
+     * @param id
+     */
     static void remove(int id){
         try(Connection con = ConPool.getConnection()){
 
@@ -212,7 +252,11 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che permette di aggiornare i dati relativi ad una Sezione*/
+
+    /**Metodo che permette di aggiornare i dati relativi ad una Sezione
+     *
+     * @param s
+     */
     public void update(Sezione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Sezione set immagine=?,titolo=?,descrizione=? where idSezione=?");
@@ -227,7 +271,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che permette di rimuovere un genere ad una Sezione*/
+
+    /**Metodo che permette di rimuovere un genere ad una Sezione
+     *
+     * @param s
+     * @param genere
+     */
     public void removeGenere(Sezione s,String genere){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Appartenere where idSezione=? and genere=?");
@@ -242,7 +291,12 @@ public class SezioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che permette di aggiungere un genere ad una Sezione*/
+
+    /**Metodo che permette di aggiungere un genere ad una Sezione
+     *
+     * @param s
+     * @param genere
+     */
     public void addGenere(Sezione s,String genere){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("Insert into Appartenere values (?,?)");
@@ -260,7 +314,10 @@ public class SezioneDAO {
         }
     }
 
-    /*Metodo che permette di aggiungere un genere ad una Sezione*/
+    /**Metodo che permette di aggiungere un genere ad una Sezione
+     *
+     * @param s
+     */
     public void updateImmagine(Sezione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Sezione set immagine = ? where idSezione = ?");
