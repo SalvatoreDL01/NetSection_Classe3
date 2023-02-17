@@ -18,6 +18,7 @@
     List<Segnalazione> listaSegnalazione = (List<Segnalazione>) request.getAttribute("segnalazioni");
     List<Commento> commenti = (List<Commento>) request.getAttribute("commentiSegnalati");
     List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) request.getAttribute("utenti");
+    UtenteRegistrato user = (UtenteRegistrato) request.getSession().getAttribute("user");
 %>
 <div id="corpo">
 
@@ -39,16 +40,17 @@
             <p>Elenco partecipanti</p>
             <%
             List<UtenteRegistrato> listu= (List<UtenteRegistrato>) discussione.getListaIscritti();
-                for (UtenteRegistrato u: listu) {
+                for (UtenteRegistrato u: listu) { if(!user.equals(u)){
             %>
             <div class="partecipante">
                 <form action="KickUser" method="get">
                     <p>ID: <%= u.getId() %></p>
                     <p>Nome: <%= u.getUsername() %></p>
+                    <input type="hidden" name="kick" vale="<%=u.getId()%>">
                     <input type="submit" id="kick-button" value="KICK">
                 </form>
             </div>
-            <% } %>
+            <% }} %>
         </div>
         <!-- display per la visualizzazione delle segnalazioni -->
         <h2>Segnalazioni</h2>

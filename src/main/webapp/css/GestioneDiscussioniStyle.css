@@ -91,3 +91,12 @@ footer{
     padding-right: 40%;
     padding-bottom: 20%;
 }
+
+#immagineDiscussione{
+    width: 500px;
+    height: 300px;
+}
+
+#errore{
+    color:red;
+}

@@ -2,7 +2,8 @@
 <%@ page import="ServiziEStorage.Entry.Discussione" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ServiziEStorage.Entry.UtenteRegistrato" %>
-<%@ page import="ServiziEStorage.Entry.UtenteNetflix" %><%--
+<%@ page import="ServiziEStorage.Entry.UtenteNetflix" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: utente
   Date: 20/01/2023
@@ -38,7 +39,7 @@
 <div id="paginaSezione">
     <br>
     <%if(errore != null){%>
-    <h2 style="color:red"><%=errore%></h2>
+    <h2 id="errore"><%=errore%></h2>
     <%}%>
     <!-- ricerca filtrata per tags -->
     <div id="ricercaFiltrata">
@@ -75,7 +76,7 @@
         <input type="submit" value="Crea discussione">
     </form>
     <%}%>
-    <%  if(discussioniTag.isEmpty() || discussioniTag.size()==0){
+    <%  if(discussioniTag==null){discussioniTag = new ArrayList<>();} if(discussioniTag.size()==0){
         for(int i=0; i<lDiscussione.size();i++){%>
     <div class="discussione">
         <p class="titoloDiscussione"><%=lDiscussione.get(i).getTitolo()%></p>
