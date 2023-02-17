@@ -345,9 +345,6 @@ public class UtenteRegistratoDAO {
             ps.setString(3, d.getTitolo());
 
             ps.execute();
-
-            ((ArrayList<UtenteRegistrato>)d.getListaIscritti()).add(u);
-            ((ArrayList<Discussione>)u.getListaIscizioni()).add(d);
         }
         catch (SQLException e){
             throw new RuntimeException(e);
