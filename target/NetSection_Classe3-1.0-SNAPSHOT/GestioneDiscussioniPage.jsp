@@ -32,7 +32,7 @@
         </div>
         <div>
             <p>Immagine</p>
-            <img src='<%= discussione.getImmagine()%>'>
+            <img id="immagineDiscussione" src='<%= discussione.getImmagine()%>'>
         </div>
         <hr style="width: 800px">
         <div>

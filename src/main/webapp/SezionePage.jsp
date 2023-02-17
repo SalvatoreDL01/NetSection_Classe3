@@ -36,8 +36,9 @@
 %>
 <div id="sfondo" style="background-image: url(<%=s.getImmagine()%>);"></div>
 <div id="paginaSezione">
+    <br>
     <%if(errore != null){%>
-    <h2><%=errore%></h2>
+    <h2 style="color:red"><%=errore%></h2>
     <%}%>
     <!-- ricerca filtrata per tags -->
     <div id="ricercaFiltrata">
@@ -74,7 +75,7 @@
         <input type="submit" value="Crea discussione">
     </form>
     <%}%>
-    <%  if(discussioniTag==null){
+    <%  if(discussioniTag.isEmpty() || discussioniTag.size()==0){
         for(int i=0; i<lDiscussione.size();i++){%>
     <div class="discussione">
         <p class="titoloDiscussione"><%=lDiscussione.get(i).getTitolo()%></p>
