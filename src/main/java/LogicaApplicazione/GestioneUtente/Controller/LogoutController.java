@@ -6,9 +6,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per il logout
+ */
 @WebServlet(name = "LogoutController", value = "/LogoutController")
 public class LogoutController extends HttpServlet {
-    @Override
+    /**
+     * invalida la sessione utente
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();

@@ -11,8 +11,10 @@
 <html>
 <head>
     <title>Discussione</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" type="text/css" href="css/DiscussionePageStyle.css">
     <link rel="stylesheet" type="text/css" href="css/SezioneStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <%
@@ -21,17 +23,6 @@
     List<Commento> commenti = (List<Commento>) d.getListaCommenti();
     UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
 %>
-<script>
-    function validateElect(){
-        let id= document.getElementById("userToElect").value;
-
-        if(id==" "){
-            let hid= document.getElementById("hidden").innerHTML= "utente non valido!";
-            return false;
-        }
-        return true;
-    }
-</script>
 <%@include file="NavBar.jsp" %>
 <div id="paginaDiscussione">
     <div class="immagineDiscussione">
@@ -44,7 +35,7 @@
         UtenteRegistrato u = utenteRegistratoDAO.doRetriveById(c.getCreatore());
     %>
     <hr>
-
+    <!-- form per immagine utente -->
     <div class="immagineUtente" style="color: aliceblue">
         <img style="float:left;" src="<%if(u.getImmagine()!=null){%>
                                 <%=u.getImmagine()%>
@@ -54,18 +45,34 @@
            <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>"><img src="css/icone/mipiace.png"></a><%=c.getPunteggio()%>
         <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
+    <br>
+    <!-- form per segnalazione -->
+    <form id="segnala" method="post" action="SegnalazioneCommentoController">
+        <br>
+        <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
+        <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
+        <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
+        <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
+        <input class="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>
+        <textarea class=segnalaText id="segnalaText" name="contenuto" placeholder="scrivi la motivazuione"></textarea><br><br>
+        <input type="submit" value="Segnala Utente">
+    </form>
 <%}%>
     <br>
     <br>
-    <form id="formCommento" class="commento" action="AggiungiCommento">
+    <!-- form per commento -->
+    <div class="commento">
+        <form id="formCommento" class="commento" action="AggiungiCommento">
 
-        <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
-        <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
-        <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
-        <br><br>
-        <input id="submitCommento" type="submit" value="Pubblica"><br>
-    </form>
-    <p></p>
+            <input type="hidden" name="idSezione" value="<%=d.getSezione()%>">
+            <input type="hidden" name="discussione" value="<%=d.getTitolo() %>">
+            <textarea id="testoCommetno" name="commento" placeholder="Scrivi il tuo commento..."></textarea>
+            <br><br>
+            <input id="submitCommento" type="submit" value="Pubblica"><br><br>
+        </form>
+        <p></p>
+    </div>
+
 </div>
 <script>
     function validateKickForm(){
@@ -78,27 +85,26 @@
     }
 </script>
 <div>
-    <form>
-        <select type="hidden" class="form-select" id = "formKick">
-            <option selected value = "0">Seleziona l'utente</option>
-            <%
-                List<UtenteRegistrato> list= (List<UtenteRegistrato>) d.getListaIscritti();
-                for (UtenteRegistrato u: list) {
-            %>
-            <option value="1"><% u.getUsername(); %></option>
-            <% } %>
-        </select>
-        <input type="hidden" type="text" id="mot" placeholder="Descrivi la motivazione della segnalazione...">
-        <input type="submit" value="Segnala Utente" onsubmit="return (validateKickForm());"><br><br>
-    </form>
 </div>
-<div class="elect-mod-button">
-    <form action="ElectModController" method="get" onsubmit="return (validateElect());">
-        <label for="userToElect">Inserisci l'ID dell'utente che vuoi eleggere:</label>
-        <input type="text" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
-        <input type="hidden" id="hidden" style="color: red" value=""><br><br>
-        <input type="submit" id="Eleggi" name="electButton"><br>
-    </form>
-</div>
+<footer>
+    <%if(d.getListaModeratori().contains(utente)){%>
+    <div class="elect-mod-button">
+        <form action="ElectModController" method="get" onsubmit="return (validateElect());">
+            <label for="userToElect" style="color: white">Inserisci l'ID dell'utente che vuoi eleggere:</label><br>
+            <input type="number" id="userToElect" name="userToElect" placeholder="Utente da eleggere..."><br>
+            <input type="hidden" id="hidden" style="color: red" value=""><br><br>
+            <input type="submit" id="Eleggi" value="electButton"><br>
+        </form>
+    </div>
+
+    <div class="ges-disc-button">
+        <form action="GestioneDiscussioneController" method="post">
+            <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
+            <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
+            <input type="submit" value="Visualizza segnalazioni"><br>
+        </form>
+    </div>
+    <%}%>
+</footer>
 </body>
 </html>

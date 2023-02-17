@@ -5,7 +5,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Crea Sezione</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" href="css/CreazioneDiscussionePageStyle.css">
 </head>
 <body>

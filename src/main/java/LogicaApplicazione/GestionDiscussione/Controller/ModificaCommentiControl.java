@@ -10,9 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
+/**
+ * servlet per la modifica di un commento
+ */
 @WebServlet(name = "ModificaCommentiControl", value = "/ModificaCommentiControl")
 public class ModificaCommentiControl extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo per modificare il commento
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
 

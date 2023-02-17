@@ -9,12 +9,14 @@
 <html>
 <head>
     <title>Aggiorna Catalogo</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>
 
 <div class="aggiorna-catalogo">
     <h2>Da qui puoi inserire una nuova Sezione:</h2><br><br>
+    <!-- form per aggiornare il catalogo -->
     <form action="/UpdateCatalog">
         <input type="text" id="titolo" name="titolo" value="" placeholder="Titolo..."><br>
         <input type="text" id="descrizione" name="descrizione" value="" placeholder="Descrizione..."><br>

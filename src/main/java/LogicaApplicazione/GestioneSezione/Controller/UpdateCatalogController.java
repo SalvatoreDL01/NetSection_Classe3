@@ -9,10 +9,20 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * servlet per fare l'update del catalogo
+ */
 @MultipartConfig
 @WebServlet(name = "UpdateCatalogController", value = "/UpdateCatalogController")
 public class UpdateCatalogController extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo per aggiungere una sezione al catalogo
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
         String titolo = request.getParameter("titolo");

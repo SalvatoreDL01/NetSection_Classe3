@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" href="css/RegNetStyle.css">
     <script type="text/javascript" src="javaScript/LoginPage.js"></script>
 </head>

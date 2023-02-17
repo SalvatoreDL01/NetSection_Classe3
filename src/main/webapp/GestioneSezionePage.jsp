@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Gestione Sezione|NetSection</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link type="text/css" rel="stylesheet" href="css/GestioneSezioneStyle.css">
     <link rel="stylesheet" type="text/css" href="css/GestioneDiscussioniStyle.css">
 </head>

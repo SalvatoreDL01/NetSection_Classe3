@@ -1,14 +1,11 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
-import LogicaApplicazione.GestioneUtente.Service.UtenteService;
-import LogicaApplicazione.GestioneUtente.Service.UtenteServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
 import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
-import ServiziEStorage.Entry.Sezione;
 import ServiziEStorage.Entry.UtenteRegistrato;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,18 +19,78 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementazione per il service
+ */
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
-    public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
-    public final static CommentoDAO commentoDAO = new CommentoDAO();
-    public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
-    public final static SezioneDAO sezioneDAO = new SezioneDAO();
+    private DiscussioneDAO discussioneDAO;
+    private CommentoDAO commentoDAO;
+    private UtenteRegistratoDAO utenteRegistratoDAO;
+    private SezioneDAO sezioneDAO;
 
+    public DiscussioneServiceImp(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+    }
+
+    public DiscussioneServiceImp() {
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO){
+        this.discussioneDAO = discussioneDAO;
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO, CommentoDAO commentoDAO,
+                                 UtenteRegistratoDAO utenteRegistratoDAO, SezioneDAO sezioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+        this.commentoDAO = commentoDAO;
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    public void setDiscussioneDAO(DiscussioneDAO discussioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+    }
+
+    public void setCommentoDAO(CommentoDAO commentoDAO) {
+        this.commentoDAO = commentoDAO;
+    }
+
+    public void setUtenteRegistratoDAO(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+    }
+
+    public void setSezioneDAO(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    /**
+     * effettua controlli sull'ID dell'utente da kickare
+     * @param idUserToKick
+     * @return true
+     */
     public  boolean checkUtenteToKick(int idUserToKick){
         String idString= Integer.toString(idUserToKick);
-        if(idString.length()<5){
-            System.out.println("La lunghezza deve essere superiore a 4.");
+        if(idUserToKick<0){
+            System.out.println("L'ID deve essere maggiore di 0.");
             return false;
         }
         else if(!(idString.matches("[0-9]+"))){
@@ -42,19 +99,50 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return true;
     }
-    public boolean kickUtente(int idUserToKick, Discussione discussione){
+
+    /**
+     * effettua ulteriori controlli e kicka un utente dalla discussione
+     * @param idUserToKick
+     * @param discussione
+     * @return true
+     */
+    public boolean kickUtente(int idUserToKick, Discussione discussione) {
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
+
+        if(utenteRegistratoDAO.doRetriveById(idUserToKick)==null)
+            return false;
+
+        if(!utenteRegistratoDAO.isIscritto(discussione.getSezione(),discussione.getTitolo(),idUserToKick))
+            return false;
+
+        if(discussione == null)
+            return false;
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){
-                utenteRegistratoDAO.removeUtente(discussione, u);
-                System.out.println("L'utente è stato kickato dalla conversazione");
-                return true;
+                System.out.println("ID trovato.");
+                if(utenteRegistratoDAO.removeUtente(discussione, u)){
+                    System.out.println("L'utente è stato kickato dalla conversazione.");
+                    return true;
+                }
+                else{
+                    System.out.println("L'utente non è stato kickato dalla conversazione.");
+                    return false;
+                }
+            }
+            else{
+                System.out.println("ID non trovato.");
+                return false;
             }
         }
         return false;
     }
-    @Override
+
+    /**
+     * aggiunge una discussione alla sezione
+     * @param request
+     * @return true
+     */
     public boolean addDiscussione(HttpServletRequest request) {
         int idSezione= Integer.parseInt(request.getParameter("idSezione"));
         String tag = request.getParameter("tags");
@@ -99,7 +187,7 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         try {
-            String dirPath = "/home/giuseppe/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
+            String dirPath = "C:/Users/utente/IdeaProjects/NetSection_Classe3/src/main/webapp/css/icone/Immagini/"+d.getSezione();
             File f = new File(dirPath);
             f.setWritable(true);
             System.out.println(f.canWrite());
@@ -131,6 +219,8 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
 
         discussioneDAO.doSave(d);
+        utenteRegistratoDAO.addModerazione(d,utente);
+        utenteRegistratoDAO.addIscrizione(d,utente);
         
         for(String s : tags)
             discussioneDAO.addTag(d,s);
@@ -138,6 +228,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
+    /**
+     * serve a caricare un file
+     * @param is
+     * @param path
+     * @return true
+     */
     private boolean uploadFile(InputStream is, String path){
         boolean test = false;
         try{
@@ -158,7 +254,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return test;
     }
 
-
+    /**
+     * cancella un commento
+     * @param idCreatore
+     * @param dataCreazioneCommento
+     * @return true
+     */
     public boolean deleteComment(int idCreatore, String dataCreazioneCommento){
         if(idCreatore!=0 && dataCreazioneCommento!=null){
             CommentoDAO c=new CommentoDAO();
@@ -170,6 +271,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return false;
     }
 
+    /**
+     * serve per caricare una discussione
+     * @param request
+     * @return true
+     */
     @Override
     public boolean loadDiscussione(HttpServletRequest request){
 
@@ -198,6 +304,12 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
+    /**
+     * rende un utente amministratore di una discussione
+     * @param idUserToElect
+     * @param discussione
+     * @return true
+     */
     public boolean electMod(int idUserToElect, Discussione discussione){
 
         UtenteRegistrato utente= utenteRegistratoDAO.doRetriveById(idUserToElect);
@@ -210,6 +322,13 @@ public class DiscussioneServiceImp implements DiscussioneService {
             return false;
     }
 
+    /**
+     * funzione per iscrivere un utente a una discussione
+     * @param idSezione
+     * @param titolo
+     * @param utente
+     * @return true
+     */
     public boolean iscrivi(int idSezione, String titolo, UtenteRegistrato utente){
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
@@ -219,6 +338,14 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return false;
     }
+
+    /**
+     * disiscrive un utente da una discussione
+     * @param idSezione
+     * @param titolo
+     * @param utente
+     * @return true
+     */
     public boolean disiscrivi(int idSezione, String titolo, UtenteRegistrato utente){
         Discussione d= discussioneDAO.doRetriveById(idSezione, titolo);
 
@@ -229,6 +356,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return false;
     }
 
+    /**
+     * aggiunge un commento ad una discussione
+     * @param request
+     * @return true
+     */
     public boolean addCommento(HttpServletRequest request){
         Commento c = new Commento();
         Commento cRisposto = new Commento();
@@ -266,6 +398,11 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
+    /**
+     * permette la modifica di un commento
+     * @param request
+     * @return true
+     */
     public boolean modificaCommento(HttpServletRequest request){
         Commento c = new Commento();
         String originale = request.getParameter("contenutoOriginale");
@@ -299,21 +436,38 @@ public class DiscussioneServiceImp implements DiscussioneService {
         return true;
     }
 
+    /**
+     * effettua una ricerca di discussioni con uno o più determinati tags
+     * @param tagSelezionati
+     * @param nonDesiderati
+     * @param idSezione
+     * @return List<Discussione>
+     */
     public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
-    List<Discussione> d = new ArrayList<>();
 
-        if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
-        d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
-
-        if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
-            d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+        //controlliamo che ogni tag desiderato non faccia parte di quelli non desiderati
+        for(String tag:tagSelezionati)
+            if(nonDesiderati.contains(tag))
+                return null;
 
         if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
-            d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
+            return discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
+        else
+            if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
+                return discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+        else
+            if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
+                return discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
 
-        return d;
+        return null;
     }
 
+    /**
+     * richiama un commento
+     * @param data
+     * @param creatore
+     * @return null
+     */
     @Override
     public Commento ottieniCommento(String data, int creatore) {
         return commentoDAO.doRetriveById(data, creatore);

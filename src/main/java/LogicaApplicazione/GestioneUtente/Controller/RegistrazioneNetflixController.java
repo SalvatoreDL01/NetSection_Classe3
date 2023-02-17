@@ -10,9 +10,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per l'autenticazione del profilo Netflix
+ */
 @WebServlet(name = "RegistrazioneNetflixController", value = "/RegistrazioneNetflixController")
 public class RegistrazioneNetflixController extends HttpServlet {
-    @Override
+    /**
+     * chiama la sessione utente e con il metodo salvaUtenteNetflix setta la sessione a utente Netflix
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String email = request.getParameter("email");

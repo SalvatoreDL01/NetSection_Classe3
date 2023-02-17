@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Sezione Page</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -38,6 +39,7 @@
     <%if(errore != null){%>
     <h2><%=errore%></h2>
     <%}%>
+    <!-- ricerca filtrata per tags -->
     <div id="ricercaFiltrata">
         <p class="tags" id="bottoneRicerca">
             RicercaFiltrata
@@ -66,12 +68,12 @@
     <br>
     <br>
     <!-- For per  visualizzare le selezioni (quando saranno implementate dovrà avere un tasto di "mostra altro") -->
-
+    <% if(utente instanceof UtenteNetflix){%>
     <form method="get" action="CreaDiscussioneController">
         <input type="hidden" name="sezione" value="<%=s.getIdSezione()%>">
         <input type="submit" value="Crea discussione">
     </form>
-
+    <%}%>
     <%  if(discussioniTag==null){
         for(int i=0; i<lDiscussione.size();i++){%>
     <div class="discussione">
@@ -108,6 +110,7 @@
         </div>
     </div>
     <br>
+    <!-- funzioni per la discussione -->
     <%}}else{for(Discussione d: discussioniTag){%>
     <div class="discussione">
         <p class="titoloDiscussione"><%=d.getTitolo()%></p>

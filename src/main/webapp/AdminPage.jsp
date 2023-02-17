@@ -9,6 +9,7 @@
 <html>
 <head>
   <title>Admin Page</title>
+  <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
   <link rel="stylesheet" href="css/AdmPageStyle.css">
 </head>
 <body>
@@ -97,6 +98,7 @@
     return (true);
   }
 </script>
+<!-- form per ban di un utente -->
 <div class="ban-user-by-id">
   <p>Banna un Utente. Attenzione: il Ban è un'azione irreversibile!</p><br>
   <form action="BanUser" method="get" onsubmit="return (validateBan());">
@@ -105,7 +107,8 @@
     <input type="submit" value="Banna Utente">
   </form>
 </div>
-<div class="discuss">
+  <!-- form logout -->
+  <div class="discuss">
   <form action="LogoutController">
     <input type="submit" value="Logout">
   </form>

@@ -10,9 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
+/**
+ * servlet per aggiungere un commento
+ */
 @WebServlet(name = "AggiungiCommento", value = "/AggiungiCommento")
 public class AggiungiCommento extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo per aggiungere un commento
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
 

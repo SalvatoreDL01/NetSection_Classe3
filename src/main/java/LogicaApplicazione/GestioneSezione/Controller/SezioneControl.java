@@ -11,9 +11,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * servlet per caricare una sezione
+ */
 @WebServlet(name = "SezioneControl", value = "/SezioneControl")
 public class SezioneControl extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo per caricare una sezione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneService s = new SezioneServiceImp();
         String path = "SezionePage.jsp";

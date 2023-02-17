@@ -10,9 +10,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per l'iscrizione ad una discussione
+ */
 @WebServlet(name = "SubscribeController", value = "/SubscribeController")
 public class SubscribeController extends HttpServlet {
-    @Override
+    /**
+     * effettua un check e chiama il metodo per l'iscrizione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteRegistrato u = (UtenteRegistrato) request.getSession().getAttribute("user");
         int idUser= u.getId();

@@ -15,6 +15,7 @@
 <html>
 <head>
   <title>UserPage</title>
+  <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
   <link rel="stylesheet" href="css/UserPageStyle.css">
 </head>
 <body>
@@ -32,6 +33,7 @@
   <h2>Benvenuto, <%=u.getUsername()%></h2>
 </div>
 <div class="info">
+  <!-- info sull'utente -->
   <p>Ecco alcune informazioni su di te: </p>
   <div id="info-list">
     <ul>
@@ -59,6 +61,7 @@
   <%
     }
   %>
+  <!-- funzione per mostrare le 'tue discussioni', se ci sono -->
   <script>
     function mostraMenu(){
       var display = document.getElementById("tue-discussioni").style.display;
@@ -102,6 +105,7 @@
 </div>
 <div class="discuss" style="height: 1100px">
   <div style="height: 500px">
+    <!-- mostra a display i generi selezionati come preferiti -->
     <p>Generi preferiti</p>
     <div>
       <%
@@ -120,6 +124,7 @@
     </div>
   </div>
   <div style="height: 500px">
+    <!-- generi da aggiungere ai preferiti -->
     <p>Generi da poter aggiungere</p>
     <div>
       <%
@@ -142,6 +147,7 @@
   <p>Accedi alle tue discussioni preferite</p><br>
   <input type="button" value="Discussioni preferite">
 </div>-->
+<!-- form per la segnalazione di un problema -->
 <div class="discuss">
   <input type="button" onclick="visualizzaForm()" value="Segnala un problema">
 </div>
@@ -175,6 +181,7 @@
   <%=request.getAttribute("errore")%>
   <%}%>
 </div>
+<!-- funzione di visualizzazione per la segnalazione -->
 <script>
   function visualizzaForm(){
     document.getElementById("segnalazione").style.display = "block";

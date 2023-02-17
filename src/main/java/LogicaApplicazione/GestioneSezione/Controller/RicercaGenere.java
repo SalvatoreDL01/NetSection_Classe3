@@ -8,9 +8,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per effettuare una ricerca tramite i generi
+ */
 @WebServlet(name = "RicercaGenere", value = "/RicercaGenere")
 public class RicercaGenere extends HttpServlet {
-    @Override
+    /**
+     * chiama la funzione per ricercare tramite generi e la passa alla request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String nome = request.getParameter("nome");

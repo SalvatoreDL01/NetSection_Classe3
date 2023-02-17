@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Registrati</title>
+    <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
     <link rel="stylesheet" href="css/RegNetStyle.css">
 
 </head>
@@ -39,6 +40,7 @@
         <img src="css/logo.png"><br>
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
+    <!-- form per la registrazione -->
     <div class="reg-form">
         <form id="formLogin" action="RegistrazioneController" method="get" onsubmit="return(validate());">
             <label for="user">Username:</label><br><br>

@@ -6,9 +6,11 @@
 <html>
 <head>
   <title>Registrazione Netflix</title>
+  <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
   <link rel="stylesheet" href="css/RegNetStyle.css">
 </head>
 <body>
+<!-- funzioni di validazione -->
 <script>
     function validate() {
       let email = document.getElementById("email").value;
@@ -31,6 +33,7 @@
     <h2>Accedi con il tuo account Netflix</h2><br><br>
   </div>
   <div class="reg-form">
+    <!-- form di registrazione Netflix -->
     <form action="RegistrazioneNetflixController" method="get" onsubmit="return(validate());">
       <label for="email">Email del tuo profilo Netflix:</label><br><br>
       <input type="email" id="email" name="email" value=""><br><br>

@@ -15,12 +15,70 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+/**
+ * Implementazione per il service di Utente
+ */
 @MultipartConfig
 public class UtenteServiceImp implements UtenteService {
-    public static final UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
-    public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
-    public static final EliminazioneDAO eliminazioneDAO = new EliminazioneDAO();
+    private UtenteRegistratoDAO utenteRegistratoDAO;
+    private UtenteNetflixDAO utenteNetflixDAO;
+    private EliminazioneDAO eliminazioneDAO;
 
+    public UtenteServiceImp() {
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(UtenteNetflixDAO utenteNetflixDAO) {
+        this.utenteNetflixDAO = utenteNetflixDAO;
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(EliminazioneDAO eliminazioneDAO) {
+        this.eliminazioneDAO = eliminazioneDAO;
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteRegistratoDAO getUtenteRegistratoDAO() {
+        return utenteRegistratoDAO;
+    }
+
+    public void setUtenteRegistratoDAO(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+    }
+
+    public UtenteNetflixDAO getUtenteNetflixDAO() {
+        return utenteNetflixDAO;
+    }
+
+    public void setUtenteNetflixDAO(UtenteNetflixDAO utenteNetflixDAO) {
+        this.utenteNetflixDAO = utenteNetflixDAO;
+    }
+
+    public EliminazioneDAO getEliminazioneDAO() {
+        return eliminazioneDAO;
+    }
+
+    public void setEliminazioneDAO(EliminazioneDAO eliminazioneDAO) {
+        this.eliminazioneDAO = eliminazioneDAO;
+    }
+
+    /**
+     * effettua controlli sull'utente
+     * @param user
+     * @param password
+     * @return UtenteRegistrato
+     */
     public UtenteRegistrato checkUtente(String user, String password){
 
         ArrayList<UtenteRegistrato> list = utenteRegistratoDAO.retriveAll();
@@ -31,6 +89,12 @@ public class UtenteServiceImp implements UtenteService {
         return null;
     }
 
+    /**
+     * effettua controlli sull'utente Netflix
+     * @param user
+     * @param password
+     * @return UtenteNetflix
+     */
     public UtenteNetflix checkUtenteNetflix(String user, String password){
 
         ArrayList<UtenteNetflix> list = (ArrayList<UtenteNetflix>) utenteNetflixDAO.retiveAll();
@@ -41,7 +105,11 @@ public class UtenteServiceImp implements UtenteService {
         return null;
     }
 
-    @Override
+    /**
+     * salva un utente nel dao
+     * @param u
+     * @return true
+     */
     public boolean saveUtente(UtenteRegistrato u) {
         try{
             utenteRegistratoDAO.doSave(u);
@@ -52,6 +120,11 @@ public class UtenteServiceImp implements UtenteService {
         }
     }
 
+    /**
+     * salva un utente Netflix nel dao
+     * @param u
+     * @return true
+     */
     public boolean salvaUtenteNetflix(UtenteNetflix u){
         try {
             utenteNetflixDAO.doSaveUtente(u);
@@ -62,6 +135,13 @@ public class UtenteServiceImp implements UtenteService {
         }
     }
 
+    /**
+     * permette la modifica dell'immagine profilo utente
+     * @param request
+     * @return true
+     * @throws ServletException
+     * @throws IOException
+     */
     public boolean modificaImmagineUtente(HttpServletRequest request) throws ServletException, IOException {
         UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
         HttpSession session = request.getSession();
@@ -81,6 +161,12 @@ public class UtenteServiceImp implements UtenteService {
         return uploadFile(is, ""+fileName);
     }
 
+    /**
+     * permette di caricare un file
+     * @param is
+     * @param path
+     * @return true
+     */
     private boolean uploadFile(InputStream is, String path){
         //funzione per la scrittura del file is nella posizione path
         boolean test = false;
@@ -102,6 +188,12 @@ public class UtenteServiceImp implements UtenteService {
         return test;
     }
 
+    /**
+     * effettua un controllo dell'admin
+     * @param email
+     * @param password
+     * @return Amministratore
+     */
     public Amministratore checkAdmin(String email, String password){
 
         ArrayList<Amministratore> list = new AmministratoreDAO().retriveAll();
@@ -112,7 +204,11 @@ public class UtenteServiceImp implements UtenteService {
         return null;
     }
 
-    @Override
+    /**
+     * chiama la funzione del dao per verificare se un utente è registrato con Netflix
+     * @param u
+     * @return true
+     */
     public boolean checkNetflix(UtenteRegistrato u) {
         return utenteRegistratoDAO.isUtenteNetflix(u);
     }

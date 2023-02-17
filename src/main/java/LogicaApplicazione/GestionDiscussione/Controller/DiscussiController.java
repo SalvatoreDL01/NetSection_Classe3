@@ -13,9 +13,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
+/**
+ * servlet per caricare una discussione
+ */
 @WebServlet(name = "DiscussiController", value = "/DiscussiController")
 public class DiscussiController extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo loadDiscussione per richiamare una discussione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService s = new DiscussioneServiceImp();
         String path = "DiscussionePage.jsp";

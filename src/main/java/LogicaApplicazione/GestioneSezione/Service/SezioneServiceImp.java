@@ -16,11 +16,34 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
 @MultipartConfig
+/**
+ * Implementazione per il service di Sezione
+ */
 public class SezioneServiceImp implements SezioneService{
 
-    private static final SezioneDAO sezioneDAO = new SezioneDAO();
+    private SezioneDAO sezioneDAO = new SezioneDAO();
 
-    @Override
+    public SezioneServiceImp(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    public SezioneServiceImp() {
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public SezioneDAO getSezioneDAO() {
+        return sezioneDAO;
+    }
+
+    public void setSezioneDAO(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    /**
+     * permette di aggiungere una sezione al database
+     * @param request
+     * @return true
+     */
     public boolean addSezione(HttpServletRequest request) {
         String titolo = request.getParameter("titolo");
         String descrizione = request.getParameter("descrizione");
@@ -77,6 +100,12 @@ public class SezioneServiceImp implements SezioneService{
         return true;
     }
 
+    /**
+     * permette di caricare un file
+     * @param is
+     * @param path
+     * @return true
+     */
     private boolean uploadFile(InputStream is, String path){
         boolean test = false;
         try{
@@ -97,6 +126,11 @@ public class SezioneServiceImp implements SezioneService{
         return test;
     }
 
+    /**
+     * permette di caricare una sezione
+     * @param request
+     * @return true
+     */
     public boolean loadSezione(HttpServletRequest request){
         int i = Integer.parseInt(request.getParameter("idSezione"));
         Sezione s = sezioneDAO.doRetriveById(i);
@@ -112,6 +146,11 @@ public class SezioneServiceImp implements SezioneService{
         return true;
     }
 
+    /**
+     * permette di effettuare una ricerca in base ai generi
+     * @param request
+     * @return true
+     */
     public boolean serchByGenere(HttpServletRequest request){
         String genere = request.getParameter("genere");
         if(genere==null){
@@ -127,7 +166,11 @@ public class SezioneServiceImp implements SezioneService{
         return true;
     }
 
-    @Override
+    /**
+     * permette di cercare una sezione nella lista di tutte le sezioni
+     * @param nome
+     * @return -1
+     */
     public int searchSezione(String nome) {
         List<Sezione> lista = sezioneDAO.doRretriveAll();
         for(Sezione s: lista){
@@ -137,7 +180,11 @@ public class SezioneServiceImp implements SezioneService{
         return -1;
     }
 
-    @Override
+    /**
+     * cerca un genere tramite il dao
+     * @param g
+     * @return List<Sezione>
+     */
     public List<Sezione> ricercaGeneri(String g) {
         return sezioneDAO.doRetriveByGenere(g);
     }

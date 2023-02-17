@@ -9,6 +9,7 @@
 <html>
 <head>
   <title>Admin Page</title>
+  <link rel="icon" type="image/x-icon" href="css/icone/icona.png">
   <link rel="stylesheet" href="css/AdmPageStyle.css">
 </head>
 <body>

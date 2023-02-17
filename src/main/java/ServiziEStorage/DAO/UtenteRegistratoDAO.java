@@ -258,7 +258,7 @@ public class UtenteRegistratoDAO {
     }
 
     /*Metodo che svolge il kick di un utente da una discussione*/
-    public void removeUtente(Discussione d,UtenteRegistrato u){
+    public boolean removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
             PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
@@ -278,6 +278,7 @@ public class UtenteRegistratoDAO {
             ((ArrayList<UtenteRegistrato>)d.getListaKickati()).add(u);
             u.getListaIscizioni().remove(d);
             ((ArrayList<Discussione>)u.getListaKickato()).add(d);
+            return true;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -329,9 +330,6 @@ public class UtenteRegistratoDAO {
             ps.setString(3, d.getTitolo());
 
             ps.execute();
-
-            ((ArrayList<UtenteRegistrato>)d.getListaModeratori()).add(u);
-            u.getListaModerazioni().addToList(d);
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -429,6 +427,23 @@ public class UtenteRegistratoDAO {
             ps.setInt(2,u.getId());
 
             ps.execute();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    /*Metodo che controlla se per un utente è iscritto ad una Iscrizione*/
+    public boolean isIscritto(int sezione, String titolo, int idUtene){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select idUtente from Iscrizione where idUtente=? " +
+                    "and sezione = ? and discussione = ?");
+            ps.setInt(1,idUtene);
+            ps.setInt(2,sezione);
+            ps.setString(3,titolo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                return true;
+            else return false;
         }
         catch (SQLException e){
             throw new RuntimeException(e);

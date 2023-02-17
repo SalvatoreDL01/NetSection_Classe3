@@ -14,6 +14,7 @@ public class Discussione {
 
     private String dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
+
 /*Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione*/
     public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione)
     {

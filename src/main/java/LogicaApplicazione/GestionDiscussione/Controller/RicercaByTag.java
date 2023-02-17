@@ -2,6 +2,7 @@ package LogicaApplicazione.GestionDiscussione.Controller;
 
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneService;
 import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
+import ServiziEStorage.DAO.SezioneDAO;
 import ServiziEStorage.Entry.Discussione;
 import ServiziEStorage.Entry.Sezione;
 import jakarta.servlet.RequestDispatcher;
@@ -15,12 +16,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp.sezioneDAO;
-
+/**
+ * servlet per la ricerca di discussioni tramite tags
+ */
 @WebServlet(name = "RicercaByTag", value = "/RicercaByTag")
 public class RicercaByTag extends HttpServlet {
-    @Override
+    /**
+     * effettua una serie di check, dopo chiama il metodo per la ricerca
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        SezioneDAO sezioneDAO = new SezioneDAO();
         DiscussioneService ds = new DiscussioneServiceImp();
         List<Discussione> d = null;
         List<String> tagSelezionati = new ArrayList<>();
