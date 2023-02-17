@@ -463,6 +463,5 @@ public class DiscussioneDAO {
         catch (SQLException e){
             throw new RuntimeException(e);
         }
-
     }
 }

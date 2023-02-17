@@ -18,7 +18,23 @@ import java.util.List;
 @MultipartConfig
 public class SezioneServiceImp implements SezioneService{
 
-    private static final SezioneDAO sezioneDAO = new SezioneDAO();
+    private SezioneDAO sezioneDAO = new SezioneDAO();
+
+    public SezioneServiceImp(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    public SezioneServiceImp() {
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public SezioneDAO getSezioneDAO() {
+        return sezioneDAO;
+    }
+
+    public void setSezioneDAO(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
 
     @Override
     public boolean addSezione(HttpServletRequest request) {

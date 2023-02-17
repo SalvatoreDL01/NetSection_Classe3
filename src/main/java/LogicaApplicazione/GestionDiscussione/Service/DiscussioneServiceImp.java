@@ -22,15 +22,67 @@ import java.util.List;
 @MultipartConfig
 public class DiscussioneServiceImp implements DiscussioneService {
 
-    public final static DiscussioneDAO discussioneDAO = new DiscussioneDAO(){};
-    public final static CommentoDAO commentoDAO = new CommentoDAO();
-    public final static UtenteRegistratoDAO utenteRegistratoDAO=new UtenteRegistratoDAO();
-    public final static SezioneDAO sezioneDAO = new SezioneDAO();
+    private DiscussioneDAO discussioneDAO;
+    private CommentoDAO commentoDAO;
+    private UtenteRegistratoDAO utenteRegistratoDAO;
+    private SezioneDAO sezioneDAO;
+
+    public DiscussioneServiceImp(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+    }
+
+    public DiscussioneServiceImp() {
+        discussioneDAO = new DiscussioneDAO();
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO){
+        this.discussioneDAO = discussioneDAO;
+        commentoDAO = new CommentoDAO();
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        sezioneDAO = new SezioneDAO();
+    }
+
+    public DiscussioneServiceImp(DiscussioneDAO discussioneDAO, CommentoDAO commentoDAO,
+                                 UtenteRegistratoDAO utenteRegistratoDAO, SezioneDAO sezioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+        this.commentoDAO = commentoDAO;
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        this.sezioneDAO = sezioneDAO;
+    }
+
+    public void setDiscussioneDAO(DiscussioneDAO discussioneDAO) {
+        this.discussioneDAO = discussioneDAO;
+    }
+
+    public void setCommentoDAO(CommentoDAO commentoDAO) {
+        this.commentoDAO = commentoDAO;
+    }
+
+    public void setUtenteRegistratoDAO(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+    }
+
+    public void setSezioneDAO(SezioneDAO sezioneDAO) {
+        this.sezioneDAO = sezioneDAO;
+    }
 
     public  boolean checkUtenteToKick(int idUserToKick){
         String idString= Integer.toString(idUserToKick);
-        if(idString.length()<5){
-            System.out.println("La lunghezza deve essere superiore a 4.");
+        if(idUserToKick<0){
+            System.out.println("L'ID deve essere maggiore di 0.");
             return false;
         }
         else if(!(idString.matches("[0-9]+"))){
@@ -39,8 +91,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return true;
     }
+
     public boolean kickUtente(int idUserToKick, Discussione discussione) {
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
+
+        if(utenteRegistratoDAO.doRetriveById(idUserToKick)==null)
+            return false;
+
+        if(!utenteRegistratoDAO.isIscritto(discussione.getSezione(),discussione.getTitolo(),idUserToKick))
+            return false;
+
+        if(discussione == null)
+            return false;
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){
@@ -309,17 +371,22 @@ public class DiscussioneServiceImp implements DiscussioneService {
     }
 
     public List<Discussione> searchByTag(List<String> tagSelezionati,List<String> nonDesiderati,int idSezione){
-    List<Discussione> d = new ArrayList<>();
+
+        //controlliamo che ogni tag desiderato non faccia parte di quelli non desiderati
+        for(String tag:tagSelezionati)
+            if(nonDesiderati.contains(tag))
+                return null;
+
         if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
-            d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
+            return discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione);
         else
             if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
-            d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
+                return discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione);
         else
             if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
-                d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
+                return discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione);
 
-        return d;
+        return null;
     }
 
     @Override

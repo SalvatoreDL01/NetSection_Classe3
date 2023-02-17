@@ -1,7 +1,9 @@
 package LogicaApplicazione.GestionDiscussione.Service;
 
+import LogicaApplicazione.GestioneSezione.Service.SezioneServiceImp;
 import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.Entry.Discussione;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -9,105 +11,131 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SearchByTagTest {
 
     @Test
-    void soloTagDesiderati() {
+    public void soloTagDesiderati() {
         //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
         int idSezione = 1;
-        List<String> tagDesiderati = new ArrayList<>();
 
-        tagDesiderati.add("@tag");
+        List<String> tagDesiderati = Arrays.asList("@tag");
+        List<String> tagNonDesiderati = new ArrayList<>();
+        //Creiamo una discussione che rappresenti un esempio di output desiderato
+        Discussione d1 = new Discussione(1,"titolo",1,"path",tagDesiderati,
+                "data");
+        //Simuliamo il dao e la connessione al DB
+        DiscussioneDAO discussioneDAOMock = mock(DiscussioneDAO.class);
 
-        List<Discussione> aspettato;
-        List<Discussione> list;
-        List<String> tags = new ArrayList<>();
-        tags.add("@tag");
-        Discussione d1 = new Discussione(1,"titolo",1,"path",tags,"data");
-        tags.add("@tag1");
-        Discussione d2 = new Discussione(1,"titolo2",1,"path2",tags,"data2");
-        aspettato = Arrays.asList(d1,d2);
-        list = Arrays.asList(d1,d2);
-        //simuliamo la connessione al DB
+        List<Discussione> list = Arrays.asList(d1);
+        //Definiamo il valore della simulazione
+        when(discussioneDAOMock.ricercaTagDesiderati(tagDesiderati,idSezione)).thenReturn(list);
 
-        DiscussioneDAO dao = Mockito.mock(DiscussioneDAO.class);
-        Mockito.when(dao.ricercaTagDesiderati(tagDesiderati,idSezione)).thenReturn(list);
-
-        //Simuliamo il risultato
-        List<Discussione> result = dao.ricercaTagDesiderati(tagDesiderati,idSezione);
-        assertEquals(aspettato,result);
+        DiscussioneService ds = new DiscussioneServiceImp(discussioneDAOMock);
+        //testiamo il caso
+        assertEquals(list, ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
     }
 
     @Test
-    void soloTagNonDesiderati() {
+    public void soloTagNonDesiderati() {
         //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
         int idSezione = 1;
-        List<String> tagNonDesiderati = new ArrayList<>();
 
-        tagNonDesiderati.add("@tag");
+        List<String> tagDesiderati =  new ArrayList<>();
+        List<String> tagNonDesiderati = Arrays.asList("@tag");
+        //vogliamo che ritorni d1 perchè non presenta @tag
+        Discussione d1 = new Discussione(1,"titolo",1,"path",Arrays.asList("@tag2"),"data");
 
-        List<Discussione> aspettato;
-        List<Discussione> list;
-        List<String> tags;
+        DiscussioneDAO discussioneDAOMock = mock(DiscussioneDAO.class);
 
-        tags = Arrays.asList("tag10","tag11");
-        Discussione d1 = new Discussione(1,"titolo",1,"path",tags,"data");
-        Discussione d2 = new Discussione(1,"titolo2",1,"path2",tags,"data2");
-        aspettato = Arrays.asList(d1,d2);
-        list = Arrays.asList(d1,d2);
-        //simuliamo la connessione al DB
+        List<Discussione> list = Arrays.asList(d1);
 
-        DiscussioneDAO dao = Mockito.mock(DiscussioneDAO.class);
-        Mockito.when(dao.ricercaTagConEsclusione(tagNonDesiderati,idSezione)).thenReturn(list);
-        //Simuliamo il risultato
-        List<Discussione> result = dao.ricercaTagConEsclusione(tagNonDesiderati,idSezione);
+        when(discussioneDAOMock.ricercaTagConEsclusione(tagNonDesiderati,idSezione)).thenReturn(list);
 
-        assertEquals(aspettato,result);
+        DiscussioneService ds = new DiscussioneServiceImp(discussioneDAOMock);
+
+        assertEquals(list, ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
     }
 
     @Test
-    void siaTagDesideratiCheNon() {
-        //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
+    public void tuttiITipiDiTag(){
+    int idSezione = 1;
+        List<String> tagDesiderati =   Arrays.asList("@tag2");
+        List<String> tagNonDesiderati = Arrays.asList("@tag1");
+        //In questo caso non vogliamo d1 come risultato perché contiene @tag1 ma vogliamo solo @tag2
+        Discussione d1 = new Discussione(1,"titolo",1,"path",
+                Arrays.asList("@tag2","@tag1"),"data");
+        Discussione d2 = new Discussione(1,"titolo2",1,"path",
+                Arrays.asList("@tag2"),"data2");
+
+        DiscussioneDAO discussioneDAOMock = mock(DiscussioneDAO.class);
+
+        List<Discussione> list = Arrays.asList(d2);
+
+        when(discussioneDAOMock.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione)).thenReturn(list);
+
+        DiscussioneService ds = new DiscussioneServiceImp(discussioneDAOMock);
+
+        assertEquals(list, ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
+    }
+
+    @Test
+    public void nessunTag(){
         int idSezione = 1;
+        //In questo caso non ci sono tag selezionati di alcun tipo quindi ci Aspettino di ottenere null
         List<String> tagDesiderati = new ArrayList<>();
         List<String> tagNonDesiderati = new ArrayList<>();
-
-        tagNonDesiderati.add("@tag");
-        tagDesiderati.add("@tag1");
-
-        List<Discussione> aspettato;
-        List<Discussione> list;
-        List<String> tags,tags2;
-
-        tags = Arrays.asList("@tag1","@tag");
-        tags2 = Arrays.asList("@tag1");
-        Discussione d1 = new Discussione(1,"titolo",1,"path",tags,"data");
-        Discussione d2 = new Discussione(1,"titolo2",1,"path2",tags2,"data2");
-        aspettato = Arrays.asList(d2);
-        list = Arrays.asList(d2);
-        //simuliamo la connessione al DB
-
-        DiscussioneDAO dao = Mockito.mock(DiscussioneDAO.class);
-        Mockito.when(dao.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione)).thenReturn(list);
-        //Simuliamo il risultato
-        List<Discussione> result = dao.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione);
-
-        assertEquals(aspettato,result);
+        DiscussioneService ds = new DiscussioneServiceImp();
+        assertNull(ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
     }
-    /*
-    List<Discussione> d = new ArrayList<>(); --
-        if(tagSelezionati.size()>0 && nonDesiderati.size()==0)
-        d =discussioneDAO.ricercaTagDesiderati(tagSelezionati,idSezione); --
-        else
-            if(tagSelezionati.size()==0 && nonDesiderati.size()>0)
-                d= discussioneDAO.ricercaTagConEsclusione(nonDesiderati,idSezione); --
-            else
-                if(tagSelezionati.size()>0 && nonDesiderati.size()>0)
-                    d = discussioneDAO.ricercaTag(tagSelezionati,nonDesiderati,idSezione); --
 
-        return d;
-    * */
+    @Test
+    public void entrambeLeCategorieMaRisultatoNullo(){
+        int idSezione = 1;
+        List<String> tagDesiderati =   Arrays.asList("@tag2");
+        List<String> tagNonDesiderati = Arrays.asList("@tag1");
+        //In questo caso non vogliamo d1 come risultato perché contiene @tag1
+        Discussione d1 = new Discussione(1,"titolo",1,"path",
+                Arrays.asList("@tag2","@tag1"),"data");
+
+        DiscussioneDAO discussioneDAOMock = mock(DiscussioneDAO.class);
+        /*Siccome non ci sono Discussioni che soddisfano sia il tag desiderato che il non desiderato ci aspettiamo di
+            ottenere null*/
+        List<Discussione> list = null;
+
+        when(discussioneDAOMock.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione)).thenReturn(list);
+
+        DiscussioneService ds = new DiscussioneServiceImp(discussioneDAOMock);
+
+        assertEquals(list, ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
+    }
+    @Test
+    public void TagIdenticoSuEntrambeLeCategorie(){
+        int idSezione = 1;
+        List<String> tagDesiderati =   Arrays.asList("@tag1","@tag3");
+        List<String> tagNonDesiderati = Arrays.asList("@tag1");
+        //In questo caso non possiamo estrarre d1 e d2 perché hanno come tag @tag1
+        Discussione d1 = new Discussione(1,"titolo",1,"path",
+                Arrays.asList("@tag2","@tag1"),"data");
+        Discussione d2 = new Discussione(1,"titolo",1,"path",
+                Arrays.asList("@tag3","@tag1"),"data");
+        Discussione d3 = new Discussione(1,"titolo",1,"path",
+                Arrays.asList("@tag2","@tag3"),"data");
+
+        DiscussioneDAO discussioneDAOMock = mock(DiscussioneDAO.class);
+        /*Siccome non ci sono Discussioni che soddisfano sia il tag desiderato che il non desiderato ci aspettiamo di
+            ottenere null*/
+        List<Discussione> list = Arrays.asList(d3);
+
+        when(discussioneDAOMock.ricercaTag(tagDesiderati,tagNonDesiderati,idSezione)).thenReturn(list);
+
+        DiscussioneService ds = new DiscussioneServiceImp(discussioneDAOMock);
+
+        assertNull(ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
+    }
+
+
 }

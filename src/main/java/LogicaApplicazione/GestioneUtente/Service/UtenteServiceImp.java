@@ -17,9 +17,57 @@ import java.io.InputStream;
 import java.util.ArrayList;
 @MultipartConfig
 public class UtenteServiceImp implements UtenteService {
-    public static final UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
-    public static final UtenteNetflixDAO utenteNetflixDAO = new UtenteNetflixDAO();
-    public static final EliminazioneDAO eliminazioneDAO = new EliminazioneDAO();
+    private UtenteRegistratoDAO utenteRegistratoDAO;
+    private UtenteNetflixDAO utenteNetflixDAO;
+    private EliminazioneDAO eliminazioneDAO;
+
+    public UtenteServiceImp() {
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(UtenteNetflixDAO utenteNetflixDAO) {
+        this.utenteNetflixDAO = utenteNetflixDAO;
+        utenteRegistratoDAO = new UtenteRegistratoDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteServiceImp(EliminazioneDAO eliminazioneDAO) {
+        this.eliminazioneDAO = eliminazioneDAO;
+        utenteNetflixDAO = new UtenteNetflixDAO();
+        eliminazioneDAO = new EliminazioneDAO();
+    }
+
+    public UtenteRegistratoDAO getUtenteRegistratoDAO() {
+        return utenteRegistratoDAO;
+    }
+
+    public void setUtenteRegistratoDAO(UtenteRegistratoDAO utenteRegistratoDAO) {
+        this.utenteRegistratoDAO = utenteRegistratoDAO;
+    }
+
+    public UtenteNetflixDAO getUtenteNetflixDAO() {
+        return utenteNetflixDAO;
+    }
+
+    public void setUtenteNetflixDAO(UtenteNetflixDAO utenteNetflixDAO) {
+        this.utenteNetflixDAO = utenteNetflixDAO;
+    }
+
+    public EliminazioneDAO getEliminazioneDAO() {
+        return eliminazioneDAO;
+    }
+
+    public void setEliminazioneDAO(EliminazioneDAO eliminazioneDAO) {
+        this.eliminazioneDAO = eliminazioneDAO;
+    }
 
     public UtenteRegistrato checkUtente(String user, String password){
 
