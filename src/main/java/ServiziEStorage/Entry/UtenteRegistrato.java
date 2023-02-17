@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* Questa classe rappresenta gli utenti registrati ad un sito e comprende un attributo int id, String username, email,
- pass, immagine, dataNascita. Inolte mantiene dei riferimenti ad oggetti della classe discussione sotto forma di
-  listaIscrizione che rappresenta le discussioni alle quali l'utente partecipa, listaModerazione che rappresenta le
-   discussioni che l'utente modera, listaKickato che rappresenta le discussioni alle quali non può più accedere e una
-   listaPreferiti che contiene i generi preferiti dall'utente */
+/**
+ *  Questa classe rappresenta gli utenti registrati ad un sito e comprende un attributo int id, String username, email,
+ *  pass, immagine, dataNascita. Inolte mantiene dei riferimenti ad oggetti della classe discussione sotto forma di
+ *  listaIscrizione che rappresenta le discussioni alle quali l'utente partecipa, listaModerazione che rappresenta le
+ *  discussioni che l'utente modera, listaKickato che rappresenta le discussioni alle quali non può più accedere e una
+ *  listaPreferiti che contiene i generi preferiti dall'utente
+ */
 public class UtenteRegistrato {
 
     private int id;
@@ -38,8 +40,10 @@ public class UtenteRegistrato {
 
     }
 
-    /* costruttore per un nuovo utente registrato sono necessari oggetti String username, String email, String pass,
-    String immagine, String dataNascita. Questo costruttore è usato per creare un nuovo untente e salvarlo nel DB */
+    /**
+     *  costruttore per un nuovo utente registrato sono necessari oggetti String username, String email, String pass,
+     *  String immagine, String dataNascita. Questo costruttore è usato per creare un nuovo untente e salvarlo nel DB
+     *  */
     public UtenteRegistrato(String username,String email,String pass,String immagine,String dataNascita){
         this.email=email;
         this.dataNascita=dataNascita;

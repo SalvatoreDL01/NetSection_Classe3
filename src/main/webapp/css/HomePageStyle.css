@@ -31,7 +31,7 @@ body{
     position: absolute;
     top: 200px;
     right: 45px;
-    background-color: #0a1316;
+    background-color: transparent;
     border-style: none;
 }
 
@@ -40,10 +40,10 @@ body{
 }
 
 .frecciaIndietro{
+    background-color: transparent;
     position: absolute;
     top: 200px;
     left: 45px;
-    background-color: #0a1316;
     border-style: none;
 }
 
@@ -59,7 +59,7 @@ body{
     position: relative;
     float: left;
     margin-top: 20px;
-    margin-left: 140px;
+    margin-left: 60px;
 }
 
 .element img{

@@ -68,7 +68,7 @@ public class SegnalazioneDAO {
             List l = new ArrayList<Segnalazione>();
             PreparedStatement ps = con.prepareStatement(
                     "select dataSegnalazione, dataCommento, creatoreSegnalazione, " +
-                            "creatoreCommento, sezione, discussione, natura, contenuto from Segnalazione where sezione=? and discussione=? order by desc dataSegnalazione");
+                            "creatoreCommento, sezione, discussione, natura, contenuto from Segnalazione where sezione=? and discussione=? order by dataSegnalazione desc");
             ps.setInt(1, idSezione);
             ps.setString(2,titolo);
 
