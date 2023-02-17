@@ -6,6 +6,10 @@ import ServiziEStorage.Entry.Discussione;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +42,25 @@ class SearchByTagTest {
         //testiamo il caso
         assertEquals(list, ds.searchByTag(tagDesiderati,tagNonDesiderati,idSezione));
     }
-//
+
+    @Test
+    public void testSelenium(){
+        try{
+            WebDriver webDriver = new ChromeDriver();
+            webDriver.get("http://localhost:8080/NetSection_Classe3_war_exploded/SezioneControl?idSezione=1");
+            WebElement email = webDriver.findElement(By.id("email"));
+            WebElement password = webDriver.findElement(By.id("password"));
+            email.sendKeys("utente@o");
+            password.sendKeys("password1");
+            webDriver.findElement(By.id("accedi")).submit();
+            WebElement success = webDriver.findElement(By.id("success"));
+            assertEquals("Username o password errata", success.getText());
+        }
+        catch (Exception e){
+
+        }
+    }
+
     @Test
     public void soloTagNonDesiderati() {
         //inizializziamo il caso in cui tagDesiderati ha almeno un elemento e tagNonDesiderati è vuoto
