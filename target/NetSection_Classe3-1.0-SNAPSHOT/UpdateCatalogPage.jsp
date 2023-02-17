@@ -16,6 +16,7 @@
 
 <div class="aggiorna-catalogo">
     <h2>Da qui puoi inserire una nuova Sezione:</h2><br><br>
+    <!-- form per aggiornare il catalogo -->
     <form action="/UpdateCatalog">
         <input type="text" id="titolo" name="titolo" value="" placeholder="Titolo..."><br>
         <input type="text" id="descrizione" name="descrizione" value="" placeholder="Descrizione..."><br>

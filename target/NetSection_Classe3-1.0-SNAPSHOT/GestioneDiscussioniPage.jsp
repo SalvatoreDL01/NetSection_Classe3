@@ -68,6 +68,7 @@
             </div>
             <% } %>
         </div>
+        <!-- display per la visualizzazione delle segnalazioni -->
         <h2>Segnalazioni</h2>
         <%if(!listaSegnalazione.isEmpty())%>
         <%for(int i=0; i<listaSegnalazione.size();i++){%>

@@ -32,6 +32,7 @@
         <img src="css/logo.png"><br>
         <h2>Accedi con il tuo account Netflix</h2><br><br>
     </div>
+    <!-- form login -->
     <div class="reg-form">
         <form id="formLogin" action="LoginController" onsubmit="return(validate());" >
             <label for="email">E-mail:</label><br><br>

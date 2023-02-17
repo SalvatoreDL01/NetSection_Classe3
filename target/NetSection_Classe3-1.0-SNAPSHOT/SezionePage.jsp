@@ -39,6 +39,7 @@
     <%if(errore != null){%>
     <h2><%=errore%></h2>
     <%}%>
+    <!-- ricerca filtrata per tags -->
     <div id="ricercaFiltrata">
         <p class="tags" id="bottoneRicerca">
             RicercaFiltrata
@@ -109,6 +110,7 @@
         </div>
     </div>
     <br>
+    <!-- funzioni per la discussione -->
     <%}}else{for(Discussione d: discussioniTag){%>
     <div class="discussione">
         <p class="titoloDiscussione"><%=d.getTitolo()%></p>
