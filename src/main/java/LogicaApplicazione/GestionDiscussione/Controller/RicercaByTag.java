@@ -16,10 +16,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * servlet per la ricerca di discussioni tramite tags
+ */
 @WebServlet(name = "RicercaByTag", value = "/RicercaByTag")
 public class RicercaByTag extends HttpServlet {
-    @Override
+    /**
+     * effettua una serie di check, dopo chiama il metodo per la ricerca
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SezioneDAO sezioneDAO = new SezioneDAO();
         DiscussioneService ds = new DiscussioneServiceImp();

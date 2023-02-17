@@ -8,9 +8,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per ricercare una sezione
+ */
 @WebServlet(name = "RicercaSezioneControl", value = "/RicercaSezioneControl")
 public class RicercaSezioneControl extends HttpServlet {
-    @Override
+    /**
+     * effettua un check chiamando il metodo per cercare una sezione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String nome = request.getParameter("nomeSezione");

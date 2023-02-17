@@ -9,9 +9,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * servlet per creare una discussione
+ */
 @WebServlet(name = "CreaDiscussioneController", value = "/CreaDiscussioneController")
 public class CreaDiscussioneController extends HttpServlet {
-    @Override
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id=-1;
         String ritorno="CreaDiscussionePage.jsp";

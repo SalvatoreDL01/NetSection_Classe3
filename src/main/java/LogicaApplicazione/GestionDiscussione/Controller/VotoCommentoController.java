@@ -9,9 +9,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per votare un commento
+ */
 @WebServlet(name = "VotoCommentoController", value = "/VotoCommentoController")
 public class VotoCommentoController extends HttpServlet {
-    @Override
+    /**
+     * effettua dei check per verificare se si tratta di un like o dislike, dopo chiama il metodo per votare
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(request.getParameter("dec") != null){

@@ -9,6 +9,9 @@ import ServiziEStorage.Entry.UtenteRegistrato;
 
 import java.util.ArrayList;
 
+/**
+ * Implementazione per il service di Admin
+ */
 public class AdminServiceImp implements AdminService{
 
     private AmministratoreDAO ammDao = new AmministratoreDAO();
@@ -69,6 +72,11 @@ public class AdminServiceImp implements AdminService{
         this.eliminazioneDAO = eliminazioneDAO;
     }
 
+    /**
+     *bannare permanentemente l'utente
+     * @param idUserToBan
+     * @return true
+     */
     public boolean banUtente(int idUserToBan){
         ArrayList<UtenteRegistrato> listU= utenteRegistratoDAO.retriveAll();
 
@@ -85,6 +93,13 @@ public class AdminServiceImp implements AdminService{
         }
         return false;
     }
+
+    /**
+     * modificare la mail dell'amministratore
+     * @param nuovaMail
+     * @param idAdmin
+     * @return true
+     */
     public boolean editMail(String nuovaMail, int idAdmin){
         Amministratore a= ammDao.doRetriveById(idAdmin);
 

@@ -12,9 +12,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * servlet per segnalare un problema
+ */
 @WebServlet(name = "SegnalazioneProblemaControl", value = "/SegnalazioneProblemaControl")
 public class SegnalazioneProblemaControl extends HttpServlet {
-    @Override
+    /**
+     * effettua dei controlli, dopo salva il problema
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String naturaProblema = request.getParameter("naturaProblema");

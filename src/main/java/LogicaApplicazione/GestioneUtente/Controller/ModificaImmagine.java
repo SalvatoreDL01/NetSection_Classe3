@@ -12,7 +12,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+/**
+ * servlet per modificare l'immagine dell'utente
+ */
 @MultipartConfig
 @WebServlet(name = "ModificaImmagine", value = "/ModificaImmagine")
 public class ModificaImmagine extends HttpServlet {
@@ -21,7 +23,13 @@ public class ModificaImmagine extends HttpServlet {
         this.doPost(request,response);
     }
 
-    @Override
+    /**
+     * effettua un controllo attraverso la chiamata del metodo per modificare l'immagine dell'utente
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteService us = new UtenteServiceImp();
         if(!us.modificaImmagineUtente(request))

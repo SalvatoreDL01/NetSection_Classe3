@@ -10,9 +10,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per eleggere un moderatore
+ */
 @WebServlet(name = "ElectModController", value = "/ElectModController")
 public class ElectModController extends HttpServlet {
-    @Override
+    /**
+     * effettua dei controlli sull'utente da eleggere e chiama il metodo per eleggerlo
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneDAO d=new DiscussioneDAO();
         int idUserToElect= Integer.parseInt(request.getParameter("userToElect"));

@@ -8,9 +8,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per la registrazione
+ */
 @WebServlet(name = "RegistrazioneController", value = "/RegistrazioneController")
 public class RegistrazioneController extends HttpServlet {
-    @Override
+    /**
+     * registra un nuovo utente, effettua dei check e setta la sessione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String user = request.getParameter("user");

@@ -13,10 +13,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+/**
+ * servlet per aggiungere una discussione
+ */
 @MultipartConfig
 @WebServlet(name = "AddDiscussioneController", value = "/AddDiscussioneController")
 public class AddDiscussioneController extends HttpServlet {
-    @Override
+    /**
+     * chiama il metodo per aggiungere una discussione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DiscussioneService ds = new DiscussioneServiceImp();
         String path = "SezioneControl";

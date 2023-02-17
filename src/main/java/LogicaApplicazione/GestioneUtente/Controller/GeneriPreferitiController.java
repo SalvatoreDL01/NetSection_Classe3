@@ -8,9 +8,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per aggiungere o rimuovere un genere dai preferiti
+ */
 @WebServlet(name = "GeneriPreferitiController", value = "/GeneriPreferitiController")
 public class GeneriPreferitiController extends HttpServlet {
-    @Override
+    /**
+     * effettua un check per verificare se bisogna aggiungere o rimuovere un genere dai preferiti
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String genere = request.getParameter("genere");

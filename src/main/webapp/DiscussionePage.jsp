@@ -35,7 +35,7 @@
         UtenteRegistrato u = utenteRegistratoDAO.doRetriveById(c.getCreatore());
     %>
     <hr>
-
+    <!-- form per immagine utente -->
     <div class="immagineUtente" style="color: aliceblue">
         <img style="float:left;" src="<%if(u.getImmagine()!=null){%>
                                 <%=u.getImmagine()%>
@@ -46,6 +46,7 @@
         <a href="VotoCommentoController?data=<%=c.getDataScrittura()%>&creatore=<%=c.getCreatore()%>&idSezione=<%=d.getSezione()%>&discussione=<%=d.getTitolo()%>&dec=si"><img src="css/icone/mipiace.png" style="rotate: 180deg"></a>
     </div>
     <br>
+    <!-- form per segnalazione -->
     <form id="segnala" method="post" action="SegnalazioneCommentoController">
         <br>
         <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
@@ -59,6 +60,7 @@
 <%}%>
     <br>
     <br>
+    <!-- form per commento -->
     <div class="commento">
         <form id="formCommento" class="commento" action="AggiungiCommento">
 

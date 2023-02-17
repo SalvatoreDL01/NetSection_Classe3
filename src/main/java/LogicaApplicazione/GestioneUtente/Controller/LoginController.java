@@ -17,9 +17,18 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * servlet per la login
+ */
 @WebServlet(name = "LoginController", value = "/LoginController")
 public class LoginController extends HttpServlet {
-    @Override
+    /**
+     * effettua una serie di controlli sull'utente, dopo setta la sessione utente
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String email = request.getParameter("email");
