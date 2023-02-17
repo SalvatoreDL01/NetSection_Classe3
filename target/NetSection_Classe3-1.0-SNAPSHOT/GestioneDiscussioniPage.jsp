@@ -58,7 +58,6 @@
             <hr>
         <!-- display per la visualizzazione delle segnalazioni -->
         <h2>Segnalazioni</h2>
-        <%if(!listaSegnalazione.isEmpty())%>
         <%for(int i=0; i<listaSegnalazione.size();i++){%>
             <hr>
         <p><%=utenti.get(i).getUsername()%></p>
@@ -66,6 +65,8 @@
         <p><%=listaSegnalazione.get(i).getNatura()%></p>
         <p><%=listaSegnalazione.get(i).getContenuto()%></p>
         <form action="DeleteCommentController" method="post">
+            <input type="hidden" name="sezione" value="<%=discussione.getSezione()%>">
+            <input type="hidden" name="discussione" value="<%=discussione.getTitolo()%>">
             <input type="hidden" name="idCreatore" value="<%=commenti.get(i).getCreatore()%>">
             <input type="hidden" name="dataCommento" value="<%=commenti.get(i).getDataScrittura()%>">
             <input type="submit" value="Cancella commento">

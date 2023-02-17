@@ -30,7 +30,7 @@ public class KickUserTest {
 
        UtenteRegistratoDAO dao = mock(UtenteRegistratoDAO.class);
 
-       when(dao.removeUtente(d,)).thenReturn(true);
+       when(dao.removeUtente(d,u)).thenReturn(true);
 
        DiscussioneService ds = new DiscussioneServiceImp(dao);
 
