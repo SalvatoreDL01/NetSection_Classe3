@@ -67,8 +67,8 @@ public class UtenteRegistrato {
 
     /**
      *  Costruttore utente per facilitare la registrazione con netflix. Ha bisogno di String dataNascita,
-     *  String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
-     *  List<?> listaKickato, List<?> listaPreferiti
+     *  String username, String email, String pass, String immagine, Listuser listaIscizioni, Listuser listaModerazioni,
+     *  Listuser listaKickato, Listuser listaPreferiti
      *
      * @param dataNascita
      * @param username
@@ -97,8 +97,8 @@ public class UtenteRegistrato {
     /**
      *  Costruttore utente per facilitare la registrazione con netflix postuma alla creazione utente.
      *      Ha bisogno di int id, String dataNascita,
-     *     String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
-     *      List<?> listaKickato, List<?> listaPreferiti
+     *     String username, String email, String pass, String immagine, Listuser listaIscizioni, Listuser listaModerazioni,
+     *      Listuser listaKickato, Listuser listaPreferiti
      * @param id
      * @param dataNascita
      * @param username
@@ -126,8 +126,8 @@ public class UtenteRegistrato {
     }
 
     /** Costruttore usato durante la retrive dei dati dal DB, ha bisogno di oggetti int id, String dataNascita,
-     String username, String email, String pass, String immagine, List<?> listaIscizioni, List<?> listaModerazioni,
-     List<?> listaKickato, List<?> listaPreferiti
+     String username, String email, String pass, String immagine, List listaIscizioni, List listaModerazioni,
+     List listaKickato, List listaPreferiti
      *
      * @param id
      * @param dataNascita
@@ -244,7 +244,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la lista iscrizioni
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaIscizioni() {
         return listaIscizioni;

@@ -15,7 +15,7 @@ public class Discussione {
     private String dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
 
-    /**Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione
+    /**Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, Listuser listaTag, String dataCreazione
      *
      * @param sezione
      * @param titolo
@@ -39,7 +39,7 @@ public class Discussione {
     }
 
     /**Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
-     * List<?> listaTag, List<?> listaIscritti, List<?> listaKickati
+     * Listuser listaTag, Listuser listaIscritti, Listuser listaKickati
      *
      * @param sezione
      * @param creatore
@@ -65,7 +65,7 @@ public class Discussione {
     }
 
     /**Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
-     *  List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati, List<?> listaCommenti
+     *  Listuser listaTag, Listuser listaIscritti, Listuser listaModeratori, Listuser listaKickati, Listuser listaCommenti
      *
      * @param sezione
      * @param creatore
@@ -182,7 +182,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaTag
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaTag() {
         return listaTag;
@@ -198,7 +198,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaIscritti
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaIscritti() {
         return listaIscritti;
@@ -214,7 +214,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaModeratori
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaModeratori() {
         return listaModeratori;
@@ -230,7 +230,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaKickati
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaKickati() {
         return listaKickati;
@@ -246,7 +246,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaCommenti
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaCommenti() {
         return listaCommenti;

@@ -17,7 +17,7 @@ public class Genere {
         listaSezioni = new ArrayList<Sezione>();
     }
 
-    /** Costruttore di un oggetto Genere che necessita di String nome, List<?> listaSezioni
+    /** Costruttore di un oggetto Genere che necessita di String nome, Listuser listaSezioni
      *
      * @param nome
      * @param listaSezioni
@@ -45,7 +45,7 @@ public class Genere {
 
     /** Metodo che ritorna un oggetto List listaSezioni
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaSezioni() {
         return listaSezioni;

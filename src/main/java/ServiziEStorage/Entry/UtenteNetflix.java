@@ -26,7 +26,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     }
 
     /**Costruttore per un oggetto UtenteNetflix. Necessita di String dataNascita, String username, String email, String pass,
-     * String immagine, List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
+     * String immagine, Listuser listaIscizioni, Listuser listaModerazioni, Listuser listaKickato, Listuser listaPreferiti,
      * String emailNetflix,String passwordNetflix
      *
      *
@@ -51,7 +51,7 @@ public class UtenteNetflix extends UtenteRegistrato{
     }
 
     /**Costruttore per un oggetto UtenteNetflix. Necessita di int id, String dataNascita, String username, String email, String pass, String immagine,
-     * List<?> listaIscizioni, List<?> listaModerazioni, List<?> listaKickato, List<?> listaPreferiti,
+     * Listuser listaIscizioni, Listuser listaModerazioni, Listuser listaKickato, Listuser listaPreferiti,
      * String emailNetflix, String passwordNetflix
      *
      * @param id
@@ -217,7 +217,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaIscizioni della classe UntenteRegistrato
      *
-     * @return List<?>
+     * @return Listuser
      */
     @Override
     public List<?> getListaIscizioni() {
@@ -254,7 +254,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaKickato della classe UntenteRegistrato
      *
-     * @return List<?>
+     * @return Listuser
      */
     @Override
     public List<?> getListaKickato() {
@@ -272,7 +272,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaPreferiti della classe UntenteRegistrato
      *
-     * @return List<?>
+     * @return Listuser
      */
     @Override
     public List<?> getListaPreferiti() {

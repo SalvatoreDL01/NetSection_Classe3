@@ -25,7 +25,7 @@ public class Sezione {
         this.descrizione = descrizione;
     }
 
-    /**Costruttore di Sezione che necessita di String immagine, String titolo, String descrizione, List<?> listaGeneri.
+    /**Costruttore di Sezione che necessita di String immagine, String titolo, String descrizione, Listuser listaGeneri.
      Usato per salvare oggetti sul DB
      *
      * @param immagine
@@ -42,8 +42,8 @@ public class Sezione {
         listaDiscussioni = new ArrayList<Discussione>();
     }
 
-    /**Costruttore di Sezione che necessita di int idSezione, String immagine, String titolo, String descrizione, List<?> listaGeneri,
-     List<?> listaDiscussioni
+    /**Costruttore di Sezione che necessita di int idSezione, String immagine, String titolo, String descrizione, Listuser listaGeneri,
+     Listuser listaDiscussioni
      *
      * @param idSezione
      * @param immagine
@@ -132,7 +132,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto List listaGeneri
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaGeneri() {
         return listaGeneri;
@@ -148,7 +148,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto List listaDiscussioni
      *
-     * @return List<?>
+     * @return Listuser
      */
     public List<?> getListaDiscussioni() {
         return listaDiscussioni;
