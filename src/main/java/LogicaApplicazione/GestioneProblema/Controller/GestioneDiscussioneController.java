@@ -35,8 +35,15 @@ public class GestioneDiscussioneController  extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idSezione= Integer.parseInt(request.getParameter("sezione"));
         String titolo = request.getParameter("titolo");
+        int idSezione;
+        if(titolo != null)
+            idSezione = Integer.parseInt(request.getParameter("sezione"));
+        else{
+            idSezione = (int) request.getAttribute("sezione");
+            titolo = (String) request.getAttribute("titolo");
+        }
+
 
         CommentoDAO cDAO = new CommentoDAO();
         UtenteRegistratoDAO uDAO = new UtenteRegistratoDAO();

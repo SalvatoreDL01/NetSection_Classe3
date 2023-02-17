@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 public class checkUtenteToKickTest {
     @Test
-    public void checkIdMinoreDi0(){
+    public void checkIdMinoreDi1(){
 
         DiscussioneService service= new DiscussioneServiceImp();
         int idUserToKick=-1;
