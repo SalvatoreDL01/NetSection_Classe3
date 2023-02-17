@@ -46,7 +46,9 @@
                 <form action="KickUser" method="get">
                     <p>ID: <%= u.getId() %></p>
                     <p>Nome: <%= u.getUsername() %></p>
-                    <input type="hidden" name="kick" vale="<%=u.getId()%>">
+                    <input type="hidden" name="kick" value="<%=u.getId()%>">
+                    <input type="hidden" name="sezione" value="<%=discussione.getSezione()%>">
+                    <input type="hidden" name="discussione" value="<%=discussione.getTitolo()%>">
                     <input type="submit" id="kick-button" value="KICK">
                 </form>
             </div>

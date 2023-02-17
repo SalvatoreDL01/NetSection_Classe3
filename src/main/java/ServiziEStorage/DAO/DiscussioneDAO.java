@@ -442,8 +442,8 @@ public class DiscussioneDAO {
                     query += "t2.nome = \""+nonDesiderati.get(i)+"\")) and (";
                 else
                     query += "t2.nome = \""+nonDesiderati.get(i)+"\" or ";
-            for(i=0; i<nonDesiderati.size(); i++)
-                if(i==nonDesiderati.size()-1)
+            for(i=0; i<desiderati.size(); i++)
+                if(i==desiderati.size()-1)
                     query += "t.nome =\""+desiderati.get(i)+"\")";
                 else
                     query += "t.nome = \""+desiderati.get(i)+"\" or ";

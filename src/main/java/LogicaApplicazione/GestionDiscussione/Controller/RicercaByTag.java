@@ -61,7 +61,7 @@ public class RicercaByTag extends HttpServlet {
         else {
             d = ds.searchByTag(tagSelezionati,tagNonSelezionati,idSezione);
             if(d == null)
-                request.setAttribute("errore" ,"Discussone non trovata");
+                request.setAttribute("errore" ,"Discussione non trovata");
         }
         request.setAttribute("discussioniTag",d);
 

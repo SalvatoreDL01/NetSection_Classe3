@@ -107,9 +107,10 @@ public class DiscussioneServiceImp implements DiscussioneService {
      * @return true
      */
     public boolean kickUtente(int idUserToKick, Discussione discussione) {
-        ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
 
-        if(utenteRegistratoDAO.doRetriveById(idUserToKick)==null)
+        UtenteRegistrato u = utenteRegistratoDAO.doRetriveById(idUserToKick);
+
+        if(u==null)
             return false;
 
         if(!utenteRegistratoDAO.isIscritto(discussione.getSezione(),discussione.getTitolo(),idUserToKick))
@@ -118,9 +119,6 @@ public class DiscussioneServiceImp implements DiscussioneService {
         if(discussione == null)
             return false;
 
-        for (UtenteRegistrato u: listU) {
-            if(u.getId()==idUserToKick){
-                System.out.println("ID trovato.");
                 if(utenteRegistratoDAO.removeUtente(discussione, u)){
                     System.out.println("L'utente è stato kickato dalla conversazione.");
                     return true;
@@ -129,13 +127,6 @@ public class DiscussioneServiceImp implements DiscussioneService {
                     System.out.println("L'utente non è stato kickato dalla conversazione.");
                     return false;
                 }
-            }
-            else{
-                System.out.println("ID non trovato.");
-                return false;
-            }
-        }
-        return false;
     }
 
     /**

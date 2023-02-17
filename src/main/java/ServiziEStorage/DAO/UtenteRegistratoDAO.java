@@ -261,7 +261,7 @@ public class UtenteRegistratoDAO {
     public boolean removeUtente(Discussione d,UtenteRegistrato u){
         try(Connection con = ConPool.getConnection()){
 
-            PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and idSezione=? and discussione=?");
+            PreparedStatement ps = con.prepareStatement("delete from Iscrizione where idUtente=? and sezione=? and discussione=?");
             ps.setInt(1, u.getId());
             ps.setInt(2, d.getSezione());
             ps.setString(3, d.getTitolo());
