@@ -12,8 +12,7 @@ public class SegnalazioneDAO {
     public void doSave(Segnalazione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
-                    "insert into Segnalazione (dataSegnalazione, creatoreSegnalazione, dataCommento, " +
-                            "creatoreCommento, sezione, discussione, natura, contenuto) values (?,?,?,?,?,?,?,?)");
+                    "insert into Segnalazione values (?,?,?,?,?,?,?,?)");
             ps.setString(1, s.getDataSegnalazione());
             ps.setInt(2, s.getCreatoreSegnalazione());
             ps.setString(3, s.getDataCommento());
@@ -69,7 +68,7 @@ public class SegnalazioneDAO {
             List l = new ArrayList<Segnalazione>();
             PreparedStatement ps = con.prepareStatement(
                     "select dataSegnalazione, dataCommento, creatoreSegnalazione, " +
-                            "creatoreCommento, sezione, discussione, natura, contenuto from Segnalazione where sezione=? and discussione=? order by desc dataSegnalazione");
+                            "creatoreCommento, sezione, discussione, natura, contenuto from Segnalazione where sezione=? and discussione=? order by dataSegnalazione desc");
             ps.setInt(1, idSezione);
             ps.setString(2,titolo);
 

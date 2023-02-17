@@ -14,43 +14,25 @@
 <%@include file="NavBar.jsp"%>
 
 <%
-    UtenteRegistrato utente = (UtenteRegistrato) request.getSession().getAttribute("user");
-    UtenteRegistratoDAO utenteRegistratoDAO = new UtenteRegistratoDAO();
     Discussione discussione = (Discussione) request.getAttribute("discussione");
     List<Segnalazione> listaSegnalazione = (List<Segnalazione>) request.getAttribute("segnalazioni");
-    List<Commento> commenti = (List<Commento>) request.getAttribute("commenti");
+    List<Commento> commenti = (List<Commento>) request.getAttribute("commentiSegnalati");
     List<UtenteRegistrato> utenti = (List<UtenteRegistrato>) request.getAttribute("utenti");
 %>
 <div id="corpo">
 
     <div class="mod">
         <p>Lista discussioni moderate:</p>
-    <!--lista discussioni create dall'utente-->
-    <%
-        List<Discussione> lista= (List<Discussione>) utente.getListaModerazioni();
-        for (Discussione d: lista) {
-    %>
-        <div class="discussione-moderata">
-            <div><img class="imgDiscussione" src="css/witcher.jpeg"> </div>
-            <div><p><% d.getTitolo(); %></p><p>creata da:</p><p><% d.getCreatore(); %></p></div>
-        </div>
-    </div>
-    <% } %>
 
     <!--div per la visualizzazione dei dati realtivi ad una discussione selezionata-->
 
     <div id="visualizzazioneDiscussione">
         <div>
-            <p><% discussione.getTitolo(); %></p>
+            <p><%= discussione.getTitolo()%></p>
         </div>
         <div>
             <p>Immagine</p>
-            <img src='<% discussione.getImmagine(); %>'>
-        </div>
-        <hr style="width: 800px">
-        <div>
-            <p>Elenco tag</p>
-            <textarea cols="50" rows="15"><% discussione.getListaTag(); %></textarea>
+            <img src='<%= discussione.getImmagine()%>'>
         </div>
         <hr style="width: 800px">
         <div>
@@ -61,8 +43,8 @@
             %>
             <div class="partecipante">
                 <form action="KickUser" method="get">
-                    <p>ID: <% u.getId(); %></p>
-                    <p>Nome: <% u.getUsername(); %></p
+                    <p>ID: <%= u.getId() %></p>
+                    <p>Nome: <%= u.getUsername() %></p>
                     <input type="submit" id="kick-button" value="KICK">
                 </form>
             </div>
@@ -84,6 +66,7 @@
         <%}%>
         <hr style="width: 800px">
     </div>
+</div>
 </div>
 </body>
 </html>

@@ -49,8 +49,8 @@
     <!-- form per segnalazione -->
     <form id="segnala" method="post" action="SegnalazioneCommentoController">
         <br>
-        <input type="hidden" value="<%=d.getSezione()%>" name="sezione">
-        <input type="hidden" value="<%=d.getTitolo()%>" name="discussione">
+        <input type="hidden" value="<%=d.getSezione()%>" name="idSezione">
+        <input type="hidden" value="<%=d.getTitolo()%>" name="titolo">
         <input type="hidden" value="<%=c.getDataScrittura()%>" name="dataSegnalato">
         <input type="hidden" value="<%=c.getCreatore()%>" name="creatoreSegnalato">
         <input class="natura" type="text" name="natura" placeholder="natura segnalazione"><br><br>

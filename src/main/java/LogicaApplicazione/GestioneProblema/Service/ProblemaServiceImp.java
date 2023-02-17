@@ -73,4 +73,11 @@ public class ProblemaServiceImp implements ProblemaService{
         List<Segnalazione> lista = segnalazioneDAO.doRetriveByDiscussioni(idSezione,titolo);
         return lista;
     }
+
+    public boolean salvaSegnalazione(Segnalazione s){
+        if(s == null)
+            return false;
+        segnalazioneDAO.doSave(s);
+        return true;
+    }
 }

@@ -5,6 +5,7 @@ import LogicaApplicazione.GestionDiscussione.Service.DiscussioneServiceImp;
 import LogicaApplicazione.GestioneProblema.Service.ProblemaService;
 import LogicaApplicazione.GestioneProblema.Service.ProblemaServiceImp;
 import ServiziEStorage.DAO.CommentoDAO;
+import ServiziEStorage.DAO.DiscussioneDAO;
 import ServiziEStorage.DAO.UtenteRegistratoDAO;
 import ServiziEStorage.Entry.Commento;
 import ServiziEStorage.Entry.Discussione;
@@ -39,19 +40,25 @@ public class GestioneDiscussioneController  extends HttpServlet {
 
         CommentoDAO cDAO = new CommentoDAO();
         UtenteRegistratoDAO uDAO = new UtenteRegistratoDAO();
+
         ProblemaService ps = new ProblemaServiceImp();
-        DiscussioneService ds = new DiscussioneServiceImp();
+
         List<Commento> commenti = new ArrayList<>();
         List<UtenteRegistrato> utenti = new ArrayList<>();
         List<Segnalazione> s = ps.loadSegnalazioni(titolo,idSezione);
-        ds.loadDiscussione(request);
+
+        DiscussioneDAO discussioneDAO = new DiscussioneDAO();
+        Discussione d = discussioneDAO.doRetriveById(idSezione,titolo);
+
+        if(s == null){
+            request.setAttribute("errore","La discussione non è più presente");
+        }
         for(Segnalazione seg: s){
         commenti.add(cDAO.doRetriveById(seg.getDataCommento(),seg.getCreatoreCommento()));
         utenti.add(uDAO.doRetriveById(seg.getCreatoreCommento()));
         }
         request.setAttribute("utenti",utenti);
-        request.setAttribute("discussione",titolo);
-        request.setAttribute("sezione",idSezione);
+        request.setAttribute("discussione",d);
         request.setAttribute("commentiSegnalati",commenti);
         request.setAttribute("segnalazioni",s);
 
