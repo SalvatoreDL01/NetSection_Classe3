@@ -81,8 +81,8 @@ public class DiscussioneServiceImp implements DiscussioneService {
 
     public  boolean checkUtenteToKick(int idUserToKick){
         String idString= Integer.toString(idUserToKick);
-        if(idString.length()<5){
-            System.out.println("La lunghezza deve essere superiore a 4.");
+        if(idUserToKick<0){
+            System.out.println("L'ID deve essere maggiore di 0.");
             return false;
         }
         else if(!(idString.matches("[0-9]+"))){
@@ -91,8 +91,18 @@ public class DiscussioneServiceImp implements DiscussioneService {
         }
         return true;
     }
+
     public boolean kickUtente(int idUserToKick, Discussione discussione) {
         ArrayList<UtenteRegistrato> listU=utenteRegistratoDAO.retriveAll();
+
+        if(utenteRegistratoDAO.doRetriveById(idUserToKick)==null)
+            return false;
+
+        if(!utenteRegistratoDAO.isIscritto(discussione.getSezione(),discussione.getTitolo(),idUserToKick))
+            return false;
+
+        if(discussione == null)
+            return false;
 
         for (UtenteRegistrato u: listU) {
             if(u.getId()==idUserToKick){

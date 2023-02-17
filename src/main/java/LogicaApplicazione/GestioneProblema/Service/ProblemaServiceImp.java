@@ -37,8 +37,10 @@ public class ProblemaServiceImp implements ProblemaService{
     }
 
     @Override
-    public boolean controllaProblem(String naturaProblema, String paginaProblema, String descrizione, ArrayList<String> listaPagineSito) {
-        if(naturaProblema.equals("") || naturaProblema.length() > 100 || !listaPagineSito.contains(paginaProblema) || descrizione.equals("") || descrizione.length() > 300){
+    public boolean controllaProblem(String naturaProblema, String paginaProblema, String descrizione,
+                                    ArrayList<String> listaPagineSito) {
+        if(naturaProblema.equals("") || naturaProblema.length() > 100 || !listaPagineSito.contains(paginaProblema)
+                || descrizione.equals("") || descrizione.length() > 250){
             return false;
         }
         else{

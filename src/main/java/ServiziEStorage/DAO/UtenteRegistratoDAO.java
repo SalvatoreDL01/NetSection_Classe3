@@ -432,4 +432,21 @@ public class UtenteRegistratoDAO {
             throw new RuntimeException(e);
         }
     }
+    /*Metodo che controlla se per un utente è iscritto ad una Iscrizione*/
+    public boolean isIscritto(int sezione, String titolo, int idUtene){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps = con.prepareStatement("select idUtente from Iscrizione where idUtente=? " +
+                    "and sezione = ? and discussione = ?");
+            ps.setInt(1,idUtene);
+            ps.setInt(2,sezione);
+            ps.setString(3,titolo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                return true;
+            else return false;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
