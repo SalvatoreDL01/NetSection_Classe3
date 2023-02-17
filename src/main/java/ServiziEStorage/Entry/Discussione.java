@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/*Oggetto che rappresenta una Discussione. Contiene parametri int sezione e creatore, String titolo e immagine,
+/**Oggetto che rappresenta una Discussione. Contiene parametri int sezione e creatore, String titolo e immagine,
  Data dataCreazione e Liste listaTag(rappresenta i tag della discussione),
   listaIscritti(rappresenta gli iscritti alla discussione), listaModeratori(rappresenta i moderatori della discussione),
    listaKickati(rappresenta gli utenti kickati dalla discussione) e listaCommenti(rappresenta i commenti presenti sulla discussione)*/
@@ -15,7 +15,15 @@ public class Discussione {
     private String dataCreazione;
     private List<?> listaTag, listaIscritti,listaModeratori, listaKickati, listaCommenti;
 
-/*Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione*/
+    /**Costruttore che prende in input int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione
+     *
+     * @param sezione
+     * @param titolo
+     * @param creatore
+     * @param immagine
+     * @param listaTag
+     * @param dataCreazione
+     */
     public Discussione(int sezione, String titolo, int creatore, String immagine, List<?> listaTag, String dataCreazione)
     {
         this.sezione = sezione;
@@ -29,8 +37,19 @@ public class Discussione {
         listaKickati = new ArrayList<UtenteRegistrato>();
         listaCommenti = new ArrayList<Commento>();
     }
-    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione, List<?> listaTag,
-                       List<?> listaIscritti, List<?> listaKickati*/
+
+    /**Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
+     * List<?> listaTag, List<?> listaIscritti, List<?> listaKickati
+     *
+     * @param sezione
+     * @param creatore
+     * @param titolo
+     * @param immagine
+     * @param dataCreazione
+     * @param listaTag
+     * @param listaIscritti
+     * @param listaKickati
+     */
     public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione, List<?> listaTag,
                        List<?> listaIscritti, List<?> listaKickati) {
         this.sezione = sezione;
@@ -44,9 +63,21 @@ public class Discussione {
         listaModeratori = new ArrayList<UtenteRegistrato>();
         listaCommenti = new ArrayList<Commento>();
     }
-    /*Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
-                       List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
-                       List<?> listaCommenti*/
+
+    /**Costruttore che prende in input int sezione, int creatore, String titolo, String immagine, String dataCreazione,
+     *  List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati, List<?> listaCommenti
+     *
+     * @param sezione
+     * @param creatore
+     * @param titolo
+     * @param immagine
+     * @param dataCreazione
+     * @param listaTag
+     * @param listaIscritti
+     * @param listaModeratori
+     * @param listaKickati
+     * @param listaCommenti
+     */
     public Discussione(int sezione, int creatore, String titolo, String immagine, String dataCreazione,
                        List<?> listaTag, List<?> listaIscritti, List<?> listaModeratori, List<?> listaKickati,
                        List<?> listaCommenti) {
@@ -62,91 +93,178 @@ public class Discussione {
         this.listaCommenti = listaCommenti;
     }
 
+    /**
+     * Costruttore base di Discussione
+     */
     public Discussione() {
 
     }
 
-    /*ritorna un numero intero sezione*/
+    /**ritorna un numero intero sezione
+     *
+     * @return
+     */
     public int getSezione() {
         return sezione;
     }
-    /*setta il parametro intero sezione*/
+
+    /**setta il parametro intero sezione
+     *
+     * @param sezione
+     */
     public void setSezione(int sezione) {
         this.sezione = sezione;
     }
-    /*ritorna un numero intero creatore*/
+
+    /**ritorna un numero intero creatore
+     *
+     * @return
+     */
     public int getCreatore() {
         return creatore;
     }
-    /*setta il parametro intero creatore*/
+
+    /**setta il parametro intero creatore
+     *
+     * @param creatore
+     */
     public void setCreatore(int creatore) {
         this.creatore = creatore;
     }
-    /*ritorna un oggetto Stringa titolo*/
+
+    /**ritorna un oggetto Stringa titolo
+     *
+     * @return
+     */
     public String getTitolo() {
         return titolo;
     }
-    /*setta un oggetto Stringa titolo*/
+
+    /**setta un oggetto Stringa titolo
+     *
+     * @param titolo
+     */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
-    /*ritorna un oggetto Stringa immagine*/
+
+    /**ritorna un oggetto Stringa immagine
+     *
+     * @return
+     */
     public String getImmagine() {
         return immagine;
     }
-    /*setta un oggetto Stringa immagine*/
+
+    /**setta un oggetto Stringa immagine
+     *
+     * @param immagine
+     */
     public void setImmagine(String immagine) {
         this.immagine = immagine;
     }
-    /*ritorna un oggetto String dataCreazione*/
+
+    /**ritorna un oggetto String dataCreazione
+     *
+     * @return
+     */
     public String getDataCreazione() {
         return dataCreazione;
     }
-    /*setta un oggetto String dataCreazione*/
+
+    /**setta un oggetto String dataCreazione
+     *
+     * @param dataCreazione
+     */
     public void setDataCreazione(String dataCreazione) {
         this.dataCreazione = dataCreazione;
     }
-    /*ritorna un oggetto List listaTag*/
+
+    /**ritorna un oggetto List listaTag
+     *
+     * @return
+     */
     public List<?> getListaTag() {
         return listaTag;
     }
-    /*setta un oggetto List listaTag*/
+
+    /**setta un oggetto List listaTag
+     *
+     * @param listaTag
+     */
     public void setListaTag(List<?> listaTag) {
         this.listaTag = listaTag;
     }
-    /*ritorna un oggetto List listaIscritti*/
+
+    /**ritorna un oggetto List listaIscritti
+     *
+     * @return
+     */
     public List<?> getListaIscritti() {
         return listaIscritti;
     }
-    /*setta un oggetto List listaIscritti*/
+
+    /**setta un oggetto List listaIscritti
+     *
+     * @param listaIscritti
+     */
     public void setListaIscritti(List<?> listaIscritti) {
         this.listaIscritti = listaIscritti;
     }
-    /*ritorna un oggetto List listaModeratori*/
+
+    /**ritorna un oggetto List listaModeratori
+     *
+     * @return
+     */
     public List<?> getListaModeratori() {
         return listaModeratori;
     }
-    /*setta un oggetto List listaModeratori*/
+
+    /**setta un oggetto List listaModeratori
+     *
+     * @param listaModeratori
+     */
     public void setListaModeratori(List<?> listaModeratori) {
         this.listaModeratori = listaModeratori;
     }
-    /*ritorna un oggetto List listaKickati*/
+
+    /**ritorna un oggetto List listaKickati
+     *
+     * @return
+     */
     public List<?> getListaKickati() {
         return listaKickati;
     }
-    /*setta un oggetto List listaKickati*/
+
+    /**setta un oggetto List listaKickati
+     *
+     * @param listaKickati
+     */
     public void setListaKickati(List<?> listaKickati) {
         this.listaKickati = listaKickati;
     }
-    /*ritorna un oggetto List listaCommenti*/
+
+    /**ritorna un oggetto List listaCommenti
+     *
+     * @return
+     */
     public List<?> getListaCommenti() {
         return listaCommenti;
     }
-    /*setta un oggetto List listaCommenti*/
+
+    /**setta un oggetto List listaCommenti
+     *
+     * @param listaCommenti
+     */
     public void setListaCommenti(List<?> listaCommenti) {
         this.listaCommenti = listaCommenti;
     }
 
+    /**
+     * Controlla che due oggetti siano uguali, se sì ritorna true
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -155,6 +273,10 @@ public class Discussione {
         return getSezione() == that.getSezione() && getTitolo().equals(that.getTitolo());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getSezione(), getTitolo());

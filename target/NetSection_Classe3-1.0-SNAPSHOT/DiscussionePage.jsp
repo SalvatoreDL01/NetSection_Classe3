@@ -47,6 +47,7 @@
     </div>
     <br>
     <!-- form per segnalazione -->
+    <%if(utente.getId()!=u.getId()){%>
     <form id="segnala" method="post" action="SegnalazioneCommentoController">
         <br>
         <input type="hidden" value="<%=d.getSezione()%>" name="idSezione">
