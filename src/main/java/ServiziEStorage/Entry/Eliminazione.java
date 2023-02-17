@@ -22,7 +22,7 @@ public class Eliminazione {
 
     /**Metodo che ritorna un oggetto int id
      *
-     * @return
+     * @return int
      */
     public int getId() {
         return id;
@@ -30,7 +30,7 @@ public class Eliminazione {
 
     /**Metodo che ritorna un oggetto String username
      *
-     * @return
+     * @return String
      */
     public String getUsername(){
         return username;
@@ -38,7 +38,7 @@ public class Eliminazione {
 
     /**Metodo che ritorna un oggetto String email
      *
-     * @return
+     * @return String
      */
     public String getEmail(){
         return email;
@@ -71,7 +71,7 @@ public class Eliminazione {
     /**
      * Controlla che due oggetti siano uguali, se sì torna true
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -83,7 +83,7 @@ public class Eliminazione {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

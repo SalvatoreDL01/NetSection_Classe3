@@ -102,7 +102,7 @@ public class Discussione {
 
     /**ritorna un numero intero sezione
      *
-     * @return
+     * @return int
      */
     public int getSezione() {
         return sezione;
@@ -118,7 +118,7 @@ public class Discussione {
 
     /**ritorna un numero intero creatore
      *
-     * @return
+     * @return int
      */
     public int getCreatore() {
         return creatore;
@@ -134,7 +134,7 @@ public class Discussione {
 
     /**ritorna un oggetto Stringa titolo
      *
-     * @return
+     * @return String
      */
     public String getTitolo() {
         return titolo;
@@ -150,7 +150,7 @@ public class Discussione {
 
     /**ritorna un oggetto Stringa immagine
      *
-     * @return
+     * @return String
      */
     public String getImmagine() {
         return immagine;
@@ -166,7 +166,7 @@ public class Discussione {
 
     /**ritorna un oggetto String dataCreazione
      *
-     * @return
+     * @return String
      */
     public String getDataCreazione() {
         return dataCreazione;
@@ -182,7 +182,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaTag
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaTag() {
         return listaTag;
@@ -198,7 +198,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaIscritti
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaIscritti() {
         return listaIscritti;
@@ -214,7 +214,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaModeratori
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaModeratori() {
         return listaModeratori;
@@ -230,7 +230,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaKickati
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaKickati() {
         return listaKickati;
@@ -246,7 +246,7 @@ public class Discussione {
 
     /**ritorna un oggetto List listaCommenti
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaCommenti() {
         return listaCommenti;
@@ -263,7 +263,7 @@ public class Discussione {
     /**
      * Controlla che due oggetti siano uguali, se sì ritorna true
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -275,7 +275,7 @@ public class Discussione {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

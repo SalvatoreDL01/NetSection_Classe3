@@ -34,7 +34,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto String dataSegnalazione
      *
-     * @return
+     * @return String
      */
     public String getDataSegnalazione() {
         return dataSegnalazione;
@@ -50,7 +50,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto Date dataCommento
      *
-     * @return
+     * @return String
      */
     public String getDataCommento() {
         return dataCommento;
@@ -62,7 +62,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto int creatoreSegnalazione
      *
-     * @return
+     * @return int
      */
     public int getCreatoreSegnalazione() {
         return creatoreSegnalazione;
@@ -78,7 +78,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto int creatoreCommento
      *
-     * @return
+     * @return int
      */
     public int getCreatoreCommento() {
         return creatoreCommento;
@@ -94,7 +94,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto int sezione
      *
-     * @return
+     * @return int
      */
     public int getSezione() {
         return sezione;
@@ -110,7 +110,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto String discussione
      *
-     * @return
+     * @return String
      */
     public String getDiscussione() {
         return discussione;
@@ -126,7 +126,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto String natura
      *
-     * @return
+     * @return String
      */
     public String getNatura() {
         return natura;
@@ -142,7 +142,7 @@ public class Segnalazione {
 
     /**Metodo che ritorna un oggetto String contenuto
      *
-     * @return
+     * @return String
      */
     public String getContenuto() {
         return contenuto;
@@ -158,7 +158,7 @@ public class Segnalazione {
 
     /**
      * Ritorna l'id dell'utente kickato
-     * @return
+     * @return int
      */
     public int getIdUtenteKick() {
         return idUtenteKick;
@@ -175,7 +175,7 @@ public class Segnalazione {
     /**
      *
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -187,7 +187,7 @@ public class Segnalazione {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

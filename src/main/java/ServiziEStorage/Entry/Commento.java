@@ -58,7 +58,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto String dataScrittura
      *
-     * @return
+     * @return String
      */
     public String getDataScrittura() {
         return dataScrittura;
@@ -74,7 +74,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto int creatore
      *
-     * @return
+     * @return int
      */
     public int getCreatore() {
         return creatore;
@@ -90,7 +90,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto int sezione
      *
-     * @return
+     * @return int
      */
     public int getSezione() {
         return sezione;
@@ -106,7 +106,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto String discussione
      *
-     * @return
+     * @return String
      */
     public String getDiscussione() {
         return discussione;
@@ -122,7 +122,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto String contenuto
      *
-     * @return
+     * @return String
      */
     public String getContenuto() {
         return contenuto;
@@ -138,7 +138,7 @@ public class Commento {
 
     /**Metodo che ritorna un oggetto int punteggio
      *
-     * @return
+     * @return int
      */
     public int getPunteggio() {
         return punteggio;
@@ -155,7 +155,7 @@ public class Commento {
     /**
      *  Controlla che due oggetti siano uguali, se sì ritorna true
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -167,7 +167,7 @@ public class Commento {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

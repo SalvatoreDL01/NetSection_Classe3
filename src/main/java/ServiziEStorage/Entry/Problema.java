@@ -27,7 +27,7 @@ public class Problema {
 
     /**Metodo che ritorna un oggetto int idUtente
      *
-     * @return
+     * @return String
      */
     public int getIdUtente() {
         return idUtente;
@@ -43,7 +43,7 @@ public class Problema {
 
     /**Metodo che ritorna un oggetto String dataSottomissione
      *
-     * @return
+     * @return String
      */
     public String getDataSottomissione() {
         return dataSottomissione;
@@ -59,7 +59,7 @@ public class Problema {
 
     /**Metodo che ritorna un oggetto String natura
      *
-     * @return
+     * @return String
      */
     public String getNatura() {
         return natura;
@@ -92,7 +92,7 @@ public class Problema {
     /**
      * Controlla che due oggetti suano uguali, se sì ritorna true
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -104,7 +104,7 @@ public class Problema {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

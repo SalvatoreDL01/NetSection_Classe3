@@ -8,9 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Discussione*/
+
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Discussione
+ *
+ */
 public class AmministratoreDAO {
-/*Metodo che estrae i dati di un Amministratore dal DB tramite il suo id*/
+    /**Metodo che estrae i dati di un Amministratore dal DB tramite il suo id
+     *
+     * @param idAdmin
+     * @return Amministratore
+     */
     public Amministratore doRetriveById(int idAdmin){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select idAdmin, username, email, password from Admin where idAdmin = ?");
@@ -27,7 +34,11 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-/*Metodo che salva i dati di un amministratore sul DB tramite il suo id*/
+
+    /**Metodo che salva i dati di un amministratore sul DB tramite il suo id
+     *
+     * @param a
+     */
     public void doSave(Amministratore a){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("insert into Admin (idAdmin, username, email, password) values (?,?,?,?)");
@@ -42,7 +53,11 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-/*Metodo che rimuove i dati di un Amministratore dal DB tramite il suo id*/
+
+    /**Metodo che rimuove i dati di un Amministratore dal DB tramite il suo id
+     *
+     * @param idAdmin
+     */
     public void doRemoveById(int idAdmin){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Admin where idAdmin=?");
@@ -53,7 +68,11 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrae tutti i dati di un amministratore dal DB*/
+
+    /**Metodo che estrae tutti i dati di un amministratore dal DB
+     *
+     * @return ArrayList<Amministratore>
+     */
     public ArrayList<Amministratore> retriveAll(){
         ArrayList<Amministratore> l = new ArrayList<>();
         try(Connection con = ConPool.getConnection()){
@@ -69,7 +88,11 @@ public class AmministratoreDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che permette di aggiornare i dati relativi ad un Amministratore*/
+
+    /**Metodo che permette di aggiornare i dati relativi ad un Amministratore
+     *
+     * @param a
+     */
     public void update(Amministratore a){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Admin set username=?, email=?, pass=? where idAdmin=?");
@@ -85,6 +108,11 @@ public class AmministratoreDAO {
         }
     }
 
+    /**
+     * Metodo che fa l'update della mail dell'amministratore
+     * @param a
+     * @param mail
+     */
     public void updateMail(Amministratore a, String mail){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update Admin set username=?, email=?, pass=? where idAdmin=?");

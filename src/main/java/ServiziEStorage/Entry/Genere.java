@@ -29,7 +29,7 @@ public class Genere {
 
     /** Metodo che ritorna un oggetto String nome
      *
-     * @return
+     * @return String
      */
     public String getNome() {
         return nome;
@@ -45,7 +45,7 @@ public class Genere {
 
     /** Metodo che ritorna un oggetto List listaSezioni
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaSezioni() {
         return listaSezioni;
@@ -62,7 +62,7 @@ public class Genere {
     /**
      * Controlla che due oggetti siano uguali, se si ritorna true
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -74,7 +74,7 @@ public class Genere {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

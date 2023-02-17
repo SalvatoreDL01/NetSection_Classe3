@@ -10,8 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classere usata per estraarre dal DB i dati relativi al Genere
+ */
 public class GenereDAO {
-
+    /**
+     * Metodo che estrae un genere dal db se questo è presente
+     * @param nome
+     * @return Genere
+     */
     public Genere doRetriveByNomeGenere(String nome){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select * from Genere where nome = ?");
@@ -33,6 +40,10 @@ public class GenereDAO {
         }
     }
 
+    /**
+     * Metodo che estrae tutti i generi dal DB
+     * @return ArrayList<Genere>
+     */
     public ArrayList<Genere> retriveAll(){
 
         try(Connection con = ConPool.getConnection()){

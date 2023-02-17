@@ -7,10 +7,14 @@ import ServiziEStorage.Entry.UtenteRegistrato;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe UtenteNetflix*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe UtenteNetflix*/
 public class UtenteNetflixDAO {
-    /*Metodo che estrae tutti i dati di un entry UtenteNetflix dal DB partendo dal suo id. Estrae anche i dati
-    relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce */
+    /**Metodo che estrae tutti i dati di un entry UtenteNetflix dal DB partendo dal suo id.
+     * Estrae anche i dati relativi alle discussioni sulle quali è iscritto, stato cacciato e di cui è il moderatore e i generi che preferisce
+     *
+     * @param id
+     * @return UtenteNetflix
+     */
     public UtenteNetflix doRetriveById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select emailNetflix, passwordNetflix  from UtenteNetflix where idUtente = ?");
@@ -30,7 +34,12 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
-    /* Estrae i dati di una entry della tabella UtenteNetflix*/
+
+    /** Estrae i dati di una entry della tabella UtenteNetflix
+     *
+     * @param id
+     * @return UtenteNetflix
+     */
     public UtenteNetflix doRetriveLightById(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("select emailNetflix, passwordNetflix  from UtenteNetflix where idUtente = ?");
@@ -51,7 +60,11 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Estrae tutti i dati relativi agli UtentiNetflix dal DV*/
+
+    /**Estrae tutti i dati relativi agli UtentiNetflix dal DV
+     *
+     * @return List<UtenteNetflix>
+     */
     public List<UtenteNetflix> retiveAll(){
         try(Connection con = ConPool.getConnection()){
             ArrayList<UtenteNetflix> l = new ArrayList<UtenteNetflix>();
@@ -72,7 +85,11 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Salva i dati di un oggetto UtenteNetflix sul DB. Salva anche la tabella di generi preferiti se fornita. Usata quando*/
+
+    /**Salva i dati di un oggetto UtenteNetflix sul DB. Salva anche la tabella di generi preferiti se fornita. Usata quando
+     *
+     * @param u
+     */
     public void doSaveUtente(UtenteNetflix u){
         try(Connection con = ConPool.getConnection()){
             //UtenteRegistratoDAO utenteRegistratoDAO= new UtenteRegistratoDAO();
@@ -89,7 +106,11 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che rimuove tutti i dati di un UtenteNetflix dal DB conoscendo il suo id*/
+
+    /**Metodo che rimuove tutti i dati di un UtenteNetflix dal DB conoscendo il suo id
+     *
+     * @param id
+     */
     public void remove(int id){
         try(Connection con = ConPool.getConnection()){
 
@@ -102,7 +123,11 @@ public class UtenteNetflixDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che permette di aggiornare i dati relativi ad un UtenteNetflix*/
+
+    /**Metodo che permette di aggiornare i dati relativi ad un UtenteNetflix
+     *
+     * @param u
+     */
     public void update(UtenteNetflix u){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("update UtenteNetflix set emailNetflix =?,passwordNetflix =? where idUtente=?");

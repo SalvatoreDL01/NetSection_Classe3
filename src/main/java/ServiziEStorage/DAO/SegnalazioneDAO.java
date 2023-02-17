@@ -6,9 +6,12 @@ import ServiziEStorage.Entry.Segnalazione;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-/* Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Segnalazione*/
+/** Classe contenente metodi statici che servono per la gestione dei dati persistenti della classe Segnalazione*/
 public class SegnalazioneDAO {
-    /*Metodo che salva i dati di un oggetto Segnalazione dal DB*/
+    /**Metodo che salva i dati di un oggetto Segnalazione dal DB
+     *
+     * @param s
+     */
     public void doSave(Segnalazione s){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
@@ -28,7 +31,12 @@ public class SegnalazioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che rimuove i dati di una entry Segnalazione dal DB tramite il suo id*/
+
+    /**Metodo che rimuove i dati di una entry Segnalazione dal DB tramite il suo id
+     *
+     * @param data
+     * @param idCreatore
+     */
     public void doRemoveById(String data, int idCreatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement("delete from Segnalazione where dataSegnalazione=? and creatoreSegnalazione=? ");
@@ -40,7 +48,13 @@ public class SegnalazioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrai i dati di una entry Segnalazione dal DB tramite il suo id*/
+
+    /**Metodo che estrai i dati di una entry Segnalazione dal DB tramite il suo id
+     *
+     * @param data
+     * @param idCreatore
+     * @return Segnalazione
+     */
     public Segnalazione doRetriveById(String data, int idCreatore){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(
@@ -62,7 +76,13 @@ public class SegnalazioneDAO {
             throw new RuntimeException(e);
         }
     }
-    /*Metodo che estrai tutti i dati delle segnalazioni appartenenti a una discussine dal DB*/
+
+    /**Metodo che estrai tutti i dati delle segnalazioni appartenenti a una discussine dal DB
+     *
+     * @param idSezione
+     * @param titolo
+     * @return List<Segnalazione>
+     */
     public List<Segnalazione> doRetriveByDiscussioni(int idSezione, String titolo){
         try(Connection con = ConPool.getConnection()){
             List l = new ArrayList<Segnalazione>();

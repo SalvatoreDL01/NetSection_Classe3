@@ -151,7 +151,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre l'id
      *
-     * @return
+     * @return int
      */
     public int getId() {
         return id;
@@ -165,7 +165,7 @@ public class UtenteRegistrato {
     }
     /** permette di estrarre la data di nascita
      *
-     * @return
+     * @return String
      */
     public String getDataNascita() {
         return dataNascita;
@@ -180,7 +180,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre l'username
      *
-     * @return
+     * @return String
      */
     public String getUsername() {
         return username;
@@ -196,7 +196,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la mail
      *
-     * @return
+     * @return String
      */
     public String getEmail() {
         return email;
@@ -212,7 +212,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la password
      *
-     * @return
+     * @return String
      */
     public String getPass() {
         return pass;
@@ -228,7 +228,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre l'immagine
      *
-     * @return
+     * @return String
      */
     public String getImmagine() {
         return immagine;
@@ -244,7 +244,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la lista iscrizioni
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaIscizioni() {
         return listaIscizioni;
@@ -260,7 +260,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la lista moderazioni
      *
-     * @return
+     * @return GestioneListaModerazioni
      */
     public GestioneListaModerazioni getListaModerazioni() {
         return new GestioneListaModerazioni((ArrayList<Discussione>) listaModerazioni);
@@ -276,7 +276,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la lista kick
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaKickato() {
         return listaKickato;
@@ -292,7 +292,7 @@ public class UtenteRegistrato {
 
     /** permette di estrarre la lista preferiti
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaPreferiti() {
         return listaPreferiti;
@@ -308,7 +308,7 @@ public class UtenteRegistrato {
 
     /** Metodo che ritorna vero se l'utente è un moderatore, falso altrimenti
      *
-     * @return
+     * @return boolean
      */
 
     public boolean isModeratore(){
@@ -320,7 +320,7 @@ public class UtenteRegistrato {
     /**
      * Ritorna true se l'utente è un moderatore
      * @param discussione
-     * @return
+     * @return boolean
      */
     public boolean isModeratoreOf(Discussione discussione){
 
@@ -330,7 +330,7 @@ public class UtenteRegistrato {
     /**
      * testa se un 2 oggetti sono uguali
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -342,7 +342,7 @@ public class UtenteRegistrato {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {

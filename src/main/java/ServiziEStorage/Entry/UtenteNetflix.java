@@ -77,7 +77,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String emailNetflix
      *
-     * @return
+     * @return String
      */
     public String getEmailNetflix() {
         return emailNetflix;
@@ -93,7 +93,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String passwordNetflix
      *
-     * @return
+     * @return String
      */
     public String getPasswordNetflix() {
         return passwordNetflix;
@@ -109,7 +109,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto int id della classe UntenteRegistrato
      *
-     * @return
+     * @return int
      */
     @Override
     public int getId() {
@@ -127,7 +127,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String dataNascita della classe UntenteRegistrato
      *
-     * @return
+     * @return String
      */
     @Override
     public String getDataNascita() {
@@ -145,7 +145,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String Username della classe UntenteRegistrato
      *
-     * @return
+     * @return String
      */
     @Override
     public String getUsername() {
@@ -163,7 +163,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String email della classe UntenteRegistrato
      *
-     * @return
+     * @return String
      */
     @Override
     public String getEmail() {
@@ -181,7 +181,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String pass della classe UntenteRegistrato
      *
-     * @return
+     * @return String
      */
     @Override
     public String getPass() {
@@ -199,7 +199,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto String immagine della classe UntenteRegistrato
      *
-     * @return
+     * @return String
      */
     @Override
     public String getImmagine() {
@@ -217,7 +217,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaIscizioni della classe UntenteRegistrato
      *
-     * @return
+     * @return List<?>
      */
     @Override
     public List<?> getListaIscizioni() {
@@ -235,7 +235,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaModerazioni della classe UntenteRegistrato
      *
-     * @return
+     * @return GestioneListaModerazioni
      */
     @Override
     public GestioneListaModerazioni getListaModerazioni() {
@@ -254,7 +254,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaKickato della classe UntenteRegistrato
      *
-     * @return
+     * @return List<?>
      */
     @Override
     public List<?> getListaKickato() {
@@ -272,7 +272,7 @@ public class UtenteNetflix extends UtenteRegistrato{
 
     /**Metodo che ritorna un oggetto List listaPreferiti della classe UntenteRegistrato
      *
-     * @return
+     * @return List<?>
      */
     @Override
     public List<?> getListaPreferiti() {

@@ -68,7 +68,7 @@ public class Sezione {
 
     /**Metodo che ritorna un oggetto int idSezione
      *
-     * @return
+     * @return int
      */
     public int getIdSezione() {
         return idSezione;
@@ -84,7 +84,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto String immagine
      *
-     * @return
+     * @return String
      */
     public String getImmagine() {
         return immagine;
@@ -100,7 +100,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto String titolo
      *
-     * @return
+     * @return String
      */
     public String getTitolo() {
         return titolo;
@@ -116,7 +116,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto String descrizione
      *
-     * @return
+     * @return String
      */
     public String getDescrizione() {
         return descrizione;
@@ -132,7 +132,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto List listaGeneri
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaGeneri() {
         return listaGeneri;
@@ -148,7 +148,7 @@ public class Sezione {
 
     /**Metodo che estrae un oggetto List listaDiscussioni
      *
-     * @return
+     * @return List<?>
      */
     public List<?> getListaDiscussioni() {
         return listaDiscussioni;
@@ -165,7 +165,7 @@ public class Sezione {
     /**
      *
      * @param o
-     * @return
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
@@ -177,7 +177,7 @@ public class Sezione {
 
     /**
      *
-     * @return
+     * @return int
      */
     @Override
     public int hashCode() {
