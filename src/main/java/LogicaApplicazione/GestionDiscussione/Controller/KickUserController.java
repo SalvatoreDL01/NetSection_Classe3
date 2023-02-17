@@ -9,9 +9,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servelt per escludere un utente da una discussione
+ */
 @WebServlet(name = "KickUserController", value = "/KickUser")
 public class KickUserController extends HttpServlet {
-    @Override
+    /**
+     * effettua dei controlli sull'ID dell'utente da kickare, dopo chiama il metodo per kickare
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idUserToKick= Integer.parseInt(request.getParameter("kick"));
 

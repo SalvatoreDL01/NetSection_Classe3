@@ -11,9 +11,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * servlet per bannare un utente
+ */
 @WebServlet(name = "BanUserController", value = "/BanUser")
 public class BanUserController extends HttpServlet {
-    @Override
+    /**
+     * effettua un check e chiama la funzione di ban
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idUserToBan= Integer.parseInt(request.getParameter("ban"));
 

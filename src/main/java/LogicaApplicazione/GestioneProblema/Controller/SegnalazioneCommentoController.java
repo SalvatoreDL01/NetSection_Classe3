@@ -10,9 +10,18 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * servlet per segnalare un commento e un utente
+ */
 @WebServlet(name = "SegnalazioneCommentoController", value = "/SegnalazioneCommentoController")
 public class SegnalazioneCommentoController extends HttpServlet {
-    @Override
+    /**
+     * crea un oggetto segnalazione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int sezione= Integer.parseInt(request.getParameter("sezione"));
         String titolo= request.getParameter("discussione");

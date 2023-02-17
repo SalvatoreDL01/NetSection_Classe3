@@ -21,9 +21,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * servlet per accedere a GestioneDiscussionePage
+ */
 @WebServlet(name = "GestioneDiscussioneController", value = "/GestioneDiscussioneController")
 public class GestioneDiscussioneController  extends HttpServlet {
-    @Override
+    /**
+     * passa tutte le informazioni di una discussione alla pagina di moderazione della discussione
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idSezione= Integer.parseInt(request.getParameter("sezione"));
         String titolo = request.getParameter("titolo");
