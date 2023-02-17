@@ -41,7 +41,7 @@
             <label for="tags" id="textLable">Seleziona tag</label><br>
             <textarea id="tags" name="tags" placeholder="@NomeTAG, @NomeTAG2..."></textarea><br>
             <div id="bottoneGioco">
-                <input type="submit" value="Aggiungi gioco">
+                <input type="submit" value="Aggiungi Discussione">
             </div>
 
         </div>

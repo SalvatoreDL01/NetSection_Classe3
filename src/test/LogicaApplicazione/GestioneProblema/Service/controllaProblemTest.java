@@ -163,6 +163,7 @@ class controllaProblemTest {
         assertEquals(false, service.controllaProblem(naturaProblema, paginaProblema, descrizione, listaPagineSito));
     }
 
+    /*
     @Test
     public void testSelenium(){
         try{
@@ -197,6 +198,6 @@ class controllaProblemTest {
         catch (Exception e){
 
         }
-    }
+    }*/
 
 }

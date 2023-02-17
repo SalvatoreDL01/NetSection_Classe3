@@ -101,7 +101,7 @@
         <form action="GestioneDiscussioneController" method="post">
             <input type="hidden" name="sezione" value="<%=d.getSezione()%>">
             <input type="hidden" name="titolo" value="<%=d.getTitolo()%>">
-            <input type="submit" value="Visualizza segnalazioni"><br>
+            <input type="submit" value="Gestisci discussioni"><br>
         </form>
     </div>
     <%}%>
